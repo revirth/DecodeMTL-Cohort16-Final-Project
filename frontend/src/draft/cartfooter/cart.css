@@ -1,0 +1,115 @@
+.image {
+  padding-right: 30px
+}
+
+.input-number {
+  width: 40px
+}
+
+.item-in-column {
+  display: flex;
+  margin: 10px;
+  padding: 10px
+}
+
+hr {
+  display: block;
+  height: 5px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 10px;
+  padding: 0;
+}
+
+.information-in-row {
+  display: flex;
+  orientation: row;
+  width: 100%
+}
+
+.parent {
+  display: flex;
+  justify-content: center;
+}
+
+.stick_bottom {
+  align-self: flex-end;
+}
+
+.item-cell-width {
+  width: 100% 
+}
+
+.subtotal {
+  color: red;
+  font-size: 15px;
+  text-transform: uppercase;
+  margin-left: 50px
+}
+
+.total {
+  color: red;
+  font-size: 25px;
+  text-transform: uppercase;
+  margin-top: 50px
+}
+
+.general-margin {
+  margin: 10px;
+}
+
+.fa-times:before {
+  content: "\f00d";
+}
+
+.fa {
+  display: inline-block;
+  font-family: FontAwesome;
+  color: red;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.checkout-button {
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 0px solid;
+  border-color: green;
+  padding: 8px;
+  background-color: green;
+  color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-transform: uppercase;
+}
+
+.button-right {
+  align-self: flex-start
+}
+
+.parent-horizontal {
+  display: flex;
+  justify-content: flex-end
+}
+
+.remove-width{
+  width: 3%
+}
+
+.subtotal-width{
+  width: 7%
+}
+
+.quantity-width{
+  width: 5%
+}
+
+.name-price-width{
+  width: 100%
+}
+
+.photo-width{
+  width: 15%
+}
