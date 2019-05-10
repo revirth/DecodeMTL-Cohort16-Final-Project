@@ -1,6 +1,4 @@
-import {
-  createStore
-} from "redux";
+import { createStore } from "redux";
 
 let reducer = (state, action) => {
   /*if (action.type === "ChangeQuantity") {
@@ -30,18 +28,23 @@ let reducer = (state, action) => {
     return {
       ...state,
       cartItems: action.cartItems
-    }
+    };
   }
 
+  switch (action.type) {
+    case "afterLogin":
+      return { ...state, loggedIn: true, username: action.username };
+    case "afterLogout":
+      return { ...state, loggedIn: false, username: "" };
+  }
   return state;
-}
-
-
+};
 
 let store = createStore(
-  reducer, {
+  reducer,
+  {
     cartItems: [],
-    login: false,
+    loggedIn: false,
     username: ""
   },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

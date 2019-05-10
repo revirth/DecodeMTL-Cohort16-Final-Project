@@ -51,13 +51,13 @@ import SignupForm from "../login/SignupForm.jsx";
 //       </div>
 //   };
 
-class Links extends React.Component {
+class UnconnectedLinks extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { popup: false, signup: false, loggedIn: false };
+    this.state = { popup: false, signup: false };
   }
   closeLoginPopup = loggedIn => {
-    this.setState({ popup: false, loggedIn: loggedIn });
+    this.setState({ popup: false });
   };
   closeSignup = () => {
     this.setState({ signup: false });
@@ -79,14 +79,10 @@ class Links extends React.Component {
     }
   }
 
-  logout = () => {
-    fetch("/logout")
-      .then(res => res.json())
-      .then(res => {
-        if (res.status) {
-          this.setState({ loggedIn: false });
-        }
-      });
+  logout = async () => {
+    const res = await fetch("/logout");
+
+    res.status && this.props.dispatch({ type: "afterLogout" });
   };
 
   render() {
@@ -101,7 +97,7 @@ class Links extends React.Component {
         <a href="/cart">ORDER</a>
         <a href="#">DELIVERY</a>
         <a href="/">ABOUT</a>
-        {!this.state.loggedIn ? (
+        {!this.props.loggedIn ? (
           <span>
             <a href="#" onClick={() => this.setState({ popup: true })}>
               LOGIN
@@ -112,6 +108,7 @@ class Links extends React.Component {
           </span>
         ) : (
           <span>
+            Hi {this.props.username}
             <a href="#" onClick={this.logout}>
               LOGOUT
             </a>
@@ -130,14 +127,14 @@ class Links extends React.Component {
   }
 }
 
-// let mapStateToProps = {
-//   return {
-//     username : state.username,
-//     login : state.login
-//   }
-// };
+const mapStateToProps = state => {
+  return {
+    loggedIn: state.loggedIn,
+    username: state.username
+  };
+};
 
-// let Link = connect(mapStateToProps)(UnconnectedLinks)
+const Links = connect(mapStateToProps)(UnconnectedLinks);
 
 export default class Navbar extends React.Component {
   render() {

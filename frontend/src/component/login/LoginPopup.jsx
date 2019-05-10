@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import SignupForm from "./SignupForm.jsx";
+import { connect } from "react-redux";
 import "./main.css";
 import "./style.css";
 
-export default class LoginPopup extends Component {
+class UnconnectedLoginPopup extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,7 +40,11 @@ export default class LoginPopup extends Component {
           alert("Incorrect Username or Password");
           return;
         } else {
-          this.props.onClose(res.status);
+          this.props.dispatch({
+            type: "afterLogin",
+            username: this.state.username
+          });
+          this.props.onClose();
         }
       });
   };
@@ -91,3 +96,11 @@ export default class LoginPopup extends Component {
     );
   }
 }
+
+let mapStateToProps = state => {
+  return { loggedIn: state.loggedIn };
+};
+
+let Login = connect()(UnconnectedLoginPopup);
+
+export default Login;
