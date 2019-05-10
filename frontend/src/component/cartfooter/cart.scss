@@ -1,3 +1,6 @@
+
+.cart{
+
 .image {
   padding-right: 30px
 }
@@ -112,4 +115,31 @@ hr {
 
 .photo-width{
   width: 15%
+}
+
+.rounded-button{
+  display: inline-block;
+  background-color: #137752;
+  color: #fff;
+  font-size: .875rem;
+  text-decoration: none;
+  opacity: 1;
+  border-style: none;
+  border-width: 0;
+  border-radius: .5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  margin-bottom: .5rem;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  transition: -webkit-transform .25s ease-out;
+  transition: transform .25s ease-out;
+  transition: transform .25s ease-out, -webkit-transform .25s ease-out
+}
+
 }
