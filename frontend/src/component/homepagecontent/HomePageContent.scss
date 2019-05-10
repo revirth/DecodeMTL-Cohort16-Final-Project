@@ -1,0 +1,203 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css");
+@import url("https://use.fontawesome.com/releases/v5.8.2/css/all.css");
+
+.homecontent{
+body{
+    background:#F8F5F1;
+   
+   }
+   /* videostyle */
+   .videocontainer{
+    margin-bottom:100px;
+    margin-left: 0px;
+    padding-left :0px;
+    margin-right : 1px;
+         
+     
+     
+   }
+   
+   /* scocial medias */
+
+  .socialmedias{
+    
+     margin-top:200px;
+     margin-bottom:200px;
+      margin-right: 40px;
+      margin-left:-200px;
+      text-align: center;
+      font-size: 25px;
+      display:flex;
+      justify-content:space-around;
+   }
+   
+
+   /* style for text blockof3 */
+   
+   #blockof3{
+      margin-top:40px;
+      margin-right: 40px;
+      margin-left: 40px;
+      margin-bottom:100px;
+      text-align: center;
+      font-size: 25px;
+      display:flex;
+      justify-content:space-around;
+   }
+   #blockof4{
+      margin-top:150px;
+     margin-bottom:150px;
+      margin-right: 40px;
+      margin-left: 40px;
+      text-align: center;
+     padding-left:80px;
+      font-size: 25px;
+      display:flex;
+      justify-content:space-around;
+   }
+   
+   .redish{
+      color:#037B55;
+   }
+   
+   
+   
+   .hello{
+      border-right-style:groove;
+      border-right-width: 1px;
+      max-height:90px;
+      padding-right:100px;
+   
+   }
+   /* style for services + 4 images */
+   
+   .services{
+   margin-left: 50px;
+   margin-right:50px;
+   border: 1px solid #0A8E62;
+   }
+   .box1{
+      display: flex;
+      justify-content: space-around;
+      padding-top:75px;
+      padding-bottom:75px;
+   
+   
+   }
+
+//    <div className="socialmedias">
+//    <i className="facebooks" className="fab fa-facebook-square"></i>
+//    <i className="twitters" className="fab fa-twitter-square"></i>
+//    <i className="instagrams" className="fab fa-instagram"></i>
+// </div>
+
+
+   .socialmedias{
+   i.fa-facebook-square{
+     
+      font-size: 5em;
+      transition:1s;
+      padding-left:20%;
+
+       
+         color:#3B5A98;
+      
+     
+   }
+   i.fa-twitter-square{
+     
+      font-size: 5em;
+      transition:1s;
+      padding-left:20%;
+
+       
+         color:#1EA1F2;
+      
+     
+   }
+   i.fa-instagram{
+     
+      font-size: 5em;
+      transition:1s;
+      padding-left:20%;
+
+       
+         color:#EA0B57;
+      
+     
+   }
+   
+   i:hover{
+      font-size: 6em;
+   
+   }
+
+}
+//  #facebooks
+//    #3B5A98
+
+// #instagrams
+// #EA0B57
+   // #twitters
+   // #1EA1F2
+   
+   .box1 p{
+   padding-top:10px;
+   font-size:1.2em;
+   
+   
+   }
+   
+   
+   .box2{
+      align-content: center;
+   }
+   .servicesHeader{
+      font-size:2em;
+      color:white;
+      background-color: #037B55;
+      margin-left: 45%;
+      margin-right:40%;
+      text-align: center;
+      vertical-align: middle;
+      height:100px;
+      margin-top:75px;
+      padding-top:5px;
+      margin-bottom: 50px;
+      padding-left: 15px;
+   padding-right: 15px;
+   
+   
+   }
+   .servicesHeader p{
+   
+   transition: 1000ms;
+   border-bottom: 1px solid transparent;
+   }
+   .servicesHeader p:hover{
+      border-color:white;
+   }
+   .spaceforfooter{
+     padding:25px;
+   }
+}
+
+.services{
+   i{
+      color:#037B55;
+      font-size: 5em;
+      transition:1s;
+      padding-left:20%;
+   }
+   
+   i:hover{
+      font-size: 6em;
+   
+   }
+}
+
+
+ 
+ 
+ 
+ 

@@ -1,0 +1,104 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css");
+@import url("https://use.fontawesome.com/releases/v5.8.2/css/all.css");
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px');
+#searchbutton{
+  color:white;
+  padding-right:5px;
+}
+input{
+  border-radius: 15px;
+}
+nav {
+  background-color: #037B55;
+  overflow: hidden;
+  padding: 1.30em;
+  border-bottom: 3px solid transparent;
+}
+
+nav a {
+  color: white;
+  font-family: 'Slabo 27px', serif;
+}
+
+nav .navWide {
+  display: none;
+  margin: 0 auto;
+}
+
+nav .navWide .wideDiv {
+  text-align: center;
+}
+
+nav .navWide .wideDiv a {
+  text-decoration: none;
+  display: line-block;
+  padding: 0 2.5em;
+  padding-bottom: 5px;
+}
+
+a {
+  transition: 1000ms;
+  border-bottom: 1px solid transparent;
+}
+a:hover {
+  border-color: white;
+}
+nav .navNarrow span {
+  float: left;
+  cursor: pointer;
+  color: white;
+}
+nav .navNarrow i {
+  float: right;
+  cursor: pointer;
+  color: white;
+}
+
+nav .navNarrow .narrowLinks a {
+  text-decoration: none;
+  display: block;
+  float: left;
+  clear: left;
+  padding: 1em 0;
+}
+
+.hidden {
+  display: none;
+}
+
+/*Adjust breakpoint as desired to select when the "hamburger" menu is
+replaced by just the links.*/
+@media (min-width: 1250px) {
+  nav .navWide {
+    display: block;
+  }
+
+  nav .navNarrow {
+    display: none;
+  }
+}
+
+/* .float-right{
+  
+} */
+
+.menus {
+  display: none;
+  padding-top: 20px;
+  padding-left:40px;
+}
+.menus a {
+  text-decoration: none;
+  transition: 1000ms;
+  border-bottom: 1px solid transparent;
+  display: block;
+  float: left;
+  clear: left;
+  padding: 0.1em 0;
+}
+.menus a:hover {
+  border-color: white;
+}
+.titles{
+  font-size: 1em;
+}

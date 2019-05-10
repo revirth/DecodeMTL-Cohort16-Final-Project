@@ -1,0 +1,103 @@
+body {
+  background-color: #F8F5F1;
+  margin: 0;
+}
+
+.btn1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+
+
+}
+
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.largedetails {
+  display: flex;
+  flex-direction: column
+}
+
+.itemdetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.name {
+  margin-left: 10%;
+}
+
+.review {
+  margin-left: 5%;
+}
+
+.listofreview {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.commentBox {
+  margin-left: 3%;
+}
+
+.colorNews {
+  background-color: rgb(3, 150, 103);
+}
+
+.space {
+  width: 10px;
+}
+
+.articlediv {
+  width: 3000px !important;
+}
+
+.moreLinks {
+  text-align: center;
+}
+
+.subscribebtn {
+  margin-top: 0px !important;
+}
+
+.footergap {
+  margin-top: 5%;
+}
+
+.productimg {
+  border-radius: 40px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  -ms-border-radius: 40px;
+  -o-border-radius: 40px;
+  width: 100%;
+  height: auto;
+  -webkit-filter: grayscale(20%);
+  filter: grayscale(20%);
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+  -webkit-transition: filter 600ms ease, -webkit-filter 600ms ease;
+  transition: -webkit-filter 600ms ease;
+  transition: filter 600ms ease;
+  transition: filter 600ms ease, -webkit-filter 600ms ease;
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  transition: transform 0.5s, -webkit-transform 0.5s;
+  -moz-transition: filter 600ms ease, -webkit-filter 600ms ease;
+  -ms-transition: filter 600ms ease, -webkit-filter 600ms ease;
+  -o-transition: filter 600ms ease, -webkit-filter 600ms ease;
+}
+
+.productimg:hover {
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
