@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import LoginPopup from "../login/LoginPopup.jsx";
 import SignupForm from "../login/SignupForm.jsx";
+import NavBarSearchBox from "../navbar-searchbox";
 
 // let Links = (props) => {
 
@@ -115,8 +116,10 @@ class UnconnectedLinks extends React.Component {
           </span>
         )}
 
-        <i id="searchbutton" className="fa fa-search fa" />
-        <input />
+        {/* <i id="searchbutton" className="fa fa-search fa" />
+        <input onClick={() => alert(`search ${this.value}`)} /> */}
+
+        <NavBarSearchBox />
 
         {this.state.popup ? (
           <LoginPopup onClose={this.closeLoginPopup} />
