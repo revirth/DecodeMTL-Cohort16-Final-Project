@@ -49,7 +49,11 @@ body {
     border: 1px solid #ccc;
     box-sizing: border-box;
     font-size: 150%;
-
+    border-radius: 5px !important;
+    -webkit-border-radius: 5px !important;
+    -moz-border-radius: 5px !important;
+    -ms-border-radius: 5px !important;
+    -o-border-radius: 5px !important;
 }
 
 /* ::placeholder {

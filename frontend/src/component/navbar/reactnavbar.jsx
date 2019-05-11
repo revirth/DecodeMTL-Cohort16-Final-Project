@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import LoginPopup from "../login/LoginPopup.jsx";
 import SignupForm from "../login/SignupForm.jsx";
 import NavBarSearchBox from "../navbar-searchbox";
+import Search from "./Search.jsx";
 
 // let Links = (props) => {
 
@@ -55,7 +56,12 @@ import NavBarSearchBox from "../navbar-searchbox";
 class UnconnectedLinks extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { popup: false, signup: false };
+    this.state = {
+      popup: false,
+      signup: false,
+      loggedIn: false,
+      search: false
+    };
   }
   closeLoginPopup = loggedIn => {
     this.setState({ popup: false });
@@ -70,6 +76,26 @@ class UnconnectedLinks extends React.Component {
   //     login : false
   //   }
   // }
+  escFunction = event => {
+    //console.log("event key", event.key);
+    if (event.keyCode === 27) {
+      this.setState({ search: false });
+    }
+  };
+  enterFunction = event => {
+    //console.log("event key", event.key);
+    if (event.keyCode === 13 && this.state.search === true) {
+      console.log("enter status", "hello");
+    }
+  };
+  componentDidMount() {
+    document.addEventListener("keydown", this.escFunction, false);
+    document.addEventListener("keydown", this.enterFunction, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.escFunction, false);
+    document.removeEventListener("keydown", this.enterFunction, false);
+  }
 
   menuToggle() {
     let menus = document.querySelector(".menus");
@@ -119,7 +145,15 @@ class UnconnectedLinks extends React.Component {
         {/* <i id="searchbutton" className="fa fa-search fa" />
         <input onClick={() => alert(`search ${this.value}`)} /> */}
 
-        <NavBarSearchBox />
+        {/* <NavBarSearchBox /> */}
+
+        <i
+          id="searchbutton"
+          className="fa fa-search fa"
+          onClick={() => this.setState({ search: true })}
+          onKeyDown={this.closeSerachPopup}
+        />
+        {this.state.search ? <Search /> : null}
 
         {this.state.popup ? (
           <LoginPopup onClose={this.closeLoginPopup} />
