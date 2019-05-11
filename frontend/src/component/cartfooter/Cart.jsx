@@ -48,7 +48,6 @@ class UnConnectedCart extends React.Component {
     let data = new FormData()
     data.append("cartItemId", e.target.id)
     fetch("http://localhost:3000/deleteCartItem", { method: "DELETE", body: data }).then(headers => {
-      console.log("Delete")
       return headers.text()
     }).then(body => {
       let result = true
@@ -64,6 +63,24 @@ class UnConnectedCart extends React.Component {
       }
     })
   };
+
+  onClickClearCart = e => {
+    fetch("http://localhost:3000/clearCart", { method: "DELETE"}).then(headers => {
+      return headers.text()
+    }).then(body => {
+      let result = true
+      if (result) {
+        // if the item was removed successfully we send request to the endpoint "/cartItems"
+        // to upload updated cartItems for current user
+        fetch("http://localhost:4000/cartItems", { method: "GET" }).then(headers => {
+          return headers.text();
+        }).then(body => {
+          // we update the cartItems for current user in our "store"
+          this.props.dispatch({ type: "FillCart", cartItems: JSON.parse(body) });
+        })
+      }
+    })
+  }
 
   render() {
     //calculate Total for all items in the Cart
@@ -122,12 +139,13 @@ class UnConnectedCart extends React.Component {
               </div>
             );
           })}
+          <div><button className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow" onClick={this.onClickClearCart}>Clear Cart</button></div>
           <div className="total">Total: {total.toFixed(2)}</div>
           <div className="parent-horizontal">
             <div className="button-right">
               <button
-                 className="checkout-button f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
-                onClick={this.onClickHandle}
+                 className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
+                onClick={this.onClickChaeckout}
               >
                 Checkout
             </button>

@@ -1,9 +1,14 @@
 import React from "react";
+import addItemToCart from './addItemToCart'
 import "./main.css";
 import "./style.css";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
-const Product = ({ _id, name, description, imgUrl, price, addFunc }) => {
+let onClickHandle = e => {
+
+}
+
+const Product = ({ _id, name, description, imgUrl, price }) => {
   let showDesc = "";
   return (
     <article
@@ -33,7 +38,7 @@ const Product = ({ _id, name, description, imgUrl, price, addFunc }) => {
         <div className="btn1">
           <button
             className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow btncart"
-            onClick={() => addFunc(_id)}
+            onClick={() => addItemToCart(_id)}
           >
             Add to cart
             <i class="fas fa-cart-plus" />
