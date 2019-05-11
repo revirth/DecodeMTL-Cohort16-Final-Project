@@ -321,6 +321,13 @@ app.delete("/deleteCartItem", upload.none(), async (req, res) => {
     res.send(JSON.stringify({succesfull: true}))
 })
 
+app.delete("/clearCart", upload.none(), async (req, res) => {
+  CART.deleteMany({}, function(err, obj) {
+    if (err) throw err;
+    console.log("Cart cleared")})
+    res.send(JSON.stringify({succesfull: true}))
+})
+
 app.put("/updateCartItem", upload.none(), async (req, res) => {
   let _id = ObjectId(req.body.cartItemId)
   let quantity = req.body.itemQuantity
