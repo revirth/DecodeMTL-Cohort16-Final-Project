@@ -7,6 +7,7 @@ import LoginPopup from "../login/LoginPopup.jsx";
 import SignupForm from "../login/SignupForm.jsx";
 import NavBarSearchBox from "../navbar-searchbox";
 import Search from "./Search.jsx";
+import SimpleMenu from "./dropdown.jsx";
 
 // let Links = (props) => {
 
@@ -135,10 +136,11 @@ class UnconnectedLinks extends React.Component {
           </span>
         ) : (
           <span>
-            Hi {this.props.username}
-            <a href="#" onClick={this.logout}>
+            {/* Hi {this.props.username} */}
+            {/* <a href="#" onClick={this.logout}>
               LOGOUT
-            </a>
+            </a> */}
+            <SimpleMenu />
           </span>
         )}
 

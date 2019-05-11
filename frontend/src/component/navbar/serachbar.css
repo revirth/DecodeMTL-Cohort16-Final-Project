@@ -104,3 +104,9 @@ input[type="text"] {
 
     font-size: 30px;
 }
+
+.navbarmains {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
