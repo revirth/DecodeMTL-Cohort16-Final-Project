@@ -27,9 +27,9 @@ export default class Search extends Component {
 
   render() {
     return (
-      <div className="overlay">
-        <div className="popup w3-animate-top">
-          <form className="mainform" onSubmit={this.handleSubmit}>
+      <div className="overlay1">
+        <div className="popup1 w3-animate-top">
+          <form className="mainform1" onSubmit={this.handleSubmit}>
             <input
               type="text"
               id="txtSearch"
@@ -37,7 +37,7 @@ export default class Search extends Component {
               value={this.state.search}
               onChange={this.handleChange}
               onKeyPress={this.keyPressed}
-              className="search"
+              className="search1"
               placeholder="Hungry! Search for a food"
             />
           </form>
