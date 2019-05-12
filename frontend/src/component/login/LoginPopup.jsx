@@ -13,6 +13,9 @@ class UnconnectedLoginPopup extends Component {
       password: ""
     };
   }
+  componentDidMount() {
+    document.getElementById("loginspace").focus();
+  }
 
   handleUsername = event => {
     this.setState({ username: event.target.value });
@@ -62,6 +65,7 @@ class UnconnectedLoginPopup extends Component {
                 placeholder="Enter Username"
                 onChange={this.handleUsername}
                 className="login-field"
+                id="loginspace"
               />
               <input
                 type="password"

@@ -11,6 +11,10 @@ export default class SignupForm extends Component {
       password: ""
     };
   }
+
+  componentDidMount() {
+    document.getElementById("Signupspace").focus();
+  }
   handleUsername = event => {
     this.setState({ username: event.target.value });
   };
@@ -61,6 +65,7 @@ export default class SignupForm extends Component {
                 placeholder="Enter Your Name"
                 onChange={this.handleUsername}
                 className="login-field"
+                id="Signupspace"
               />
 
               <input

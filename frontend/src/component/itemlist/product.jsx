@@ -1,12 +1,10 @@
 import React from "react";
-import addItemToCart from './addItemToCart'
+import addItemToCart from "./addItemToCart";
 import "./main.css";
 import "./style.css";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
-let onClickHandle = e => {
-
-}
+let onClickHandle = e => {};
 
 const Product = ({ _id, name, description, imgUrl, price }) => {
   let showDesc = "";
