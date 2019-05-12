@@ -66,6 +66,7 @@ export default class SignupForm extends Component {
                 onChange={this.handleUsername}
                 className="login-field"
                 id="Signupspace"
+                required
               />
 
               <input
@@ -73,6 +74,7 @@ export default class SignupForm extends Component {
                 placeholder="Enter Password"
                 onChange={this.handlePassword}
                 className="login-field"
+                required
               />
               <div className="styled-select ColorSignup semi-square">
                 <select

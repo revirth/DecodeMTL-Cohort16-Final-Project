@@ -226,5 +226,12 @@ input[type=submit] {
     padding: 5px;
     /* If you add too much padding here, the options won't show in IE */
     width: 268px;
+    color: white;
+
+}
+
+.styled-select option {
+    background: #037B55;
+    padding: 20px;
 
 }

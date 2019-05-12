@@ -66,12 +66,14 @@ class UnconnectedLoginPopup extends Component {
                 onChange={this.handleUsername}
                 className="login-field"
                 id="loginspace"
+                required
               />
               <input
                 type="password"
                 placeholder="Enter Password"
                 onChange={this.handlePassword}
                 className="login-field"
+                required
               />
               <input
                 className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow loginicon"
