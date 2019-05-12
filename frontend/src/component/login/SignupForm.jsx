@@ -74,6 +74,18 @@ export default class SignupForm extends Component {
                 onChange={this.handlePassword}
                 className="login-field"
               />
+              <div className="styled-select ColorSignup semi-square">
+                <select
+                  name="catagory"
+                  className="catagory"
+                  id="signupcatagory"
+                >
+                  <option value="seller">Seller</option>
+                  <option value="consumer" selected>
+                    Consumer
+                  </option>
+                </select>
+              </div>
 
               <input
                 className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow signbtn"
