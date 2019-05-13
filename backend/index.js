@@ -44,12 +44,11 @@ MongoClient.connect(process.env.MLAB_URI, {
   CART = DB.collection("cart");
 
   // in dev environment, check MongoDB documents
-  let arrP = [USERS, CONFIG, ITEMS, REVIEWS, CART].map(p =>
-    p.find({}).toArray()
-  );
+  // let arrP = [USERS, CONFIG, ITEMS, REVIEWS, CART].map(p =>
+  let arrP = [CONFIG].map(p => p.find({}).toArray());
 
-  // process.env.NODE_ENV === "development" &&
-  //   Promise.all(arrP).then(arr => arr.map(res => console.log(res)));
+  process.env.NODE_ENV === "development" &&
+    Promise.all(arrP).then(arr => arr.map(res => console.log(res)));
 
   // start express server
   app.listen(4000, () => console.log("listening on port 4000"));
@@ -275,16 +274,15 @@ app.get("/cartItems", async (req, res) => {
 });
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-app.use(require("body-parser").text());
 app.post("/charge", upload.none(), async (req, res) => {
   console.log("TCL: /charge", req.body);
 
   try {
     let { status } = await stripe.charges.create({
-      amount: 2000,
-      currency: "usd",
+      amount: parseInt(req.body.amount),
+      currency: "cad",
       description: "An example charge",
-      source: req.body
+      source: req.body.token
     });
 
     console.log("TCL: /charge -> ", status);

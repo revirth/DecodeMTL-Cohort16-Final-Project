@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { CardElement, injectStripe } from "react-stripe-elements";
 
-class CheckoutForm extends Component {
+class UnconnectedCheckoutForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,17 +13,22 @@ class CheckoutForm extends Component {
 
   async submit(ev) {
     let { token } = await this.props.stripe.createToken({
-      name: "Name"
-    });
-    let response = await fetch("/charge", {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain"
-      },
-      body: token.id
+      name: this.props.username
     });
 
-    if (response.ok) console.log("Purchase Complete!");
+    let form = new FormData();
+    form.append("token", token.id);
+    form.append("amount", Math.floor(Math.random() * 100000 + 1000));
+
+    let response = await fetch("/charge", {
+      method: "POST",
+      // headers: {
+      //   "Content-Type": "text/plain"
+      // },
+      body: form
+    });
+
+    if (response.ok) alert("Purchase Complete!");
   }
 
   render() {
@@ -37,4 +43,10 @@ class CheckoutForm extends Component {
   }
 }
 
-export default injectStripe(CheckoutForm);
+const mapStateToProps = state => {
+  return {
+    username: state.username
+  };
+};
+
+export default connect(mapStateToProps)(injectStripe(UnconnectedCheckoutForm));
