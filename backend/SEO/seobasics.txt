@@ -76,9 +76,11 @@ him a plain HTML response using prerender.io. This will prevent error while inde
 the website by making sure that the crawlers are getting the right content.
 ( worst case scenario is that for X reason JavaScript dosent work proprely and 
 the crawler is only able to see the root div and an empty page, which is not so
-good for SEO). Since React is a one page website and all links are handled by the
-ReactBrowser Componenent, google analytics is having a hard time determining the
-amount of time and which part of the page was most relevant for the user. To prevent
+good for SEO). Since React is a one page website, we have to use the
+React browser component( which we already do) so google can see which url correponds to which
+page. The only problem is that the <head> remains the same which is a problem to determine
+how much time a user stays on a certain page or section of the site, which is crucial
+when it comes to analyse data with google analytics. To prevent
 that we use the react-helmet library wich allows us to manage the <head> depending 
 on the url. This way google analytics will work proprely for each 'pages'on the site.
 We also need to manually install google analytics as for any custom. we will integrate 
