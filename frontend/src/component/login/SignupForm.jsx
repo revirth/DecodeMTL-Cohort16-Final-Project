@@ -7,8 +7,8 @@ export default class SignupForm extends Component {
     super(props);
     this.state = {
       username: "",
-
-      password: ""
+      password: "",
+      usertype: 1
     };
   }
 
@@ -23,12 +23,17 @@ export default class SignupForm extends Component {
     this.setState({ password: event.target.value });
   };
 
+  handleIsSeller = event => {
+    this.setState({ usertype: event.target.checked ? 2 : 1 });
+  };
+
   handleSubmit = event => {
     event.preventDefault();
     let data = new FormData();
     data.append("username", this.state.username);
-
     data.append("password", this.state.password);
+    data.append("usertype", this.state.usertype);
+
     fetch("/signup", {
       method: "POST",
       body: data,
@@ -79,7 +84,7 @@ export default class SignupForm extends Component {
               <div className="sildertoggle">
                 <p className="registertxt"> Register as a seller ? </p>
                 <label class="switch tog">
-                  <input type="checkbox" />
+                  <input type="checkbox" onChange={this.handleIsSeller} />
                   <span class="slider round" />
                 </label>
               </div>

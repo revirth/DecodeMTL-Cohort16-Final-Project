@@ -95,6 +95,8 @@ app.get("/logout", upload.none(), (req, res) => {
 });
 
 app.post("/signup", upload.none(), async (req, res) => {
+  console.log("TCL: /signup", req.body);
+
   // check the username
   let doc = await USERS.findOne({
     username: req.body.username
@@ -110,7 +112,7 @@ app.post("/signup", upload.none(), async (req, res) => {
   let obj = {
     ...req.body,
     password: sha256(req.body.password),
-    usertype: 1
+    usertype: parseInt(req.body.usertype)
   };
 
   await USERS.insertOne(obj);
