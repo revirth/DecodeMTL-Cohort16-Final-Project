@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import "./cart.scss";
-import "./style.css";
+// import "./style.css";
 
 class UnConnectedCart extends React.Component {
 
@@ -144,7 +144,7 @@ class UnConnectedCart extends React.Component {
           <div className="parent-horizontal">
             <div className="button-right">
               <button
-                 className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
+                className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
                 onClick={this.onClickChaeckout}
               >
                 Checkout

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 import "./reactnavbar.scss";
 import Fade from "react-reveal/Fade";
 import { connect } from "react-redux";
@@ -114,35 +115,35 @@ class UnconnectedLinks extends React.Component {
   };
 
   render() {
+    console.log("LoggedIn", this.props.loggedIn)
     return (
       <div className="navbarmains">
-        <a href="/" className="titles">
+        <Link to="/" className="titles">
           Nutrition Fine Fourchette
-        </a>
-        <a href="#" onClick={this.menuToggle}>
+        </Link>
+        <Link to="#" onClick={this.menuToggle}>
           MENU
-        </a>
-        <a href="/cart">ORDER</a>
-        <a href="#">DELIVERY</a>
-        <a href="/">ABOUT</a>
+        </Link>
+        <Link to="/cart">ORDER</Link>
+        <Link to="#">DELIVERY</Link>
+        <Link to="/">ABOUT</Link>
         {!this.props.loggedIn ? (
           <span>
-            <a href="#" onClick={() => this.setState({ popup: true })}>
+            <Link to="#" onClick={() => this.setState({ popup: true })}>
               LOGIN
-            </a>
-            <a href="#" onClick={() => this.setState({ signup: true })}>
+            </Link>
+            <Link to="#" onClick={() => this.setState({ signup: true })}>
               SIGNUP
-            </a>
+            </Link>
           </span>
         ) : (
-          <span>
-            Hi {this.props.username}
-            <a href="#" onClick={this.logout}>
-              LOGOUT
-            </a>
-            <Customdropdown />
-          </span>
-        )}
+            <span>
+              Hi {this.props.username}
+              <Link to="#" onClick={this.logout}>
+                LOGOUT
+            </Link>
+            </span>
+          )}
 
         {/* <i id="searchbutton" className="fa fa-search fa" />
         <input onClick={() => alert(`search ${this.value}`)} /> */}
@@ -189,15 +190,15 @@ export default class Navbar extends React.Component {
 
         <Fade top>
           <div className="menus" onClick={this.menuToggle}>
-            <a href="/items" onClick={this.menuToggle} onClick={this.toggle}>
+            <Link to="/items" onClick={this.menuToggle} onClick={this.toggle}>
               WEEKLY
-            </a>
-            <a href="/items" onClick={this.menuToggle} onClick={this.toggle}>
+            </Link>
+            <Link to="/items" onClick={this.menuToggle} onClick={this.toggle}>
               FITNESS
-            </a>
-            <a href="/items" onClick={this.menuToggle} onClick={this.toggle}>
+            </Link>
+            <Link to="/items" onClick={this.menuToggle} onClick={this.toggle}>
               COOKED
-            </a>
+            </Link>
           </div>
         </Fade>
         <div className="navNarrow" onClick={this.toggle}>

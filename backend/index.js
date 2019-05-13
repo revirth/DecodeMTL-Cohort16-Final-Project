@@ -304,7 +304,12 @@ app.get("/charges", async (req, res) => {
   res.json(list);
 });
 app.post("/addCartItem", upload.none(), async (req, res) => {
-  let itemId = req.body.itemId;
+  let sid = req.cookies.sid;
+  let username = SESSIONS[sid]
+  console.log("Sessions: ", SESSIONS)
+  console.log("sid: ", sid)
+  console.log("Name: ", username)
+  let itemId = req.body.itemId
   let newCartItem = {
     itemId: itemId,
     itemQuantity: 1,
