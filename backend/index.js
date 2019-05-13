@@ -117,6 +117,15 @@ app.post("/signup", upload.none(), async (req, res) => {
   res.send(resmsg(true, "signup success"));
 });
 
+paginzation = query => {
+  const limit = query.limit
+    ? parseInt(query.limit)
+    : parseInt(process.env.DEFAULT_PAGE_SIZE);
+  const skip = query.page ? (parseInt(query.page) - 1) * limit : 0;
+
+  return { limit: limit, skip: skip };
+};
+
 app.get("/items", upload.none(), async (req, res) => {
   console.log("TCL: /items", req.query);
 
@@ -129,11 +138,18 @@ app.get("/items", upload.none(), async (req, res) => {
       }
     : {};
 
-  let docs = await ITEMS.find(query).toArray();
+  const page = paginzation(req.query);
 
-  console.log("TCL: /items", docs);
+  const docs = await ITEMS.find(query)
+    .skip(page.skip)
+    .limit(page.limit)
+    .toArray();
 
-  res.send(docs);
+  const data = { items: docs, total: await ITEMS.countDocuments() };
+
+  console.log("TCL: /items", data);
+
+  res.send(data);
 });
 
 app.get("/items/:itemId", upload.none(), async (req, res) => {
@@ -305,11 +321,11 @@ app.get("/charges", async (req, res) => {
 });
 app.post("/addCartItem", upload.none(), async (req, res) => {
   let sid = req.cookies.sid;
-  let username = SESSIONS[sid]
-  console.log("Sessions: ", SESSIONS)
-  console.log("sid: ", sid)
-  console.log("Name: ", username)
-  let itemId = req.body.itemId
+  let username = SESSIONS[sid];
+  console.log("Sessions: ", SESSIONS);
+  console.log("sid: ", sid);
+  console.log("Name: ", username);
+  let itemId = req.body.itemId;
   let newCartItem = {
     itemId: itemId,
     itemQuantity: 1,
