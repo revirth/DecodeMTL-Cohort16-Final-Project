@@ -36,7 +36,6 @@ a {
 .listofreview {
   margin-left: 5%;
   margin-right: 5%;
-  widows: 90% !important;
 }
 
 .commentBox {
@@ -101,4 +100,8 @@ a {
 
 .subscribetxt {
   font-size: 15px !important;
+}
+
+.reviewlist {
+  width: 100%;
 }

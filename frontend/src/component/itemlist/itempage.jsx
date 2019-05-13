@@ -1,7 +1,7 @@
 import "./main.css";
 import "./style.css";
 import React, { Component } from "react";
-import addItemToCart from './addItemToCart'
+import addItemToCart from "./addItemToCart";
 // import item from "./items.js";
 
 class Itempage extends Component {
@@ -38,7 +38,10 @@ class Itempage extends Component {
                 <p class="measure lh-copy">
                   {this.state.foundItem.description}
                 </p>
-                <button className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow" onClick={() => addItemToCart(this.state.foundItem._id)}>
+                <button
+                  className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
+                  onClick={() => addItemToCart(this.state.foundItem._id)}
+                >
                   Add to cart
                 </button>
               </div>
@@ -47,7 +50,7 @@ class Itempage extends Component {
           <div>
             <h1 class="f4 bold review mw5">Reviews</h1>
             <div className="listofreview">
-              <ul class="list pl0 ml0 center  ba b--light-silver br3 ">
+              <ul class="list pl0 ml0 center  ba b--light-silver br3 reviewlist ">
                 <li class="ph3 pv2 bb b--light-silver">Mackeral Tabby</li>
                 <li class="ph3 pv2 bb b--light-silver">Burmese</li>
                 <li class="ph3 pv2 bb b--light-silver">Maine Coon</li>
