@@ -76,17 +76,12 @@ export default class SignupForm extends Component {
                 className="login-field"
                 required
               />
-              <div className="styled-select ColorSignup semi-square">
-                <select
-                  name="catagory"
-                  className="catagory"
-                  id="signupcatagory"
-                >
-                  <option value="seller">Seller</option>
-                  <option value="consumer" selected>
-                    Consumer
-                  </option>
-                </select>
+              <div className="sildertoggle">
+                <p className="registertxt"> Register as a seller ? </p>
+                <label class="switch tog">
+                  <input type="checkbox" />
+                  <span class="slider round" />
+                </label>
               </div>
 
               <input
