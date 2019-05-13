@@ -39,13 +39,26 @@ let reducer = (state, action) => {
   }
   return state;
 };
+let getCookie_sid = () => {
+  return document.cookie.replace(
+    /(?:(?:^|.*;\s*)sid\s*\=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+};
+
+let getCookie_unm = () => {
+  return document.cookie.replace(
+    /(?:(?:^|.*;\s*)unm\s*\=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+};
 
 let store = createStore(
   reducer,
   {
     cartItems: [],
-    loggedIn: false,
-    username: ""
+    loggedIn: getCookie_sid() !== "",
+    username: getCookie_unm()
   },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
