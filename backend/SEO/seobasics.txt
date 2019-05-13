@@ -1,0 +1,205 @@
+
+Google is the main search engine so SEO is really GSEO ( google search engine optimisation)
+
+The competition is so low that it does not really matter to bother.
+
+Google has a few different 'crawlers', they are going through websites and link through
+a process called 'scrapping' which extracts content from websites and index them.
+
+The 3 main criteria for a good website are the following
+
+    1. Authority
+        In simple terms, how many good and established websites are linking to yours
+
+    2.Coherent
+        Does the website matches the search intention of the user and the actual content
+        corectly answers that intention
+
+    3. Performance
+        loading speed + no downtime 
+        
+Google will always display a mix of 
+    - Optimised websites based on the 3 above
+    - Direct links to videos that might correspond to the search intent
+    - Websites that pays to be there.
+
+Seo brings more organic traffic to a given website and allows for more successful
+payed marketing campain. 
+
+The main Algorythms at google are the following
+
+    Panda 
+        Penalize bad content, spam, repetitive content
+
+    Pingouin 
+        Verify the value of external links to your website. Basically if you have
+        tons of links but from non related source your will get penalised. Main reason
+        for Pingouin is to prevent malicious behaviors such as creating tons of websites
+        linking to yours.
+
+    HummingBird and Rankbrain
+        Goes beyond content and understands more context and intent behing the search.
+        Before google was mainly focused on keywords. Now Google tries to understand 
+        the search intent behing what the user typed in the search bar in order to show
+        him results that will answers is questions/search more precisely then just 
+        looking for keywords. 
+        ( this is super important, especially with the growth of voice recognition
+         searches, more and more searches are formulated into questions)    
+
+    Pigeon 
+        Makes use of GoogleMap and will boost local search resutls. 
+        ex- a user makes a search for 'best hot-dog'
+        Pigeon will guess that the user wants to get local results based on his current
+        position. So searching 'best hot-dog' while in Montreal vs searching the same thing 
+        in New-York will probably not give the same results. 
+
+2 main ways to optimise a website
+
+    On-page
+
+    1. Performance and speed ( main argument for using custom web vs wordpress solution)
+    2. crawler friendly structure( more on that later)
+    3. Text/Video content optimisation
+
+    Off-page
+
+    1. Links from established websites to yours
+
+
+REACT AND SEO
+
+Google crawlers don't work 100% with react because the DOM is mainly populated by
+JavaScript. In order to optimise a React website, they are a few things to consider.
+Since crawlers have a easier time with static HTML, we need to detect when it is
+a robot or a user that is looking at the site. If it is a robot, server will send
+him a plain HTML response using prerender.io. This will prevent error while indexing
+the website by making sure that the crawlers are getting the right content.
+( worst case scenario is that for X reason JavaScript dosent work proprely and 
+the crawler is only able to see the root div and an empty page, which is not so
+good for SEO). Since React is a one page website and all links are handled by the
+ReactBrowser Componenent, google analytics is having a hard time determining the
+amount of time and which part of the page was most relevant for the user. To prevent
+that we use the react-helmet library wich allows us to manage the <head> depending 
+on the url. This way google analytics will work proprely for each 'pages'on the site.
+We also need to manually install google analytics as for any custom. we will integrate 
+the google analytics dashboard in the react-admin user interface.
+
+
+
+SEO GOALS
+
+    Always important to have well defined goals before trying to do anything. The process
+    will be much easier.
+
+    ex of valid goals - more sales, attract new clients, increase visibility, 
+    build brand image, establish expertise, publish meaningful content... 
+
+
+KPI ( key performance indexes) ( more on that on google analytics section)
+
+    Most popular and used are 
+        1. Number of unique visitors ( different user/ip having visited the page
+            at least once)
+        2. Pages visited by session
+        3. Conversion rate ( sales, subscription...)
+        4. Recurring visitors 
+
+
+Once goal and KPI are fixed and ways to track them, time to improve SEO
+
+Improving a website 
+
+    1. Quick audit ( google lighthouse chromebrowsertools + 
+                        http://nibbler.silktide.com)
+    2. Keyword search
+    3. Detailed audit 
+    4. Optimise performance + content
+    5. Find partners to link to your web site      
+
+
+
+QUICK audit
+
+    Google integrated in the dev tools a quick automated audit process
+    that gives recommendations. Really detailed and precise. Run that one first
+
+    Nibbler is the second step, gives a second viewpoint to consolidate 
+
+    This step should give you a quick idea on how to optimise any website quicklu
+
+Keyword search
+
+    Google is moving more towards search intent but keywords are still important
+    and easy to implement. The intent is also pretty important so don't limit
+    optimisation for single keywords but also expression/questions that your website
+    is answering. 
+
+    First step is finding the basics. Brainstorm about potential search that
+    a potential client would use to search you on google. 
+
+    Once list is decent, use the following tools to validate and explore 
+
+    1. google keyword planner
+    2. kwfinder
+    3. Answer the public
+
+    The goal is to find related search with your main ideas with high 
+    search volume and low competition.
+
+    Next step is to follow the website in competition, 
+    look at what kw they are using and see if you can re-use same ones or 
+    related ones.
+
+    If store is local, add location and picture with
+        Google My Business
+
+    That way the Pigeon Algorythm is going to be able to index your website more
+    successfuly. 
+
+
+Optimise Performance and content
+
+    Performance - use the results from the audit to ajust. 
+
+        common things that may be quick to fix are <head> meta-description
+        image compression, limit the dependencies and make it responsive
+        and mobile friendly
+
+    Content - The actual text on the site
+
+        only one <h1> per website and should be determined based on key expression
+        <h2> should be used for subtitles and should correspond to key expressions
+        or synonyms. The keywords should also appear in <p> tags. NEVER spam
+        keywords, try to use synonyms and different relevant expressions based
+        on the keyword section. Meta-description and title in the <head> tag 
+        are super important. Also any images must have an alt attribute with
+        a short description in case browser dosent support image or any problem
+        occurs. crawlers have an easier work indexing with that too. 
+
+        Any website should have a dedicated space for content.   
+        (Newsletter,blog...)  
+        And new content should be added regularly. The content should be aligned
+        with the keywords.
+
+Find partners
+
+    Thrust score :
+
+    Quality and quantity of links to your website. 
+    Find bloggers, partners, authorities and ask them to link at your 
+    website whenever possible
+
+    Also having a Facebook, a twitter, linkedin and intagram account is 
+    a must. Might not focus on all of them but at least having the account
+    up and reposting content when possible. 
+
+
+SEO STRATEGY
+
+Google analytics + Google Search console.
+
+These two tools are easy to use and give all the relevant data. 
+
+// more info on google analytics and google Search console later
+
+
