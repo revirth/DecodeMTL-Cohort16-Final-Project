@@ -9,16 +9,18 @@ let cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
 let cors = require("cors");
-app.use(cors({
-  credentials: true,
-  origin: `http://localhost:3000`
-}));
+app.use(
+  cors({
+    credentials: true,
+    origin: `http://localhost:3000`
+  })
+);
 
 let shajs = require("sha.js");
 sha256 = str =>
   shajs("sha256")
-  .update(str)
-  .digest("hex");
+    .update(str)
+    .digest("hex");
 
 resmsg = (st, msg) => ({
   status: st,
@@ -33,27 +35,25 @@ const ObjectId = require("mongodb").ObjectId;
 let DB, USERS, CONFIG, ITEMS, REVIEWS;
 MongoClient.connect(process.env.MLAB_URI, {
   useNewUrlParser: true
-}).then(
-  client => {
-    DB = client.db("alibay");
-    USERS = DB.collection("users"); // [{username:'a', password:'sha256...', usertype:1}]
-    CONFIG = DB.collection("config"); // usertypes: [type1, type2, type3 ...],
-    ITEMS = DB.collection("items");
-    REVIEWS = DB.collection("reviews");
-    CART = DB.collection("cart");
+}).then(client => {
+  DB = client.db("alibay");
+  USERS = DB.collection("users"); // [{username:'a', password:'sha256...', usertype:1}]
+  CONFIG = DB.collection("config"); // usertypes: [type1, type2, type3 ...],
+  ITEMS = DB.collection("items");
+  REVIEWS = DB.collection("reviews");
+  CART = DB.collection("cart");
 
-    // in dev environment, check MongoDB documents
-    let arrP = [USERS, CONFIG, ITEMS, REVIEWS, CART].map(p =>
-      p.find({}).toArray()
-    );
+  // in dev environment, check MongoDB documents
+  let arrP = [USERS, CONFIG, ITEMS, REVIEWS, CART].map(p =>
+    p.find({}).toArray()
+  );
 
-    // process.env.NODE_ENV === "development" &&
-    //   Promise.all(arrP).then(arr => arr.map(res => console.log(res)));
+  // process.env.NODE_ENV === "development" &&
+  //   Promise.all(arrP).then(arr => arr.map(res => console.log(res)));
 
-    // start express server
-    app.listen(4000, () => console.log("listening on port 4000"));
-  }
-);
+  // start express server
+  app.listen(4000, () => console.log("listening on port 4000"));
+});
 
 app.get("/users", async (req, res) => {
   process.env.NODE_ENV === "development" &&
@@ -82,6 +82,7 @@ app.post("/login", upload.none(), async (req, res) => {
   let sid = "" + Math.floor(Math.random() * 1000000000000);
   SESSIONS[sid] = req.body.username;
   res.cookie("sid", sid);
+  res.cookie("unm", req.body.username);
   res.send(resmsg(true, "login success"));
 });
 
@@ -95,8 +96,6 @@ app.get("/logout", upload.none(), (req, res) => {
 });
 
 app.post("/signup", upload.none(), async (req, res) => {
-
-
   // check the username
   let doc = await USERS.findOne({
     username: req.body.username
@@ -122,12 +121,14 @@ app.post("/signup", upload.none(), async (req, res) => {
 app.get("/items", upload.none(), async (req, res) => {
   console.log("TCL: /items", req.query);
 
-  const query = req.query.search ? {
-    name: {
-      $regex: req.query.search,
-      $options: "i"
-    }
-  } : {};
+  const query = req.query.search
+    ? {
+        name: {
+          $regex: req.query.search,
+          $options: "i"
+        }
+      }
+    : {};
 
   let docs = await ITEMS.find(query).toArray();
 
@@ -179,13 +180,17 @@ app.put("/items/:itemId", upload.none(), async (req, res) => {
     quantity: parseInt(req.body.quantity)
   };
 
-  let doc = await ITEMS.findOneAndUpdate({
-    _id: ObjectId(req.params.itemId)
-  }, {
-    $set: object
-  }, {
-    returnNewDocument: true
-  });
+  let doc = await ITEMS.findOneAndUpdate(
+    {
+      _id: ObjectId(req.params.itemId)
+    },
+    {
+      $set: object
+    },
+    {
+      returnNewDocument: true
+    }
+  );
 
   console.log(doc);
 
@@ -230,13 +235,17 @@ app.put("/reviews/:reviewId", upload.none(), async (req, res) => {
     rating: parseInt(req.body.rating)
   };
 
-  let doc = await REVIEWS.findOneAndUpdate({
-    _id: ObjectId(req.params.reviewId)
-  }, {
-    $set: object
-  }, {
-    returnNewDocument: true
-  });
+  let doc = await REVIEWS.findOneAndUpdate(
+    {
+      _id: ObjectId(req.params.reviewId)
+    },
+    {
+      $set: object
+    },
+    {
+      returnNewDocument: true
+    }
+  );
 
   console.log(doc);
 
@@ -271,9 +280,7 @@ app.post("/charge", upload.none(), async (req, res) => {
   console.log("TCL: /charge", req.body);
 
   try {
-    let {
-      status
-    } = await stripe.charges.create({
+    let { status } = await stripe.charges.create({
       amount: 2000,
       currency: "usd",
       description: "An example charge",
@@ -299,40 +306,46 @@ app.get("/charges", async (req, res) => {
   res.json(list);
 });
 app.post("/addCartItem", upload.none(), async (req, res) => {
-  let itemId = req.body.itemId
+  let itemId = req.body.itemId;
   let newCartItem = {
     itemId: itemId,
     itemQuantity: 1,
     userId: "5cd0ae661c9d440000de172c"
-  }
+  };
   await CART.insertOne(newCartItem);
-  res.send(JSON.stringify({
-    successfull: true
-  }))
-
-
-})
+  res.send(
+    JSON.stringify({
+      successfull: true
+    })
+  );
+});
 
 app.delete("/deleteCartItem", upload.none(), async (req, res) => {
-  let _id = ObjectId(req.body.cartItemId)
-  CART.deleteOne({"_id": _id}, function(err, obj) {
+  let _id = ObjectId(req.body.cartItemId);
+  CART.deleteOne({ _id: _id }, function(err, obj) {
     if (err) throw err;
-    console.log("1 document deleted")})
-    res.send(JSON.stringify({succesfull: true}))
-})
+    console.log("1 document deleted");
+  });
+  res.send(JSON.stringify({ succesfull: true }));
+});
 
 app.delete("/clearCart", upload.none(), async (req, res) => {
   CART.deleteMany({}, function(err, obj) {
     if (err) throw err;
-    console.log("Cart cleared")})
-    res.send(JSON.stringify({succesfull: true}))
-})
+    console.log("Cart cleared");
+  });
+  res.send(JSON.stringify({ succesfull: true }));
+});
 
 app.put("/updateCartItem", upload.none(), async (req, res) => {
-  let _id = ObjectId(req.body.cartItemId)
-  let quantity = req.body.itemQuantity
-  CART.updateOne({"_id": _id}, { $set: {"itemQuantity": quantity}}, function(err, obj) {
+  let _id = ObjectId(req.body.cartItemId);
+  let quantity = req.body.itemQuantity;
+  CART.updateOne({ _id: _id }, { $set: { itemQuantity: quantity } }, function(
+    err,
+    obj
+  ) {
     if (err) throw err;
-    console.log("1 document updated")})
-    res.send(JSON.stringify({succesfull: true}))
-})
+    console.log("1 document updated");
+  });
+  res.send(JSON.stringify({ succesfull: true }));
+});

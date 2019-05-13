@@ -7,6 +7,7 @@ import LoginPopup from "../login/LoginPopup.jsx";
 import SignupForm from "../login/SignupForm.jsx";
 import NavBarSearchBox from "../navbar-searchbox";
 import Search from "./Search.jsx";
+import Customdropdown from "../login/customdropdown.jsx";
 
 // let Links = (props) => {
 
@@ -139,6 +140,7 @@ class UnconnectedLinks extends React.Component {
             <a href="#" onClick={this.logout}>
               LOGOUT
             </a>
+            <Customdropdown />
           </span>
         )}
 
