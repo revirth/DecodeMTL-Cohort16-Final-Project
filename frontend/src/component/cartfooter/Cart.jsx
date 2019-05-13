@@ -8,7 +8,7 @@ class UnConnectedCart extends React.Component {
   componentDidMount = () => {
     // we send a request to the endpoint "/cartItems" to upload cartItems for current user
     // before show the Cart page the first time
-    fetch("http://localhost:4000/cartItems", { method: "GET", credentials:'include' })
+    fetch("http://localhost:4000/cartItems", { method: "GET", credentials: 'include' })
       .then(headers => {
         return headers.text();
       })
@@ -24,7 +24,7 @@ class UnConnectedCart extends React.Component {
     let data = new FormData()
     data.append("cartItemId", e.target.id)
     data.append("itemQuantity", e.target.value)
-    fetch("http://localhost:3000/updateCartItem", { method: "PUT", credentials:'include', body: data }).then(headers => {
+    fetch("http://localhost:3000/updateCartItem", { method: "PUT", credentials: 'include', body: data }).then(headers => {
       console.log("PUT")
       return headers.text()
     }).then(body => {
@@ -32,7 +32,7 @@ class UnConnectedCart extends React.Component {
       if (result) {
         // if the item was updated successfully we send request to the endpoint "/cartItems"
         // to upload updated cartItems for current user
-        fetch("http://localhost:4000/cartItems", { method: "GET", credentials:'include' }).then(headers => {
+        fetch("http://localhost:4000/cartItems", { method: "GET", credentials: 'include' }).then(headers => {
           return headers.text();
         }).then(body => {
           // we update the cartItems for current user in our "store"
@@ -47,14 +47,14 @@ class UnConnectedCart extends React.Component {
     // we send a request to the endpoint "/deleteCartItem" to remove the item 
     let data = new FormData()
     data.append("cartItemId", e.target.id)
-    fetch("http://localhost:3000/deleteCartItem", { method: "DELETE", credentials:'include', body: data }).then(headers => {
+    fetch("http://localhost:3000/deleteCartItem", { method: "DELETE", credentials: 'include', body: data }).then(headers => {
       return headers.text()
     }).then(body => {
       let result = true
       if (result) {
         // if the item was removed successfully we send request to the endpoint "/cartItems"
         // to upload updated cartItems for current user
-        fetch("http://localhost:4000/cartItems", { method: "GET", credentials:'include' }).then(headers => {
+        fetch("http://localhost:4000/cartItems", { method: "GET", credentials: 'include' }).then(headers => {
           return headers.text();
         }).then(body => {
           // we update the cartItems for current user in our "store"
@@ -65,7 +65,7 @@ class UnConnectedCart extends React.Component {
   };
 
   onClickClearCart = e => {
-    fetch("http://localhost:3000/clearCart", { method: "DELETE", credentials:'include'}).then(headers => {
+    fetch("http://localhost:3000/clearCart", { method: "DELETE", credentials: 'include' }).then(headers => {
       return headers.text()
     }).then(body => {
       let result = true
@@ -85,6 +85,13 @@ class UnConnectedCart extends React.Component {
   render() {
     //calculate Total for all items in the Cart
     let total = 0;
+    let clearButton = this.props.items.length > 0 ?
+      <div className="parent-horizontal">
+        <div className="button-right">
+          <button className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow" onClick={this.onClickClearCart}>Clear Cart</button>
+        </div>
+      </div>
+      : null
     this.props.items.forEach(item => {
       total = total + parseFloat(item.itemPrice) * parseInt(item.itemQuantity);
     });
@@ -93,6 +100,7 @@ class UnConnectedCart extends React.Component {
       <div className="cart">
         <div className="general-margin">
           <h4>Your Items:</h4>
+          {clearButton}
           {this.props.items.map((item) => {
             return (
               <div key={item.cartItemId} className="item-cell-width">
@@ -139,7 +147,6 @@ class UnConnectedCart extends React.Component {
               </div>
             );
           })}
-          <div><button className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow" onClick={this.onClickClearCart}>Clear Cart</button></div>
           <div className="total">Total: {total.toFixed(2)}</div>
           <div className="parent-horizontal">
             <div className="button-right">
