@@ -8,6 +8,7 @@ import Navbar from "./component/navbar/reactnavbar";
 import Itempage from "./component/itemlist/itempage.jsx";
 import HomePageContent from "./component/homepagecontent/HomePageContent.jsx";
 import Checkout from "./component/checkout/index";
+import userprofile from "./component/userprofile/userprofile.jsx";
 
 let renderItem = routerData => {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route exact={true} path="/cart" component={Cart} />
         <Route exact={true} path="/items/:itemId" render={renderItem} />
         <Route exact={true} path="/checkout" component={Checkout} />
+        <Route exact={true} path="/profile" component={userprofile} />
       </div>
       <CartBar />
     </BrowserRouter>

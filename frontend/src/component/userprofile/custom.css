@@ -1,0 +1,46 @@
+.settngdetials {
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+}
+.mainsettings {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.settingsbtn {
+  padding: 2%;
+}
+
+.w3-animate-bottom {
+  position: relative;
+  animation: animatebottom 0.4s;
+}
+@keyframes animatebottom {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+.w3-animate-top {
+  position: absolute;
+  animation: animatetop 0.4s;
+  -webkit-animation: animatetop 0.4s;
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+
+  to {
+    /* top: 0; */
+    opacity: 1;
+  }
+}
