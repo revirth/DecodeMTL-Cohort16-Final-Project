@@ -1,5 +1,5 @@
 body {
-  background-color: #F8F5F1;
+  background-color: #f8f5f1;
   margin: 0;
 }
 
@@ -7,11 +7,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-
-
 }
-
 
 a {
   text-decoration: none;
@@ -20,7 +16,7 @@ a {
 
 .largedetails {
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 
 .itemdetails {
@@ -40,6 +36,7 @@ a {
 .listofreview {
   margin-left: 5%;
   margin-right: 5%;
+  widows: 90% !important;
 }
 
 .commentBox {
