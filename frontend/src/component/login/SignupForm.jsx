@@ -11,6 +11,10 @@ export default class SignupForm extends Component {
       password: ""
     };
   }
+
+  componentDidMount() {
+    document.getElementById("Signupspace").focus();
+  }
   handleUsername = event => {
     this.setState({ username: event.target.value });
   };
@@ -61,6 +65,8 @@ export default class SignupForm extends Component {
                 placeholder="Enter Your Name"
                 onChange={this.handleUsername}
                 className="login-field"
+                id="Signupspace"
+                required
               />
 
               <input
@@ -68,7 +74,15 @@ export default class SignupForm extends Component {
                 placeholder="Enter Password"
                 onChange={this.handlePassword}
                 className="login-field"
+                required
               />
+              <div className="sildertoggle">
+                <p className="registertxt"> Register as a seller ? </p>
+                <label class="switch tog">
+                  <input type="checkbox" />
+                  <span class="slider round" />
+                </label>
+              </div>
 
               <input
                 className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow signbtn"

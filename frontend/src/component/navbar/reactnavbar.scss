@@ -1,13 +1,16 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css");
 @import url("https://use.fontawesome.com/releases/v5.8.2/css/all.css");
 @import url('https://fonts.googleapis.com/css?family=Slabo+27px');
-#searchbutton{
-  color:white;
-  padding-right:5px;
+
+#searchbutton {
+  color: white;
+  padding-right: 5px;
 }
-input{
+
+input {
   border-radius: 15px;
 }
+
 nav {
   background-color: #037B55;
   overflow: hidden;
@@ -39,15 +42,22 @@ nav .navWide .wideDiv a {
 a {
   transition: 1000ms;
   border-bottom: 1px solid transparent;
+  -webkit-transition: 1000ms;
+  -moz-transition: 1000ms;
+  -ms-transition: 1000ms;
+  -o-transition: 1000ms;
 }
+
 a:hover {
   border-color: white;
 }
+
 nav .navNarrow span {
   float: left;
   cursor: pointer;
   color: white;
 }
+
 nav .navNarrow i {
   float: right;
   cursor: pointer;
@@ -85,8 +95,9 @@ replaced by just the links.*/
 .menus {
   display: none;
   padding-top: 20px;
-  padding-left:40px;
+  padding-left: 40px;
 }
+
 .menus a {
   text-decoration: none;
   transition: 1000ms;
@@ -95,10 +106,16 @@ replaced by just the links.*/
   float: left;
   clear: left;
   padding: 0.1em 0;
+  -webkit-transition: 1000ms;
+  -moz-transition: 1000ms;
+  -ms-transition: 1000ms;
+  -o-transition: 1000ms;
 }
+
 .menus a:hover {
   border-color: white;
 }
-.titles{
+
+.titles {
   font-size: 1em;
 }

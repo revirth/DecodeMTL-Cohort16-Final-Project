@@ -1,6 +1,7 @@
 import "./main.css";
 import "./style.css";
 import React, { Component } from "react";
+import addItemToCart from './addItemToCart'
 // import item from "./items.js";
 
 class Itempage extends Component {
@@ -37,7 +38,7 @@ class Itempage extends Component {
                 <p class="measure lh-copy">
                   {this.state.foundItem.description}
                 </p>
-                <button className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow">
+                <button className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow" onClick={() => addItemToCart(this.state.foundItem._id)}>
                   Add to cart
                 </button>
               </div>
@@ -86,7 +87,7 @@ class Itempage extends Component {
                       Email Address
                     </label>
                     <input
-                      class="f6 f5-l input-reset bn fl black-80 bg-white pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns"
+                      class="f6 f5-l input-reset bn fl black-80 bg-white pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns subscribetxt"
                       placeholder="Your Email Address"
                       type="text"
                       name="email-address"

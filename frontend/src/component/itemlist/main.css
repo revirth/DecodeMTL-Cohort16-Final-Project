@@ -101,3 +101,7 @@ a {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+.subscribetxt {
+  font-size: 15px !important;
+}
