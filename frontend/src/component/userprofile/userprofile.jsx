@@ -2,30 +2,42 @@ import React, { Component } from "react";
 import "./custom.css";
 import "./style.css";
 import Addresspopup from "./updateAddresspopup.jsx";
+import Paymentpopup from "./updatePaymentpopup.jsx";
+import Accountdetails from "./updateAccountdetails.jsx"
 
 export default class userprofile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showaddress: false
+      showaddress: false,
+      payment: false,
+      accountdetails: false
     };
   }
   escFunction = event => {
     //console.log("event key", event.key);
     if (event.keyCode === 27) {
-      this.setState({ showaddress: false });
+      this.setState({ showaddress: false, payment: false, accountdetails: false });
     }
   };
   componentDidMount() {
     document.addEventListener("keydown", this.escFunction, false);
   }
-  componentWillUnmount() {
-    document.removeEventListener("keydown", this.escFunction, false);
+  // componentWillUnmount() {
+  //   document.removeEventListener("keydown", this.escFunction, false);
+  // }
+  updatePayment = event => {
+    event.preventDefault();
+    this.setState({ payment: !this.state.payment });
   }
 
   updateAddress = event => {
     event.preventDefault();
     this.setState({ showaddress: !this.state.showaddress });
+  };
+  updateSettings = event => {
+    event.preventDefault();
+    this.setState({ accountdetails: !this.state.accountdetails });
   };
   render() {
     // let checkAdd = this.state.address ? {<SignupForm>} : null
@@ -55,7 +67,7 @@ export default class userprofile extends Component {
           </article>
         </div>
         <div className="settngdetials">
-          <button className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow">
+          <button className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow" onClick={this.updatePayment} >
             Update Payment Options
           </button>
           <article class="center mw5 mw6-ns br3 ba b--black-10 mv4">
@@ -70,10 +82,11 @@ export default class userprofile extends Component {
                 justo duo dolores et ea rebum.
               </p>
             </div>
+            {this.state.payment ? <Paymentpopup /> : null}
           </article>
         </div>
         <div className="settngdetials">
-          <button className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow">
+          <button className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow" onClick={this.updateSettings}>
             Account detials
           </button>
           <article class="center mw5 mw6-ns br3 ba b--black-10 mv4">
@@ -88,6 +101,7 @@ export default class userprofile extends Component {
                 justo duo dolores et ea rebum.
               </p>
             </div>
+            {this.state.accountdetails ? <Accountdetails /> : null}
           </article>
         </div>
       </div>

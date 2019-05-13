@@ -2,29 +2,30 @@ import React, { Component } from "react";
 //import "./main.css";
 import "./style.css";
 
-export default class Addresspopup extends Component {
+export default class Paymentpopup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      street: "",
-      apt: "",
-      postal: "",
-      phone: ""
+      cardno: "",
+      cvc: "123",
+      expirydate: "",
+      name: ""
     };
   }
 
-  handleStreet = event => {
-    this.setState({ street: event.target.value });
+  cardNo = event => {
+    this.setState({ cardno: event.target.value });
   };
-  handleApt = event => {
-    this.setState({ apt: event.target.value });
+  cvc = event => {
+    this.setState({ cvc: event.target.value });
   };
-  handlePost = event => {
-    this.setState({ postal: event.target.value });
+  expiryDate = event => {
+    this.setState({ expirydate: event.target.value });
   };
-  handlePh = event => {
-    this.setState({ phone: event.target.value });
+  cardName = event => {
+    this.setState({ name: event.target.value });
   };
+
   handleSubmit = event => {
     event.preventDefault();
   };
@@ -39,30 +40,34 @@ export default class Addresspopup extends Component {
             <form className="mainform" onSubmit={this.handleSubmit}>
               <input
                 type="text"
-                placeholder="Enter your street(optional)"
-                onChange={this.handleStreet}
+                placeholder="Credit/Debit card No"
+                onChange={this.cardNo}
                 className="login-field"
                 id="Signupspace"
+                required
               />
 
               <input
                 type="text"
-                placeholder="Enter your apartment number(optional)"
-                onChange={this.handleApt}
+                placeholder="CVC number"
+                onChange={this.cvc}
                 className="login-field"
+                required
               />
               <input
-                type="text"
-                placeholder="Enter your postal code(optional)"
-                onChange={this.handlePost}
+                type="date"
+                placeholder="Expiry Date"
+                onChange={this.expiryDate}
                 className="login-field"
+                required
               />
 
               <input
                 type="text"
-                placeholder="Enter your Phone(optional)"
-                onChange={this.handlePh}
+                placeholder="Enter name on the card"
+                onChange={this.Cardname}
                 className="login-field"
+                required
               />
 
               <input
