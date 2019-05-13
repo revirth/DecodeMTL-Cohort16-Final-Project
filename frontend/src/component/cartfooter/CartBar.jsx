@@ -8,7 +8,7 @@ class UnconnectedCartBar extends React.Component {
   componentDidMount = () => {
     // we send a request to the endpoint "/cartItems" to upload cartItems for current user
     // before show the CartBar the first time
-    fetch("http://localhost:4000/cartItems", { method: "GET" })
+    fetch("http://localhost:4000/cartItems", { method: "GET", credentials:'include' })
       .then(headers => {
         return headers.text();
       })

@@ -1,0 +1,64 @@
+
+Challenge 1 
+
+We need to serve static content to crawlers so google can correctly index our website
+They are multiple options but a simple and easy one is using the node module pre-render.
+more info on the prerender.io website. The middleware function will intercept any HTTP
+request from a robot and perform a server-side rendering before sending HTTP response
+instead of sending the normal HTTP response. 
+
+In the Terminal
+    npm install prerender -node --save
+
+Inside server.js in the back-end    
+    app.use(require('prerender-node').set('prerenderToken', 'YOUR_TOKEN'));
+
+    in our case, our token is ptYouLHIIgp5cABSTQfe
+
+    app.use(require('prerender-node').set('prerenderToken', 'ptYouLHIIgp5cABSTQfe'));
+
+
+Challenge 2 
+
+We need to manage the <head> tag. We don't want crawlers to think the are on a single-page
+application( which is the case due to the use of ReactBrowser ) The react-helmet library
+allows us to use the <Helmet> component to control the head tag info based on the current
+route. 
+
+This part is pretty easy to implement.
+
+In the Terminal 
+    yarn add react-helmet
+
+Inside JSX file for each component 
+    below the main div tag in the render method for every given component, add 
+    an <Helmet>x</Helmet> section with x behing what we want in the <head> tag for 
+    a specific component. Nested component will overwrite parent component so for any
+    given URL we will have the correct <head> tag displayed !
+
+    ex- 
+import React from "react";
+import {Helmet} from "react-helmet";
+ 
+class Application extends React.Component {
+  render () {
+    return (
+        <div className="application">
+            <Helmet>
+                <title>Correct title for specific page</title>
+                <meta name="description" content="The crawler will read this instead of nothing!"
+                </meta>
+                
+            </Helmet>
+            ...
+        </div>
+    );
+  }
+};    
+
+
+Challenge 3 
+
+We need to install the google analytic tracker in our React App
+
+// in construction

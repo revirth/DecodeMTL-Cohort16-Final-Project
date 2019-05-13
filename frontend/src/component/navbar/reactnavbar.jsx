@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import "./reactnavbar.scss";
 import Fade from "react-reveal/Fade";
 import { connect } from "react-redux";
@@ -115,7 +115,7 @@ class UnconnectedLinks extends React.Component {
   };
 
   render() {
-    console.log("LoggedIn", this.props.loggedIn)
+    console.log("LoggedIn", this.props.loggedIn);
     return (
       <div className="navbarmains">
         <Link to="/" className="titles">
@@ -137,13 +137,14 @@ class UnconnectedLinks extends React.Component {
             </Link>
           </span>
         ) : (
-            <span>
-              Hi {this.props.username}
-              <Link to="#" onClick={this.logout}>
-                LOGOUT
+          <span>
+            Hi {this.props.username}
+            <Link to="/profile">Account Setting</Link>
+            <Link to="#" onClick={this.logout}>
+              LOGOUT
             </Link>
-            </span>
-          )}
+          </span>
+        )}
 
         {/* <i id="searchbutton" className="fa fa-search fa" />
         <input onClick={() => alert(`search ${this.value}`)} /> */}

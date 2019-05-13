@@ -1,26 +1,28 @@
 import React, { Component } from "react";
 import "./dropdown.css";
 import { BrowserRouter, Route, Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-class Customdropdown extends Component {
+class UnconnectedCustomdropdown extends Component {
   constructor(props) {
     super(props);
     this.state = {
       displaymenu: false
     };
+    this.showMenu = this.showMenu.bind(this);
   }
 
   showMenu = event => {
-    event.preventDeafult();
-    this.setState({ displaymenu: true });
+    //event.preventDeafult();
+    this.setState({ displaymenu: !this.state.displaymenu });
   };
+
   render() {
     return (
       <div className="dropdown">
-        <div className="button" onClick={this.showMenu}>
-          {" "}
-          Username{" "}
-        </div>
+        <button className="button" onClick={this.showMenu}>
+          Hi {this.props.username}
+        </button>
         {this.state.displaymenu ? (
           <ul>
             <li className="active">
@@ -38,5 +40,11 @@ class Customdropdown extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    username: state.username
+  };
+};
+let Customdropdown = connect(mapStateToProps)(UnconnectedCustomdropdown);
 
 export default Customdropdown;
