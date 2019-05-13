@@ -5,10 +5,12 @@ import React, { Component } from "react";
 import Product from "./product.jsx";
 import { item } from "./items.js";
 import { connect } from "react-redux";
+import Pagination from "../pagination";
 
 class UnconnectedApp extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       name: "React",
       cart: [],
@@ -21,7 +23,13 @@ class UnconnectedApp extends Component {
     let response = await fetch(fetchUrl);
     let data = await response.json();
 
-    if (Array.isArray(data.items)) this.setState({ items: data.items });
+    if (Array.isArray(data.items))
+      this.setState({
+        items: data.items,
+        page: data.page,
+        total: data.total,
+        limit: data.limit
+      });
 
     console.table(data);
   };
@@ -42,11 +50,20 @@ class UnconnectedApp extends Component {
   render() {
     return (
       <div>
-        <main className="pa3 pa5-ns flex flex-wrap">
-          {this.state.items.map(p => (
-            <Product key={p.id} {...p} />
-          ))}
-        </main>
+        <div>
+          <main className="pa3 pa5-ns flex flex-wrap">
+            {this.state.items.map(p => (
+              <Product key={p.id} {...p} />
+            ))}
+          </main>
+        </div>
+        <div>
+          <Pagination
+            limit={this.state.limit}
+            total={this.state.total}
+            page={this.state.page}
+          />
+        </div>
       </div>
     );
   }

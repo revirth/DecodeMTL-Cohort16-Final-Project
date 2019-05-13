@@ -121,9 +121,10 @@ paginzation = query => {
   const limit = query.limit
     ? parseInt(query.limit)
     : parseInt(process.env.DEFAULT_PAGE_SIZE);
-  const skip = query.page ? (parseInt(query.page) - 1) * limit : 0;
+  const page = query.page ? parseInt(query.page) : 1;
+  const skip = page ? (page - 1) * limit : 0;
 
-  return { limit: limit, skip: skip };
+  return { limit: limit, page: page, skip: skip };
 };
 
 app.get("/items", upload.none(), async (req, res) => {
@@ -145,7 +146,12 @@ app.get("/items", upload.none(), async (req, res) => {
     .limit(page.limit)
     .toArray();
 
-  const data = { items: docs, total: await ITEMS.countDocuments() };
+  const data = {
+    items: docs,
+    page: page.page,
+    total: await ITEMS.countDocuments(),
+    limit: page.limit
+  };
 
   console.log("TCL: /items", data);
 
