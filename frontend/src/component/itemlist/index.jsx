@@ -4,7 +4,7 @@ import "./style.css";
 import React, { Component } from "react";
 import Product from "./product.jsx";
 import { item } from "./items.js";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 
 class UnconnectedApp extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class UnconnectedApp extends Component {
     let response = await fetch(fetchUrl);
     let data = await response.json();
 
-    if (Array.isArray(data)) this.setState({ items: data });
+    if (Array.isArray(data.items)) this.setState({ items: data.items });
 
     console.table(data);
   };
@@ -52,11 +52,11 @@ class UnconnectedApp extends Component {
   }
 }
 
-let mapStatetoProps = (state) => {
-  return state
-}
+let mapStatetoProps = state => {
+  return state;
+};
 
-let app = connect(mapStatetoProps)(UnconnectedApp)
+let app = connect(mapStatetoProps)(UnconnectedApp);
 
-export default app
+export default app;
 // ReactDOM.render(<App />, document.getElementById("root"));
