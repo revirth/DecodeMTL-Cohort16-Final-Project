@@ -2,6 +2,7 @@ import React from "react";
 import "./reactnavbar.scss";
 import Fade from "react-reveal/Fade";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import LoginPopup from "../login/LoginPopup.jsx";
 import SignupForm from "../login/SignupForm.jsx";
@@ -137,10 +138,10 @@ class UnconnectedLinks extends React.Component {
         ) : (
           <span>
             Hi {this.props.username}
+            <Link to="/profile">Account Setting</Link>
             <a href="#" onClick={this.logout}>
               LOGOUT
             </a>
-            <Customdropdown />
           </span>
         )}
 
