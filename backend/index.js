@@ -32,7 +32,7 @@ let SESSIONS = {};
 require("dotenv-expand")(require("dotenv").config());
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectId;
-let DB, USERS, CONFIG, ITEMS, REVIEWS;
+let DB, USERS, CONFIG, ITEMS, REVIEWS, ORDERS;
 MongoClient.connect(process.env.MLAB_URI, {
   useNewUrlParser: true
 }).then(client => {
@@ -42,6 +42,7 @@ MongoClient.connect(process.env.MLAB_URI, {
   ITEMS = DB.collection("items");
   REVIEWS = DB.collection("reviews");
   CART = DB.collection("cart");
+  ORDERS = DB.collection("orders");
 
   // in dev environment, check MongoDB documents
   // let arrP = [USERS, CONFIG, ITEMS, REVIEWS, CART].map(p =>
@@ -299,24 +300,32 @@ app.get("/cartItems", async (req, res) => {
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 app.post("/charge", upload.none(), async (req, res) => {
-  console.log("TCL: /charge", req.body);
+  let sid = req.cookies.sid;
+  let username = SESSIONS[sid];
+  if (username === undefined) {
+    res.send(resmsg(false, "Invalid User"));
+    return;
+  }
+  console.log("TCL: /charge", req.body, username);
 
   try {
-    let { status } = await stripe.charges.create({
+    const charge = await stripe.charges.create({
       amount: parseInt(req.body.amount),
       currency: "cad",
       description: "An example charge",
-      source: req.body.token
+      source: req.body.token,
+      metadata: { unm: username }
     });
 
-    console.log("TCL: /charge -> ", status);
-    res.json({
-      status
-    });
+    console.log("TCL: /charge -> ", charge);
+
+    await ORDERS.insertOne(charge);
+
+    res.send(resmsg(true));
   } catch (err) {
     console.error("TCL: /charge -> ", err);
 
-    res.status(500).end();
+    res.status(500).send(resmsg(false, err));
   }
 });
 
