@@ -1,24 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import {updateCartInfo} from './Cart.jsx'
 import "./cartBar.scss";
 //import "./style.css";
 
 class UnconnectedCartBar extends React.Component {
   componentDidMount = () => {
-    // we send a request to the endpoint "/cartItems" to upload cartItems for current user
-    // before show the CartBar the first time
-    fetch("http://localhost:4000/cartItems", { method: "GET", credentials:'include' })
-      .then(headers => {
-        return headers.text();
-      })
-      .then(body => {
-        // we update the cartItems for current user in our "store"
-        this.props.dispatch({ type: "FillCart", cartItems: JSON.parse(body) });
-      });
+    updateCartInfo()
   }
-
+  
   render() {
+    console.log("Render CartBar")
     return (
       // generate CartBar page
       <div className="cartBar">

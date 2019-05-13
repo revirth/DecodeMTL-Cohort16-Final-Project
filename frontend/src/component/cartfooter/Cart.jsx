@@ -1,21 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
+import store from '../../store.js'
 import "./cart.scss";
 // import "./style.css";
 
 class UnConnectedCart extends React.Component {
 
   componentDidMount = () => {
-    // we send a request to the endpoint "/cartItems" to upload cartItems for current user
-    // before show the Cart page the first time
-    fetch("http://localhost:4000/cartItems", { method: "GET", credentials: 'include' })
-      .then(headers => {
-        return headers.text();
-      })
-      .then(body => {
-        // we update the cartItems for current user in our "store"
-        this.props.dispatch({ type: "FillCart", cartItems: JSON.parse(body) });
-      });
+    updateCartInfo()
   }
 
   onChangeHandleQuantity = e => {
@@ -30,14 +22,7 @@ class UnConnectedCart extends React.Component {
     }).then(body => {
       let result = true
       if (result) {
-        // if the item was updated successfully we send request to the endpoint "/cartItems"
-        // to upload updated cartItems for current user
-        fetch("http://localhost:4000/cartItems", { method: "GET", credentials: 'include' }).then(headers => {
-          return headers.text();
-        }).then(body => {
-          // we update the cartItems for current user in our "store"
-          this.props.dispatch({ type: "FillCart", cartItems: JSON.parse(body) });
-        })
+        updateCartInfo()
       }
     })
   };
@@ -52,14 +37,7 @@ class UnConnectedCart extends React.Component {
     }).then(body => {
       let result = true
       if (result) {
-        // if the item was removed successfully we send request to the endpoint "/cartItems"
-        // to upload updated cartItems for current user
-        fetch("http://localhost:4000/cartItems", { method: "GET", credentials: 'include' }).then(headers => {
-          return headers.text();
-        }).then(body => {
-          // we update the cartItems for current user in our "store"
-          this.props.dispatch({ type: "FillCart", cartItems: JSON.parse(body) });
-        })
+        updateCartInfo()
       }
     })
   };
@@ -70,20 +48,14 @@ class UnConnectedCart extends React.Component {
     }).then(body => {
       let result = true
       if (result) {
-        // if the item was removed successfully we send request to the endpoint "/cartItems"
-        // to upload updated cartItems for current user
-        fetch("http://localhost:4000/cartItems", { method: "GET" }).then(headers => {
-          return headers.text();
-        }).then(body => {
-          // we update the cartItems for current user in our "store"
-          this.props.dispatch({ type: "FillCart", cartItems: JSON.parse(body) });
-        })
+        updateCartInfo()
       }
     })
   }
 
   render() {
     //calculate Total for all items in the Cart
+    console.log("Render Cart")
     let total = 0;
     let clearButton = this.props.items.length > 0 ?
       <div className="parent-horizontal">
@@ -164,10 +136,33 @@ class UnConnectedCart extends React.Component {
   }
 }
 
+let updateCartInfo = () => {
+  // we send a request to the endpoint "/cartItems" to upload cartItems for current user
+  // before show the Cart page the first time
+  console.log("Fetch cartItems")
+  fetch("http://localhost:4000/cartItems", { method: "GET", credentials: 'include' })
+    .then(headers => {
+      return headers.text();
+    })
+    .then(body => {
+      // we update the cartItems for current user in our "store"
+      let parsed = JSON.parse(body)
+      console.log("Before check if successful")
+      if (parsed.successful) {
+        console.log("If check successful")
+        console.log("cartItems: ", parsed.cartItems)
+        store.dispatch({ type: "FillCart", cartItems: parsed.cartItems });
+      }
+    });
+
+}
+
 let mapStateToProps = state => {
   return { items: state.cartItems };
 };
 
 let Cart = connect(mapStateToProps)(UnConnectedCart);
 
-export default Cart;
+export default Cart
+
+export { updateCartInfo }

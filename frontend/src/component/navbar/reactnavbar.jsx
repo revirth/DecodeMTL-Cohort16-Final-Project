@@ -115,7 +115,6 @@ class UnconnectedLinks extends React.Component {
   };
 
   render() {
-    console.log("LoggedIn", this.props.loggedIn);
     return (
       <div className="navbarmains">
         <Link to="/" className="titles">
