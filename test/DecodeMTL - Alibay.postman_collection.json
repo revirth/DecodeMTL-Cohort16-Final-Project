@@ -389,36 +389,40 @@
 			"name": "/items/:itemId",
 			"request": {
 				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"isAvailable\":false}"
+				},
+				"url": {
+					"raw": "localhost:4000/items/5cd1cfee9a1d3215de6aeffa",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"items",
+						"5cd1cfee9a1d3215de6aeffa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/items/:itemId",
+			"request": {
+				"method": "DELETE",
 				"header": [],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "name",
-							"value": "item name {{$randomInt}}",
-							"type": "text"
-						},
-						{
-							"key": "price",
-							"value": "{{$randomInt}}.{{$randomInt}}",
-							"type": "text"
-						},
-						{
-							"key": "sellerId",
-							"value": "seller{{$randomInt}}",
-							"type": "text"
-						},
-						{
-							"key": "imgUrl",
-							"value": "http://placekitten.com/200/{{$randomInt}}",
-							"type": "text"
-						},
-						{
-							"key": "quantity",
-							"value": "{{$randomInt}}",
-							"type": "text"
-						}
-					]
+					"mode": "raw",
+					"raw": ""
 				},
 				"url": {
 					"raw": "localhost:4000/items/5cd1cfee9a1d3215de6aeffa",

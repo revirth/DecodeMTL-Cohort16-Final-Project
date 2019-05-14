@@ -8,6 +8,10 @@ app.use("/images", express.static("uploads"));
 let cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
+const bodyParser = require("body-parser");
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
 let cors = require("cors");
 app.use(
   cors({
@@ -88,27 +92,29 @@ app.post("/login", upload.none(), async (req, res) => {
 });
 
 app.post("/facebookLogin", upload.none(), async (req, res) => {
+  let query = { userId: req.body.userId };
 
-    let query = {userId: req.body.userId}
+  // find a user in Mongo
+  let doc = await USERS.findOne(query);
+  console.log("TCL: /facebookLogin -> USERS.findOne", doc);
 
-    // find a user in Mongo
-    let doc = await USERS.findOne(query);
-    console.log("TCL: /facebookLogin -> USERS.findOne", doc);
-  
-    if (doc === null) {
-      res.clearCookie("sid");
-      res.send(resmsg(false, "User doesn't exist"));
-      return;
-    }
-    // login
-    let sid = "" + Math.floor(Math.random() * 1000000000000);
-    SESSIONS[sid] = doc.username;
-    res.cookie("sid", sid);
-    res.cookie("unm", doc.username);
-    res.cookie("utp", doc.usertype);
-    res.send({status: true, message: "facebookLogin successful", username: doc.username});
-
-})
+  if (doc === null) {
+    res.clearCookie("sid");
+    res.send(resmsg(false, "User doesn't exist"));
+    return;
+  }
+  // login
+  let sid = "" + Math.floor(Math.random() * 1000000000000);
+  SESSIONS[sid] = doc.username;
+  res.cookie("sid", sid);
+  res.cookie("unm", doc.username);
+  res.cookie("utp", doc.usertype);
+  res.send({
+    status: true,
+    message: "facebookLogin successful",
+    username: doc.username
+  });
+});
 
 app.get("/logout", upload.none(), (req, res) => {
   console.log("TCL: /logout", req.body);
@@ -146,10 +152,9 @@ app.post("/signup", upload.none(), async (req, res) => {
 
 /**Facebook SignUp */
 app.post("/facebookSignup", upload.none(), async (req, res) => {
-
-  let userId = req.body.userId
-  let username = req.body.username
-  let usertype = req.body.usertype
+  let userId = req.body.userId;
+  let username = req.body.username;
+  let usertype = req.body.usertype;
   console.log("TCL: /facebookSignup", req.body);
 
   // check the username
@@ -171,11 +176,9 @@ app.post("/facebookSignup", upload.none(), async (req, res) => {
   };
 
   await USERS.insertOne(obj);
-  console.log("/facebookSignUp user is added")
+  console.log("/facebookSignUp user is added");
   res.send(resmsg(true, "signup success"));
 });
-
-
 
 paginzation = query => {
   const limit = query.limit ? parseInt(query.limit) : parseInt(10); // default paging size 10
