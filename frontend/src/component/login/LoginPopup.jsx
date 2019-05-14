@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SignupForm from "./SignupForm.jsx";
 import { connect } from "react-redux";
+import { updateCartInfo } from '../cartfooter/Cart.jsx'
 import "./main.css";
 import "./style.css";
 
@@ -47,6 +48,7 @@ class UnconnectedLoginPopup extends Component {
             type: "afterLogin",
             username: this.state.username
           });
+          updateCartInfo()
           this.props.onClose();
         }
       });

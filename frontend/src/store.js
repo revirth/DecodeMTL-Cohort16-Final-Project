@@ -1,28 +1,6 @@
 import { createStore } from "redux";
 
 let reducer = (state, action) => {
-  /*if (action.type === "ChangeQuantity") {
-    return {
-      ...state,
-      cartItems: state.cartItems.map(item => {
-        if (item.itemId === action.itemId) {
-          return {
-            ...item,
-            itemQuantity: parseInt(action.quantity)
-          }
-        } else {
-          return item
-        }
-      })
-    };
-  }*/
-
-  /* if (action.type === "RemoveItem") {
-     let newItems = state.cartItems.filter( item => {
-       return item.itemId !== action.itemId
-     })
-     return {...state, cartItems: newItems}
-   }*/
 
   if (action.type === "FillCart") {
     return {
@@ -35,10 +13,11 @@ let reducer = (state, action) => {
     case "afterLogin":
       return { ...state, loggedIn: true, username: action.username };
     case "afterLogout":
-      return { ...state, loggedIn: false, username: "" };
+      return { ...state, cartItems: [], loggedIn: false, username: "" };
   }
   return state;
 };
+
 let getCookie_sid = () => {
   return document.cookie.replace(
     /(?:(?:^|.*;\s*)sid\s*\=\s*([^;]*).*$)|^.*$/,

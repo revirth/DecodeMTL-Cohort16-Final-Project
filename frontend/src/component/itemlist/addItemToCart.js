@@ -1,20 +1,17 @@
 import store from '../../store.js'
+import { updateCartInfo } from '../cartfooter/Cart.jsx'
 
-let addItemToCart = ( itemId ) => {
-    let data = new FormData()
-    data.append("itemId", itemId)
-      fetch("http://localhost:4000/addCartItem", { method: "POST", credentials:'include', body: data}).then( headers => {
-        return headers.text()
-      }).then( body => {
-        let result = true
-        if(result){
-          fetch("http://localhost:4000/cartItems", { method: "GET", credentials:'include' }).then(headers => {
-             return headers.text();
-                                                                                      }).then(body => {
-      store.dispatch({ type: "FillCart", cartItems: JSON.parse(body) });
-                                                                                                      })
-        }
-      })
-} 
+let addItemToCart = (itemId) => {
+  let data = new FormData()
+  data.append("itemId", itemId)
+  fetch("http://localhost:4000/addCartItem", { method: "POST", credentials: 'include', body: data }).then(headers => {
+    return headers.text()
+  }).then(body => {
+    let result = JSON.parse(body)
+    if (result.successful) {
+      updateCartInfo()
+    }
+  })
+}
 
 export default addItemToCart
