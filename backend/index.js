@@ -459,3 +459,55 @@ app.put("/updateCartItem", upload.none(), async (req, res) => {
     res.send(JSON.stringify({ successful: false }));
   }
 });
+
+app.get("/profile", async (req, res) => {
+  let sid = req.cookies.sid;
+  let username = SESSIONS[sid];
+
+  console.log("TCL: /profile", username);
+
+  // find a user in Mongo
+  let doc = await USERS.findOne({ username: username });
+  console.log("TCL: /profile -> USERS.findOne", doc);
+
+  if (doc === null) {
+    res.clearCookie("sid");
+    res.send(resmsg(false, "Invalid request"));
+    return;
+  }
+
+  delete doc.password;
+
+  res.send(doc);
+});
+
+app.put("/profile", upload.none(), async (req, res) => {
+  let sid = req.cookies.sid;
+  let username = SESSIONS[sid];
+
+  console.log("TCL: /profile", req.body, username);
+
+  // find a user in Mongo
+  let doc = await USERS.findOne({ username: username });
+  console.log("TCL: /profile -> USERS.findOne", doc);
+
+  if (doc === null) {
+    res.clearCookie("sid");
+    res.send(resmsg(false, "Invalid request"));
+    return;
+  }
+
+  let body = body.password
+    ? { ...req.body }
+    : { ...req.body, password: sha256(req.body.password) };
+
+  doc = await USERS.findOneAndUpdate(
+    { _id: ObjectId(doc._id) },
+    { $set: body },
+    { returnNewDocument: true }
+  );
+
+  console.log("TCL: /profile -> USERS.findOneAndUpdate", doc);
+
+  doc["ok"] && res.send(resmsg(true, "user profile updated"));
+});
