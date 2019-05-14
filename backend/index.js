@@ -497,9 +497,9 @@ app.put("/profile", upload.none(), async (req, res) => {
     return;
   }
 
-  let body = body.password
-    ? { ...req.body }
-    : { ...req.body, password: sha256(req.body.password) };
+  let body = req.body.password
+    ? { ...req.body, password: sha256(req.body.password) }
+    : { ...req.body };
 
   doc = await USERS.findOneAndUpdate(
     { _id: ObjectId(doc._id) },
