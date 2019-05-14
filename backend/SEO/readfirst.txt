@@ -13,6 +13,15 @@ the best of both world, speed and responsivness of React and accurate tracking w
 analytics and other tools that are used across the industry. So yes React is powerfull but 
 with great power comes great responsability.
 
+We solve the issue using multiple ressources that allows us to create a cleaner experience
+for both the end user ( responsivness, dynamic elements based on user) and the owner
+(easy SEO, access to same tracking tools and happier customers)
+by using the following tools    
+
+        - Server side-rendering for crawlers and old browsers (prerender module)
+        - Changing meta-description depending on the url (react-helmet module)
+        - Accurate tracking with google analytics (react-ga module)
+
 
 
 SEO (Search Engine Optimisation)

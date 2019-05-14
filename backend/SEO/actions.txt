@@ -40,10 +40,10 @@ Inside JSX file for each component
 import React from "react";
 import {Helmet} from "react-helmet";
  
-class Application extends React.Component {
+class Navbar extends React.Component {
   render () {
     return (
-        <div className="application">
+        <div className="navbar">
             <Helmet>
                 <title>Correct title for specific page</title>
                 <meta name="description" content="The crawler will read this instead of nothing!"
@@ -56,8 +56,29 @@ class Application extends React.Component {
   }
 };    
 
+Challenge 3:
 
-Challenge 3 
+It is one thing that we change the meta-description for each pages, but we need the crawlers
+to get the right info. This is where we combine prerender and react helmet on our main App
+component.
+
+Terminal
+    npm i react-dom-server
+
+Inside server.js
+    import ReactDOMServer from 'react-dom/server';
+    var ReactDOMServer = require('react-dom/server');
+
+Inside app.jsx
+
+    // we want to give the data from the Helmet component to the server so it can use 
+    // it via pre-render
+
+    ReactDOMServer.renderToString(<App />);
+    const helmet = Helmet.renderStatic();
+
+
+Challenge 4:
 
 We need to install the google analytic tracker in our React App
 
