@@ -137,9 +137,10 @@ app.get("/items", upload.none(), async (req, res) => {
         name: {
           $regex: req.query.search,
           $options: "i"
-        }
+        },
+        isDeleted: false
       }
-    : {};
+    : { isDeleted: false };
 
   const page = paginzation(req.query);
 
@@ -151,7 +152,7 @@ app.get("/items", upload.none(), async (req, res) => {
   const data = {
     items: docs,
     page: page.page,
-    total: await ITEMS.countDocuments(),
+    total: await ITEMS.countDocuments({ isDeleted: false }),
     limit: page.limit
   };
 
@@ -187,7 +188,8 @@ app.post("/items", upload.none(), async (req, res) => {
   let obj = {
     ...req.body,
     price: parseFloat(req.body.price),
-    quantity: parseInt(req.body.quantity)
+    quantity: parseInt(req.body.quantity),
+    isDeleted: false
   };
 
   await ITEMS.insertOne(obj);
@@ -218,6 +220,20 @@ app.put("/items/:itemId", upload.none(), async (req, res) => {
   console.log(doc);
 
   doc["ok"] && res.send(resmsg(true, "item updated"));
+});
+
+app.delete("/items/:itemId", async (req, res) => {
+  console.log("TCL: /items/:itemId");
+
+  let doc = await ITEMS.findOneAndUpdate(
+    { _id: ObjectId(req.params.itemId) },
+    { $set: { isDeleted: true } },
+    { returnNewDocument: true }
+  );
+
+  console.log(doc);
+
+  doc["ok"] && res.send(resmsg(true, "item deleted"));
 });
 
 app.get("/reviews", upload.none(), async (req, res) => {
