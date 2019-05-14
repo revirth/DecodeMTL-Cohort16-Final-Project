@@ -35,7 +35,10 @@ class UnconnectedApp extends Component {
 
   requestItems = async () => {
     let fetchUrl = `/items${window.location.search}`;
-    let response = await fetch(fetchUrl);
+    let response = await fetch(fetchUrl, {
+      method: "GET",
+      credentials: "include"
+    });
     let data = await response.json();
 
     if (Array.isArray(data.items))

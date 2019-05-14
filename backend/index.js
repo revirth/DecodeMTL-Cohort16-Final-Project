@@ -12,7 +12,7 @@ let cors = require("cors");
 app.use(
   cors({
     credentials: true,
-    origin: `http://localhost:3000`
+    origin: `https://localhost:3000`
   })
 );
 
@@ -87,6 +87,29 @@ app.post("/login", upload.none(), async (req, res) => {
   res.send(resmsg(true, "login success"));
 });
 
+app.post("/facebookLogin", upload.none(), async (req, res) => {
+
+    let query = {userId: req.body.userId}
+
+    // find a user in Mongo
+    let doc = await USERS.findOne(query);
+    console.log("TCL: /facebookLogin -> USERS.findOne", doc);
+  
+    if (doc === null) {
+      res.clearCookie("sid");
+      res.send(resmsg(false, "User doesn't exist"));
+      return;
+    }
+    // login
+    let sid = "" + Math.floor(Math.random() * 1000000000000);
+    SESSIONS[sid] = doc.username;
+    res.cookie("sid", sid);
+    res.cookie("unm", doc.username);
+    res.cookie("utp", doc.usertype);
+    res.send({status: true, message: "facebookLogin successful", username: doc.username});
+
+})
+
 app.get("/logout", upload.none(), (req, res) => {
   console.log("TCL: /logout", req.body);
 
@@ -121,6 +144,39 @@ app.post("/signup", upload.none(), async (req, res) => {
   res.send(resmsg(true, "signup success"));
 });
 
+/**Facebook SignUp */
+app.post("/facebookSignup", upload.none(), async (req, res) => {
+
+  let userId = req.body.userId
+  let username = req.body.username
+  let usertype = req.body.usertype
+  console.log("TCL: /facebookSignup", req.body);
+
+  // check the username
+  let doc = await USERS.findOne({
+    userId: userId
+  });
+  console.log("TCL: /facebookSignup -> USERS.findOne", doc);
+
+  if (doc !== null) {
+    res.send(resmsg(false, "Username is already used"));
+    return;
+  }
+
+  // store userinfo in Mongo
+  let obj = {
+    userId: userId,
+    username: username,
+    usertype: parseInt(usertype)
+  };
+
+  await USERS.insertOne(obj);
+  console.log("/facebookSignUp user is added")
+  res.send(resmsg(true, "signup success"));
+});
+
+
+
 paginzation = query => {
   const limit = query.limit ? parseInt(query.limit) : parseInt(10); // default paging size 10
   const page = query.page ? parseInt(query.page) : 1;
@@ -130,7 +186,10 @@ paginzation = query => {
 };
 
 app.get("/items", upload.none(), async (req, res) => {
-  console.log("TCL: /items", req.query);
+  let sid = req.cookies.sid;
+  let username = SESSIONS[sid];
+
+  console.log("TCL: /items", req.query, username);
 
   const query = req.query.search
     ? {
@@ -142,6 +201,13 @@ app.get("/items", upload.none(), async (req, res) => {
       }
     : { isDeleted: false };
 
+  // for seller user, delete 'isDeleted' filter
+  if (username !== undefined) {
+    var user = await USERS.findOne({ username: username });
+
+    user.usertype === 2 && delete query.isDeleted;
+  }
+
   const page = paginzation(req.query);
 
   const docs = await ITEMS.find(query)
@@ -152,11 +218,11 @@ app.get("/items", upload.none(), async (req, res) => {
   const data = {
     items: docs,
     page: page.page,
-    total: await ITEMS.countDocuments({ isDeleted: false }),
+    total: await ITEMS.countDocuments(query),
     limit: page.limit
   };
 
-  console.log("TCL: /items", data);
+  // console.log("TCL: /items", data);
 
   res.send(data);
 });

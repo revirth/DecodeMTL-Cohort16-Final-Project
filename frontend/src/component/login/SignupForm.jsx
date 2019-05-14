@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import FacebookLogin from 'react-facebook-login'
 import "./main.css";
 import "./style.css";
 
@@ -56,6 +57,29 @@ export default class SignupForm extends Component {
       });
   };
 
+  facebookSignup = (response) => {
+    console.log(response)
+    if(response.userID){
+    const data = new FormData()
+    data.append("userId", response.userID)
+    data.append("username", response.name)
+    data.append("usertype", this.state.usertype);
+    fetch("/facebookSignup", {method: "POST", body: data, credentials: "include"}).then( headers => {
+      return headers.text()
+    }).then( body => {
+      const parsed = JSON.parse(body)
+      if (!parsed.status) {
+        alert("Username exist");
+        return;
+      } else {
+        alert(" Bingo!! SignUp Successfull ");
+        this.props.onClose();
+      }
+    })
+  }
+  }
+
+
   render() {
     return (
       <div className="overlay">
@@ -95,6 +119,11 @@ export default class SignupForm extends Component {
                 value="Sign Me Up"
               />
             </form>
+            <FacebookLogin
+              appId="432661687560212"
+              size="small"
+              fields="name,email,picture"
+              callback={this.facebookSignup} />
             <div className="btndiv">
               <button
                 className="btn login-btn f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
