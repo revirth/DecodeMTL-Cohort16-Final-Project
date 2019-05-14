@@ -130,7 +130,10 @@ paginzation = query => {
 };
 
 app.get("/items", upload.none(), async (req, res) => {
-  console.log("TCL: /items", req.query);
+  let sid = req.cookies.sid;
+  let username = SESSIONS[sid];
+
+  console.log("TCL: /items", req.query, username);
 
   const query = req.query.search
     ? {
@@ -142,6 +145,13 @@ app.get("/items", upload.none(), async (req, res) => {
       }
     : { isDeleted: false };
 
+  // for seller user, delete 'isDeleted' filter
+  if (username !== undefined) {
+    var user = await USERS.findOne({ username: username });
+
+    user.usertype === 2 && delete query.isDeleted;
+  }
+
   const page = paginzation(req.query);
 
   const docs = await ITEMS.find(query)
@@ -152,11 +162,11 @@ app.get("/items", upload.none(), async (req, res) => {
   const data = {
     items: docs,
     page: page.page,
-    total: await ITEMS.countDocuments({ isDeleted: false }),
+    total: await ITEMS.countDocuments(query),
     limit: page.limit
   };
 
-  console.log("TCL: /items", data);
+  // console.log("TCL: /items", data);
 
   res.send(data);
 });
