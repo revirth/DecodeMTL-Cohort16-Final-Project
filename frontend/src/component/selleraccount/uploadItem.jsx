@@ -8,7 +8,8 @@ export default class UploadItem extends Component {
     this.state = {
       namefood: "",
       price: "",
-      file: ""
+      file: "",
+      description: ""
     };
   }
 
@@ -22,8 +23,21 @@ export default class UploadItem extends Component {
   handlePrice = event => {
     this.setState({ price: event.target.value });
   };
+  handleDescription = event => {
+    this.setState({ description: event.target.value });
+  };
   handleSubmit = event => {
     event.preventDefault();
+    let data = new FormData();
+    data.append("name", this.state.namefood);
+    data.append("price", this.state.price);
+    data.append("imgUrl", this.state.file);
+    data.append("description", this.state.description);
+    fetch("/items", {
+      method: "POST",
+      body: data,
+      credentials: "include"
+    });
   };
   render() {
     return (
@@ -41,10 +55,17 @@ export default class UploadItem extends Component {
                 className="login-field"
                 id="Signupspace"
               />
+              <input
+                type="text"
+                placeholder="Enter Description"
+                onChange={this.handleDescription}
+                className="login-field"
+                id="Signupspace"
+              />
 
               <input
-                type="file"
-                // placeholder="Enter your apartment number(optional)"
+                type="text"
+                placeholder="Enter your Image URL"
                 onChange={this.handleFile}
                 className="login-field"
               />

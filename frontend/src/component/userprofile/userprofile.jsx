@@ -11,7 +11,8 @@ export default class userprofile extends Component {
     this.state = {
       showaddress: false,
       payment: false,
-      accountdetails: false
+      accountdetails: false,
+      userdetails: {}
     };
   }
   escFunction = event => {
@@ -24,9 +25,15 @@ export default class userprofile extends Component {
       });
     }
   };
-  componentDidMount() {
+  componentDidMount = async () => {
     document.addEventListener("keydown", this.escFunction, false);
-  }
+    let response = await fetch(`/profile`);
+    let data = await response.json();
+
+    this.setState({ userdetails: data });
+
+    console.table("test", data);
+  };
   // componentWillUnmount() {
   //   document.removeEventListener("keydown", this.escFunction, false);
   // }
@@ -60,10 +67,10 @@ export default class userprofile extends Component {
             </h1>
             <div class="pa3 bt b--black-10">
               <p class="f6 f5-ns lh-copy measure">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                justo duo dolores et ea rebum.
+                Street: {this.state.userdetails.street}
+                Apartment No: {this.state.userdetails.apt}
+                Postal:{this.state.userdetails.postal}
+                Phone No:{this.state.userdetails.phone}
               </p>
             </div>
 
@@ -83,10 +90,10 @@ export default class userprofile extends Component {
             </h1>
             <div class="pa3 bt b--black-10">
               <p class="f6 f5-ns lh-copy measure">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                justo duo dolores et ea rebum.
+                Card No: {this.state.userdetails.cardno}
+                CVC No: {this.state.userdetails.cvc}
+                Expiry Date:{this.state.userdetails.expirydate}
+                Name On Card:{this.state.userdetails.nameonCard}
               </p>
             </div>
             {this.state.payment ? <Paymentpopup /> : null}
@@ -105,10 +112,9 @@ export default class userprofile extends Component {
             </h1>
             <div class="pa3 bt b--black-10">
               <p class="f6 f5-ns lh-copy measure">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                justo duo dolores et ea rebum.
+                Username: {this.state.userdetails.username}
+                Current Password: {this.state.userdetails.password}
+                Email: {this.state.userdetails.email}
               </p>
             </div>
             {this.state.accountdetails ? <Accountdetails /> : null}

@@ -22,8 +22,8 @@ export default class Paymentpopup extends Component {
   expiryDate = event => {
     this.setState({ expirydate: event.target.value });
   };
-  cardName = event => {
-    this.setState({ name: event.target.value });
+  CardName = event => {
+    this.setState({ nameonCard: event.target.value });
   };
 
   handleSubmit = event => {
@@ -75,7 +75,7 @@ export default class Paymentpopup extends Component {
               <input
                 type="text"
                 placeholder="Enter name on the card"
-                onChange={this.Cardname}
+                onChange={this.CardName}
                 className="login-field"
                 required
               />

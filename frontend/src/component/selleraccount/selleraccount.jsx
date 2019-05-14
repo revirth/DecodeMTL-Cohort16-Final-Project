@@ -11,7 +11,8 @@ export default class selleraccount extends Component {
     this.state = {
       shopdetails: false,
       uploaditems: false,
-      showitems: false
+      showitems: false,
+      sellerdetails: {}
     };
   }
   escFunction = event => {
@@ -24,9 +25,15 @@ export default class selleraccount extends Component {
       });
     }
   };
-  componentDidMount() {
+  componentDidMount = async () => {
     document.addEventListener("keydown", this.escFunction, false);
-  }
+    let response = await fetch(`/profile`);
+    let data = await response.json();
+
+    this.setState({ sellerdetails: data });
+
+    console.table("test", data);
+  };
   // componentWillUnmount() {
   //   document.removeEventListener("keydown", this.escFunction, false);
   // }
@@ -63,10 +70,11 @@ export default class selleraccount extends Component {
             </h1>
             <div class="pa3 bt b--black-10">
               <p class="f6 f5-ns lh-copy measure">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                justo duo dolores et ea rebum.
+                Street: {this.state.sellerdetails.street}
+                Apartment No: {this.state.sellerdetails.apt}
+                Postal:{this.state.sellerdetails.postal}
+                Phone No:{this.state.sellerdetails.phone}
+                Shop Name : {this.state.sellerdetails.shopname}
               </p>
             </div>
           </article>

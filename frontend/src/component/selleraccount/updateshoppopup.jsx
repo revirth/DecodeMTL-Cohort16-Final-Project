@@ -31,6 +31,17 @@ export default class Shoppopup extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
+    let data = new FormData();
+    data.append("street", this.state.street);
+    data.append("apt", this.state.apt);
+    data.append("postal", this.state.postal);
+    data.append("phone", this.state.phone);
+    data.append("shopname", this.state.shopname);
+    fetch("/profile", {
+      method: "PUT",
+      body: data,
+      credentials: "include"
+    });
   };
   render() {
     return (
