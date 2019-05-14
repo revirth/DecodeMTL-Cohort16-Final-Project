@@ -19,6 +19,14 @@ export default class Accountdetails extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
+    let data = new FormData();
+    data.append("email", this.state.email);
+    data.append("password", this.state.password);
+    fetch("/profile", {
+      method: "PUT",
+      body: data,
+      credentials: "include"
+    });
   };
   render() {
     return (

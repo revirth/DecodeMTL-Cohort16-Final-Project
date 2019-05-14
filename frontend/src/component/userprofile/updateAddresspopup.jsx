@@ -27,6 +27,16 @@ export default class Addresspopup extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
+    let data = new FormData();
+    data.append("street", this.state.street);
+    data.append("apt", this.state.apt);
+    data.append("postal", this.state.postal);
+    data.append("phone", this.state.phone);
+    fetch("/profile", {
+      method: "PUT",
+      body: data,
+      credentials: "include"
+    });
   };
   render() {
     return (

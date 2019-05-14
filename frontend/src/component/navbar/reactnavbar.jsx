@@ -138,11 +138,21 @@ class UnconnectedLinks extends React.Component {
         ) : (
           <span className="afterlogin">
             Hi {this.props.username}
-            <Link to="/profile">Account Setting</Link>
-            <Link to="/sellerprofile">Seller Account</Link>
-            <Link to="#" onClick={this.logout}>
-              LOGOUT
-            </Link>
+            {this.props.usertp === "1" ? (
+              <span>
+                <Link to="/profile">Account Setting</Link>
+                <Link to="#" onClick={this.logout}>
+                  LOGOUT
+                </Link>{" "}
+              </span>
+            ) : (
+              <span>
+                <Link to="/sellerprofile">Seller Account</Link>
+                <Link to="#" onClick={this.logout}>
+                  LOGOUT
+                </Link>
+              </span>
+            )}
           </span>
         )}
 
@@ -171,7 +181,8 @@ class UnconnectedLinks extends React.Component {
 const mapStateToProps = state => {
   return {
     loggedIn: state.loggedIn,
-    username: state.username
+    username: state.username,
+    usertp: state.usertype
   };
 };
 

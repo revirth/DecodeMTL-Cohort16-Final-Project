@@ -83,6 +83,7 @@ app.post("/login", upload.none(), async (req, res) => {
   SESSIONS[sid] = req.body.username;
   res.cookie("sid", sid);
   res.cookie("unm", req.body.username);
+  res.cookie("utp", doc.usertype);
   res.send(resmsg(true, "login success"));
 });
 
@@ -121,9 +122,7 @@ app.post("/signup", upload.none(), async (req, res) => {
 });
 
 paginzation = query => {
-  const limit = query.limit
-    ? parseInt(query.limit)
-    : parseInt(10); // default paging size 10
+  const limit = query.limit ? parseInt(query.limit) : parseInt(10); // default paging size 10
   const page = query.page ? parseInt(query.page) : 1;
   const skip = page ? (page - 1) * limit : 0;
 
@@ -135,11 +134,11 @@ app.get("/items", upload.none(), async (req, res) => {
 
   const query = req.query.search
     ? {
-      name: {
-        $regex: req.query.search,
-        $options: "i"
+        name: {
+          $regex: req.query.search,
+          $options: "i"
+        }
       }
-    }
     : {};
 
   const page = paginzation(req.query);
@@ -276,7 +275,6 @@ app.put("/reviews/:reviewId", upload.none(), async (req, res) => {
   doc["ok"] && res.send(resmsg(true, "review updated"));
 });
 
-
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 app.post("/charge", upload.none(), async (req, res) => {
   let sid = req.cookies.sid;
@@ -321,9 +319,9 @@ app.get("/cartItems", async (req, res) => {
   let sid = req.cookies.sid;
   //check if there is a session for current user
   if (sid) {
-    let username = SESSIONS[sid]
+    let username = SESSIONS[sid];
     //request userId from the collection "users"
-    let currentUser = await USERS.findOne({ username: username })
+    let currentUser = await USERS.findOne({ username: username });
     //request the items in the Cart for user with this userId only
     let cart = await CART.find({ userId: currentUser._id }).toArray();
     //request all items from the collection "Items"
@@ -345,10 +343,12 @@ app.get("/cartItems", async (req, res) => {
       });
       return cartItem;
     });
-    console.log("Cart items sent")
-    process.env.NODE_ENV === "development" && res.send(JSON.stringify({ successful: true, cartItems: cartItems }));
+    console.log("Cart items sent");
+    process.env.NODE_ENV === "development" &&
+      res.send(JSON.stringify({ successful: true, cartItems: cartItems }));
   } else {
-    process.env.NODE_ENV === "development" && res.send(JSON.stringify({ successful: false }));
+    process.env.NODE_ENV === "development" &&
+      res.send(JSON.stringify({ successful: false }));
   }
 });
 
@@ -357,10 +357,10 @@ app.post("/addCartItem", upload.none(), async (req, res) => {
   let sid = req.cookies.sid;
   //check if a session exists
   if (sid) {
-    let username = SESSIONS[sid]
+    let username = SESSIONS[sid];
     //get userId of the current user
-    let currentUser = await USERS.findOne({ username: username })
-    let itemId = req.body.itemId
+    let currentUser = await USERS.findOne({ username: username });
+    let itemId = req.body.itemId;
     //create a new object for the new item
     let newCartItem = {
       itemId: itemId,
@@ -368,36 +368,37 @@ app.post("/addCartItem", upload.none(), async (req, res) => {
       userId: currentUser._id
     };
     //add this object to the "cart" collection
-    await CART.insertOne(newCartItem, function (err, obj) {
+    await CART.insertOne(newCartItem, function(err, obj) {
       if (err) throw err;
-      console.log(obj.result.n + " cart item added")
-      res.send(JSON.stringify({ successful: true })
-      );
+      console.log(obj.result.n + " cart item added");
+      res.send(JSON.stringify({ successful: true }));
     });
   } else {
-    res.send(JSON.stringify({ successful: false }))
+    res.send(JSON.stringify({ successful: false }));
   }
 });
 
 /**delete one Cart Item */
 app.delete("/deleteCartItem", upload.none(), async (req, res) => {
   let sid = req.cookies.sid;
-  let cartItemId = req.body.cartItemId
+  let cartItemId = req.body.cartItemId;
   //check if a session exists
   if (sid) {
-    let username = SESSIONS[sid]
+    let username = SESSIONS[sid];
     //get a userId of the current user
-    let cu = await USERS.findOne({ username: username })
-    let currentUser = cu._id
+    let cu = await USERS.findOne({ username: username });
+    let currentUser = cu._id;
     //get a userId of the current Cart item
-    let ciu = await CART.findOne({ _id: ObjectId(cartItemId) })
-    let currentItemUserId = ciu.userId
+    let ciu = await CART.findOne({ _id: ObjectId(cartItemId) });
+    let currentItemUserId = ciu.userId;
     //if that's the same person - remove the item
-    if (currentUser.toString().localeCompare(currentItemUserId.toString()) === 0) {
+    if (
+      currentUser.toString().localeCompare(currentItemUserId.toString()) === 0
+    ) {
       let _id = ObjectId(req.body.cartItemId);
-      await CART.deleteOne({ _id: _id }, function (err, obj) {
+      await CART.deleteOne({ _id: _id }, function(err, obj) {
         if (err) throw err;
-        console.log(obj.result.n + " cart item deleted")
+        console.log(obj.result.n + " cart item deleted");
         res.send(JSON.stringify({ successful: true }));
       });
     }
@@ -411,11 +412,11 @@ app.delete("/clearCart", upload.none(), async (req, res) => {
   let sid = req.cookies.sid;
   //check if the session exists
   if (sid) {
-    let username = SESSIONS[sid]
+    let username = SESSIONS[sid];
     //get a userId of the current user
-    let currentUser = await USERS.findOne({ username: username })
+    let currentUser = await USERS.findOne({ username: username });
     //delete all the elements in the Cart
-    await CART.deleteMany({ userId: currentUser._id }, function (err, obj) {
+    await CART.deleteMany({ userId: currentUser._id }, function(err, obj) {
       if (err) throw err;
       console.log("Cart cleared");
       res.send(JSON.stringify({ successful: true }));
@@ -427,33 +428,34 @@ app.delete("/clearCart", upload.none(), async (req, res) => {
 
 /**update the curt item of the current user */
 app.put("/updateCartItem", upload.none(), async (req, res) => {
-
   let sid = req.cookies.sid;
-  let cartItemId = req.body.cartItemId
+  let cartItemId = req.body.cartItemId;
   // check if a session exists
   if (sid) {
-    let username = SESSIONS[sid]
+    let username = SESSIONS[sid];
     //get a userId of the current user
-    let cu = await USERS.findOne({ username: username })
-    let currentUser = cu._id
+    let cu = await USERS.findOne({ username: username });
+    let currentUser = cu._id;
     //get a userId of the current Cart item
-    let ciu = await CART.findOne({ _id: ObjectId(cartItemId) })
-    let currentItemUserId = ciu.userId
+    let ciu = await CART.findOne({ _id: ObjectId(cartItemId) });
+    let currentItemUserId = ciu.userId;
     //if that's the same person - update the item
-    if (currentUser.toString().localeCompare(currentItemUserId.toString()) === 0) {
+    if (
+      currentUser.toString().localeCompare(currentItemUserId.toString()) === 0
+    ) {
       let _id = ObjectId(req.body.cartItemId);
       let quantity = req.body.itemQuantity;
-      await CART.updateOne({ _id: _id }, { $set: { itemQuantity: quantity } }, function (
-        err,
-        obj
-      ) {
-        if (err) throw err;
-        console.log(obj.result.n + " cart item updated")
-      });
+      await CART.updateOne(
+        { _id: _id },
+        { $set: { itemQuantity: quantity } },
+        function(err, obj) {
+          if (err) throw err;
+          console.log(obj.result.n + " cart item updated");
+        }
+      );
       res.send(JSON.stringify({ successful: true }));
     }
   } else {
     res.send(JSON.stringify({ successful: false }));
-
   }
 });

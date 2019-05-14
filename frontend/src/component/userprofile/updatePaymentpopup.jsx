@@ -7,9 +7,9 @@ export default class Paymentpopup extends Component {
     super(props);
     this.state = {
       cardno: "",
-      cvc: "123",
+      cvc: "",
       expirydate: "",
-      name: ""
+      nameonCard: ""
     };
   }
 
@@ -28,6 +28,16 @@ export default class Paymentpopup extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    let data = new FormData();
+    data.append("cardno", this.state.cardno);
+    data.append("cvc", this.state.cvc);
+    data.append("expirydate", this.state.expirydate);
+    data.append("nameonCard", this.state.nameonCard);
+    fetch("/profile", {
+      method: "PUT",
+      body: data,
+      credentials: "include"
+    });
   };
   render() {
     return (
