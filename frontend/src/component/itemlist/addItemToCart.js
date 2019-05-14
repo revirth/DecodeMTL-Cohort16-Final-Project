@@ -7,8 +7,8 @@ let addItemToCart = (itemId) => {
   fetch("http://localhost:4000/addCartItem", { method: "POST", credentials: 'include', body: data }).then(headers => {
     return headers.text()
   }).then(body => {
-    let result = JSON.parse(body)
-    if (result.successful) {
+    let result = true
+    if (result) {
       updateCartInfo()
     }
   })
