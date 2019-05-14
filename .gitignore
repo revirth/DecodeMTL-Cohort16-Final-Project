@@ -62,3 +62,6 @@ typings/
 
 # mac trash file
 .DS_Store
+
+# jest snapshot
+__snapshots__/
