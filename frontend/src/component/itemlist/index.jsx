@@ -30,23 +30,23 @@ class UnconnectedApp extends Component {
     //     total: data.total,
     //     limit: data.limit
     //   });
-    this.requestItems()
+    this.requestItems();
   };
-  
+
   requestItems = async () => {
     let fetchUrl = `/items${window.location.search}`;
     let response = await fetch(fetchUrl);
     let data = await response.json();
-    
+
     if (Array.isArray(data.items))
-    this.setState({
-      items: data.items,
-      page: data.page,
-      total: data.total,
-      limit: data.limit
-    });
+      this.setState({
+        items: data.items,
+        page: data.page,
+        total: data.total,
+        limit: data.limit
+      });
     console.table(data);
-  }
+  };
 
   onToken = token => {
     fetch("/save-stripe-token", {
@@ -62,12 +62,13 @@ class UnconnectedApp extends Component {
   // ...
 
   render() {
+    console.log("state", this.state);
     return (
       <div>
         <div>
           <main className="pa3 pa5-ns flex flex-wrap">
             {this.state.items.map(p => (
-              <Product key={p.id} {...p} />
+              <Product key={p.id} {...p} usertype={this.state.usertype} />
             ))}
           </main>
         </div>

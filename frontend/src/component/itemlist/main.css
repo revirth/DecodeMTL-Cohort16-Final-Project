@@ -51,6 +51,7 @@ a {
 }
 
 .articlediv {
+  position: relative;
   width: 3000px !important;
 }
 
@@ -104,4 +105,24 @@ a {
 
 .reviewlist {
   width: 100%;
+}
+
+.availability-toggle {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 700;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }

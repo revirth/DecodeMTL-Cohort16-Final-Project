@@ -222,13 +222,13 @@ app.put("/items/:itemId", upload.none(), async (req, res) => {
   doc["ok"] && res.send(resmsg(true, "item updated"));
 });
 
-app.delete("/items/:itemId", async (req, res) => {
-  console.log("TCL: /items/:itemId");
+app.delete("/items/:itemId", upload.none(), async (req, res) => {
+  console.log("TCL: /items/:itemId", req.body);
 
   let doc = await ITEMS.findOneAndUpdate(
     { _id: ObjectId(req.params.itemId) },
-    { $set: { isDeleted: true } },
-    { returnNewDocument: true }
+    { $set: { isDeleted: JSON.parse(req.body.isDeleted) } },
+    { returnNewDocument: false }
   );
 
   console.log(doc);
