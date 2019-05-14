@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SignupForm from "./SignupForm.jsx";
+import FacebookLogin from 'react-facebook-login'
 import { connect } from "react-redux";
 import { updateCartInfo } from "../cartfooter/Cart.jsx";
 import "./main.css";
@@ -61,6 +62,32 @@ class UnconnectedLoginPopup extends Component {
         }
       });
   };
+
+  facebookLogin = (response) => {
+    console.log(response)
+    if(response.userID){
+      const data = new FormData()
+    data.append("userId", response.userID)
+    fetch("/facebookLogin", {method: "POST", body: data, credentials: "include"}).then( headers => {
+      return headers.text()
+    }).then( body => {
+      const parsed = JSON.parse(body)
+      if (!parsed.status) {
+        alert("User doesn't exist");
+        return;
+      } else {
+        this.props.dispatch({
+          type: "afterLogin",
+          username: parsed.username,
+          usertype: this.getCookie_utp()
+        });
+        updateCartInfo();
+        this.props.onClose();
+      }
+    })
+    }
+  }
+
   render() {
     return (
       <div className="overlay ">
@@ -98,6 +125,11 @@ class UnconnectedLoginPopup extends Component {
                 </a>
               </span>
             </form>
+            <FacebookLogin
+              appId="432661687560212"
+              size="small"
+              fields="name,email,picture"
+              callback={this.facebookLogin} />
             <div className="btndiv">
               <button
                 className="btn login-btn f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
