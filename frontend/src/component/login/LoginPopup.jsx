@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SignupForm from "./SignupForm.jsx";
 import { connect } from "react-redux";
-import { updateCartInfo } from '../cartfooter/Cart.jsx'
+import { updateCartInfo } from "../cartfooter/Cart.jsx";
 import "./main.css";
 import "./style.css";
 
@@ -26,6 +26,13 @@ class UnconnectedLoginPopup extends Component {
     this.setState({ password: event.target.value });
   };
 
+  getCookie_utp = () => {
+    return document.cookie.replace(
+      /(?:(?:^|.*;\s*)utp\s*\=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+  };
+
   handleSubmit = event => {
     event.preventDefault();
     let data = new FormData();
@@ -46,9 +53,10 @@ class UnconnectedLoginPopup extends Component {
         } else {
           this.props.dispatch({
             type: "afterLogin",
-            username: this.state.username
+            username: this.state.username,
+            usertype: this.getCookie_utp()
           });
-          updateCartInfo()
+          updateCartInfo();
           this.props.onClose();
         }
       });

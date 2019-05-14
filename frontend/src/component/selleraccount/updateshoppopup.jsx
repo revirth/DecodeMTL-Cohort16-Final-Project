@@ -2,14 +2,15 @@ import React, { Component } from "react";
 //import "./main.css";
 import "./style.css";
 
-export default class Addresspopup extends Component {
+export default class Shoppopup extends Component {
   constructor(props) {
     super(props);
     this.state = {
       street: "",
       apt: "",
       postal: "",
-      phone: ""
+      phone: "",
+      shopname: ""
     };
   }
 
@@ -25,18 +26,11 @@ export default class Addresspopup extends Component {
   handlePh = event => {
     this.setState({ phone: event.target.value });
   };
+  handleShop = event => {
+    this.setState({ shopname: event.target.value });
+  };
   handleSubmit = event => {
     event.preventDefault();
-    let data = new FormData();
-    data.append("street", this.state.street);
-    data.append("apt", this.state.apt);
-    data.append("postal", this.state.postal);
-    data.append("phone", this.state.phone);
-    fetch("/profile", {
-      method: "PUT",
-      body: data,
-      credentials: "include"
-    });
   };
   render() {
     return (
@@ -72,6 +66,12 @@ export default class Addresspopup extends Component {
                 type="text"
                 placeholder="Enter your Phone(optional)"
                 onChange={this.handlePh}
+                className="login-field"
+              />
+              <input
+                type="text"
+                placeholder="Enter your Shop Name(optional)"
+                onChange={this.handleShop}
                 className="login-field"
               />
 

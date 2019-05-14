@@ -3,7 +3,7 @@ import "./custom.css";
 import "./style.css";
 import Addresspopup from "./updateAddresspopup.jsx";
 import Paymentpopup from "./updatePaymentpopup.jsx";
-import Accountdetails from "./updateAccountdetails.jsx"
+import Accountdetails from "./updateAccountdetails.jsx";
 
 export default class userprofile extends Component {
   constructor(props) {
@@ -17,7 +17,11 @@ export default class userprofile extends Component {
   escFunction = event => {
     //console.log("event key", event.key);
     if (event.keyCode === 27) {
-      this.setState({ showaddress: false, payment: false, accountdetails: false });
+      this.setState({
+        showaddress: false,
+        payment: false,
+        accountdetails: false
+      });
     }
   };
   componentDidMount() {
@@ -29,7 +33,7 @@ export default class userprofile extends Component {
   updatePayment = event => {
     event.preventDefault();
     this.setState({ payment: !this.state.payment });
-  }
+  };
 
   updateAddress = event => {
     event.preventDefault();
@@ -67,7 +71,10 @@ export default class userprofile extends Component {
           </article>
         </div>
         <div className="settngdetials">
-          <button className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow" onClick={this.updatePayment} >
+          <button
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
+            onClick={this.updatePayment}
+          >
             Update Payment Options
           </button>
           <article class="center mw5 mw6-ns br3 ba b--black-10 mv4">
@@ -86,7 +93,10 @@ export default class userprofile extends Component {
           </article>
         </div>
         <div className="settngdetials">
-          <button className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow" onClick={this.updateSettings}>
+          <button
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
+            onClick={this.updateSettings}
+          >
             Account detials
           </button>
           <article class="center mw5 mw6-ns br3 ba b--black-10 mv4">

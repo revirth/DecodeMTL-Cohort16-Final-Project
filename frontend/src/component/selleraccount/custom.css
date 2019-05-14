@@ -1,0 +1,71 @@
+.sellermain {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 1000px;
+  margin: auto;
+}
+.internalSeller {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.internalSeller1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.settingsbtn {
+  padding: 2%;
+}
+
+.w3-animate-bottom {
+  position: relative;
+  animation: animatebottom 0.4s;
+}
+@keyframes animatebottom {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+.w3-animate-top {
+  position: absolute;
+  animation: animatetop 0.4s;
+  -webkit-animation: animatetop 0.4s;
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+
+  to {
+    /* top: 0; */
+    opacity: 1;
+  }
+}
+
+input::placeholder {
+  font-size: 20px;
+}
+
+.spaceeven {
+  justify-content: space-evenly;
+}
+.leftAlign {
+  justify-content: row-start;
+}
+
+.flexrow {
+  display: flex;
+  flex-direction: row;
+}

@@ -2,31 +2,28 @@ import React, { Component } from "react";
 //import "./main.css";
 import "./style.css";
 
-export default class Accountdetails extends Component {
+export default class UploadItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: ""
+      namefood: "",
+      price: "",
+      file: ""
     };
   }
 
-  handleEmail = event => {
-    this.setState({ email: event.target.value });
+  handleFood = event => {
+    this.setState({ namefood: event.target.value });
   };
-  handlePassword = event => {
-    this.setState({ password: event.target.value });
+  handleFile = event => {
+    this.setState({ file: event.target.value });
+  };
+
+  handlePrice = event => {
+    this.setState({ price: event.target.value });
   };
   handleSubmit = event => {
     event.preventDefault();
-    let data = new FormData();
-    data.append("email", this.state.email);
-    data.append("password", this.state.password);
-    fetch("/profile", {
-      method: "PUT",
-      body: data,
-      credentials: "include"
-    });
   };
   render() {
     return (
@@ -38,17 +35,23 @@ export default class Accountdetails extends Component {
           <div className="login-form-div">
             <form className="mainform" onSubmit={this.handleSubmit}>
               <input
-                type="email"
-                placeholder="Enter your new email(optional)"
-                onChange={this.handleEmail}
+                type="text"
+                placeholder="Enter Name of food(optional)"
+                onChange={this.handleFood}
                 className="login-field"
                 id="Signupspace"
               />
 
               <input
-                type="password"
-                placeholder="Enter your new password(optional)"
-                onChange={this.handlePassword}
+                type="file"
+                // placeholder="Enter your apartment number(optional)"
+                onChange={this.handleFile}
+                className="login-field"
+              />
+              <input
+                type="text"
+                placeholder="Enter Price"
+                onChange={this.handlePrice}
                 className="login-field"
               />
 

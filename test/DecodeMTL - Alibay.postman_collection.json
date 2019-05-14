@@ -1,0 +1,627 @@
+{
+	"info": {
+		"_postman_id": "1ba8134c-60b5-45a7-aafd-a56b72a31c58",
+		"name": "DecodeMTL - Alibay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/users/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/users/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/reviews/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/reviews/3",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"reviews",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "whoever",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "whatever\n",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/users",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/profile",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "addreess",
+							"value": "{{$randomInt}} Sherbrooke O",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/profile",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/profile",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "a",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "b",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/login",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/charge",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "amount",
+							"value": "20000",
+							"type": "text"
+						},
+						{
+							"key": "currency",
+							"value": "cad",
+							"type": "text"
+						},
+						{
+							"key": "source",
+							"value": "tok_mastercard",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "My first payment",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/charge",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"charge"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/logout",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/logout",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "a",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "b",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/items",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/items 5 items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/items?limit=3",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"items"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/items",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "item name {{$randomInt}}",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "{{$randomInt}}.{{$randomInt}}",
+							"type": "text"
+						},
+						{
+							"key": "sellerId",
+							"value": "seller{{$randomInt}}",
+							"type": "text"
+						},
+						{
+							"key": "imgUrl",
+							"value": "http://placekitten.com/200/{{$randomInt}}",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "{{$randomInt}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/items",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/items/:itemId",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "item name {{$randomInt}}",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "{{$randomInt}}.{{$randomInt}}",
+							"type": "text"
+						},
+						{
+							"key": "sellerId",
+							"value": "seller{{$randomInt}}",
+							"type": "text"
+						},
+						{
+							"key": "imgUrl",
+							"value": "http://placekitten.com/200/{{$randomInt}}",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "{{$randomInt}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/items/5cd1cfee9a1d3215de6aeffa",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"items",
+						"5cd1cfee9a1d3215de6aeffa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/items/:itemId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/items/5cd1c2381c9d440000ddd75f",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"items",
+						"5cd1c2381c9d440000ddd75f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/items/:itemId/reviews",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/items/5cd1c2381c9d440000ddd75f/reviews",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"items",
+						"5cd1c2381c9d440000ddd75f",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/reviews",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/reviews",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/reviews/:reviewId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/reviews/5cd1c7ad1c9d440000ddd761",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"reviews",
+						"5cd1c7ad1c9d440000ddd761"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/reviews",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "itemId",
+							"value": "5cd1c2381c9d440000ddd75f",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "review title {{$randomInt}}",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "review content {{$randomInt}}",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "b",
+							"type": "text"
+						},
+						{
+							"key": "rating",
+							"value": "{{$randomInt}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/reviews",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/reviews/:reviewId",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "itemId",
+							"value": "5cd1c2381c9d440000ddd75f",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "review title {{$randomInt}}",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "review content {{$randomInt}}",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "b",
+							"type": "text"
+						},
+						{
+							"key": "rating",
+							"value": "{{$randomInt}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/reviews/5cd1de9909d5f2193671c50e",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"reviews",
+						"5cd1de9909d5f2193671c50e"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
