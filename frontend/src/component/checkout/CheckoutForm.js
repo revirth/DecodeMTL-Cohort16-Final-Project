@@ -22,18 +22,13 @@ class UnconnectedCheckoutForm extends Component {
 
     let response = await fetch("/charge", {
       method: "POST",
-      credentials: "include",
       // headers: {
       //   "Content-Type": "text/plain"
       // },
       body: form
     });
-    let data = await response.json();
 
-    console.log(data);
-
-    if (data.status) alert("Purchase Complete!");
-    else alert("Purchase failed");
+    if (response.ok) alert("Purchase Complete!");
   }
 
   render() {

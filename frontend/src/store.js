@@ -3,6 +3,7 @@ import { createStore } from "redux";
 let reducer = (state, action) => {
 
   if (action.type === "FillCart") {
+    console.log("Dispatch FillCart")
     return {
       ...state,
       cartItems: action.cartItems

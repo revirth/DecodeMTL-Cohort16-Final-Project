@@ -32,7 +32,7 @@ let SESSIONS = {};
 require("dotenv-expand")(require("dotenv").config());
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectId;
-let DB, USERS, CONFIG, ITEMS, REVIEWS, ORDERS;
+let DB, USERS, CONFIG, ITEMS, REVIEWS;
 MongoClient.connect(process.env.MLAB_URI, {
   useNewUrlParser: true
 }).then(client => {
@@ -42,7 +42,6 @@ MongoClient.connect(process.env.MLAB_URI, {
   ITEMS = DB.collection("items");
   REVIEWS = DB.collection("reviews");
   CART = DB.collection("cart");
-  ORDERS = DB.collection("orders");
 
   // in dev environment, check MongoDB documents
   // let arrP = [USERS, CONFIG, ITEMS, REVIEWS, CART].map(p =>
@@ -123,7 +122,7 @@ app.post("/signup", upload.none(), async (req, res) => {
 paginzation = query => {
   const limit = query.limit
     ? parseInt(query.limit)
-    : parseInt(10); // default paging size 10
+    : parseInt(process.env.DEFAULT_PAGE_SIZE);
   const page = query.page ? parseInt(query.page) : 1;
   const skip = page ? (page - 1) * limit : 0;
 
@@ -279,32 +278,24 @@ app.put("/reviews/:reviewId", upload.none(), async (req, res) => {
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 app.post("/charge", upload.none(), async (req, res) => {
-  let sid = req.cookies.sid;
-  let username = SESSIONS[sid];
-  if (username === undefined) {
-    res.send(resmsg(false, "Invalid User"));
-    return;
-  }
-  console.log("TCL: /charge", req.body, username);
+  console.log("TCL: /charge", req.body);
 
   try {
-    const charge = await stripe.charges.create({
+    let { status } = await stripe.charges.create({
       amount: parseInt(req.body.amount),
       currency: "cad",
       description: "An example charge",
-      source: req.body.token,
-      metadata: { unm: username }
+      source: req.body.token
     });
 
-    console.log("TCL: /charge -> ", charge);
-
-    await ORDERS.insertOne(charge);
-
-    res.send(resmsg(true));
+    console.log("TCL: /charge -> ", status);
+    res.json({
+      status
+    });
   } catch (err) {
     console.error("TCL: /charge -> ", err);
 
-    res.status(500).send(resmsg(false, err));
+    res.status(500).end();
   }
 });
 
@@ -316,7 +307,7 @@ app.get("/charges", async (req, res) => {
   res.json(list);
 });
 
-/**return an array of items (each item is an object) in the Cart for current user*/
+//return an array of items (each item is an object) in the Cart for current user
 app.get("/cartItems", async (req, res) => {
   let sid = req.cookies.sid;
   //check if there is a session for current user
@@ -346,114 +337,84 @@ app.get("/cartItems", async (req, res) => {
       return cartItem;
     });
     console.log("Cart items sent")
-    process.env.NODE_ENV === "development" && res.send(JSON.stringify({ successful: true, cartItems: cartItems }));
-  } else {
-    process.env.NODE_ENV === "development" && res.send(JSON.stringify({ successful: false }));
+    process.env.NODE_ENV === "development" && res.send(JSON.stringify({successful: true, cartItems: cartItems}));
   }
+  process.env.NODE_ENV === "development" && res.send(JSON.stringify({successful: false}));
 });
 
-/**add a Cart item to mongoDB*/
 app.post("/addCartItem", upload.none(), async (req, res) => {
   let sid = req.cookies.sid;
-  //check if a session exists
   if (sid) {
     let username = SESSIONS[sid]
-    //get userId of the current user
     let currentUser = await USERS.findOne({ username: username })
     let itemId = req.body.itemId
-    //create a new object for the new item
     let newCartItem = {
       itemId: itemId,
       itemQuantity: 1,
       userId: currentUser._id
     };
-    //add this object to the "cart" collection
-    await CART.insertOne(newCartItem, function (err, obj) {
-      if (err) throw err;
-      console.log(obj.result.n + " cart item added")
-      res.send(JSON.stringify({ successful: true })
-      );
-    });
-  } else {
-    res.send(JSON.stringify({ successful: false }))
+    await CART.insertOne(newCartItem);
+    console.log("Cart item added")
+    res.send(
+      JSON.stringify({
+        successfull: true
+      })
+    );
   }
 });
 
-/**delete one Cart Item */
 app.delete("/deleteCartItem", upload.none(), async (req, res) => {
   let sid = req.cookies.sid;
-  let cartItemId = req.body.cartItemId
-  //check if a session exists
   if (sid) {
     let username = SESSIONS[sid]
-    //get a userId of the current user
     let cu = await USERS.findOne({ username: username })
     let currentUser = cu._id
-    //get a userId of the current Cart item
-    let ciu = await CART.findOne({ _id: ObjectId(cartItemId) })
-    let currentItemUserId = ciu.userId
-    //if that's the same person - remove the item
-    if (currentUser.toString().localeCompare(currentItemUserId.toString()) === 0) {
+    let ci = await CART.findOne({ userId: currentUser })
+    let currentItem = ci.userId
+    if (currentUser.toString().localeCompare(currentItem.toString()) === 0) {
       let _id = ObjectId(req.body.cartItemId);
-      await CART.deleteOne({ _id: _id }, function (err, obj) {
+      CART.deleteOne({ _id: _id }, function (err, obj) {
         if (err) throw err;
-        console.log(obj.result.n + " cart item deleted")
-        res.send(JSON.stringify({ successful: true }));
+        console.log("1 cart item deleted");
       });
+      res.send(JSON.stringify({ succesfull: true }));
     }
-  } else {
-    res.send(JSON.stringify({ successful: false }));
   }
 });
 
-/**clear the Cart of the current user*/
 app.delete("/clearCart", upload.none(), async (req, res) => {
   let sid = req.cookies.sid;
-  //check if the session exists
   if (sid) {
     let username = SESSIONS[sid]
-    //get a userId of the current user
     let currentUser = await USERS.findOne({ username: username })
-    //delete all the elements in the Cart
-    await CART.deleteMany({ userId: currentUser._id }, function (err, obj) {
+    CART.deleteMany({ userId: currentUser._id }, function (err, obj) {
       if (err) throw err;
       console.log("Cart cleared");
-      res.send(JSON.stringify({ successful: true }));
     });
-  } else {
-    res.send(JSON.stringify({ successful: false }));
+    res.send(JSON.stringify({ succesfull: true }));
   }
 });
 
-/**update the curt item of the current user */
 app.put("/updateCartItem", upload.none(), async (req, res) => {
 
   let sid = req.cookies.sid;
-  let cartItemId = req.body.cartItemId
-  // check if a session exists
   if (sid) {
     let username = SESSIONS[sid]
-    //get a userId of the current user
     let cu = await USERS.findOne({ username: username })
     let currentUser = cu._id
-    //get a userId of the current Cart item
-    let ciu = await CART.findOne({ _id: ObjectId(cartItemId) })
-    let currentItemUserId = ciu.userId
-    //if that's the same person - update the item
-    if (currentUser.toString().localeCompare(currentItemUserId.toString()) === 0) {
+    let ci = await CART.findOne({ userId: currentUser })
+    let currentItem = ci.userId
+    if (currentUser.toString().localeCompare(currentItem.toString()) === 0) {
       let _id = ObjectId(req.body.cartItemId);
       let quantity = req.body.itemQuantity;
-      await CART.updateOne({ _id: _id }, { $set: { itemQuantity: quantity } }, function (
+      CART.updateOne({ _id: _id }, { $set: { itemQuantity: quantity } }, function (
         err,
         obj
       ) {
         if (err) throw err;
-        console.log(obj.result.n + " cart item updated")
+        console.log("1 cart item updated");
       });
-      res.send(JSON.stringify({ successful: true }));
+      res.send(JSON.stringify({ succesfull: true }));
     }
-  } else {
-    res.send(JSON.stringify({ successful: false }));
-
   }
 });
