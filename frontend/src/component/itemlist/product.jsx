@@ -8,8 +8,26 @@ import { connect } from "react-redux";
 let onClickHandle = e => {};
 
 class UnconnectedProduct extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      availble: true
+    };
+  }
+  availbleItem = () => {
+    this.setState({ availble: !this.state.availble });
+    let data = new FormData();
+    data.append("isAvailable", this.state.availble);
+
+    fetch(`/items`, {
+      method: "POST",
+      body: data,
+      credentials: "include"
+    });
+  };
+  
   render() {
-    const { _id, name, description, imgUrl, price, isDeleted } = this.props;
+    const { _id, name, description, imgUrl, price, isAvailable } = this.props;
     let showDesc = "";
 
     console.log("usertype", this.props.usertype);
@@ -20,7 +38,9 @@ class UnconnectedProduct extends Component {
         id={_id}
       >
         {this.props.usertype === "2" && (
-          <p className="availability-toggle">{!isDeleted ? "x" : "o"}</p>
+          <p className="availability-toggle" onClick={this.availbleItem}>
+            {!isAvailable ? "x" : "o"}
+          </p>
         )}
         <img
           src={imgUrl}
@@ -62,7 +82,7 @@ class UnconnectedProduct extends Component {
       </article>
     );
   }
-}
+
 let mapStateToProps = state => {
   return { usertype: state.usertype };
 };
