@@ -11,7 +11,6 @@ class UnconnectedCartBar extends React.Component {
   }
   
   render() {
-    console.log("Render CartBar")
     return (
       // generate CartBar page
       <div className="cartBar">

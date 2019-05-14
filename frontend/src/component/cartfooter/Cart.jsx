@@ -20,8 +20,8 @@ class UnConnectedCart extends React.Component {
       console.log("PUT")
       return headers.text()
     }).then(body => {
-      let result = true
-      if (result) {
+      let result = JSON.parse(body)
+      if (result.successful) {
         updateCartInfo()
       }
     })
@@ -35,8 +35,8 @@ class UnConnectedCart extends React.Component {
     fetch("http://localhost:3000/deleteCartItem", { method: "DELETE", credentials: 'include', body: data }).then(headers => {
       return headers.text()
     }).then(body => {
-      let result = true
-      if (result) {
+      let result = JSON.parse(body)
+      if (result.successful) {
         updateCartInfo()
       }
     })
@@ -46,8 +46,8 @@ class UnConnectedCart extends React.Component {
     fetch("http://localhost:3000/clearCart", { method: "DELETE", credentials: 'include' }).then(headers => {
       return headers.text()
     }).then(body => {
-      let result = true
-      if (result) {
+      let result = JSON.parse(body)
+      if (result.successful) {
         updateCartInfo()
       }
     })
@@ -139,7 +139,6 @@ class UnConnectedCart extends React.Component {
 let updateCartInfo = () => {
   // we send a request to the endpoint "/cartItems" to upload cartItems for current user
   // before show the Cart page the first time
-  console.log("Fetch cartItems")
   fetch("http://localhost:4000/cartItems", { method: "GET", credentials: 'include' })
     .then(headers => {
       return headers.text();
@@ -147,10 +146,7 @@ let updateCartInfo = () => {
     .then(body => {
       // we update the cartItems for current user in our "store"
       let parsed = JSON.parse(body)
-      console.log("Before check if successful")
       if (parsed.successful) {
-        console.log("If check successful")
-        console.log("cartItems: ", parsed.cartItems)
         store.dispatch({ type: "FillCart", cartItems: parsed.cartItems });
       }
     });
