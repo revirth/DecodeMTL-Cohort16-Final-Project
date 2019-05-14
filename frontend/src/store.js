@@ -8,6 +8,10 @@ let reducer = (state, action) => {
     };
   }
 
+  if (action.type === "ChangePage"){
+    return { ...state}
+  }
+
   switch (action.type) {
     case "afterLogin":
       return {

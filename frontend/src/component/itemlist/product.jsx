@@ -44,7 +44,7 @@ const Product = ({ _id, name, description, imgUrl, price }) => {
 
           <Link
             className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow moreLinks"
-            to={`/items/${_id}`}
+            to={`/items/item/${_id}`}
           >
             More Details
           </Link>

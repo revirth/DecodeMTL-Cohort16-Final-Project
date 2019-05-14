@@ -26,8 +26,8 @@ function App() {
       <div>
         <Route exact={true} path="/" component={HomePageContent} />
         <Route exact={true} path="/items" component={itemList} />
+        <Route exact={true} path="/items/item/:itemId" render={renderItem} />
         <Route exact={true} path="/cart" component={Cart} />
-        <Route exact={true} path="/items/:itemId" render={renderItem} />
         <Route exact={true} path="/checkout" component={Checkout} />
         <Route exact={true} path="/profile" component={userprofile} />
         <Route exact={true} path="/sellerprofile" component={selleraccount} />
