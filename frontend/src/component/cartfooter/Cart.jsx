@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import {Link} from 'react-router-dom'
 import store from '../../store.js'
 import "./cart.scss";
 // import "./style.css";
@@ -122,12 +123,14 @@ class UnConnectedCart extends React.Component {
           <div className="total">Total: {total.toFixed(2)}</div>
           <div className="parent-horizontal">
             <div className="button-right">
+            <Link to="/checkout">
               <button
                 className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
-                onClick={this.onClickChaeckout}
+                // onClick={this.onClickChaeckout}
               >
                 Checkout
             </button>
+            </Link>
             </div>
           </div>
         </div>

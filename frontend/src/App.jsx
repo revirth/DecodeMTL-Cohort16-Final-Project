@@ -24,9 +24,10 @@ function App() {
       <Navbar /> {/* TODO: pass state.login  */}
       <div>
         <Route exact={true} path="/" component={HomePageContent} />
-        <Route exact={true} path="/items" component={itemList} />
+        {/* <Route exact={true} path="/items" component={itemList} /> */}
+        <Route exact={true} path="/items/item/:itemId" render={renderItem} />
+        <Route path="/items" component={itemList} />
         <Route exact={true} path="/cart" component={Cart} />
-        <Route exact={true} path="/items/:itemId" render={renderItem} />
         <Route exact={true} path="/checkout" component={Checkout} />
         <Route exact={true} path="/profile" component={userprofile} />
       </div>
