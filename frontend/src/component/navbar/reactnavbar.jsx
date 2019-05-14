@@ -137,9 +137,10 @@ class UnconnectedLinks extends React.Component {
             </Link>
           </span>
         ) : (
-          <span>
+          <span className="afterlogin">
             Hi {this.props.username}
             <Link to="/profile">Account Setting</Link>
+            <Link to="/sellerprofile">Seller Account</Link>
             <Link to="#" onClick={this.logout}>
               LOGOUT
             </Link>

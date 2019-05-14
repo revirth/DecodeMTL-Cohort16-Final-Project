@@ -9,6 +9,7 @@ import Itempage from "./component/itemlist/itempage.jsx";
 import HomePageContent from "./component/homepagecontent/HomePageContent.jsx";
 import Checkout from "./component/checkout/index";
 import userprofile from "./component/userprofile/userprofile.jsx";
+import selleraccount from "./component/selleraccount/selleraccount.jsx";
 
 let renderItem = routerData => {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route exact={true} path="/items/:itemId" render={renderItem} />
         <Route exact={true} path="/checkout" component={Checkout} />
         <Route exact={true} path="/profile" component={userprofile} />
+        <Route exact={true} path="/sellerprofile" component={selleraccount} />
       </div>
       <CartBar />
     </BrowserRouter>
