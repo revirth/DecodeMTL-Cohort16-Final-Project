@@ -80,8 +80,11 @@ MongoClient.connect(process.env.MLAB_URI, {
     next();
   });
 
-  const itemsRouter = require("./routes/items");
-  app.use("/items", itemsRouter);
+  const itemRouter = require("./routes/items");
+  app.use("/items", itemRouter);
+
+  const reviewRouter = require("./routes/reviews");
+  app.use("/reviews", reviewRouter);
 
   // start express server
   app.listen(4000, () => console.log("listening on port 4000"));
@@ -322,52 +325,52 @@ app.post("/socialSignup", upload.none(), async (req, res) => {
 //   doc["ok"] && res.send(resmsg(true, "item deleted"));
 // });
 
-app.get("/reviews", upload.none(), async (req, res) => {
-  let docs = await REVIEWS.find({}).toArray();
+// app.get("/reviews", upload.none(), async (req, res) => {
+//   let docs = await REVIEWS.find({}).toArray();
 
-  res.send(docs);
-});
+//   res.send(docs);
+// });
 
-app.get("/reviews/:reviewId", upload.none(), async (req, res) => {
-  let _id = ObjectId(req.params.reviewId);
-  let doc = await REVIEWS.findOne(_id);
+// app.get("/reviews/:reviewId", upload.none(), async (req, res) => {
+//   let _id = ObjectId(req.params.reviewId);
+//   let doc = await REVIEWS.findOne(_id);
 
-  res.send(doc);
-});
+//   res.send(doc);
+// });
 
-app.post("/reviews", upload.none(), async (req, res) => {
-  // store a review in Mongo
-  let obj = {
-    ...req.body,
-    rating: parseInt(req.body.rating)
-  };
+// app.post("/reviews", upload.none(), async (req, res) => {
+//   // store a review in Mongo
+//   let obj = {
+//     ...req.body,
+//     rating: parseInt(req.body.rating)
+//   };
 
-  await REVIEWS.insertOne(obj);
-  res.send(resmsg(true, "review inserted"));
-});
+//   await REVIEWS.insertOne(obj);
+//   res.send(resmsg(true, "review inserted"));
+// });
 
-app.put("/reviews/:reviewId", upload.none(), async (req, res) => {
-  let object = {
-    ...req.body,
-    rating: parseInt(req.body.rating)
-  };
+// app.put("/reviews/:reviewId", upload.none(), async (req, res) => {
+//   let object = {
+//     ...req.body,
+//     rating: parseInt(req.body.rating)
+//   };
 
-  let doc = await REVIEWS.findOneAndUpdate(
-    {
-      _id: ObjectId(req.params.reviewId)
-    },
-    {
-      $set: object
-    },
-    {
-      returnNewDocument: true
-    }
-  );
+//   let doc = await REVIEWS.findOneAndUpdate(
+//     {
+//       _id: ObjectId(req.params.reviewId)
+//     },
+//     {
+//       $set: object
+//     },
+//     {
+//       returnNewDocument: true
+//     }
+//   );
 
-  console.log(doc);
+//   console.log(doc);
 
-  doc["ok"] && res.send(resmsg(true, "review updated"));
-});
+//   doc["ok"] && res.send(resmsg(true, "review updated"));
+// });
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 app.post("/charge", upload.none(), async (req, res) => {
