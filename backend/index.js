@@ -20,6 +20,22 @@ app.use(
   })
 );
 
+var morgan = require("morgan");
+app.use(
+  morgan((tokens, req, res) => {
+    return [
+      tokens.method(req, res),
+      tokens.url(req, res),
+      tokens.status(req, res),
+      JSON.stringify(req.body),
+      tokens.res(req, res, "content-length"),
+      "-",
+      tokens["response-time"](req, res),
+      "ms"
+    ].join(" ");
+  })
+);
+
 let shajs = require("sha.js");
 sha256 = str =>
   shajs("sha256")
