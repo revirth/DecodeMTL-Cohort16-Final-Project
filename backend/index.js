@@ -81,7 +81,6 @@ app.get("/users", async (req, res) => {
 });
 
 app.get("/user/isvalid", async (req, res) => {
-  console.log("TCL: /user/isvalid", SESSIONS[req.cookies.sid]);
   if (SESSIONS[req.cookies.sid] !== undefined) {
     res.send(resmsg(true));
     return;
@@ -92,8 +91,6 @@ app.get("/user/isvalid", async (req, res) => {
 });
 
 app.post("/login", upload.none(), async (req, res) => {
-  console.log("TCL: /login", req.body);
-
   let query = {
     ...req.body,
     password: sha256(req.body.password)
@@ -145,8 +142,6 @@ app.post("/socialLogin", upload.none(), async (req, res) => {
 });
 
 app.get("/logout", upload.none(), (req, res) => {
-  console.log("TCL: /logout", req.body);
-
   const sid = req.cookies.sid;
   delete SESSIONS[sid];
   res.clearCookie("sid");
@@ -154,8 +149,6 @@ app.get("/logout", upload.none(), (req, res) => {
 });
 
 app.post("/signup", upload.none(), async (req, res) => {
-  console.log("TCL: /signup", req.body);
-
   // check the username
   let doc = await USERS.findOne({
     username: req.body.username
@@ -222,8 +215,6 @@ app.get("/items", upload.none(), async (req, res) => {
   let sid = req.cookies.sid;
   let username = SESSIONS[sid];
 
-  console.log("TCL: /items", req.query, username);
-
   const query = req.query.search
     ? {
         name: {
@@ -255,14 +246,10 @@ app.get("/items", upload.none(), async (req, res) => {
     limit: page.limit
   };
 
-  // console.log("TCL: /items", data);
-
   res.send(data);
 });
 
 app.get("/items/:itemId", upload.none(), async (req, res) => {
-  console.log("TCL: /items/:itemId", req.params);
-
   let _id = ObjectId(req.params.itemId);
   let doc = await ITEMS.findOne(_id);
 
@@ -270,8 +257,6 @@ app.get("/items/:itemId", upload.none(), async (req, res) => {
 });
 
 app.get("/items/:itemId/reviews", upload.none(), async (req, res) => {
-  console.log("TCL: /items/:itemId/reviews", req.params);
-
   let query = {
     itemId: req.params.itemId
   };
@@ -281,8 +266,6 @@ app.get("/items/:itemId/reviews", upload.none(), async (req, res) => {
 });
 
 app.post("/items", upload.none(), async (req, res) => {
-  console.log("TCL: /items", req.body);
-
   // store an item in Mongo
   let obj = {
     ...req.body,
@@ -294,8 +277,6 @@ app.post("/items", upload.none(), async (req, res) => {
 });
 
 app.put("/items/:itemId", upload.none(), async (req, res) => {
-  console.log("TCL: /items/:itemId", req.params, req.body);
-
   let object = {
     ...req.body
   };
@@ -318,8 +299,6 @@ app.put("/items/:itemId", upload.none(), async (req, res) => {
 });
 
 app.delete("/items/:itemId", upload.none(), async (req, res) => {
-  console.log("TCL: /items/:itemId", req.body);
-
   let doc = await ITEMS.findOneAndUpdate(
     { _id: ObjectId(req.params.itemId) },
     { $set: { isDeleted: JSON.parse(req.body.isDeleted) } },
@@ -332,16 +311,12 @@ app.delete("/items/:itemId", upload.none(), async (req, res) => {
 });
 
 app.get("/reviews", upload.none(), async (req, res) => {
-  console.log("TCL: /reviews", req.body);
-
   let docs = await REVIEWS.find({}).toArray();
 
   res.send(docs);
 });
 
 app.get("/reviews/:reviewId", upload.none(), async (req, res) => {
-  console.log("TCL: /items/:reviewId", req.params);
-
   let _id = ObjectId(req.params.reviewId);
   let doc = await REVIEWS.findOne(_id);
 
@@ -349,8 +324,6 @@ app.get("/reviews/:reviewId", upload.none(), async (req, res) => {
 });
 
 app.post("/reviews", upload.none(), async (req, res) => {
-  console.log("TCL: /reviews", req.body);
-
   // store a review in Mongo
   let obj = {
     ...req.body,
@@ -362,8 +335,6 @@ app.post("/reviews", upload.none(), async (req, res) => {
 });
 
 app.put("/reviews/:reviewId", upload.none(), async (req, res) => {
-  console.log("TCL: /review/:reviewId", req.params, req.body);
-
   let object = {
     ...req.body,
     rating: parseInt(req.body.rating)
@@ -394,7 +365,6 @@ app.post("/charge", upload.none(), async (req, res) => {
     res.send(resmsg(false, "Invalid User"));
     return;
   }
-  console.log("TCL: /charge", req.body, username);
 
   try {
     const charge = await stripe.charges.create({
@@ -418,8 +388,6 @@ app.post("/charge", upload.none(), async (req, res) => {
 });
 
 app.get("/charges", async (req, res) => {
-  console.log("TCL: /charges");
-
   let list = await stripe.charges.list();
 
   res.json(list);
@@ -575,8 +543,6 @@ app.get("/profile", async (req, res) => {
   let sid = req.cookies.sid;
   let username = SESSIONS[sid];
 
-  console.log("TCL: /profile", username);
-
   // find a user in Mongo
   let doc = await USERS.findOne({ username: username });
   console.log("TCL: /profile -> USERS.findOne", doc);
@@ -595,8 +561,6 @@ app.get("/profile", async (req, res) => {
 app.put("/profile", upload.none(), async (req, res) => {
   let sid = req.cookies.sid;
   let username = SESSIONS[sid];
-
-  console.log("TCL: /profile", req.body, username);
 
   // find a user in Mongo
   let doc = await USERS.findOne({ username: username });
