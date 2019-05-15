@@ -4,13 +4,14 @@ let upload = require("multer")({
   dest: __dirname + "/uploads/"
 });
 app.use("/images", express.static("uploads"));
+app.use(upload.array());
 
 let cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+// app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 let cors = require("cors");
 app.use(
@@ -76,6 +77,7 @@ MongoClient.connect(process.env.MLAB_URI, {
     res.locals.USERS = USERS;
     res.locals.ITEMS = ITEMS;
     res.locals.REVIEWS = REVIEWS;
+    res.locals.ORDERS = ORDERS;
 
     next();
   });
@@ -85,6 +87,9 @@ MongoClient.connect(process.env.MLAB_URI, {
 
   const reviewRouter = require("./routes/reviews");
   app.use("/reviews", reviewRouter);
+
+  const chargeRouter = require("./routes/charges");
+  app.use("/charges", chargeRouter);
 
   // start express server
   app.listen(4000, () => console.log("listening on port 4000"));
@@ -105,7 +110,7 @@ app.get("/user/isvalid", async (req, res) => {
   res.send(resmsg(false));
 });
 
-app.post("/login", upload.none(), async (req, res) => {
+app.post("/login", async (req, res) => {
   let query = {
     ...req.body,
     password: sha256(req.body.password)
@@ -372,41 +377,41 @@ app.post("/socialSignup", upload.none(), async (req, res) => {
 //   doc["ok"] && res.send(resmsg(true, "review updated"));
 // });
 
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-app.post("/charge", upload.none(), async (req, res) => {
-  let sid = req.cookies.sid;
-  let username = SESSIONS[sid];
-  if (username === undefined) {
-    res.send(resmsg(false, "Invalid User"));
-    return;
-  }
+// const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+// app.post("/charge", upload.none(), async (req, res) => {
+//   let sid = req.cookies.sid;
+//   let username = SESSIONS[sid];
+//   if (username === undefined) {
+//     res.send(resmsg(false, "Invalid User"));
+//     return;
+//   }
 
-  try {
-    const charge = await stripe.charges.create({
-      amount: parseInt(req.body.amount),
-      currency: "cad",
-      description: "An example charge",
-      source: req.body.token,
-      metadata: { unm: username }
-    });
+//   try {
+//     const charge = await stripe.charges.create({
+//       amount: parseInt(req.body.amount),
+//       currency: "cad",
+//       description: "An example charge",
+//       source: req.body.token,
+//       metadata: { unm: username }
+//     });
 
-    console.log("TCL: /charge -> ", charge);
+//     console.log("TCL: /charge -> ", charge);
 
-    await ORDERS.insertOne(charge);
+//     await ORDERS.insertOne(charge);
 
-    res.send(resmsg(true));
-  } catch (err) {
-    console.error("TCL: /charge -> ", err);
+//     res.send(resmsg(true));
+//   } catch (err) {
+//     console.error("TCL: /charge -> ", err);
 
-    res.status(500).send(resmsg(false, err));
-  }
-});
+//     res.status(500).send(resmsg(false, err));
+//   }
+// });
 
-app.get("/charges", async (req, res) => {
-  let list = await stripe.charges.list();
+// app.get("/charges", async (req, res) => {
+//   let list = await stripe.charges.list();
 
-  res.json(list);
-});
+//   res.json(list);
+// });
 
 /**return an array of items (each item is an object) in the Cart for current user*/
 app.get("/cartItems", async (req, res) => {
