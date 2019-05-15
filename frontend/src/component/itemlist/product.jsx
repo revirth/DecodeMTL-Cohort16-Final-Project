@@ -35,16 +35,24 @@ class UnconnectedProduct extends Component {
     console.log("isAvailable", isAvailable);
     const customCSS = {
       opacity: `${this.state.available ? 1 : 0.5}`
+      // transform: `rotateY(180deg)`
+      // -webkit-transform: `rotateY(180deg)`;
+      // -moz-transform: `rotateY(180deg)`;
+      // -ms-transform: `rotateY(180deg)`;
+      // -o-transform: `rotateY(180deg)`;
     };
+    let classes = "";
+    if (this.state.available)
+      classes =
+        "br2 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw5 center articlediv";
+    else
+      classes =
+        "br2 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw5 center articlediv spin";
     return (
-      <article
-        className="br2 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw5 center articlediv"
-        style={customCSS}
-        id={_id}
-      >
+      <article className={classes} style={customCSS} id={_id}>
         {this.props.usertype === "2" && (
           <p className="availability-toggle" onClick={this.availbleItem}>
-            {!this.state.available ? "x" : "o"}
+            {!this.state.available ? "o" : "x"}
           </p>
         )}
         <img
