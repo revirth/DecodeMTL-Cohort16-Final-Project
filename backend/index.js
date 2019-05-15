@@ -259,8 +259,6 @@ app.post("/items", upload.none(), async (req, res) => {
   // store an item in Mongo
   let obj = {
     ...req.body,
-    price: parseFloat(req.body.price),
-    quantity: parseInt(req.body.quantity),
     isDeleted: false
   };
 
@@ -272,9 +270,7 @@ app.put("/items/:itemId", upload.none(), async (req, res) => {
   console.log("TCL: /items/:itemId", req.params, req.body);
 
   let object = {
-    ...req.body,
-    price: parseFloat(req.body.price),
-    quantity: parseInt(req.body.quantity)
+    ...req.body
   };
 
   let doc = await ITEMS.findOneAndUpdate(
