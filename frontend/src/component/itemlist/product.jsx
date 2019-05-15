@@ -11,35 +11,40 @@ class UnconnectedProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      availble: true
+      available: this.props.isAvailable
     };
   }
   availbleItem = () => {
-    this.setState({ availble: !this.state.availble });
+    this.setState({ available: !this.state.available });
     let data = new FormData();
-    data.append("isAvailable", this.state.availble);
+    data.append("isAvailable", this.state.available);
 
-    fetch(`/items`, {
-      method: "POST",
-      body: data,
+    fetch(`/items/${this.props._id}`, {
+      method: "PUT",
+      body: JSON.stringify({ isAvailable: !this.state.available }),
+      headers: {
+        "Content-Type": "application/json"
+      },
       credentials: "include"
     });
   };
-  
   render() {
     const { _id, name, description, imgUrl, price, isAvailable } = this.props;
     let showDesc = "";
 
-    console.log("usertype", this.props.usertype);
-
+    console.log("isAvailable", isAvailable);
+    const customCSS = {
+      opacity: `${this.state.available ? 1 : 0.5}`
+    };
     return (
       <article
         className="br2 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw5 center articlediv"
+        style={customCSS}
         id={_id}
       >
         {this.props.usertype === "2" && (
           <p className="availability-toggle" onClick={this.availbleItem}>
-            {!isAvailable ? "x" : "o"}
+            {!this.state.available ? "x" : "o"}
           </p>
         )}
         <img
@@ -64,6 +69,7 @@ class UnconnectedProduct extends Component {
           </p>
           <div className="btn1">
             <button
+              disabled={!this.state.available}
               className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow btncart"
               onClick={() => addItemToCart(_id)}
             >
@@ -82,7 +88,7 @@ class UnconnectedProduct extends Component {
       </article>
     );
   }
-
+}
 let mapStateToProps = state => {
   return { usertype: state.usertype };
 };

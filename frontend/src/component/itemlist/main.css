@@ -126,3 +126,10 @@ a {
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
 }
+
+.btncart:disabled {
+  cursor: not-allowed;
+}
+
+.btncart:disabled:hover {
+}
