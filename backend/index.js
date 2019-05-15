@@ -5,6 +5,15 @@ let upload = require("multer")({
 });
 app.use("/images", express.static("uploads"));
 
+let nodemailer = require('nodemailer');
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'consomater@gmail.com',
+    pass:  '123QWEqwe'
+   }
+});
+
 let cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
@@ -606,3 +615,45 @@ app.put("/profile", upload.none(), async (req, res) => {
 
   doc["ok"] && res.send(resmsg(true, "user profile updated"));
 });
+
+/**sending a temporary password to the user */
+app.post("/sendpassword", upload.none(), async (req,res) => {
+  let userEmailAddress = req.body.email
+  
+  let doc = await USERS.findOne({email: userEmailAddress})
+  
+  if(doc === null){
+    console.log("Email doesn't exist")
+    res.send(JSON.stringify({status: false, message: "Email doesnt exist"}))
+    return
+  }
+  
+  let randomPassword = Math.random().toString(36).slice(-8);
+
+  await USERS.updateOne(
+    { _id: doc._id },
+    { $set: { password: sha256(randomPassword) } },
+    function(err, obj) {
+      if (err) throw err;
+      console.log(obj.result.n + " password was updated");
+    }
+  );
+
+  let mailOptions = {
+    from: 'consomater@gmail.com',
+    to: userEmailAddress,
+    subject: 'Reset password',
+    text: 'Your temporary password is : ' + randomPassword
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+
+  res.send(JSON.stringify({status: true, message: "Password sent. Please check your email"} ))
+
+})

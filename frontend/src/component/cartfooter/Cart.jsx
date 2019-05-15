@@ -78,8 +78,8 @@ class UnConnectedCart extends React.Component {
             return (
               <div key={item.cartItemId} className="item-cell-width">
                 <div className="item-in-column">
-                  <div className="image photo-width">
-                    <img src={item.itemImage} height="150px" width="150px" alt="" />
+                  <div className="image-wrapper">
+                    <img className="item-image" src={item.itemImage} alt="" />
                   </div>
                   <div className="information-in-row name-price-width">
                     <div>
