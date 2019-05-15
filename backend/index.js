@@ -1,19 +1,19 @@
-let express = require("express");
-let app = express();
-let upload = require("multer")({
+const express = require("express");
+const app = express();
+const upload = require("multer")({
   dest: __dirname + "/uploads/"
 });
 app.use("/images", express.static("uploads"));
 app.use(upload.array());
 
-let cookieParser = require("cookie-parser");
+const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json()); // for parsing application/json
 // app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-let cors = require("cors");
+const cors = require("cors");
 app.use(
   cors({
     credentials: true,
@@ -21,7 +21,7 @@ app.use(
   })
 );
 
-var morgan = require("morgan");
+const morgan = require("morgan");
 app.use(
   morgan((tokens, req, res) => {
     return [
@@ -37,7 +37,7 @@ app.use(
   })
 );
 
-let shajs = require("sha.js");
+const shajs = require("sha.js");
 sha256 = str =>
   shajs("sha256")
     .update(str)
@@ -72,6 +72,7 @@ MongoClient.connect(process.env.MLAB_URI, {
   process.env.NODE_ENV === "development" &&
     Promise.all(arrP).then(arr => arr.map(res => console.log(res)));
 
+  // register variable for passing to router
   app.use((req, res, next) => {
     res.locals.SESSIONS = SESSIONS;
     res.locals.USERS = USERS;
@@ -82,13 +83,13 @@ MongoClient.connect(process.env.MLAB_URI, {
     next();
   });
 
+  // routers
   const itemRouter = require("./routes/items");
-  app.use("/items", itemRouter);
-
   const reviewRouter = require("./routes/reviews");
-  app.use("/reviews", reviewRouter);
-
   const chargeRouter = require("./routes/charges");
+
+  app.use("/items", itemRouter);
+  app.use("/reviews", reviewRouter);
   app.use("/charges", chargeRouter);
 
   // start express server
@@ -222,196 +223,6 @@ app.post("/socialSignup", upload.none(), async (req, res) => {
   console.log("/facebookSignUp user is added");
   res.send(resmsg(true, "signup success"));
 });
-
-// paginzation = query => {
-//   const limit = query.limit ? parseInt(query.limit) : parseInt(10); // default paging size 10
-//   const page = query.page ? parseInt(query.page) : 1;
-//   const skip = page ? (page - 1) * limit : 0;
-
-//   return { limit: limit, page: page, skip: skip };
-// };
-
-// app.get("/items", upload.none(), async (req, res) => {
-//   let sid = req.cookies.sid;
-//   let username = SESSIONS[sid];
-
-//   const query = req.query.search
-//     ? {
-//         name: {
-//           $regex: req.query.search,
-//           $options: "i"
-//         },
-//         isDeleted: false
-//       }
-//     : { isDeleted: false };
-
-//   // for seller user, delete 'isDeleted' filter
-//   if (username !== undefined) {
-//     var user = await USERS.findOne({ username: username });
-
-//     user.usertype === 2 && delete query.isDeleted;
-//   }
-
-//   const page = paginzation(req.query);
-
-//   const docs = await ITEMS.find(query)
-//     .skip(page.skip)
-//     .limit(page.limit)
-//     .toArray();
-
-//   const data = {
-//     items: docs,
-//     page: page.page,
-//     total: await ITEMS.countDocuments(query),
-//     limit: page.limit
-//   };
-
-//   res.send(data);
-// });
-
-// app.get("/items/:itemId", upload.none(), async (req, res) => {
-//   let _id = ObjectId(req.params.itemId);
-//   let doc = await ITEMS.findOne(_id);
-
-//   res.send(doc);
-// });
-
-// app.get("/items/:itemId/reviews", upload.none(), async (req, res) => {
-//   let query = {
-//     itemId: req.params.itemId
-//   };
-//   let docs = await REVIEWS.find(query).toArray();
-
-//   res.send(docs);
-// });
-
-// app.post("/items", upload.none(), async (req, res) => {
-//   // store an item in Mongo
-//   let obj = {
-//     ...req.body,
-//     isDeleted: false
-//   };
-
-//   await ITEMS.insertOne(obj);
-//   res.send(resmsg(true, "item inserted"));
-// });
-
-// app.put("/items/:itemId", upload.none(), async (req, res) => {
-//   let object = {
-//     ...req.body
-//   };
-
-//   let doc = await ITEMS.findOneAndUpdate(
-//     {
-//       _id: ObjectId(req.params.itemId)
-//     },
-//     {
-//       $set: object
-//     },
-//     {
-//       returnNewDocument: true
-//     }
-//   );
-
-//   console.log(doc);
-
-//   doc["ok"] && res.send(resmsg(true, "item updated"));
-// });
-
-// app.delete("/items/:itemId", upload.none(), async (req, res) => {
-//   let doc = await ITEMS.findOneAndUpdate(
-//     { _id: ObjectId(req.params.itemId) },
-//     { $set: { isDeleted: JSON.parse(req.body.isDeleted) } },
-//     { returnNewDocument: false }
-//   );
-
-//   console.log(doc);
-
-//   doc["ok"] && res.send(resmsg(true, "item deleted"));
-// });
-
-// app.get("/reviews", upload.none(), async (req, res) => {
-//   let docs = await REVIEWS.find({}).toArray();
-
-//   res.send(docs);
-// });
-
-// app.get("/reviews/:reviewId", upload.none(), async (req, res) => {
-//   let _id = ObjectId(req.params.reviewId);
-//   let doc = await REVIEWS.findOne(_id);
-
-//   res.send(doc);
-// });
-
-// app.post("/reviews", upload.none(), async (req, res) => {
-//   // store a review in Mongo
-//   let obj = {
-//     ...req.body,
-//     rating: parseInt(req.body.rating)
-//   };
-
-//   await REVIEWS.insertOne(obj);
-//   res.send(resmsg(true, "review inserted"));
-// });
-
-// app.put("/reviews/:reviewId", upload.none(), async (req, res) => {
-//   let object = {
-//     ...req.body,
-//     rating: parseInt(req.body.rating)
-//   };
-
-//   let doc = await REVIEWS.findOneAndUpdate(
-//     {
-//       _id: ObjectId(req.params.reviewId)
-//     },
-//     {
-//       $set: object
-//     },
-//     {
-//       returnNewDocument: true
-//     }
-//   );
-
-//   console.log(doc);
-
-//   doc["ok"] && res.send(resmsg(true, "review updated"));
-// });
-
-// const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-// app.post("/charge", upload.none(), async (req, res) => {
-//   let sid = req.cookies.sid;
-//   let username = SESSIONS[sid];
-//   if (username === undefined) {
-//     res.send(resmsg(false, "Invalid User"));
-//     return;
-//   }
-
-//   try {
-//     const charge = await stripe.charges.create({
-//       amount: parseInt(req.body.amount),
-//       currency: "cad",
-//       description: "An example charge",
-//       source: req.body.token,
-//       metadata: { unm: username }
-//     });
-
-//     console.log("TCL: /charge -> ", charge);
-
-//     await ORDERS.insertOne(charge);
-
-//     res.send(resmsg(true));
-//   } catch (err) {
-//     console.error("TCL: /charge -> ", err);
-
-//     res.status(500).send(resmsg(false, err));
-//   }
-// });
-
-// app.get("/charges", async (req, res) => {
-//   let list = await stripe.charges.list();
-
-//   res.json(list);
-// });
 
 /**return an array of items (each item is an object) in the Cart for current user*/
 app.get("/cartItems", async (req, res) => {
