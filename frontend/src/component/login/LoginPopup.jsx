@@ -144,6 +144,7 @@ class UnconnectedLoginPopup extends Component {
               <GoogleLogin
                 clientId="552704391478-lk7u47rc53grh82k0mmcekegqc8lkuo4.apps.googleusercontent.com"
                 buttonText="Login with Google"
+                theme="dark"
                 onSuccess={(r) => { this.socialLogin({ response: r, socialN: "google" }) }} />
             </div>
             <div className="btndiv">

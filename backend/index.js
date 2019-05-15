@@ -94,6 +94,8 @@ app.post("/login", upload.none(), async (req, res) => {
 /**Facebook/Google login */
 app.post("/socialLogin", upload.none(), async (req, res) => {
 
+  let query = {userId: req.body.userId}
+
   // find a user in Mongo
   let doc = await USERS.findOne(query);
   console.log("TCL: /facebookLogin -> USERS.findOne", doc);
