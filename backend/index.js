@@ -71,6 +71,18 @@ MongoClient.connect(process.env.MLAB_URI, {
   process.env.NODE_ENV === "development" &&
     Promise.all(arrP).then(arr => arr.map(res => console.log(res)));
 
+  app.use((req, res, next) => {
+    res.locals.SESSIONS = SESSIONS;
+    res.locals.USERS = USERS;
+    res.locals.ITEMS = ITEMS;
+    res.locals.REVIEWS = REVIEWS;
+
+    next();
+  });
+
+  const itemsRouter = require("./routes/items");
+  app.use("/items", itemsRouter);
+
   // start express server
   app.listen(4000, () => console.log("listening on port 4000"));
 });
@@ -203,112 +215,112 @@ app.post("/socialSignup", upload.none(), async (req, res) => {
   res.send(resmsg(true, "signup success"));
 });
 
-paginzation = query => {
-  const limit = query.limit ? parseInt(query.limit) : parseInt(10); // default paging size 10
-  const page = query.page ? parseInt(query.page) : 1;
-  const skip = page ? (page - 1) * limit : 0;
+// paginzation = query => {
+//   const limit = query.limit ? parseInt(query.limit) : parseInt(10); // default paging size 10
+//   const page = query.page ? parseInt(query.page) : 1;
+//   const skip = page ? (page - 1) * limit : 0;
 
-  return { limit: limit, page: page, skip: skip };
-};
+//   return { limit: limit, page: page, skip: skip };
+// };
 
-app.get("/items", upload.none(), async (req, res) => {
-  let sid = req.cookies.sid;
-  let username = SESSIONS[sid];
+// app.get("/items", upload.none(), async (req, res) => {
+//   let sid = req.cookies.sid;
+//   let username = SESSIONS[sid];
 
-  const query = req.query.search
-    ? {
-        name: {
-          $regex: req.query.search,
-          $options: "i"
-        },
-        isDeleted: false
-      }
-    : { isDeleted: false };
+//   const query = req.query.search
+//     ? {
+//         name: {
+//           $regex: req.query.search,
+//           $options: "i"
+//         },
+//         isDeleted: false
+//       }
+//     : { isDeleted: false };
 
-  // for seller user, delete 'isDeleted' filter
-  if (username !== undefined) {
-    var user = await USERS.findOne({ username: username });
+//   // for seller user, delete 'isDeleted' filter
+//   if (username !== undefined) {
+//     var user = await USERS.findOne({ username: username });
 
-    user.usertype === 2 && delete query.isDeleted;
-  }
+//     user.usertype === 2 && delete query.isDeleted;
+//   }
 
-  const page = paginzation(req.query);
+//   const page = paginzation(req.query);
 
-  const docs = await ITEMS.find(query)
-    .skip(page.skip)
-    .limit(page.limit)
-    .toArray();
+//   const docs = await ITEMS.find(query)
+//     .skip(page.skip)
+//     .limit(page.limit)
+//     .toArray();
 
-  const data = {
-    items: docs,
-    page: page.page,
-    total: await ITEMS.countDocuments(query),
-    limit: page.limit
-  };
+//   const data = {
+//     items: docs,
+//     page: page.page,
+//     total: await ITEMS.countDocuments(query),
+//     limit: page.limit
+//   };
 
-  res.send(data);
-});
+//   res.send(data);
+// });
 
-app.get("/items/:itemId", upload.none(), async (req, res) => {
-  let _id = ObjectId(req.params.itemId);
-  let doc = await ITEMS.findOne(_id);
+// app.get("/items/:itemId", upload.none(), async (req, res) => {
+//   let _id = ObjectId(req.params.itemId);
+//   let doc = await ITEMS.findOne(_id);
 
-  res.send(doc);
-});
+//   res.send(doc);
+// });
 
-app.get("/items/:itemId/reviews", upload.none(), async (req, res) => {
-  let query = {
-    itemId: req.params.itemId
-  };
-  let docs = await REVIEWS.find(query).toArray();
+// app.get("/items/:itemId/reviews", upload.none(), async (req, res) => {
+//   let query = {
+//     itemId: req.params.itemId
+//   };
+//   let docs = await REVIEWS.find(query).toArray();
 
-  res.send(docs);
-});
+//   res.send(docs);
+// });
 
-app.post("/items", upload.none(), async (req, res) => {
-  // store an item in Mongo
-  let obj = {
-    ...req.body,
-    isDeleted: false
-  };
+// app.post("/items", upload.none(), async (req, res) => {
+//   // store an item in Mongo
+//   let obj = {
+//     ...req.body,
+//     isDeleted: false
+//   };
 
-  await ITEMS.insertOne(obj);
-  res.send(resmsg(true, "item inserted"));
-});
+//   await ITEMS.insertOne(obj);
+//   res.send(resmsg(true, "item inserted"));
+// });
 
-app.put("/items/:itemId", upload.none(), async (req, res) => {
-  let object = {
-    ...req.body
-  };
+// app.put("/items/:itemId", upload.none(), async (req, res) => {
+//   let object = {
+//     ...req.body
+//   };
 
-  let doc = await ITEMS.findOneAndUpdate(
-    {
-      _id: ObjectId(req.params.itemId)
-    },
-    {
-      $set: object
-    },
-    {
-      returnNewDocument: true
-    }
-  );
+//   let doc = await ITEMS.findOneAndUpdate(
+//     {
+//       _id: ObjectId(req.params.itemId)
+//     },
+//     {
+//       $set: object
+//     },
+//     {
+//       returnNewDocument: true
+//     }
+//   );
 
-  console.log(doc);
+//   console.log(doc);
 
-  doc["ok"] && res.send(resmsg(true, "item updated"));
-});
+//   doc["ok"] && res.send(resmsg(true, "item updated"));
+// });
 
-app.delete("/items/:itemId", upload.none(), async (req, res) => {
-  let doc = await ITEMS.findOneAndUpdate(
-    { _id: ObjectId(req.params.itemId) },
-    { $set: { isDeleted: JSON.parse(req.body.isDeleted) } },
-    { returnNewDocument: false }
-  );
+// app.delete("/items/:itemId", upload.none(), async (req, res) => {
+//   let doc = await ITEMS.findOneAndUpdate(
+//     { _id: ObjectId(req.params.itemId) },
+//     { $set: { isDeleted: JSON.parse(req.body.isDeleted) } },
+//     { returnNewDocument: false }
+//   );
 
-  console.log(doc);
+//   console.log(doc);
 
-  doc["ok"] && res.send(resmsg(true, "item deleted"));
-});
+//   doc["ok"] && res.send(resmsg(true, "item deleted"));
+// });
 
 app.get("/reviews", upload.none(), async (req, res) => {
   let docs = await REVIEWS.find({}).toArray();
