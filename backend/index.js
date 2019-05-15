@@ -91,8 +91,8 @@ app.post("/login", upload.none(), async (req, res) => {
   res.send(resmsg(true, "login success"));
 });
 
-app.post("/facebookLogin", upload.none(), async (req, res) => {
-  let query = { userId: req.body.userId };
+/**Facebook/Google login */
+app.post("/socialLogin", upload.none(), async (req, res) => {
 
   // find a user in Mongo
   let doc = await USERS.findOne(query);
@@ -150,11 +150,13 @@ app.post("/signup", upload.none(), async (req, res) => {
   res.send(resmsg(true, "signup success"));
 });
 
-/**Facebook SignUp */
-app.post("/facebookSignup", upload.none(), async (req, res) => {
-  let userId = req.body.userId;
-  let username = req.body.username;
-  let usertype = req.body.usertype;
+/**Facebook/Google SignUp */
+app.post("/socialSignup", upload.none(), async (req, res) => {
+
+  let userId = req.body.userId
+  let username = req.body.username
+  let usertype = req.body.usertype
+  let signuptype = req.body.signuptype
   console.log("TCL: /facebookSignup", req.body);
 
   // check the username
@@ -172,7 +174,8 @@ app.post("/facebookSignup", upload.none(), async (req, res) => {
   let obj = {
     userId: userId,
     username: username,
-    usertype: parseInt(usertype)
+    usertype: parseInt(usertype),
+    signuptype: parseInt(signuptype)
   };
 
   await USERS.insertOne(obj);

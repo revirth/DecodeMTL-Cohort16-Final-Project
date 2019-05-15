@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import FacebookLogin from 'react-facebook-login'
+import GoogleLogin from 'react-google-login'
 import "./main.css";
 import "./style.css";
 
@@ -34,6 +35,7 @@ export default class SignupForm extends Component {
     data.append("username", this.state.username);
     data.append("password", this.state.password);
     data.append("usertype", this.state.usertype);
+    data.append("signuptype", 0)
 
     fetch("/signup", {
       method: "POST",
@@ -57,28 +59,40 @@ export default class SignupForm extends Component {
       });
   };
 
-  facebookSignup = (response) => {
-    console.log(response)
-    if(response.userID){
-    const data = new FormData()
-    data.append("userId", response.userID)
-    data.append("username", response.name)
-    data.append("usertype", this.state.usertype);
-    fetch("/facebookSignup", {method: "POST", body: data, credentials: "include"}).then( headers => {
-      return headers.text()
-    }).then( body => {
-      const parsed = JSON.parse(body)
-      if (!parsed.status) {
-        alert("Username exist");
-        return;
-      } else {
-        alert(" Bingo!! SignUp Successfull ");
-        this.props.onClose();
+  socialSignup = (result) => {
+    let userId = ""
+    let username = ""
+    let signuptype = -1
+    if (result.socialN === "facebook") {
+        userId = result.response.userID
+        username = result.response.name
+        signuptype = 1
       }
-    })
-  }
-  }
+    if (result.socialN === "google") {
+        userId = result.response.googleId
+        username = result.response.profileObj.name
+        signuptype = 2
+      }
+      const data = new FormData()
+      data.append("userId", userId)
+      data.append("username", username)
+      data.append("signuptype", signuptype)
+      data.append("usertype", this.state.usertype);
+      fetch("/socialSignup", { method: "POST", body: data, credentials: "include" }).then(headers => {
+        return headers.text()
+      }).then(body => {
+        const parsed = JSON.parse(body)
+        if (!parsed.status) {
+          alert("Username exist");
+          return;
+        } else {
+          alert(" Bingo!! SignUp Successfull ");
+          this.props.onClose();
+        }
+      })
+    
 
+  }
 
   render() {
     return (
@@ -119,11 +133,21 @@ export default class SignupForm extends Component {
                 value="Sign Me Up"
               />
             </form>
-            <FacebookLogin
-              appId="432661687560212"
-              size="small"
-              fields="name,email,picture"
-              callback={this.facebookSignup} />
+            <div className="wrapper">
+              <FacebookLogin
+                appId="432661687560212"
+                textButton="SignUp with Facebook"
+                size="small"
+                fields="name,email,picture"
+                callback={(r) => { this.socialSignup({ response: r, socialN: "facebook" }) }} />
+            </div>
+            <div className="wrapper">
+              <GoogleLogin
+                clientId="552704391478-lk7u47rc53grh82k0mmcekegqc8lkuo4.apps.googleusercontent.com"
+                buttonText="Signup with Google"
+                theme="dark"
+                onSuccess={(r) => { this.socialSignup({ response: r, socialN: "google" }) }} />
+            </div>
             <div className="btndiv">
               <button
                 className="btn login-btn f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
