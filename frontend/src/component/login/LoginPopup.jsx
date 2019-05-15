@@ -78,6 +78,7 @@ class UnconnectedLoginPopup extends Component {
 
     const data = new FormData()
     data.append("userId", userId)
+    console.log("UserId", userId)
     fetch("/socialLogin", { method: "POST", body: data, credentials: "include" }).then(headers => {
       return headers.text()
     }).then(body => {

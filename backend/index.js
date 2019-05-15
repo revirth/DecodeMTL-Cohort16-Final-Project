@@ -4,7 +4,7 @@ const upload = require("multer")({
   dest: __dirname + "/uploads/"
 });
 app.use("/images", express.static("uploads"));
-app.use(upload.array());
+app.use(upload.none());
 
 let nodemailer = require('nodemailer');
 let transporter = nodemailer.createTransport({
@@ -146,7 +146,8 @@ app.post("/login", async (req, res) => {
 });
 
 /**Facebook/Google login */
-app.post("/socialLogin", upload.none(), async (req, res) => {
+app.post("/socialLogin", async (req, res) => {
+  console.log("Body: ", req.body)
   let query = { userId: req.body.userId };
 
   // find a user in Mongo
@@ -171,14 +172,14 @@ app.post("/socialLogin", upload.none(), async (req, res) => {
   });
 });
 
-app.get("/logout", upload.none(), (req, res) => {
+app.get("/logout", (req, res) => {
   const sid = req.cookies.sid;
   delete SESSIONS[sid];
   res.clearCookie("sid");
   res.send(resmsg(true, "logout success"));
 });
 
-app.post("/signup", upload.none(), async (req, res) => {
+app.post("/signup", async (req, res) => {
   // check the username
   let doc = await USERS.findOne({
     username: req.body.username
@@ -202,12 +203,11 @@ app.post("/signup", upload.none(), async (req, res) => {
 });
 
 /**Facebook/Google SignUp */
-app.post("/socialSignup", upload.none(), async (req, res) => {
-  let userId = req.body.userId;
+app.post("/socialSignup", async (req, res) => {
+  let userId = req.body.userId ? req.body.userId : -1
   let username = req.body.username;
   let usertype = req.body.usertype;
   let signuptype = req.body.signuptype;
-  console.log("TCL: /facebookSignup", req.body);
 
   // check the username
   let doc = await USERS.findOne({
@@ -272,7 +272,7 @@ app.get("/cartItems", async (req, res) => {
 });
 
 /**add a Cart item to mongoDB*/
-app.post("/addCartItem", upload.none(), async (req, res) => {
+app.post("/addCartItem", async (req, res) => {
   let sid = req.cookies.sid;
   //check if a session exists
   if (sid) {
@@ -298,7 +298,7 @@ app.post("/addCartItem", upload.none(), async (req, res) => {
 });
 
 /**delete one Cart Item */
-app.delete("/deleteCartItem", upload.none(), async (req, res) => {
+app.delete("/deleteCartItem", async (req, res) => {
   let sid = req.cookies.sid;
   let cartItemId = req.body.cartItemId;
   //check if a session exists
@@ -327,7 +327,7 @@ app.delete("/deleteCartItem", upload.none(), async (req, res) => {
 });
 
 /**clear the Cart of the current user*/
-app.delete("/clearCart", upload.none(), async (req, res) => {
+app.delete("/clearCart", async (req, res) => {
   let sid = req.cookies.sid;
   //check if the session exists
   if (sid) {
@@ -346,7 +346,7 @@ app.delete("/clearCart", upload.none(), async (req, res) => {
 });
 
 /**update the curt item of the current user */
-app.put("/updateCartItem", upload.none(), async (req, res) => {
+app.put("/updateCartItem", async (req, res) => {
   let sid = req.cookies.sid;
   let cartItemId = req.body.cartItemId;
   // check if a session exists
@@ -398,7 +398,7 @@ app.get("/profile", async (req, res) => {
   res.send(doc);
 });
 
-app.put("/profile", upload.none(), async (req, res) => {
+app.put("/profile", async (req, res) => {
   let sid = req.cookies.sid;
   let username = SESSIONS[sid];
 
@@ -428,7 +428,7 @@ app.put("/profile", upload.none(), async (req, res) => {
 });
 
 /**sending a temporary password to the user */
-app.post("/sendpassword", upload.none(), async (req,res) => {
+app.post("/sendpassword", async (req,res) => {
   let userEmailAddress = req.body.email
   
   let doc = await USERS.findOne({email: userEmailAddress})
