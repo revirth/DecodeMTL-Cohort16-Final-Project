@@ -93,8 +93,7 @@ app.post("/login", upload.none(), async (req, res) => {
 
 /**Facebook/Google login */
 app.post("/socialLogin", upload.none(), async (req, res) => {
-
-  let query = {userId: req.body.userId}
+  let query = { userId: req.body.userId };
 
   // find a user in Mongo
   let doc = await USERS.findOne(query);
@@ -154,11 +153,10 @@ app.post("/signup", upload.none(), async (req, res) => {
 
 /**Facebook/Google SignUp */
 app.post("/socialSignup", upload.none(), async (req, res) => {
-
-  let userId = req.body.userId
-  let username = req.body.username
-  let usertype = req.body.usertype
-  let signuptype = req.body.signuptype
+  let userId = req.body.userId;
+  let username = req.body.username;
+  let usertype = req.body.usertype;
+  let signuptype = req.body.signuptype;
   console.log("TCL: /facebookSignup", req.body);
 
   // check the username
@@ -261,8 +259,6 @@ app.post("/items", upload.none(), async (req, res) => {
   // store an item in Mongo
   let obj = {
     ...req.body,
-    price: parseFloat(req.body.price),
-    quantity: parseInt(req.body.quantity),
     isDeleted: false
   };
 
@@ -274,9 +270,7 @@ app.put("/items/:itemId", upload.none(), async (req, res) => {
   console.log("TCL: /items/:itemId", req.params, req.body);
 
   let object = {
-    ...req.body,
-    price: parseFloat(req.body.price),
-    quantity: parseInt(req.body.quantity)
+    ...req.body
   };
 
   let doc = await ITEMS.findOneAndUpdate(
