@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SignupForm from "./SignupForm.jsx";
 import FacebookLogin from 'react-facebook-login'
+import GoogleLogin from 'react-google-login'
 import { connect } from "react-redux";
 import { updateCartInfo } from "../cartfooter/Cart.jsx";
 import "./main.css";
@@ -63,30 +64,37 @@ class UnconnectedLoginPopup extends Component {
       });
   };
 
-  facebookLogin = (response) => {
-    console.log(response)
-    if(response.userID){
-      const data = new FormData()
-    data.append("userId", response.userID)
-    fetch("/facebookLogin", {method: "POST", body: data, credentials: "include"}).then( headers => {
-      return headers.text()
-    }).then( body => {
-      const parsed = JSON.parse(body)
-      if (!parsed.status) {
-        alert("User doesn't exist");
-        return;
-      } else {
-        this.props.dispatch({
-          type: "afterLogin",
-          username: parsed.username,
-          usertype: this.getCookie_utp()
-        });
-        updateCartInfo();
-        this.props.onClose();
+  socialLogin = (result) => {
+    let userId = ""
+    if (result.socialN === "facebook") {
+        userId = result.response.userID
       }
-    })
-    }
+    if (result.socialN === "google") {
+        userId = result.response.googleId
+      }
+
+      const data = new FormData()
+      data.append("userId", userId)
+      fetch("/socialLogin", { method: "POST", body: data, credentials: "include" }).then(headers => {
+        return headers.text()
+      }).then(body => {
+        const parsed = JSON.parse(body)
+        if (!parsed.status) {
+          alert("User doesn't exist");
+          return;
+        } else {
+          this.props.dispatch({
+            type: "afterLogin",
+            username: parsed.username,
+            usertype: this.getCookie_utp()
+          });
+          updateCartInfo();
+          this.props.onClose();
+        }
+      })
+    
   }
+   
 
   render() {
     return (
@@ -125,11 +133,20 @@ class UnconnectedLoginPopup extends Component {
                 </a>
               </span>
             </form>
-            <FacebookLogin
-              appId="432661687560212"
-              size="small"
-              fields="name,email,picture"
-              callback={this.facebookLogin} />
+            <div className="wrapper">
+              <FacebookLogin
+                appId="432661687560212"
+                size="small"
+                fields="name,email,picture"
+                callback={(r) => { this.socialLogin({ response: r, socialN: "facebook" }) }} />
+            </div>
+            <div className="wrapper">
+              <GoogleLogin
+                clientId="552704391478-lk7u47rc53grh82k0mmcekegqc8lkuo4.apps.googleusercontent.com"
+                buttonText="Login with Google"
+                theme="dark"
+                onSuccess={(r) => { this.socialLogin({ response: r, socialN: "google" }) }} />
+            </div>
             <div className="btndiv">
               <button
                 className="btn login-btn f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
