@@ -534,10 +534,17 @@
 			"name": "/reviews",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
+					"mode": "urlencoded",
+					"urlencoded": [
 						{
 							"key": "itemId",
 							"value": "5cd1c2381c9d440000ddd75f",
@@ -554,7 +561,7 @@
 							"type": "text"
 						},
 						{
-							"key": "userId",
+							"key": "username",
 							"value": "b",
 							"type": "text"
 						},
@@ -582,10 +589,17 @@
 			"name": "/reviews/:reviewId",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
+					"mode": "urlencoded",
+					"urlencoded": [
 						{
 							"key": "itemId",
 							"value": "5cd1c2381c9d440000ddd75f",
@@ -602,7 +616,7 @@
 							"type": "text"
 						},
 						{
-							"key": "userId",
+							"key": "username",
 							"value": "b",
 							"type": "text"
 						},

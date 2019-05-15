@@ -20,7 +20,7 @@ class UnconnectedCheckoutForm extends Component {
     form.append("token", token.id);
     form.append("amount", Math.floor(Math.random() * 100000 + 1000));
 
-    let response = await fetch("/charge", {
+    let response = await fetch("/charges", {
       method: "POST",
       credentials: "include",
       // headers: {

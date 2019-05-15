@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SignupForm from "./SignupForm.jsx";
 import FacebookLogin from 'react-facebook-login'
 import GoogleLogin from 'react-google-login'
+import { Link } from "react-router-dom"
 import { connect } from "react-redux";
 import { updateCartInfo } from "../cartfooter/Cart.jsx";
 import "./main.css";
@@ -12,12 +13,14 @@ class UnconnectedLoginPopup extends Component {
     super(props);
     this.state = {
       signup: false,
+      forgetPassword: false,
       username: "",
-      password: ""
+      password: "",
+      email: ""
     };
   }
   componentDidMount() {
-    document.getElementById("loginspace").focus();
+    // document.getElementById("loginspace").focus();
   }
 
   handleUsername = event => {
@@ -67,36 +70,119 @@ class UnconnectedLoginPopup extends Component {
   socialLogin = (result) => {
     let userId = ""
     if (result.socialN === "facebook") {
-        userId = result.response.userID
-      }
+      userId = result.response.userID
+    }
     if (result.socialN === "google") {
-        userId = result.response.googleId
-      }
+      userId = result.response.googleId
+    }
 
-      const data = new FormData()
-      data.append("userId", userId)
-      fetch("/socialLogin", { method: "POST", body: data, credentials: "include" }).then(headers => {
-        return headers.text()
-      }).then(body => {
-        const parsed = JSON.parse(body)
-        if (!parsed.status) {
-          alert("User doesn't exist");
-          return;
-        } else {
-          this.props.dispatch({
-            type: "afterLogin",
-            username: parsed.username,
-            usertype: this.getCookie_utp()
-          });
-          updateCartInfo();
-          this.props.onClose();
-        }
-      })
-    
+    const data = new FormData()
+    data.append("userId", userId)
+    console.log("UserId", userId)
+    fetch("/socialLogin", { method: "POST", body: data, credentials: "include" }).then(headers => {
+      return headers.text()
+    }).then(body => {
+      const parsed = JSON.parse(body)
+      if (!parsed.status) {
+        alert("User doesn't exist");
+        return;
+      } else {
+        this.props.dispatch({
+          type: "afterLogin",
+          username: parsed.username,
+          usertype: this.getCookie_utp()
+        });
+        updateCartInfo();
+        this.props.onClose();
+      }
+    })
+
   }
-   
+
+  switchForm = () => {
+    this.setState({ forgetPassword: !this.state.forgetPassword })
+  }
+
+  sendPasswordByEmail = (e) => {
+    e.preventDefault()
+    let data = new FormData()
+    data.append("email", this.state.email)
+    fetch("/sendpassword", { method: "POST", body: data }).then(headers => {
+      return headers.text()
+    }).then(body => {
+      let parsed = JSON.parse(body)
+      if (parsed.status) {
+        this.setState({ email: "", forgetPassword: false })
+        alert(parsed.message)
+      } else {
+        this.setState({ email: "" })
+        alert(parsed.message)
+      }
+    })
+  }
+
+  handleEmailAddress = event => {
+    this.setState({ email: event.target.value });
+  };
 
   render() {
+    let form = ""
+    if (!this.state.forgetPassword) {
+      form = (<form className="mainform" onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          value={this.state.username}
+          placeholder="Enter Username"
+          onChange={this.handleUsername}
+          className="login-field"
+          id="loginspace"
+          required
+        />
+        <input
+          type="password"
+          value={this.state.password}
+          placeholder="Enter Password"
+          onChange={this.handlePassword}
+          className="login-field"
+          required
+        />
+        <input
+          className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow loginicon"
+          type="submit"
+          value="log In"
+        />
+
+        <span className="forgot-password">
+          <i onClick={this.switchForm}>Forgot password?</i>
+        </span>
+      </form>)
+    } else {
+      form = (<div>
+        <div className="cross-to-right">
+      <i
+        className="fa fa-times"
+        onClick={this.switchForm}
+      />
+      </div>
+      <form className="mainform" onSubmit={this.sendPasswordByEmail}>
+        <input
+          type="text"
+          value={this.state.email}
+          placeholder="Enter Your Email Address"
+          onChange={this.handleEmailAddress}
+          className="login-field"
+          required
+        />
+        <input
+          className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
+          type="submit"
+          value="Reset your password" />
+
+      </form>
+      </div>)
+    }
+
+
     return (
       <div className="overlay ">
         <div className="popup animate">
@@ -104,7 +190,8 @@ class UnconnectedLoginPopup extends Component {
             <img src="/popup.jpg" />
           </div> */}
           <div className="login-form-div">
-            <form className="mainform" onSubmit={this.handleSubmit}>
+            {form}
+            {/* <form className="mainform" onSubmit={this.handleSubmit}>
               <input
                 type="text"
                 placeholder="Enter Username"
@@ -127,12 +214,12 @@ class UnconnectedLoginPopup extends Component {
               />
 
               <span className="forgot-password">
-                Forgot{" "}
-                <a href="#" className="forgetlink">
-                  password?
-                </a>
+                //<a href="#" className="forgetlink">
+                //Forgot{" "}password?
+                //</a>
+            <i onClick={this.sendPassword}>Forgot password?</i>
               </span>
-            </form>
+            </form> */}
             <div className="wrapper">
               <FacebookLogin
                 appId="432661687560212"
@@ -156,8 +243,8 @@ class UnconnectedLoginPopup extends Component {
               </button>
             </div>
           </div>
-        </div>
-      </div>
+        </div >
+      </div >
     );
   }
 }
