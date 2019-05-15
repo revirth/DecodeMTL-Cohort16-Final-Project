@@ -13,11 +13,11 @@ class UnConnectedCart extends React.Component {
 
   onChangeHandleQuantity = e => {
     // if a customer changed the quantity of an item in their Cart
-    // we send a request to the endpoint "/updateCartItem" to update the item 
+    // we send a request to the endpoint "/cart/updateItem" to update the item 
     let data = new FormData()
     data.append("cartItemId", e.target.id)
     data.append("itemQuantity", e.target.value)
-    fetch("/updateCartItem", { method: "PUT", credentials: 'include', body: data }).then(headers => {
+    fetch("/cart/updateItem", { method: "PUT", credentials: 'include', body: data }).then(headers => {
       console.log("PUT")
       return headers.text()
     }).then(body => {
@@ -30,10 +30,10 @@ class UnConnectedCart extends React.Component {
 
   onClickRemoveItem = e => {
     // if a customer removed an item from their Cart
-    // we send a request to the endpoint "/deleteCartItem" to remove the item 
+    // we send a request to the endpoint "/cart/deleteItem" to remove the item 
     let data = new FormData()
     data.append("cartItemId", e.target.id)
-    fetch("/deleteCartItem", { method: "DELETE", credentials: 'include', body: data }).then(headers => {
+    fetch("/cart/deleteItem", { method: "DELETE", credentials: 'include', body: data }).then(headers => {
       return headers.text()
     }).then(body => {
       let result = JSON.parse(body)
@@ -44,7 +44,7 @@ class UnConnectedCart extends React.Component {
   };
 
   onClickClearCart = e => {
-    fetch("/clearCart", { method: "DELETE", credentials: 'include' }).then(headers => {
+    fetch("/cart/clear", { method: "DELETE", credentials: 'include' }).then(headers => {
       return headers.text()
     }).then(body => {
       let result = JSON.parse(body)
@@ -142,7 +142,7 @@ class UnConnectedCart extends React.Component {
 let updateCartInfo = () => {
   // we send a request to the endpoint "/cartItems" to upload cartItems for current user
   // before show the Cart page the first time
-  fetch("/cartItems", { method: "GET", credentials: 'include' })
+  fetch("/cart/allItems", { method: "GET", credentials: 'include' })
     .then(headers => {
       return headers.text();
     })
