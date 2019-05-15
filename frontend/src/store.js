@@ -8,8 +8,8 @@ let reducer = (state, action) => {
     };
   }
 
-  if (action.type === "ChangePage"){
-    return { ...state}
+  if (action.type === "ChangePage") {
+    return { ...state };
   }
 
   switch (action.type) {
@@ -26,33 +26,40 @@ let reducer = (state, action) => {
   return state;
 };
 
-let getCookie_sid = () => {
-  return document.cookie.replace(
-    /(?:(?:^|.*;\s*)sid\s*\=\s*([^;]*).*$)|^.*$/,
-    "$1"
-  );
-};
-let getCookie_utp = () => {
-  return document.cookie.replace(
-    /(?:(?:^|.*;\s*)utp\s*\=\s*([^;]*).*$)|^.*$/,
-    "$1"
-  );
+let getCookie = cname => {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(";");
+
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+
+  return "";
 };
 
-let getCookie_unm = () => {
-  return document.cookie.replace(
-    /(?:(?:^|.*;\s*)unm\s*\=\s*([^;]*).*$)|^.*$/,
-    "$1"
-  );
+let isValidUser = async () => {
+  let response = await fetch("/user/isvalid", { credentials: "include" });
+  let data = await response.json();
+
+  return data.status;
 };
 
 let store = createStore(
   reducer,
   {
     cartItems: [],
-    loggedIn: getCookie_sid() !== "",
-    username: getCookie_unm(),
-    usertype: getCookie_utp()
+    loggedIn: isValidUser() === true,
+    username: getCookie("sid") !== "" ? getCookie("unm") : "",
+    usertype: getCookie("sid") !== "" ? getCookie("utp") : ""
   },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

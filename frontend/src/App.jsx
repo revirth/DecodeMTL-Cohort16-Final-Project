@@ -22,7 +22,7 @@ let renderItem = routerData => {
 function App() {
   return (
     <BrowserRouter>
-      <Navbar /> {/* TODO: pass state.login  */}
+      <Navbar />
       <div>
         <Route exact={true} path="/" component={HomePageContent} />
         <Route exact={true} path="/items" component={itemList} />

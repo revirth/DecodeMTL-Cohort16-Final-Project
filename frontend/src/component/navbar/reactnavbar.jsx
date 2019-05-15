@@ -138,7 +138,7 @@ class UnconnectedLinks extends React.Component {
         ) : (
           <span className="afterlogin">
             Hi {this.props.username}
-            {this.props.usertp === "1" ? (
+            {this.props.loggedIn && this.props.usertp === "1" ? (
               <span>
                 <Link to="/profile">Account Setting</Link>
                 <Link to="#" onClick={this.logout}>

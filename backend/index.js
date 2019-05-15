@@ -64,6 +64,17 @@ app.get("/users", async (req, res) => {
     res.send(await USERS.find({}).toArray());
 });
 
+app.get("/user/isvalid", async (req, res) => {
+  console.log("TCL: /user/isvalid", SESSIONS[req.cookies.sid]);
+  if (SESSIONS[req.cookies.sid] !== undefined) {
+    res.send(resmsg(true));
+    return;
+  }
+
+  res.clearCookie("sid");
+  res.send(resmsg(false));
+});
+
 app.post("/login", upload.none(), async (req, res) => {
   console.log("TCL: /login", req.body);
 
@@ -401,9 +412,9 @@ app.get("/charges", async (req, res) => {
 /**return an array of items (each item is an object) in the Cart for current user*/
 app.get("/cartItems", async (req, res) => {
   let sid = req.cookies.sid;
+  let username = SESSIONS[sid];
   //check if there is a session for current user
-  if (sid) {
-    let username = SESSIONS[sid];
+  if (username !== undefined) {
     //request userId from the collection "users"
     let currentUser = await USERS.findOne({ username: username });
     //request the items in the Cart for user with this userId only
