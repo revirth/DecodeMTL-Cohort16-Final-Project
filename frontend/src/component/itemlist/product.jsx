@@ -73,7 +73,7 @@ class UnconnectedProduct extends Component {
             </div>
           </div>
           <p className="f6 lh-copy measure mt2 mid-gray">
-            {description.substring(0, 200)}
+            {description && description.substring(0, 200)}
           </p>
           <div className="btn1">
             <button

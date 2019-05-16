@@ -2,8 +2,11 @@ const express = require("express");
 const router = express.Router();
 require("dotenv-expand")(require("dotenv").config());
 const ObjectId = require("mongodb").ObjectId;
-
+const twilio = require("twilio");
 const nodemailer = require("nodemailer");
+const accountSid = "ACa40838c98b0bb1e79ee3d893936297fa";
+const authToken = "81d861e95f049d1bbe053d0cc1c79ff1";
+const clinet = new twilio(accountSid, authToken);
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -53,12 +56,23 @@ router.get("/logout", (req, res) => {
   res.clearCookie("sid");
   res.send(resmsg(true, "logout success"));
 });
+sendtext = (to, message) => {
+  console.log("sending text to:", to, "message:", message);
+  clinet.messages
+    .create({
+      body: message,
+      to: to,
+      from: "+14387963072"
+    })
+    .then(message => console.log(message.sid));
+};
 
 router.post("/signup", async (req, res) => {
   // check the username
   let doc = await res.locals.USERS.findOne({
     username: req.body.username
   });
+
   console.log("TCL: /signup -> USERS.findOne", doc);
 
   if (doc !== null) {
@@ -74,6 +88,12 @@ router.post("/signup", async (req, res) => {
   };
 
   await res.locals.USERS.insertOne(obj);
+  Number.isInteger(+obj.username) &&
+    sendtext(
+      +obj.username,
+      "Welcome to Nutrition Fine Fourchette http://google.com"
+    );
+
   res.send(resmsg(true, "signup success"));
 });
 
@@ -99,7 +119,7 @@ router.get("/profile", async (req, res) => {
 router.put("/profile", async (req, res) => {
   let sid = req.cookies.sid;
   let username = res.locals.SESSIONS[sid];
-  console.log("Username: ", username)
+  console.log("Username: ", username);
 
   // find a user in Mongo
   let doc = await res.locals.USERS.findOne({ username: username });
