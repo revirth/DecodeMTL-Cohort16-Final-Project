@@ -66,13 +66,20 @@ router.get("/:itemId/reviews", async (req, res) => {
 
 router.post("/", async (req, res) => {
   // store an item in Mongo
-  let obj = {
+  const obj = {
     ...req.body,
     isDeleted: false
   };
 
-  await res.locals.ITEMS.insertOne(obj);
-  res.send(resmsg(true, "item inserted"));
+  await res.locals.ITEMS.insertOne(obj, (err, insertedOne) => {
+    if (err) {
+      console.error(err);
+      res.send(resmsg(false, err));
+    } else {
+      // console.info(insertedOne);
+      res.send(resmsg(true, insertedOne.ops[0]._id));
+    }
+  });
 });
 
 router.put("/:itemId", async (req, res) => {
@@ -81,32 +88,26 @@ router.put("/:itemId", async (req, res) => {
   };
 
   let doc = await res.locals.ITEMS.findOneAndUpdate(
-    {
-      _id: ObjectId(req.params.itemId)
-    },
-    {
-      $set: object
-    },
-    {
-      returnNewDocument: true
-    }
+    { _id: ObjectId(req.params.itemId) },
+    { $set: object },
+    {}
   );
 
-  console.log(doc);
+  console.log(`PUT /items/${req.params.itemId}`, doc);
 
-  doc["ok"] && res.send(resmsg(true, "item updated"));
+  res.send(resmsg(doc["ok"] === 1));
 });
 
 router.delete("/:itemId", async (req, res) => {
   let doc = await res.locals.ITEMS.findOneAndUpdate(
     { _id: ObjectId(req.params.itemId) },
     { $set: { isDeleted: JSON.parse(req.body.isDeleted) } },
-    { returnNewDocument: false }
+    {}
   );
 
-  console.log(doc);
+  console.log(`DEL /items/${req.params.itemId}`, doc);
 
-  doc["ok"] && res.send(resmsg(true, "item deleted"));
+  res.send(resmsg(doc["ok"] === 1));
 });
 
 module.exports = router;
