@@ -115,7 +115,7 @@ router.get("/allItems", async (req, res) => {
     let sid = req.cookies.sid;
     let username = res.locals.SESSIONS[sid];
     //check if there is a session for current user
-    if (username !== undefined) {
+    if (username) {
       //request userId from the collection "users"
       let currentUser = await res.locals.USERS.findOne({ username: username });
       //request the items in the Cart for user with this userId only

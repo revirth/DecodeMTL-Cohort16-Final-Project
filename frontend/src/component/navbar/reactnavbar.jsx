@@ -66,7 +66,7 @@ class UnconnectedLinks extends React.Component {
     };
   }
 
-  componentDidMount = () => {
+  componentWillMount = () => {
      this.isValidUser()
   }
 
