@@ -12,6 +12,10 @@ let reducer = (state, action) => {
     return { ...state };
   }
 
+  if (action.type === "CheckIfUserValid") {
+    return { ...state, loggedIn: action.isValidUser }
+  }
+
   switch (action.type) {
     case "afterLogin":
       return {
@@ -21,7 +25,13 @@ let reducer = (state, action) => {
         usertype: action.usertype
       };
     case "afterLogout":
-      return { ...state, cartItems: [], loggedIn: false, username: "" };
+      return {
+        ...state,
+        cartItems: [],
+        loggedIn: false,
+        username: "",
+        usertype: ""
+      };
   }
   return state;
 };
@@ -49,16 +59,15 @@ let getCookie = cname => {
 let isValidUser = async () => {
   let response = await fetch("/auth/isvalid", { credentials: "include" });
   let data = await response.json();
-
   return data.status;
-};
+}
 
 let store = createStore(
   reducer,
   {
     cartItems: [],
     // loggedIn: isValidUser() === true,
-    loggedIn: isValidUser(),
+    loggedIn: false,
     username: getCookie("sid") !== "" ? getCookie("unm") : "",
     usertype: getCookie("sid") !== "" ? getCookie("utp") : ""
   },

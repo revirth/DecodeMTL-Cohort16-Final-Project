@@ -4,14 +4,16 @@ import "./main.css";
 import "./style.css";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
+import LoginPopup from '../login/LoginPopup'
 
-let onClickHandle = e => {};
+let onClickHandle = e => { };
 
 class UnconnectedProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      available: this.props.isAvailable
+      available: this.props.isAvailable,
+      loginPopup: false
     };
   }
   availbleItem = () => {
@@ -28,6 +30,20 @@ class UnconnectedProduct extends Component {
       credentials: "include"
     });
   };
+
+  onClickAddItemToCart = (itemId) => {
+    console.log("LoggedIn: ", this.props.loggedIn, "itemId: ", itemId)
+    if (this.props.loggedIn) {
+      addItemToCart(itemId)
+    } else {
+      this.setState({ loginPopup: true })
+    }
+  }
+
+  closeLoginPopup = () => {
+    this.setState({ loginPopup: false });
+  };
+
   render() {
     const { _id, name, description, imgUrl, price, isAvailable } = this.props;
     let showDesc = "";
@@ -48,6 +64,7 @@ class UnconnectedProduct extends Component {
     else
       classes =
         "br2 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw5 center articlediv spin";
+
     return (
       <article className={classes} style={customCSS} id={_id}>
         {this.props.usertype === "2" && (
@@ -79,7 +96,10 @@ class UnconnectedProduct extends Component {
             <button
               disabled={!this.state.available}
               className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow btncart"
-              onClick={() => addItemToCart(_id)}
+              // onClick={() => addItemToCart(_id)}
+              onClick={() => {
+                this.onClickAddItemToCart(_id)
+              }}
             >
               Add to cart
               <i className="fas fa-cart-plus" />
@@ -93,12 +113,15 @@ class UnconnectedProduct extends Component {
             </Link>
           </div>
         </div>
+        {this.state.loginPopup ? (
+          <LoginPopup onClose={this.closeLoginPopup} />
+        ) : null}
       </article>
     );
   }
 }
 let mapStateToProps = state => {
-  return { usertype: state.usertype };
+  return { usertype: state.usertype, loggedIn: state.loggedIn };
 };
 
 let Product = connect(mapStateToProps)(UnconnectedProduct);

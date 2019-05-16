@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import SignupForm from "./SignupForm.jsx";
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { updateCartInfo } from "../cartfooter/Cart.jsx";
 import "./main.css";
@@ -78,7 +76,6 @@ class UnconnectedLoginPopup extends Component {
 
     const data = new FormData();
     data.append("userId", userId);
-    console.log("UserId", userId);
     fetch("/auth/socialLogin", {
       method: "POST",
       body: data,
@@ -198,35 +195,6 @@ class UnconnectedLoginPopup extends Component {
           </div> */}
           <div className="login-form-div">
             {form}
-            {/* <form className="mainform" onSubmit={this.handleSubmit}>
-              <input
-                type="text"
-                placeholder="Enter Username"
-                onChange={this.handleUsername}
-                className="login-field"
-                id="loginspace"
-                required
-              />
-              <input
-                type="password"
-                placeholder="Enter Password"
-                onChange={this.handlePassword}
-                className="login-field"
-                required
-              />
-              <input
-                className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow loginicon"
-                type="submit"
-                value="log In"
-              />
-
-              <span className="forgot-password">
-                //<a href="#" className="forgetlink">
-                //Forgot{" "}password?
-                //</a>
-            <i onClick={this.sendPassword}>Forgot password?</i>
-              </span>
-            </form> */}
             <div className="wrapper">
               <FacebookLogin
                 appId="432661687560212"
@@ -263,7 +231,7 @@ class UnconnectedLoginPopup extends Component {
 }
 
 let mapStateToProps = state => {
-  return { loggedIn: state.loggedIn };
+  return { };
 };
 
 let Login = connect()(UnconnectedLoginPopup);

@@ -4,17 +4,18 @@
 
 import "./neural_net.js"
 import "./data.js"
-import "./chitchatdata.js"
+// import "./chitchatdata.js"
 import React, { Component } from "react";
 import "./sky_net.scss";
 class Sky_net extends React.Component {
     constructor() {
         super();
         this.state = {
-            predicts: [],
-            show: "All your base are belong to us",
-            error: false,
-            trained_net: {}
+            prediction: [],
+            show: "Hello World!",
+            showMenu: false,
+            trained_net: {},
+            comments: []
 
         };
     }
@@ -44,6 +45,8 @@ class Sky_net extends React.Component {
 
         this.setState({ show: "Upgrade completed!" })
 
+        setTimeout(this.setState({ show: "Allow me to scan your comments now" }), 2000)
+
     }
     /*
     Initialize has to be called first, it will train and return
@@ -61,74 +64,100 @@ class Sky_net extends React.Component {
 
     */
     predict() {
-
+        this.setState({ show: "analyzing..." })
         // database call for array of reviews => to do 
+        // store the reviews into rawreviews
+        this.setState({ comments: rawreviews })
 
-        let reviews = []
-        for (i = 0; i < arr.length; i++) {
-            reviews.push(arr[i])
-            console.log(reviews)
-        }
-        // at this point we have an array of string with the reviews
-
-
-        let trimmed = ""
-        // empty container for individial reviews to be cleaned 
-
-        for (j = 0; j < reviews.length; j++) {
-            if (reviews[j].length >= 45) {
-                trimmed = reviews[j].slice(0, 45);
-            } else {
-                trimmed = reviews[j]
+        function arrCleaner(arr) {
+            let reviews = []
+            for (i = 0; i < arr.length; i++) {
+                reviews.push(arr[i])
+                console.log(reviews)
             }
+            // at this point we have an array of string with the reviews
+            // named review ["xsdfas","ysdfdsfa","zfdsfdsa"]...
+
+            // cleaning function for individuals reviews
+
+
+            // modify the existing array for strings too long
+
+            for (let j = 0; j < reviews.length; j++) {
+                if (reviews[j].length >= 45) {
+                    reviews[j] = reviews[j].slice(0, 45);
+                }
+            }
+
+            // modify each element of the array so easier to analyse
+            // and more accurate predictions ( no special cars and all
+            // lower case)
+
+            for (let i = 0; i < reviews.length; i++) {
+
+                let cleanString = reviews[i].replace(/[\|&;\(0)(1)(2)(3)(4)(5)(6)(7)(8)(9)"-<>\(\)\+,.±!@@##$%^&*()_+]/g, "");
+                let cleanString1 = cleanString.replace(/[A-Z]/g, function (x) { return x.toLowerCase(); })
+
+                reviews[i] = cleanString1
+            }
+
+            // by now we have an array that is easier to make predicitons
+
+
+            // changing the values of the array for a string, "good" or "bad"
+            // depending on the .run method from current neural net
+
+            let predictions = []
+
+            this.setState({ show: "Comments retrievew and are being analyzed" })
+
+            for (let i = 0; i < reviews.length; i++) {
+                predictions.push(sky_net.run(reviews[i]))
+            }
+
+            // store the array of predictions in the state
+
+            this.setState({ prediction: predictions })
+            this.setState({ show: "I finished my task" })
+
         }
-        for (i = 0; i < )
-
-            let cleanString = trimmed.replace(/[\|&;\(0)(1)(2)(3)(4)(5)(6)(7)(8)(9)"-<>\(\)\+,.±!@@##$%^&*()_+]/g, "");
-        let cleanString1 = cleanString.replace(/[A-Z]/g, function (x) { return x.toLowerCase(); })
-
-        let prediction = sky_net.run(cleanString1)
-
-        prediction;
+        arrCleaner(this.state.comments)
     }
 
-    /*
-    sky_net will output suggestions to optimise SEO,
-    give supportive feedback and other fun stuff. 
 
-    */
-    chitchat() {
+
+    /*
+    suggestions() {
         // random comments from chitchat array of strings
         // returns a string 
         let randomNum = Math.ceil((Math.random) * chitChatData.length);
 
         let randomChat = chitChatData[randomNum]
 
-
+        // sends the string to the state
         this.setState({ show: randomChat });
 
     }
-    evaluate() {
-        alert("error detected, need immediate attention");
-        this.setState({ show: "internal error need further validations" })
-        this.setState({ error: true })
+*/
+
+
+    close() {
+        this.setState({ show: "Goodbye !" })
+        // changes the opactiy of the menu section to 0 
 
 
 
-
-
-
-
-
+        setTimeout(this.setState({ show: "If you need more help I'm still here ;\)" }, 2000))
+        setTimeout(this.setState({ show: "Humans..." }, 4000))
     }
+
+    display() {
+        // changes opacity of the menu section to 1
+    }
+
+
+
     render() {
-        // if (this.state.error === true) {
-        //     return (
-        //         <div className="destroy">
-        //             <img scr="./self-destruct.png"></img>
-        //         </div>
-        //     )
-        // } else {
 
         return (
             <div className='sky_net'>
@@ -158,15 +187,20 @@ class Sky_net extends React.Component {
 
 
                         <div className="talkative">
-                            <p>{this.state.show}</p></div>
+                            <p>{this.state.show}</p>
+                            <button onClick={this.display}>Display Menu</button></div>
+
                     </div>
+
+
+
                     <div className='commands'><p>How can I help you ?</p><ul>
                         <li onClick={this.initialise}>Initialize</li>
                         <li onClick={this.predict}>Scan Comments</li>
-                        <li onClick={this.chitchat}>What is the meaning of life</li>
-                        <li onClick={this.evaluate}>Destroy all Evil</li>
+                        <li onClick={this.close}>Close</li>
                     </ul>
                     </div>
+
 
                 </div>
 
@@ -180,13 +214,5 @@ class Sky_net extends React.Component {
     }
 }
 
-
-
-
-
-
-
-
-}
 
 export default Sky_net
