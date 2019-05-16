@@ -22,7 +22,7 @@ export default class Accountdetails extends Component {
     let data = new FormData();
     data.append("email", this.state.email);
     data.append("password", this.state.password);
-    fetch("/profile", {
+    fetch("/auth/profile", {
       method: "PUT",
       body: data,
       credentials: "include"

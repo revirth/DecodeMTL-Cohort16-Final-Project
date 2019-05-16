@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import SignupForm from "./SignupForm.jsx";
-import FacebookLogin from 'react-facebook-login'
-import GoogleLogin from 'react-google-login'
-import { Link } from "react-router-dom"
+import FacebookLogin from "react-facebook-login";
+import GoogleLogin from "react-google-login";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { updateCartInfo } from "../cartfooter/Cart.jsx";
 import "./main.css";
@@ -43,7 +43,7 @@ class UnconnectedLoginPopup extends Component {
     let data = new FormData();
     data.append("username", this.state.username);
     data.append("password", this.state.password);
-    fetch("/login", {
+    fetch("/auth/login", {
       method: "POST",
       body: data,
       credentials: "include"
@@ -67,121 +67,128 @@ class UnconnectedLoginPopup extends Component {
       });
   };
 
-  socialLogin = (result) => {
-    let userId = ""
+  socialLogin = result => {
+    let userId = "";
     if (result.socialN === "facebook") {
-      userId = result.response.userID
+      userId = result.response.userID;
     }
     if (result.socialN === "google") {
-      userId = result.response.googleId
+      userId = result.response.googleId;
     }
 
-    const data = new FormData()
-    data.append("userId", userId)
-    console.log("UserId", userId)
-    fetch("/socialLogin", { method: "POST", body: data, credentials: "include" }).then(headers => {
-      return headers.text()
-    }).then(body => {
-      const parsed = JSON.parse(body)
-      if (!parsed.status) {
-        alert("User doesn't exist");
-        return;
-      } else {
-        this.props.dispatch({
-          type: "afterLogin",
-          username: parsed.username,
-          usertype: this.getCookie_utp()
-        });
-        updateCartInfo();
-        this.props.onClose();
-      }
+    const data = new FormData();
+    data.append("userId", userId);
+    console.log("UserId", userId);
+    fetch("/auth/socialLogin", {
+      method: "POST",
+      body: data,
+      credentials: "include"
     })
-
-  }
+      .then(headers => {
+        return headers.text();
+      })
+      .then(body => {
+        const parsed = JSON.parse(body);
+        if (!parsed.status) {
+          alert("User doesn't exist");
+          return;
+        } else {
+          this.props.dispatch({
+            type: "afterLogin",
+            username: parsed.username,
+            usertype: this.getCookie_utp()
+          });
+          updateCartInfo();
+          this.props.onClose();
+        }
+      });
+  };
 
   switchForm = () => {
-    this.setState({ forgetPassword: !this.state.forgetPassword })
-  }
+    this.setState({ forgetPassword: !this.state.forgetPassword });
+  };
 
-  sendPasswordByEmail = (e) => {
-    e.preventDefault()
-    let data = new FormData()
-    data.append("email", this.state.email)
-    fetch("/sendpassword", { method: "POST", body: data }).then(headers => {
-      return headers.text()
-    }).then(body => {
-      let parsed = JSON.parse(body)
-      if (parsed.status) {
-        this.setState({ email: "", forgetPassword: false })
-        alert(parsed.message)
-      } else {
-        this.setState({ email: "" })
-        alert(parsed.message)
-      }
-    })
-  }
+  sendPasswordByEmail = e => {
+    e.preventDefault();
+    let data = new FormData();
+    data.append("email", this.state.email);
+    fetch("/auth/sendpassword", { method: "POST", body: data })
+      .then(headers => {
+        return headers.text();
+      })
+      .then(body => {
+        let parsed = JSON.parse(body);
+        if (parsed.status) {
+          this.setState({ email: "", forgetPassword: false });
+          alert(parsed.message);
+        } else {
+          this.setState({ email: "" });
+          alert(parsed.message);
+        }
+      });
+  };
 
   handleEmailAddress = event => {
     this.setState({ email: event.target.value });
   };
 
   render() {
-    let form = ""
+    let form = "";
     if (!this.state.forgetPassword) {
-      form = (<form className="mainform" onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          value={this.state.username}
-          placeholder="Enter Username"
-          onChange={this.handleUsername}
-          className="login-field"
-          id="loginspace"
-          required
-        />
-        <input
-          type="password"
-          value={this.state.password}
-          placeholder="Enter Password"
-          onChange={this.handlePassword}
-          className="login-field"
-          required
-        />
-        <input
-          className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow loginicon"
-          type="submit"
-          value="log In"
-        />
+      form = (
+        <form className="mainform" onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            value={this.state.username}
+            placeholder="Enter Username"
+            onChange={this.handleUsername}
+            className="login-field"
+            id="loginspace"
+            required
+          />
+          <input
+            type="password"
+            value={this.state.password}
+            placeholder="Enter Password"
+            onChange={this.handlePassword}
+            className="login-field"
+            required
+          />
+          <input
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow loginicon"
+            type="submit"
+            value="log In"
+          />
 
-        <span className="forgot-password">
-          <i onClick={this.switchForm}>Forgot password?</i>
-        </span>
-      </form>)
+          <span className="forgot-password">
+            <i onClick={this.switchForm}>Forgot password?</i>
+          </span>
+        </form>
+      );
     } else {
-      form = (<div>
-        <div className="cross-to-right">
-      <i
-        className="fa fa-times"
-        onClick={this.switchForm}
-      />
-      </div>
-      <form className="mainform" onSubmit={this.sendPasswordByEmail}>
-        <input
-          type="text"
-          value={this.state.email}
-          placeholder="Enter Your Email Address"
-          onChange={this.handleEmailAddress}
-          className="login-field"
-          required
-        />
-        <input
-          className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
-          type="submit"
-          value="Reset your password" />
-
-      </form>
-      </div>)
+      form = (
+        <div>
+          <div className="cross-to-right">
+            <i className="fa fa-times" onClick={this.switchForm} />
+          </div>
+          <form className="mainform" onSubmit={this.sendPasswordByEmail}>
+            <input
+              type="text"
+              value={this.state.email}
+              placeholder="Enter Your Email Address"
+              onChange={this.handleEmailAddress}
+              className="login-field"
+              required
+            />
+            <input
+              className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
+              type="submit"
+              value="Reset your password"
+            />
+          </form>
+        </div>
+      );
     }
-
 
     return (
       <div className="overlay ">
@@ -225,14 +232,20 @@ class UnconnectedLoginPopup extends Component {
                 appId="432661687560212"
                 size="small"
                 fields="name,email,picture"
-                callback={(r) => { this.socialLogin({ response: r, socialN: "facebook" }) }} />
+                callback={r => {
+                  this.socialLogin({ response: r, socialN: "facebook" });
+                }}
+              />
             </div>
             <div className="wrapper">
               <GoogleLogin
                 clientId="552704391478-lk7u47rc53grh82k0mmcekegqc8lkuo4.apps.googleusercontent.com"
                 buttonText="Login with Google"
                 theme="dark"
-                onSuccess={(r) => { this.socialLogin({ response: r, socialN: "google" }) }} />
+                onSuccess={r => {
+                  this.socialLogin({ response: r, socialN: "google" });
+                }}
+              />
             </div>
             <div className="btndiv">
               <button
@@ -243,8 +256,8 @@ class UnconnectedLoginPopup extends Component {
               </button>
             </div>
           </div>
-        </div >
-      </div >
+        </div>
+      </div>
     );
   }
 }
