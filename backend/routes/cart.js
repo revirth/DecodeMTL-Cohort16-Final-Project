@@ -93,6 +93,26 @@ router.post("/addItem", async (req, res) => {
       //get userId of the current user
       let currentUser = await res.locals.USERS.findOne({ username: username });
       let itemId = req.body.itemId;
+      
+      //check if the item already exists in the users's Cart
+
+      let  isItemExists = await res.locals.CART.findOne({ itemId: itemId });
+      console.log("Is item already in the cart: ", isItemExists)
+      
+      if(isItemExists){
+        let _id = ObjectId(isItemExists._id);
+        let quantity = isItemExists.itemQuantity + 1
+        await CART.updateOne(
+          { _id: _id },
+          { $set: { itemQuantity: quantity } },
+          function(err, obj) {
+            if (err) throw err;
+            console.log(obj.result.n + " cart item updated");
+          }
+        );
+        res.send(JSON.stringify({ successful: true }));
+
+      } else {
       //create a new object for the new item
       let newCartItem = {
         itemId: itemId,
@@ -105,6 +125,7 @@ router.post("/addItem", async (req, res) => {
         console.log(obj.result.n + " cart item added");
         res.send(JSON.stringify({ successful: true }));
       });
+    }
     } else {
       res.send(JSON.stringify({ successful: false }));
     }
