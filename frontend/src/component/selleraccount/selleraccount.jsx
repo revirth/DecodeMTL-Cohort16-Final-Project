@@ -96,6 +96,7 @@ export default class selleraccount extends Component {
         {this.state.showitems ? <EditSellerItems /> : null}
         {this.state.uploaditems ? <UploadItem /> : null}
         {this.state.shopdetails ? <Shoppopup /> : null}
+
       </div>
     );
   }

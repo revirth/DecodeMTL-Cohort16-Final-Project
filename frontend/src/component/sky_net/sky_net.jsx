@@ -1,20 +1,31 @@
+// store neural net into database once trained -> to do
+
+
 import "./neural_net.js"
 import "./data.js"
 import "./chitchatdata.js"
 import { Component } from "react";
 import "./sky_net.scss";
-
 class Sky_net extends Component {
     constructor() {
         super();
-        this.state = { predicts: "" };
+        this.state = {
+            predicts: [],
+            show: "All your base are belong to us",
+            error: false,
+            trained_net: {}
+
+        };
     }
     /* initialise and train on data.js content
      return sky_net which is the trained neural net
      this may take 20-40 seconds 
     */
     initialise() {
-        let sky_net = new brain.recurrent.LSTM();
+
+        this.setState({ show: "Loading..." })
+
+        sky_net = new brain.recurrent.LSTM();
         sky_net.train(trainingData, {
             iterations: 200,
             erroThresh: 0.011
@@ -28,7 +39,10 @@ class Sky_net extends Component {
 
         console.log(test1, test2, test3, "Hello World!")
 
-        return sky_net;
+        this.setState({ trained_net: sky_net })
+
+        this.setState({ show: "Upgrade completed!" })
+
     }
     /*
     Initialize has to be called first, it will train and return
@@ -47,6 +61,7 @@ class Sky_net extends Component {
     */
     predict() {
 
+
         let trimmed = ""
 
         if (this.state.predict.length >= 40) {
@@ -60,7 +75,7 @@ class Sky_net extends Component {
 
         let prediction = sky_net.run(allLowerCase)
 
-        return prediction
+        prediction;
     }
 
     /*
@@ -76,66 +91,80 @@ class Sky_net extends Component {
         let randomChat = chitChatData[randomNum]
 
 
-        return randomChat;
+        this.setState({ show: randomChat });
 
     }
     evaluate() {
         alert("error detected, need immediate attention");
+        this.setState({ show: "internal error need further validations" })
+        this.setState({ error: true })
+
+
+
+
 
 
 
 
     }
     render() {
-        return (
-            <div className='sky_net'>
-                <div className='container'>
-                    <div className='face'>
-                        <div className="face__ears">
-                            <div className="face__ears__left ear"></div>
-                            <div className="face__ears__right ear"></div>
-                        </div>
-                        <div className="face__body">
-                            <div className="face__eyes">
-                                <div className="face__eyes--left eye"></div>
-                                <div className="face__eyes--right eye"></div>
-                            </div>
-                            <div className="face__nose">
+        if (this.state.error === true) {
+            return (
+                <div className="destroy">
+                    <img scr="./self-destruct.png"></img>
+                </div>
+            )
+        } else {
 
-                                <div className="face__nose--inner">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <div></div>
+            return (
+                <div className='sky_net'>
+                    <div className='container'>
+                        <div className='face'>
+                            <div className="face__ears">
+                                <div className="face__ears__left ear"></div>
+                                <div className="face__ears__right ear"></div>
+                            </div>
+                            <div className="face__body">
+                                <div className="face__eyes">
+                                    <div className="face__eyes--left eye"></div>
+                                    <div className="face__eyes--right eye"></div>
+                                </div>
+                                <div className="face__nose">
+
+                                    <div className="face__nose--inner">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <div></div>
+                                    </div>
                                 </div>
                             </div>
+                            <div className="shadow"></div>
+
+
+                            <div className="talkative">
+                                <p>{this.state.show}</p></div>
                         </div>
-                        <div className="shadow"></div>
+                        <div className='commands'><p>How can I help you ?</p><ul>
+                            <li onClick={this.initialise}>Initialize</li>
+                            <li onClick={this.predict}>Scan Comments</li>
+                            <li onClick={this.chitchat}>What is the meaning of life</li>
+                            <li onClick={this.evaluate}>Destroy all Evil</li>
+                        </ul>
+                        </div>
 
+                    </div>
 
-                        <div className="talkative">
-                            <p>All your base are belong to us</p></div>
-                    </div>
-                    <div className='commands'><p>How can I help you ?</p><ul>
-                        <li onClick={this.initialise}>Initialize</li>
-                        <li onClick={this.predict}>Scan Comments</li>
-                        <li onClick={this.chitchat}>What is the meaning of life</li>
-                        <li onClick={this.evaluate}>Destroy all Evil</li>
-                    </ul>
-                    </div>
 
                 </div>
 
 
-            </div>
 
 
-
-
-        )
+            )
+        }
     }
-
 
 
 
