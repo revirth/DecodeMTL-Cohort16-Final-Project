@@ -1,9 +1,9 @@
-.sky_net{
-    position: absolute;
-    z-index:999;
+
 .commands{
+	opacity:0;
 	margin-left:600px;
 	margin-top:-250px;
+	padding-right:10px;
 	font-family:Lucida Console, Courier;
 	color:#00FF41;
 	background:#003B00;
@@ -268,6 +268,8 @@ span:nth-of-type(4) {
 	color:#008F11;
 	margin-top:-20px;
 	text-align:center;
-	
+	button{
+	font-size:1.5em;
+
 }
 }
