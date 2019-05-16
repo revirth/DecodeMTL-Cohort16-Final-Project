@@ -57,7 +57,8 @@ let store = createStore(
   reducer,
   {
     cartItems: [],
-    loggedIn: isValidUser() === true,
+    // loggedIn: isValidUser() === true,
+    loggedIn: isValidUser(),
     username: getCookie("sid") !== "" ? getCookie("unm") : "",
     usertype: getCookie("sid") !== "" ? getCookie("utp") : ""
   },
