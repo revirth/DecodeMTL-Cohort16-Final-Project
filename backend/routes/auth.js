@@ -1,5 +1,16 @@
 const express = require("express");
 const router = express.Router();
+require("dotenv-expand")(require("dotenv").config());
+const ObjectId = require("mongodb").ObjectId;
+
+const nodemailer = require("nodemailer");
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.SENDER,
+    pass: process.env.SENDER_PASSWORD
+  }
+});
 
 router.get("/isvalid", async (req, res) => {
   if (res.locals.SESSIONS[req.cookies.sid] !== undefined) {
@@ -88,6 +99,7 @@ router.get("/profile", async (req, res) => {
 router.put("/profile", async (req, res) => {
   let sid = req.cookies.sid;
   let username = res.locals.SESSIONS[sid];
+  console.log("Username: ", username)
 
   // find a user in Mongo
   let doc = await res.locals.USERS.findOne({ username: username });

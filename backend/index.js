@@ -7,14 +7,14 @@ const upload = require("multer")({
 app.use("/images", express.static("uploads"));
 app.use(upload.none());
 
-let nodemailer = require("nodemailer");
-let transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.SENDER,
-    pass: process.env.SENDER_PASSWORD
-  }
-});
+// let nodemailer = require("nodemailer");
+// let transporter = nodemailer.createTransport({
+//   service: "gmail",
+//   auth: {
+//     user: process.env.SENDER,
+//     pass: process.env.SENDER_PASSWORD
+//   }
+// });
 
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
@@ -89,7 +89,6 @@ MongoClient.connect(process.env.MLAB_URI, {
     res.locals.REVIEWS = REVIEWS;
     res.locals.ORDERS = ORDERS;
     res.locals.CART = CART;
-
     next();
   });
 
