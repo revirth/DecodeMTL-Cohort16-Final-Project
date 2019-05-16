@@ -4,7 +4,7 @@ import { updateCartInfo } from '../cartfooter/Cart.jsx'
 let addItemToCart = (itemId) => {
   let data = new FormData()
   data.append("itemId", itemId)
-  fetch("/addCartItem", { method: "POST", credentials: 'include', body: data }).then(headers => {
+  fetch("/cart/addItem", { method: "POST", credentials: 'include', body: data }).then(headers => {
     return headers.text()
   }).then(body => {
     let result = JSON.parse(body)

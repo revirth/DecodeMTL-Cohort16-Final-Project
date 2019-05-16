@@ -6,7 +6,7 @@
 .mainsettings {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 .settingsbtn {
   padding: 2%;
@@ -47,4 +47,8 @@
 
 input::placeholder {
   font-size: 20px;
+}
+.stylepara {
+  display: flex;
+  flex-direction: column;
 }

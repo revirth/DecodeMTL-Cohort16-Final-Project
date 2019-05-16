@@ -66,11 +66,11 @@ export default class userprofile extends Component {
               Address
             </h1>
             <div class="pa3 bt b--black-10">
-              <p class="f6 f5-ns lh-copy measure">
-                Street: {this.state.userdetails.street}
-                Apartment No: {this.state.userdetails.apt}
-                Postal:{this.state.userdetails.postal}
-                Phone No:{this.state.userdetails.phone}
+              <p class="f6 f5-ns lh-copy measure stylepara">
+                <span>Street: {this.state.userdetails.street}</span>
+                <span>Apartment No: {this.state.userdetails.apt}</span>
+                <span>Postal:{this.state.userdetails.postal}</span>
+                <span>Phone No:{this.state.userdetails.phone}</span>
               </p>
             </div>
 
@@ -89,11 +89,11 @@ export default class userprofile extends Component {
               Payment
             </h1>
             <div class="pa3 bt b--black-10">
-              <p class="f6 f5-ns lh-copy measure">
-                Card No: {this.state.userdetails.cardno}
-                CVC No: {this.state.userdetails.cvc}
-                Expiry Date:{this.state.userdetails.expirydate}
-                Name On Card:{this.state.userdetails.nameonCard}
+              <p class="f6 f5-ns lh-copy measure stylepara">
+                <span>Card No: {this.state.userdetails.cardno}</span>
+                <span>CVC No: {this.state.userdetails.cvc}</span>
+                <span>Expiry Date:{this.state.userdetails.expirydate}</span>
+                <span>Name On Card:{this.state.userdetails.nameonCard}</span>
               </p>
             </div>
             {this.state.payment ? <Paymentpopup /> : null}
@@ -111,10 +111,10 @@ export default class userprofile extends Component {
               Account Details
             </h1>
             <div class="pa3 bt b--black-10">
-              <p class="f6 f5-ns lh-copy measure">
-                Username: {this.state.userdetails.username}
-                Current Password: {this.state.userdetails.password}
-                Email: {this.state.userdetails.email}
+              <p class="f6 f5-ns lh-copy measure stylepara">
+                <span>Username: {this.state.userdetails.username}</span>
+                <span>Current Password: *************</span>
+                <span>Email:{this.state.userdetails.email}</span>
               </p>
             </div>
             {this.state.accountdetails ? <Accountdetails /> : null}

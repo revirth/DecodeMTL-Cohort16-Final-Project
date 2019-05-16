@@ -68,4 +68,24 @@ input::placeholder {
 .flexrow {
   display: flex;
   flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.stylepara {
+  display: flex;
+  flex-direction: column;
+}
+.editlist {
+  overflow: scroll;
+  height: -webkit-fill-available;
+}
+.listing-items {
+  display: flex;
+  flex-direction: column;
+}
+.flexlist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 1500%;
 }

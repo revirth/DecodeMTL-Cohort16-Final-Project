@@ -1,3 +1,4 @@
+require("dotenv-expand")(require("dotenv").config());
 const express = require("express");
 const app = express();
 const upload = require("multer")({
@@ -10,8 +11,8 @@ let nodemailer = require('nodemailer');
 let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'consomater@gmail.com',
-    pass:  '123QWEqwe'
+    user: process.env.SENDER,
+    pass: process.env.SENDER_PASSWORD
    }
 });
 
@@ -59,7 +60,6 @@ resmsg = (st, msg) => ({
 
 let SESSIONS = {};
 
-require("dotenv-expand")(require("dotenv").config());
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectId;
 let DB, USERS, CONFIG, ITEMS, REVIEWS, ORDERS;
@@ -88,6 +88,7 @@ MongoClient.connect(process.env.MLAB_URI, {
     res.locals.ITEMS = ITEMS;
     res.locals.REVIEWS = REVIEWS;
     res.locals.ORDERS = ORDERS;
+    res.locals.CART = CART
 
     next();
   });
@@ -96,10 +97,12 @@ MongoClient.connect(process.env.MLAB_URI, {
   const itemRouter = require("./routes/items");
   const reviewRouter = require("./routes/reviews");
   const chargeRouter = require("./routes/charges");
+  const cartRouter = require("./routes/cart")
 
   app.use("/items", itemRouter);
   app.use("/reviews", reviewRouter);
   app.use("/charges", chargeRouter);
+  app.use("/cart", cartRouter);
 
   // start express server
   app.listen(4000, () => console.log("listening on port 4000"));
@@ -231,152 +234,6 @@ app.post("/socialSignup", async (req, res) => {
   await USERS.insertOne(obj);
   console.log("/facebookSignUp user is added");
   res.send(resmsg(true, "signup success"));
-});
-
-/**return an array of items (each item is an object) in the Cart for current user*/
-app.get("/cartItems", async (req, res) => {
-  let sid = req.cookies.sid;
-  let username = SESSIONS[sid];
-  //check if there is a session for current user
-  if (username !== undefined) {
-    //request userId from the collection "users"
-    let currentUser = await USERS.findOne({ username: username });
-    //request the items in the Cart for user with this userId only
-    let cart = await CART.find({ userId: currentUser._id }).toArray();
-    //request all items from the collection "Items"
-    let items = await ITEMS.find({}).toArray();
-    //for each item in the Cart create an object for frontend
-    let cartItems = cart.map(element => {
-      let cartItem = {};
-      items.forEach(item => {
-        if (ObjectId(item._id).toString() === element.itemId) {
-          cartItem = {
-            cartItemId: ObjectId(element._id).toString(),
-            itemId: ObjectId(item._id).toString(),
-            itemName: item.name,
-            itemImage: item.imgUrl,
-            itemPrice: item.price,
-            itemQuantity: element.itemQuantity
-          };
-        }
-      });
-      return cartItem;
-    });
-    console.log("Cart items sent");
-    process.env.NODE_ENV === "development" &&
-      res.send(JSON.stringify({ successful: true, cartItems: cartItems }));
-  } else {
-    process.env.NODE_ENV === "development" &&
-      res.send(JSON.stringify({ successful: false }));
-  }
-});
-
-/**add a Cart item to mongoDB*/
-app.post("/addCartItem", async (req, res) => {
-  let sid = req.cookies.sid;
-  //check if a session exists
-  if (sid) {
-    let username = SESSIONS[sid];
-    //get userId of the current user
-    let currentUser = await USERS.findOne({ username: username });
-    let itemId = req.body.itemId;
-    //create a new object for the new item
-    let newCartItem = {
-      itemId: itemId,
-      itemQuantity: 1,
-      userId: currentUser._id
-    };
-    //add this object to the "cart" collection
-    await CART.insertOne(newCartItem, function(err, obj) {
-      if (err) throw err;
-      console.log(obj.result.n + " cart item added");
-      res.send(JSON.stringify({ successful: true }));
-    });
-  } else {
-    res.send(JSON.stringify({ successful: false }));
-  }
-});
-
-/**delete one Cart Item */
-app.delete("/deleteCartItem", async (req, res) => {
-  let sid = req.cookies.sid;
-  let cartItemId = req.body.cartItemId;
-  //check if a session exists
-  if (sid) {
-    let username = SESSIONS[sid];
-    //get a userId of the current user
-    let cu = await USERS.findOne({ username: username });
-    let currentUser = cu._id;
-    //get a userId of the current Cart item
-    let ciu = await CART.findOne({ _id: ObjectId(cartItemId) });
-    let currentItemUserId = ciu.userId;
-    //if that's the same person - remove the item
-    if (
-      currentUser.toString().localeCompare(currentItemUserId.toString()) === 0
-    ) {
-      let _id = ObjectId(req.body.cartItemId);
-      await CART.deleteOne({ _id: _id }, function(err, obj) {
-        if (err) throw err;
-        console.log(obj.result.n + " cart item deleted");
-        res.send(JSON.stringify({ successful: true }));
-      });
-    }
-  } else {
-    res.send(JSON.stringify({ successful: false }));
-  }
-});
-
-/**clear the Cart of the current user*/
-app.delete("/clearCart", async (req, res) => {
-  let sid = req.cookies.sid;
-  //check if the session exists
-  if (sid) {
-    let username = SESSIONS[sid];
-    //get a userId of the current user
-    let currentUser = await USERS.findOne({ username: username });
-    //delete all the elements in the Cart
-    await CART.deleteMany({ userId: currentUser._id }, function(err, obj) {
-      if (err) throw err;
-      console.log("Cart cleared");
-      res.send(JSON.stringify({ successful: true }));
-    });
-  } else {
-    res.send(JSON.stringify({ successful: false }));
-  }
-});
-
-/**update the curt item of the current user */
-app.put("/updateCartItem", async (req, res) => {
-  let sid = req.cookies.sid;
-  let cartItemId = req.body.cartItemId;
-  // check if a session exists
-  if (sid) {
-    let username = SESSIONS[sid];
-    //get a userId of the current user
-    let cu = await USERS.findOne({ username: username });
-    let currentUser = cu._id;
-    //get a userId of the current Cart item
-    let ciu = await CART.findOne({ _id: ObjectId(cartItemId) });
-    let currentItemUserId = ciu.userId;
-    //if that's the same person - update the item
-    if (
-      currentUser.toString().localeCompare(currentItemUserId.toString()) === 0
-    ) {
-      let _id = ObjectId(req.body.cartItemId);
-      let quantity = req.body.itemQuantity;
-      await CART.updateOne(
-        { _id: _id },
-        { $set: { itemQuantity: quantity } },
-        function(err, obj) {
-          if (err) throw err;
-          console.log(obj.result.n + " cart item updated");
-        }
-      );
-      res.send(JSON.stringify({ successful: true }));
-    }
-  } else {
-    res.send(JSON.stringify({ successful: false }));
-  }
 });
 
 app.get("/profile", async (req, res) => {

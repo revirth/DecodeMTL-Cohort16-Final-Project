@@ -17,7 +17,7 @@ export default class EditSellerItems extends Component {
   }
 
   componentDidMount = async () => {
-    let fetchUrl = `/items${window.location.search}`;
+    let fetchUrl = `/items?limit=1000`;
     let response = await fetch(fetchUrl, {
       method: "GET",
       credentials: "include"
@@ -33,8 +33,8 @@ export default class EditSellerItems extends Component {
     // let checkAdd = this.state.address ? {<SignupForm>} : null
     return (
       <div className="overlay">
-        <div className="w3-animate-bottom">
-          <div className="login-form-div">
+        <div className="w3-animate-bottom editlist">
+          <div className="login-form-div listing-items">
             {this.state.items.map(item => (
               <EditItem item={item} />
             ))}
