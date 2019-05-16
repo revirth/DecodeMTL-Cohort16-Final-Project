@@ -10,6 +10,7 @@ import HomePageContent from "./component/homepagecontent/HomePageContent.jsx";
 import Checkout from "./component/checkout/index";
 import userprofile from "./component/userprofile/userprofile.jsx";
 import selleraccount from "./component/selleraccount/selleraccount.jsx";
+import Allreviewspage from "./component/selleraccount/Allreviewspage.jsx";
 
 let renderItem = routerData => {
   return (
@@ -31,6 +32,11 @@ function App() {
         <Route exact={true} path="/checkout" component={Checkout} />
         <Route exact={true} path="/profile" component={userprofile} />
         <Route exact={true} path="/sellerprofile" component={selleraccount} />
+        <Route
+          exact={true}
+          path="/sellerallreview"
+          component={Allreviewspage}
+        />
       </div>
       <CartBar />
     </BrowserRouter>

@@ -87,5 +87,10 @@ input::placeholder {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  width: 1500%;
+  width: 90%;
+  margin-top: 10% !important;
+  height: -webkit-fill-available;
+  overflow: scroll;
+  display: flex;
+  flex-wrap: wrap;
 }

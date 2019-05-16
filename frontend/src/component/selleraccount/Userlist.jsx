@@ -14,7 +14,7 @@ export default class Userlist extends Component {
   renderUserdetails = () => {
     return this.state.dataUsers.map(user => {
       return (
-        <div className="w3-animate-bottom">
+        <div>
           <div className="flexrow">
             <article class="mw5 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
               <div class="tc">
@@ -22,9 +22,13 @@ export default class Userlist extends Component {
                 <hr class="mw3 bb bw1 b--black-10" />
               </div>
               <p class="lh-copy measure center f6 black-70">
-                Quite affectionate and outgoing. She loves to get chin scratches
-                and will roll around on the floor waiting for you give her more
-                of them.
+                <span>Email : {user.email} </span>
+                <div>
+                  Street : {user.street} <br />
+                  Apt no : {user.apt}
+                  Postal Code : {user.postal}
+                  Phone No : {user.phone}
+                </div>
               </p>
             </article>
           </div>
@@ -42,6 +46,12 @@ export default class Userlist extends Component {
   };
 
   render() {
-    return <div className="overlay">{this.renderUserdetails()}</div>;
+    return (
+      <div className="overlay">
+        <div className=" center bg-white br3 pa3 pa4-ns mv3 ba b--black-10 w3-animate-bottom flexlist">
+          {this.renderUserdetails()}
+        </div>
+      </div>
+    );
   }
 }
