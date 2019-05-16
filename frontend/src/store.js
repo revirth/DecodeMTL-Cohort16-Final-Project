@@ -47,7 +47,7 @@ let getCookie = cname => {
 };
 
 let isValidUser = async () => {
-  let response = await fetch("/user/isvalid", { credentials: "include" });
+  let response = await fetch("/auth/isvalid", { credentials: "include" });
   let data = await response.json();
 
   return data.status;
@@ -57,7 +57,8 @@ let store = createStore(
   reducer,
   {
     cartItems: [],
-    loggedIn: isValidUser() === true,
+    // loggedIn: isValidUser() === true,
+    loggedIn: isValidUser(),
     username: getCookie("sid") !== "" ? getCookie("unm") : "",
     usertype: getCookie("sid") !== "" ? getCookie("utp") : ""
   },

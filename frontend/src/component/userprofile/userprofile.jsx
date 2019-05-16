@@ -27,7 +27,7 @@ export default class userprofile extends Component {
   };
   componentDidMount = async () => {
     document.addEventListener("keydown", this.escFunction, false);
-    let response = await fetch(`/profile`);
+    let response = await fetch(`/auth/profile`);
     let data = await response.json();
 
     this.setState({ userdetails: data });

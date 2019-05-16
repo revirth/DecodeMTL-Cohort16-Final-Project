@@ -109,7 +109,7 @@ class UnconnectedLinks extends React.Component {
   }
 
   logout = async () => {
-    const res = await fetch("/logout");
+    const res = await fetch("/auth/logout");
 
     res.status && this.props.dispatch({ type: "afterLogout" });
   };

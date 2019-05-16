@@ -5,7 +5,8 @@ import Shoppopup from "./updateshoppopup.jsx";
 import UploadItem from "./uploadItem.jsx";
 import EditSellerItems from "./EditSellerItems.jsx";
 import Userlist from "./Userlist.jsx";
-import Allreviews from "./Allreviews.jsx";
+// import Allreviews from "./Allreviews.jsx";
+import { Link } from "react-router-dom";
 
 export default class selleraccount extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export default class selleraccount extends Component {
       uploaditems: false,
       showitems: false,
       userlist: false,
-      allreview: false,
+      // allreview: false,
       sellerdetails: {}
     };
   }
@@ -26,8 +27,8 @@ export default class selleraccount extends Component {
         shopdetails: false,
         uploaditems: false,
         showitems: false,
-        userlist: false,
-        allreview: false
+        userlist: false
+        // allreview: false
       });
     }
   };
@@ -62,10 +63,10 @@ export default class selleraccount extends Component {
     event.preventDefault();
     this.setState({ userlist: true });
   };
-  reviews = event => {
-    event.preventDefault();
-    this.setState({ allreview: true });
-  };
+  // reviews = event => {
+  //   event.preventDefault();
+  //   this.setState({ allreview: true });
+  // };
 
   render() {
     // let checkAdd = this.state.address ? {<SignupForm>} : null
@@ -124,18 +125,24 @@ export default class selleraccount extends Component {
           >
             Order Lists
           </button>
-          <button
+          {/* <button
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
             onClick={this.reviews}
           >
             All reviews
-          </button>
+          </button> */}
+          <Link
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
+            to="/sellerallreview"
+          >
+            All reviews
+          </Link>
         </div>
         {this.state.showitems ? <EditSellerItems /> : null}
         {this.state.uploaditems ? <UploadItem /> : null}
         {this.state.shopdetails ? <Shoppopup /> : null}
         {this.state.userlist ? <Userlist /> : null}
-        {this.state.allreview ? <Allreviews /> : null}
+        {/* {this.state.allreview ? <Allreviews /> : null} */}
       </div>
     );
   }

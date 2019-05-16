@@ -32,7 +32,7 @@ export default class Addresspopup extends Component {
     data.append("apt", this.state.apt);
     data.append("postal", this.state.postal);
     data.append("phone", this.state.phone);
-    fetch("/profile", {
+    fetch("/auth/profile", {
       method: "PUT",
       body: data,
       credentials: "include"

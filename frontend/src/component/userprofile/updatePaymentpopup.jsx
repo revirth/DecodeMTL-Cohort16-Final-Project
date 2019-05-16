@@ -33,7 +33,7 @@ export default class Paymentpopup extends Component {
     data.append("cvc", this.state.cvc);
     data.append("expirydate", this.state.expirydate);
     data.append("nameonCard", this.state.nameonCard);
-    fetch("/profile", {
+    fetch("/auth/profile", {
       method: "PUT",
       body: data,
       credentials: "include"
