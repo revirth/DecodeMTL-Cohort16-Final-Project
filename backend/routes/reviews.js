@@ -16,10 +16,19 @@ router.get("/:reviewId", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  let sid = req.cookies.sid;
+  let username = res.locals.SESSIONS[sid];
+
+  if (username === undefined) {
+    res.send(resmsg(false, "Invalid request"));
+    return;
+  }
+
   // store a review in Mongo
   let obj = {
     ...req.body,
-    rating: parseInt(req.body.rating)
+    rating: parseInt(req.body.rating),
+    username: username
   };
 
   await res.locals.REVIEWS.insertOne(obj);
