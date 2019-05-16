@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import {connect} from 'react-redux'
 import "./custom.css";
 import "./style.css";
 import Addresspopup from "./updateAddresspopup.jsx";
 import Paymentpopup from "./updatePaymentpopup.jsx";
 import Accountdetails from "./updateAccountdetails.jsx";
 
-export default class userprofile extends Component {
+// export default class userprofile extends Component {
+  class UnconnectedUserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,12 +29,14 @@ export default class userprofile extends Component {
   };
   componentDidMount = async () => {
     document.addEventListener("keydown", this.escFunction, false);
+    if(this.props.loggedIn){
     let response = await fetch(`/auth/profile`);
     let data = await response.json();
 
     this.setState({ userdetails: data });
 
     console.table("test", data);
+    }
   };
   // componentWillUnmount() {
   //   document.removeEventListener("keydown", this.escFunction, false);
@@ -52,6 +56,7 @@ export default class userprofile extends Component {
   };
   render() {
     // let checkAdd = this.state.address ? {<SignupForm>} : null
+    console.log("Render user profile")
     return (
       <div className="mainsettings">
         <div className="settngdetials">
@@ -124,3 +129,11 @@ export default class userprofile extends Component {
     );
   }
 }
+
+let mapStatetoProps = (state) => {
+  return {loggedIn: state.loggedIn}
+}
+
+let userprofile = connect(mapStatetoProps)(UnconnectedUserProfile)
+
+export default userprofile
