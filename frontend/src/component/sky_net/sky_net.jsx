@@ -1,12 +1,13 @@
 // store neural net into database once trained -> to do
+// working with array of string, need to make the call to db and send modification
 
 
 import "./neural_net.js"
 import "./data.js"
 import "./chitchatdata.js"
-import { Component } from "react";
+import React, { Component } from "react";
 import "./sky_net.scss";
-class Sky_net extends Component {
+class Sky_net extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -61,19 +62,32 @@ class Sky_net extends Component {
     */
     predict() {
 
+        // database call for array of reviews => to do 
+
+        let reviews = []
+        for (i = 0; i < arr.length; i++) {
+            reviews.push(arr[i])
+            console.log(reviews)
+        }
+        // at this point we have an array of string with the reviews
+
 
         let trimmed = ""
+        // empty container for individial reviews to be cleaned 
 
-        if (this.state.predict.length >= 40) {
-            trimmed = this.state.predict.slice(0, 40);
-        } else {
-            trimmed = this.state.predict
+        for (j = 0; j < reviews.length; j++) {
+            if (reviews[j].length >= 45) {
+                trimmed = reviews[j].slice(0, 45);
+            } else {
+                trimmed = reviews[j]
+            }
         }
+        for (i = 0; i < )
 
-        let cleanString = trimmed.replace(/[\|&;\(0)(1)(2)(3)(4)(5)(6)(7)(8)(9)"-<>\(\)\+,.±!@@##$%^&*()_+]/g, "");
-        let allLowerCase = cleanString.replace(/[A-Z]/g, function (x) { return x.toLowerCase(); })
+            let cleanString = trimmed.replace(/[\|&;\(0)(1)(2)(3)(4)(5)(6)(7)(8)(9)"-<>\(\)\+,.±!@@##$%^&*()_+]/g, "");
+        let cleanString1 = cleanString.replace(/[A-Z]/g, function (x) { return x.toLowerCase(); })
 
-        let prediction = sky_net.run(allLowerCase)
+        let prediction = sky_net.run(cleanString1)
 
         prediction;
     }
@@ -108,63 +122,63 @@ class Sky_net extends Component {
 
     }
     render() {
-        if (this.state.error === true) {
-            return (
-                <div className="destroy">
-                    <img scr="./self-destruct.png"></img>
-                </div>
-            )
-        } else {
+        // if (this.state.error === true) {
+        //     return (
+        //         <div className="destroy">
+        //             <img scr="./self-destruct.png"></img>
+        //         </div>
+        //     )
+        // } else {
 
-            return (
-                <div className='sky_net'>
-                    <div className='container'>
-                        <div className='face'>
-                            <div className="face__ears">
-                                <div className="face__ears__left ear"></div>
-                                <div className="face__ears__right ear"></div>
-                            </div>
-                            <div className="face__body">
-                                <div className="face__eyes">
-                                    <div className="face__eyes--left eye"></div>
-                                    <div className="face__eyes--right eye"></div>
-                                </div>
-                                <div className="face__nose">
-
-                                    <div className="face__nose--inner">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="shadow"></div>
-
-
-                            <div className="talkative">
-                                <p>{this.state.show}</p></div>
+        return (
+            <div className='sky_net'>
+                <div className='container'>
+                    <div className='face'>
+                        <div className="face__ears">
+                            <div className="face__ears__left ear"></div>
+                            <div className="face__ears__right ear"></div>
                         </div>
-                        <div className='commands'><p>How can I help you ?</p><ul>
-                            <li onClick={this.initialise}>Initialize</li>
-                            <li onClick={this.predict}>Scan Comments</li>
-                            <li onClick={this.chitchat}>What is the meaning of life</li>
-                            <li onClick={this.evaluate}>Destroy all Evil</li>
-                        </ul>
-                        </div>
+                        <div className="face__body">
+                            <div className="face__eyes">
+                                <div className="face__eyes--left eye"></div>
+                                <div className="face__eyes--right eye"></div>
+                            </div>
+                            <div className="face__nose">
 
+                                <div className="face__nose--inner">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="shadow"></div>
+
+
+                        <div className="talkative">
+                            <p>{this.state.show}</p></div>
+                    </div>
+                    <div className='commands'><p>How can I help you ?</p><ul>
+                        <li onClick={this.initialise}>Initialize</li>
+                        <li onClick={this.predict}>Scan Comments</li>
+                        <li onClick={this.chitchat}>What is the meaning of life</li>
+                        <li onClick={this.evaluate}>Destroy all Evil</li>
+                    </ul>
                     </div>
 
-
                 </div>
 
 
+            </div>
 
 
-            )
-        }
+
+
+        )
     }
+}
 
 
 
