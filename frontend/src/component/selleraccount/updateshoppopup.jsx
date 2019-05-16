@@ -37,7 +37,7 @@ export default class Shoppopup extends Component {
     data.append("postal", this.state.postal);
     data.append("phone", this.state.phone);
     data.append("shopname", this.state.shopname);
-    fetch("/profile", {
+    fetch("/auth/profile", {
       method: "PUT",
       body: data,
       credentials: "include"

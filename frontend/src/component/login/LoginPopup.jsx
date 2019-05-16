@@ -43,7 +43,7 @@ class UnconnectedLoginPopup extends Component {
     let data = new FormData();
     data.append("username", this.state.username);
     data.append("password", this.state.password);
-    fetch("/login", {
+    fetch("/auth/login", {
       method: "POST",
       body: data,
       credentials: "include"
@@ -79,7 +79,7 @@ class UnconnectedLoginPopup extends Component {
     const data = new FormData();
     data.append("userId", userId);
     console.log("UserId", userId);
-    fetch("/socialLogin", {
+    fetch("/auth/socialLogin", {
       method: "POST",
       body: data,
       credentials: "include"
@@ -112,7 +112,7 @@ class UnconnectedLoginPopup extends Component {
     e.preventDefault();
     let data = new FormData();
     data.append("email", this.state.email);
-    fetch("/sendpassword", { method: "POST", body: data })
+    fetch("/auth/sendpassword", { method: "POST", body: data })
       .then(headers => {
         return headers.text();
       })
