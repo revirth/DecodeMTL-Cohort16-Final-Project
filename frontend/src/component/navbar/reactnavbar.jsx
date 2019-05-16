@@ -61,11 +61,23 @@ class UnconnectedLinks extends React.Component {
     this.state = {
       popup: false,
       signup: false,
-      loggedIn: false,
+      // loggedIn: false,
       search: false
     };
   }
-  closeLoginPopup = loggedIn => {
+
+  componentWillMount = () => {
+     this.isValidUser()
+  }
+
+  isValidUser = async () => {
+    let response = await fetch("/auth/isvalid", { credentials: "include" });
+    let data = await response.json();
+    this.props.dispatch({type: "CheckIfUserValid", isValidUser: data.status})
+  }
+
+  // closeLoginPopup = loggedIn => {
+  closeLoginPopup = () => {
     this.setState({ popup: false });
   };
   closeSignup = () => {
@@ -136,25 +148,25 @@ class UnconnectedLinks extends React.Component {
             </Link>
           </span>
         ) : (
-          <span className="afterlogin">
-            Hi {this.props.username}
-            {this.props.loggedIn && this.props.usertp === "1" ? (
-              <span>
-                <Link to="/profile">Account Setting</Link>
-                <Link to="#" onClick={this.logout}>
-                  LOGOUT
+            <span className="afterlogin">
+              Hi {this.props.username}
+              {this.props.loggedIn && this.props.usertp === "1" ? (
+                <span>
+                  <Link to="/profile">Account Setting</Link>
+                  <Link to="#" onClick={this.logout}>
+                    LOGOUT
                 </Link>{" "}
-              </span>
-            ) : (
-              <span>
-                <Link to="/sellerprofile">Seller Account</Link>
-                <Link to="#" onClick={this.logout}>
-                  LOGOUT
+                </span>
+              ) : (
+                  <span>
+                    <Link to="/sellerprofile">Seller Account</Link>
+                    <Link to="#" onClick={this.logout}>
+                      LOGOUT
                 </Link>
-              </span>
-            )}
-          </span>
-        )}
+                  </span>
+                )}
+            </span>
+          )}
 
         {/* <i id="searchbutton" className="fa fa-search fa" />
         <input onClick={() => alert(`search ${this.value}`)} /> */}

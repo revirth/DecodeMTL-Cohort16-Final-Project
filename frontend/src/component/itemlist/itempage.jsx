@@ -8,7 +8,9 @@ class Itempage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      foundItem: {}
+      foundItem: {},
+      reviews: [],
+      comment: ""
     };
   }
   componentDidMount = async () => {
@@ -18,6 +20,40 @@ class Itempage extends Component {
     this.setState({ foundItem: data });
 
     console.table("test", data);
+    let reviews = await fetch(`/items/${this.props.id}/reviews`);
+    let review = await reviews.json();
+    // review = review.filter(rev => {
+    //   return rev.itemId === this.state.foundItem._id;
+    // });
+
+    this.setState({ reviews: review });
+
+    console.table("review", review);
+  };
+  handleComment = event => {
+    this.setState({ comment: event.target.value });
+  };
+  handleSubmit = event => {
+    event.preventDefault();
+    let data = new FormData();
+    data.append("content", this.state.comment);
+    data.append("itemId", this.state.foundItem._id);
+
+    fetch("/reviews", {
+      method: "POST",
+      body: data,
+      credentials: "include"
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (!res.status) alert(res.message);
+        return fetch(`/items/${this.props.id}/reviews`)
+          .then(res => res.json())
+          .then(res => {
+            console.log("res", res);
+            this.setState({ reviews: res, comment: "" });
+          });
+      });
   };
 
   render = () => {
@@ -51,16 +87,14 @@ class Itempage extends Component {
             <h1 class="f4 bold review mw5">Reviews</h1>
             <div className="listofreview">
               <ul class="list pl0 ml0 center  ba b--light-silver br3 reviewlist ">
-                <li class="ph3 pv2 bb b--light-silver">Mackeral Tabby</li>
-                <li class="ph3 pv2 bb b--light-silver">Burmese</li>
-                <li class="ph3 pv2 bb b--light-silver">Maine Coon</li>
-                <li class="ph3 pv2 bb b--light-silver">Orange Tabby</li>
-                <li class="ph3 pv2 bb b--light-silver">Siamese</li>
-                <li class="ph3 pv2 bb b--light-silver">Scottish Fold</li>
-                <li class="ph3 pv2">American Bobtail</li>
+                {this.state.reviews.map(r => (
+                  <li class="ph3 pv2 bb b--light-silver">
+                    {r.username} : {r.content}
+                  </li>
+                ))}
               </ul>
             </div>
-            <form class="pa4 black-80">
+            <form class="pa4 black-80" onSubmit={this.handleSubmit}>
               <div className="commentBox">
                 <label for="comment" class="f6 b db mb2">
                   Comments <span class="normal black-60">(optional)</span>
@@ -70,7 +104,14 @@ class Itempage extends Component {
                   name="comment"
                   class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2"
                   aria-describedby="comment-desc"
+                  onChange={this.handleComment}
                 />
+                <input
+                  type="submit"
+                  class="f6 grow no-underline br-pill ba bw2 ph3 pv2 mb2 dib dark-green radiusgreen"
+                  value="Submit"
+                />
+
                 <small id="comment-desc" class="f6 black-60">
                   Helper text for a form control. Can use this text to{" "}
                   <a href="#" class="link underline black-80 hover-blue">
@@ -94,7 +135,6 @@ class Itempage extends Component {
                       placeholder="Your Email Address"
                       type="text"
                       name="email-address"
-                      value=""
                       id="email-address"
                     />
                     <input
