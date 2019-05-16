@@ -134,12 +134,8 @@ export default class selleraccount extends Component {
         {this.state.showitems ? <EditSellerItems /> : null}
         {this.state.uploaditems ? <UploadItem /> : null}
         {this.state.shopdetails ? <Shoppopup /> : null}
-<<<<<<< HEAD
-
-=======
         {this.state.userlist ? <Userlist /> : null}
         {this.state.allreview ? <Allreviews /> : null}
->>>>>>> fce9376911d77a1f4c6520748a608fc1341438d5
       </div>
     );
   }
