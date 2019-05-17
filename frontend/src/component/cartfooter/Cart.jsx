@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import store from "../../store.js";
+import checkUserSession from "../login/CheckUserSession";
 import "./cart.scss";
 // import "./style.css";
 
@@ -16,19 +17,25 @@ class UnConnectedCart extends React.Component {
     let data = new FormData();
     data.append("cartItemId", e.target.id);
     data.append("itemQuantity", e.target.value);
+    let status = -1;
     fetch("/cart/updateItem", {
       method: "PUT",
       credentials: "include",
       body: data
     })
       .then(headers => {
-        console.log("PUT");
+        status = headers.status;
         return headers.text();
       })
       .then(body => {
         let result = JSON.parse(body);
-        if (result.successful) {
-          updateCartInfo();
+        if (status === 200) {
+          if (result.successful) {
+            updateCartInfo();
+          }
+        } else {
+          alert("Error code: " + status + " " + result);
+          checkUserSession();
         }
       });
   };
@@ -38,31 +45,45 @@ class UnConnectedCart extends React.Component {
     // we send a request to the endpoint "/cart/deleteItem" to remove the item
     let data = new FormData();
     data.append("cartItemId", e.target.id);
+    let status = -1;
     fetch("/cart/deleteItem", {
       method: "DELETE",
       credentials: "include",
       body: data
     })
       .then(headers => {
+        status = headers.status;
         return headers.text();
       })
       .then(body => {
         let result = JSON.parse(body);
-        if (result.successful) {
-          updateCartInfo();
+        if (status === 200) {
+          if (result.successful) {
+            updateCartInfo();
+          }
+        } else {
+          alert("Error code: " + status + " " + result);
+          checkUserSession();
         }
       });
   };
 
   onClickClearCart = e => {
+    let status = -1;
     fetch("/cart/clear", { method: "DELETE", credentials: "include" })
       .then(headers => {
+        status = headers.status;
         return headers.text();
       })
       .then(body => {
         let result = JSON.parse(body);
-        if (result.successful) {
-          updateCartInfo();
+        if (status === 200) {
+          if (result.successful) {
+            updateCartInfo();
+          }
+        } else {
+          alert("Error code: " + status + " " + result);
+          checkUserSession();
         }
       });
   };
@@ -76,7 +97,7 @@ class UnConnectedCart extends React.Component {
         <div className="parent-horizontal">
           <div className="button-right">
             <button
-              className="f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow"
+              className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
               onClick={this.onClickClearCart}
             >
               Clear Cart
@@ -146,7 +167,7 @@ class UnConnectedCart extends React.Component {
             <div className="button-right">
               <Link to="/checkout">
                 <button
-                  className="f6 link dim br3 ph3 pv2 mb2 dib white btcolor  bn grow"
+                  className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
                   // onClick={this.onClickChaeckout}
                 >
                   Checkout

@@ -171,3 +171,12 @@ a {
 .bttext {
   color: #0077b5;
 }
+.notavailable {
+  position: absolute;
+  top: 210px;
+  left: 0px;
+  width: 75%;
+  height: 50%;
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 25px;
+}

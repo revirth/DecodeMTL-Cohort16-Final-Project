@@ -1,19 +1,21 @@
-
+.sky_net{
+  z-index: 10;
+  margin-left:700px;
+}
 .commands{
-	opacity:0;
-	margin-left:600px;
+	opacity:1;
+	margin-left:450px;
 	margin-top:-250px;
 	padding-right:10px;
 	font-family:Lucida Console, Courier;
 	color:#00FF41;
-	background:#003B00;
 	p{
-		margin-left:25px;
+		margin-left:10px;
   }
   li{
+    margin-left:10px;
     padding-top:10px;
-    padding-right:10px;
-    color: #00FF41;
+    color: #00FF41
   }
   li:hover{
     color:#008F11;

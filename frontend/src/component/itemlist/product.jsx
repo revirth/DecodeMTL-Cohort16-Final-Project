@@ -32,7 +32,6 @@ class UnconnectedProduct extends Component {
   };
 
   onClickAddItemToCart = itemId => {
-    console.log("LoggedIn: ", this.props.loggedIn, "itemId: ", itemId);
     if (this.props.loggedIn) {
       addItemToCart(itemId);
     } else {
@@ -67,6 +66,14 @@ class UnconnectedProduct extends Component {
 
     return (
       <article className={classes} style={customCSS} id={_id}>
+        {!this.state.available && (
+          <div
+            className="notavailable"
+            style={{ transform: "rotateY(180deg)" }}
+          >
+            Not available
+          </div>
+        )}
         {this.props.usertype === "2" && (
           <p className="availability-toggle" onClick={this.availbleItem}>
             {!this.state.available ? "o" : "x"}
