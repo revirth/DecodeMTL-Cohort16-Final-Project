@@ -34,7 +34,7 @@ export default class EditSellerItems extends Component {
     return (
       <div className="overlay">
         <div className="w3-animate-bottom editlist">
-          <div className="login-form-div listing-items">
+          <div className="center bg-white br3 pa3 pa4-ns mv3 ba b--black-10 w3-animate-bottom hideop">
             {this.state.items.map(item => (
               <EditItem item={item} />
             ))}

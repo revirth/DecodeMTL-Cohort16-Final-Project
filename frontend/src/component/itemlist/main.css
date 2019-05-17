@@ -156,4 +156,11 @@ a {
 }
 .radiusgreen {
   border-color: rgb(3, 150, 103);
+  margin: 40px !important;
+  margin-left: 0px !important;
+}
+.txtarea {
+  width: 1000px !important;
+  height: 70px;
+  margin-right: 20px;
 }
