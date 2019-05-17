@@ -111,3 +111,13 @@ input::placeholder {
   display: flex;
   flex-wrap: wrap;
 }
+
+.btcolor {
+  background-color: #0077b5;
+}
+.bttext {
+  color: #0077b5;
+}
+.bordercolorblue {
+  border-color: #0077b5;
+}

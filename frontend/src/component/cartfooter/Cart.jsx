@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import store from "../../store.js";
-import checkUserSession from  '../login/CheckUserSession'
+import checkUserSession from "../login/CheckUserSession";
 import "./cart.scss";
 // import "./style.css";
 
@@ -35,7 +35,7 @@ class UnConnectedCart extends React.Component {
           }
         } else {
           alert("Error code: " + status + " " + result);
-          checkUserSession()
+          checkUserSession();
         }
       });
   };
@@ -63,7 +63,7 @@ class UnConnectedCart extends React.Component {
           }
         } else {
           alert("Error code: " + status + " " + result);
-          checkUserSession()
+          checkUserSession();
         }
       });
   };
@@ -83,7 +83,7 @@ class UnConnectedCart extends React.Component {
           }
         } else {
           alert("Error code: " + status + " " + result);
-          checkUserSession()
+          checkUserSession();
         }
       });
   };

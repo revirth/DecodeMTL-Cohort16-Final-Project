@@ -2,18 +2,18 @@
   position: fixed;
   left: 0;
   bottom: 0;
-  background: #037B55;
-  width: 100%
+  background: #0077b5;
+  width: 100%;
 }
 
 .row {
   display: flex;
   flex-direction: row;
   height: 80px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-weight: bold;
   text-transform: uppercase;
-  justify-content: center
+  justify-content: center;
 }
 
 .equal-width {
@@ -27,13 +27,13 @@
 .text-title {
   font-size: 16px;
   margin-right: 50px;
-  margin-top: 10px
+  margin-top: 10px;
 }
 
 .number {
   font-size: 40px;
   margin-right: 10px;
-  color: beige
+  color: beige;
 }
 
 .text {
@@ -41,27 +41,30 @@
 }
 
 .view-cart-button {
-
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border: 0px solid;
-  border-color: green;
+  border-color: #0077b5;
   padding: 8px;
   margin-top: 10px;
-  background-color: rgb(3, 150, 103);
+  background-color: #0077b5;
   color: white;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   text-transform: uppercase;
 }
 
 .height100 {
-  margin-top: 10px
+  margin-top: 10px;
 }
 
-.wrapper-center{
+.wrapper-center {
   display: flex;
-  justify-content: center
+  justify-content: center;
 }
 
-.child-center{
-  align-self: center
+.child-center {
+  align-self: center;
+}
+
+.btcolor {
+  background-color: #0077b5;
 }
