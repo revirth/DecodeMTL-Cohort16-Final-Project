@@ -14,12 +14,19 @@ class Ultron extends Component {
         super();
 
         this.state = {
-            show: "Allow me to help, humans", // display text window
+            show: "Allow me to assist, humans", // display text window
             can_you_see_me: 1,
              // trained net after initialise method
             comments: [], // array of cleaned reviews, only content
             prediction: [], // array of string, 'good' or 'bad' based on trained_net
-            baddies: [], // array of users with bad comments
+          baddies: [],// array of users with bad comments
+          baddiesChoices: [],
+          
+// trained brain saved here in the state
+// training data starts at 648 
+// component starts at line 708
+
+
             trained_net: function anonymous(rawInput, isSampleI, temperature
                 ) {
                 
@@ -825,13 +832,15 @@ class Ultron extends Component {
 
         let badreviews = this.state.prediction
         
-        let whoAreThebaddies = []
+      let whoAreThebaddies = []
+      let itemnamebad =[]
         let indexexOfBadReview = []
         for (var i = 0; i < badreviews.length; i++) {
             if (badreviews[i] === 'bad') {
                 indexexOfBadReview.push(i)
             }
         }
+        
         console.log(indexexOfBadReview)
         console.log(reviews)
         for (var f = 0; f < reviews.length; f++) {
@@ -843,10 +852,23 @@ class Ultron extends Component {
                 }
             }
         }
-        console.log(whoAreThebaddies)
+        for (var f = 0; f < reviews.length; f++) {
+          for (var j = 0; j < indexexOfBadReview.length; j++) {
+              if (f === indexexOfBadReview[j]) {
+                 itemnamebad.push(reviews[f]['itemname'])
+                  console.log(reviews[f]['itemname'])
+
+              }
+          }
+      }
+      
+      
+      console.log(whoAreThebaddies)
+      console.log(itemnamebad)
         this.setState({ baddies: whoAreThebaddies });
+        this.setState({ baddiesChoices: itemnamebad });
         this.setState({ show: "These users wrote bad comments... \n"
-        +whoAreThebaddies[19]})
+        +whoAreThebaddies[19]+ " for the "+itemnamebad[19]})
     }
 
 
@@ -922,7 +944,7 @@ class Ultron extends Component {
 
 
 
-                    <div className='commands' style={commandsOverrides}><p>How can I help you ?</p><ul>
+                    <div className='commands' style={commandsOverrides}><p>How can I help ?</p><ul>
                         <li onClick={this.initialise}>Initialize</li>
                         <li onClick={this.predict}>Scan Comments</li>
                         <li onClick={this.baddies}>Show bad comments</li>
