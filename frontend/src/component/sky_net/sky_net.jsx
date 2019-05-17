@@ -1,10 +1,10 @@
 
 // currently analyze comments and returns an array of baddies 
 // need to work on displaying the baddies UI
-
-
+import brain from "brain.js"
+import React from "react"
+// import trainingData from "./data.js"
 // import "./neural_net.js"
-import "./data.js"
 // import "./chitchatdata.js"
 import { Component } from "react";
 import "./sky_net.scss";
@@ -12,8 +12,8 @@ class Sky_net extends Component {
     constructor() {
         super();
         this.state = {
-            show: "Hello World!", // display text window
-            commandsVisible: 0,
+            show: "WARNING DO NOT CLICK", // display text window
+            commandsVisible: 1,
             trained_net: {}, // trained net after initialise method
             comments: [], // array of cleaned reviews, only content
             prediction: [], // array of string, 'good' or 'bad' based on trained_net
@@ -25,23 +25,71 @@ class Sky_net extends Component {
      return sky_net which is the trained neural net
      this may take 20-40 seconds 
     */
-    initialise() {
-
+    initialise = () => {
         this.setState({ show: "Loading..." })
+        let dataz = [
+            { input: 'i am super happy', output: 'happy' },
+            { input: 'what a trhill', output: 'bad' },
+            { input: 'food was delicious awesome service', output: 'happy' },
+            { input: 'this is the best food ever', output: 'happy' },
+            { input: 'i am satisfied', output: 'happy' },
+            { input: 'I am satisfied', output: 'happy' },
+            { input: 'i hated the service and the food', output: 'bad' },
+            { input: 'would not recommend to anyone', output: 'bad' },
+            { input: 'this is the worst place to eat in montreal', output: 'bad' },
+            { input: 'i am satisfied', output: 'happy' },
+            { input: 'i was happy with my order', output: 'happy' },
+            { input: 'i am happy!', output: 'happy' },
+            { input: 'the food was terrible', output: 'bad' },
+            { input: 'i would never order from there again', output: 'bad' },
+            { input: 'i was disapointed', output: 'bad' },
+            { input: 'i was very disapointed', output: 'bad' },
+            { input: 'the food tasted like shit', output: 'bad' },
+            { input: 'the food tasted like crap', output: 'bad' },
+            { input: 'omg best service', output: 'happy' },
+            { input: 'i would recommend it to my friends', output: 'happy' },
+            { input: 'delicious food, great service', output: 'happy' },
+            { input: 'best choice out there', output: 'happy' },
+            { input: 'quick delivery, fast and effective', output: 'happy' },
+            { input: 'i would not recommend', output: 'bad' },
+            { input: 'i would not recommend it to my friends', output: 'bad' },
+            { input: 'very large choice of meals easy to order and interesting offers to watch for great', output: 'happy' },
+            { input: 'i already set a record for ordering from them every week today i ordered twice', output: 'happy' },
+            { input: 'very satisfied with alce they take care when delivering always on time great variety of choices', output: 'happy' },
+            { input: 'very bad quality and slow', output: 'bad' },
+            { input: 'bad and slow', output: 'bad' },
+            { input: 'i was very disapointed with my order', output: 'bad' },
+            { input: 'the vegetables where rotten', output: 'bad' },
+            { input: 'taste was weird', output: 'bad' },
+            { input: 'really bad first experice', output: 'bad' },
+            { input: 'bad after sale service', output: 'bad' },
+            { input: 'taste was not what i expected', output: 'bad' },
+            { input: 'i had to put it to the garbage', output: 'bad' },
+            { input: 'bad experience', output: 'bad' },
+            { input: 'i had a really bad experience with them', output: 'bad' },
+            { input: 'alot of errors in my order', output: 'bad' },
+            { input: 'i was very happy with my order', output: 'happy' },
+            { input: 'this looks really bad', output: 'bad' },
+            { input: 'i was very happy with my order', output: 'happy' },
+            { input: 'i really did not liked the spagetthi', output: 'bad' },
+            { input: 'i had to trow half the food to the garbage', output: 'bad' },
+            { input: 'i had a bad experience ordering with them', output: 'bad' },
 
+
+        ];
+        var t0 = performance.now();
+        let sky_net;
         sky_net = new brain.recurrent.LSTM();
-        sky_net.train(trainingData, {
+        sky_net.train(dataz, {
             iterations: 200,
             erroThresh: 0.011
         });
 
 
-        let test1 = sky_net.run("I would not recommend it to my friends")
-        let test2 = sky_net.run("I was very happy with my order")
-        let test3 = sky_net.run("I had a bad experience ordering with them")
 
 
-        console.log(test1, test2, test3, "Hello World!")
+        var t1 = performance.now();
+        console.log(t0 + "Hello World!" + t1)
 
         this.setState({ trained_net: sky_net })
 
@@ -70,7 +118,7 @@ class Sky_net extends Component {
         this.setState({ show: "analyzing..." })
         // returns array of all reviews, [{},{},{},...]
         // need to access 
-        rawreviews = []
+        let rawreviews = []
         let reviews = await fetch(`/reviews`).then(response => response.json());
         for (var i = 0; i < reviews.length; i++) {
             rawreviews.push(reviews[i]["content"]);
@@ -120,7 +168,9 @@ class Sky_net extends Component {
 
             let predictions = []
 
-            this.setState({ show: "Comments retrievew and are being analyzed" })
+            // this.setState({ show: "Comments retrievew and are being analyzed" })
+
+            let sky_net = this.state.Sky_net
 
             for (let i = 0; i < reviews.length; i++) {
                 predictions.push(sky_net.run(reviews[i]))
@@ -129,7 +179,7 @@ class Sky_net extends Component {
             // store the array of predictions in the state
 
             this.setState({ prediction: predictions })
-            this.setState({ show: "I finished my task" })
+            // this.setState({ show: "I finished my task" })
 
         }
         arrCleaner(this.state.comments)
@@ -145,7 +195,7 @@ class Sky_net extends Component {
             }
         }
         let reviews = await fetch(`/reviews`).then(response => response.json());
-        for (var i = 0; i < reviews.length; i++) {
+        for (var f = 0; f < reviews.length; f++) {
             for (var j = 0; j < indexexOfBadReview.length; j++) {
                 if (i === indexexOfBadReview[j]) {
                     whoAreThebaddies.push(reviews[i]["username"])
@@ -172,17 +222,17 @@ class Sky_net extends Component {
 */
 
 
-    close() {
+    close = () => {
         this.setState({ show: "Goodbye !" })
-        onClick = setState({ commandsVisible: false })
+        this.setState({ commandsVisible: false })
 
 
         setTimeout(this.setState({ show: "If you need more help I'm still here ;\)" }, 2000))
         setTimeout(this.setState({ show: "Humans..." }, 4000))
     }
 
-    display() {
-        onClick = setState({ commandsVisible: true })
+    display = () => {
+        this.setState({ commandsVisible: true })
     }
 
 
