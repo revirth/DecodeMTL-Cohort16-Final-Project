@@ -65,7 +65,7 @@ export default class EditItem extends Component {
             <p class="fw9 f4">{item.name}</p>
 
             <button
-              class="f6 grow no-underline br-pill ba bw2 ph3 pv2 mb2 dib dark-green bordercolor"
+              class="f6 grow no-underline br-pill ba bw2 ph3 pv2 mb2 dib bttext bordercolorblue"
               onClick={this.handleDelete}
             >
               {this.state.deletestatus ? "Show" : "Hide"}

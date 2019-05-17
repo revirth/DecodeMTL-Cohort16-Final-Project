@@ -134,7 +134,7 @@ class UnconnectedLoginPopup extends Component {
     let form = "";
     if (!this.state.forgetPassword) {
       form = (
-        <form className="mainform" onSubmit={this.handleSubmit}>
+        <form className="mainform plcholder" onSubmit={this.handleSubmit}>
           <input
             type="text"
             value={this.state.username}
@@ -153,7 +153,7 @@ class UnconnectedLoginPopup extends Component {
             required
           />
           <input
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow loginicon"
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow loginicon"
             type="submit"
             value="log In"
           />
@@ -179,7 +179,7 @@ class UnconnectedLoginPopup extends Component {
               required
             />
             <input
-              className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
+              className="f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
               type="submit"
               value="Reset your password"
             />
@@ -218,7 +218,7 @@ class UnconnectedLoginPopup extends Component {
             </div>
             <div className="btndiv">
               <button
-                className="btn login-btn f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
+                className="btn login-btn f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
                 onClick={this.props.onClose}
               >
                 close

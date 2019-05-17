@@ -71,6 +71,7 @@ class UnconnectedApp extends Component {
         <div>
           <main className="pa3 pa5-ns flex flex-wrap">
             {this.state.items.map(p => (
+              
               <Product key={p.id} {...p} usertype={this.state.usertype} />
             ))}
           </main>

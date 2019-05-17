@@ -132,7 +132,7 @@ export default class SignupForm extends Component {
               </div>
 
               <input
-                className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow signbtn"
+                className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow signbtn"
                 type="submit"
                 value="Sign Me Up"
               />
@@ -160,7 +160,7 @@ export default class SignupForm extends Component {
             </div>
             <div className="btndiv">
               <button
-                className="btn login-btn f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
+                className="btn login-btn f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
                 onClick={this.props.onClose}
               >
                 close

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
+    "api-ai-javascript": "^2.0.0-beta.21",
     "brain.js": "^1.6.1",
     "material-ui": "^0.20.2",
     "node-sass": "^4.12.0",

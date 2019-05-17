@@ -77,7 +77,7 @@ export default class UploadItem extends Component {
               />
 
               <input
-                className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
+                className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow"
                 type="submit"
                 value="Submit"
               />

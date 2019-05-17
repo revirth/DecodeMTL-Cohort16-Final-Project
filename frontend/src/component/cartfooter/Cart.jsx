@@ -1,70 +1,89 @@
 import React from "react";
 import { connect } from "react-redux";
-import {Link} from 'react-router-dom'
-import store from '../../store.js'
+import { Link } from "react-router-dom";
+import store from "../../store.js";
 import "./cart.scss";
 // import "./style.css";
 
 class UnConnectedCart extends React.Component {
-
   componentDidMount = () => {
-    updateCartInfo()
-  }
+    updateCartInfo();
+  };
 
   onChangeHandleQuantity = e => {
     // if a customer changed the quantity of an item in their Cart
-    // we send a request to the endpoint "/cart/updateItem" to update the item 
-    let data = new FormData()
-    data.append("cartItemId", e.target.id)
-    data.append("itemQuantity", e.target.value)
-    fetch("/cart/updateItem", { method: "PUT", credentials: 'include', body: data }).then(headers => {
-      console.log("PUT")
-      return headers.text()
-    }).then(body => {
-      let result = JSON.parse(body)
-      if (result.successful) {
-        updateCartInfo()
-      }
+    // we send a request to the endpoint "/cart/updateItem" to update the item
+    let data = new FormData();
+    data.append("cartItemId", e.target.id);
+    data.append("itemQuantity", e.target.value);
+    fetch("/cart/updateItem", {
+      method: "PUT",
+      credentials: "include",
+      body: data
     })
+      .then(headers => {
+        console.log("PUT");
+        return headers.text();
+      })
+      .then(body => {
+        let result = JSON.parse(body);
+        if (result.successful) {
+          updateCartInfo();
+        }
+      });
   };
 
   onClickRemoveItem = e => {
     // if a customer removed an item from their Cart
-    // we send a request to the endpoint "/cart/deleteItem" to remove the item 
-    let data = new FormData()
-    data.append("cartItemId", e.target.id)
-    fetch("/cart/deleteItem", { method: "DELETE", credentials: 'include', body: data }).then(headers => {
-      return headers.text()
-    }).then(body => {
-      let result = JSON.parse(body)
-      if (result.successful) {
-        updateCartInfo()
-      }
+    // we send a request to the endpoint "/cart/deleteItem" to remove the item
+    let data = new FormData();
+    data.append("cartItemId", e.target.id);
+    fetch("/cart/deleteItem", {
+      method: "DELETE",
+      credentials: "include",
+      body: data
     })
+      .then(headers => {
+        return headers.text();
+      })
+      .then(body => {
+        let result = JSON.parse(body);
+        if (result.successful) {
+          updateCartInfo();
+        }
+      });
   };
 
   onClickClearCart = e => {
-    fetch("/cart/clear", { method: "DELETE", credentials: 'include' }).then(headers => {
-      return headers.text()
-    }).then(body => {
-      let result = JSON.parse(body)
-      if (result.successful) {
-        updateCartInfo()
-      }
-    })
-  }
+    fetch("/cart/clear", { method: "DELETE", credentials: "include" })
+      .then(headers => {
+        return headers.text();
+      })
+      .then(body => {
+        let result = JSON.parse(body);
+        if (result.successful) {
+          updateCartInfo();
+        }
+      });
+  };
 
   render() {
     //calculate Total for all items in the Cart
-    console.log("Render Cart")
+    console.log("Render Cart");
     let total = 0;
-    let clearButton = this.props.items.length > 0 ?
-      <div className="parent-horizontal">
-        <div className="button-right">
-          <button className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow" onClick={this.onClickClearCart}>Clear Cart</button>
+    let clearButton =
+      this.props.items.length > 0 ? (
+        <div className="parent-horizontal">
+          <div className="button-right">
+            <button
+              className="f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow"
+              onClick={this.onClickClearCart}
+            >
+              Clear Cart
+            </button>
+          </div>
         </div>
-      </div>
-      : null
+      ) : null;
     this.props.items.forEach(item => {
       total = total + parseFloat(item.itemPrice) * parseInt(item.itemQuantity);
     });
@@ -74,12 +93,14 @@ class UnConnectedCart extends React.Component {
         <div className="general-margin">
           <h4>Your Items:</h4>
           {clearButton}
-          {this.props.items.map((item) => {
+          {this.props.items.map(item => {
             return (
               <div key={item.cartItemId} className="item-cell-width">
                 <div className="item-in-column">
                   <div className="image-wrapper">
-                    <Link to={"/items/item/" + item.itemId}><img className="item-image" src={item.itemImage} alt="" /></Link>
+                    <Link to={"/items/item/" + item.itemId}>
+                      <img className="item-image" src={item.itemImage} alt="" />
+                    </Link>
                   </div>
                   <div className="information-in-row name-price-width">
                     <div>
@@ -123,14 +144,14 @@ class UnConnectedCart extends React.Component {
           <div className="total">Total: {total.toFixed(2)}</div>
           <div className="parent-horizontal">
             <div className="button-right">
-            <Link to="/checkout">
-              <button
-                className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
-                // onClick={this.onClickChaeckout}
-              >
-                Checkout
-            </button>
-            </Link>
+              <Link to="/checkout">
+                <button
+                  className="f6 link dim br3 ph3 pv2 mb2 dib white btcolor  bn grow"
+                  // onClick={this.onClickChaeckout}
+                >
+                  Checkout
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -142,19 +163,18 @@ class UnConnectedCart extends React.Component {
 let updateCartInfo = () => {
   // we send a request to the endpoint "/cartItems" to upload cartItems for current user
   // before show the Cart page the first time
-  fetch("/cart/allItems", { method: "GET", credentials: 'include' })
+  fetch("/cart/allItems", { method: "GET", credentials: "include" })
     .then(headers => {
       return headers.text();
     })
     .then(body => {
       // we update the cartItems for current user in our "store"
-      let parsed = JSON.parse(body)
+      let parsed = JSON.parse(body);
       if (parsed.successful) {
         store.dispatch({ type: "FillCart", cartItems: parsed.cartItems });
       }
     });
-
-}
+};
 
 let mapStateToProps = state => {
   return { items: state.cartItems };
@@ -162,6 +182,6 @@ let mapStateToProps = state => {
 
 let Cart = connect(mapStateToProps)(UnConnectedCart);
 
-export default Cart
+export default Cart;
 
-export { updateCartInfo }
+export { updateCartInfo };
