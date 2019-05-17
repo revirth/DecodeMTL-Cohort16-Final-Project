@@ -78,7 +78,7 @@ export default class selleraccount extends Component {
             <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
               Shop Detail
             </h1>
-
+            <Sky_net />
             <div class="pa3 bt b--black-10">
               <p class="f6 f5-ns lh-copy measure stylepara">
                 <span>Street: {this.state.sellerdetails.street}</span>
