@@ -1,21 +1,23 @@
-// store neural net into database once trained -> to do
-// working with array of string, need to make the call to db and send modification
+
+// currently analyze comments and returns an array of baddies 
+// need to work on displaying the baddies UI
 
 
-import "./neural_net.js"
+// import "./neural_net.js"
 import "./data.js"
 // import "./chitchatdata.js"
-import React, { Component } from "react";
+import { Component } from "react";
 import "./sky_net.scss";
-class Sky_net extends React.Component {
+class Sky_net extends Component {
     constructor() {
         super();
         this.state = {
-            prediction: [],
-            show: "Hello World!",
-            showMenu: false,
-            trained_net: {},
-            comments: []
+            show: "Hello World!", // display text window
+            commandsVisible: 0,
+            trained_net: {}, // trained net after initialise method
+            comments: [], // array of cleaned reviews, only content
+            prediction: [], // array of string, 'good' or 'bad' based on trained_net
+            baddies: [] // array of users with bad comments
 
         };
     }
@@ -63,9 +65,18 @@ class Sky_net extends React.Component {
     version of the string and replacing characters with regex
 
     */
-    predict() {
+
+    predict = async () => {
         this.setState({ show: "analyzing..." })
-        // database call for array of reviews => to do 
+        // returns array of all reviews, [{},{},{},...]
+        // need to access 
+        rawreviews = []
+        let reviews = await fetch(`/reviews`).then(response => response.json());
+        for (var i = 0; i < reviews.length; i++) {
+            rawreviews.push(reviews[i]["content"]);
+        }
+        // now we have an array of string containing the comments
+
         // store the reviews into rawreviews
         this.setState({ comments: rawreviews })
 
@@ -124,6 +135,26 @@ class Sky_net extends React.Component {
         arrCleaner(this.state.comments)
     }
 
+    baddies = async () => {
+        let whoAreThebaddies = []
+        let indexexOfBadReview = []
+        let badreviews = this.state.prediction
+        for (var i = 0; i < badreviews.length; i++) {
+            if (badreviews[i] === 'bad') {
+                indexexOfBadReview.push(i)
+            }
+        }
+        let reviews = await fetch(`/reviews`).then(response => response.json());
+        for (var i = 0; i < reviews.length; i++) {
+            for (var j = 0; j < indexexOfBadReview.length; j++) {
+                if (i === indexexOfBadReview[j]) {
+                    whoAreThebaddies.push(reviews[i]["username"])
+
+                }
+            }
+        }
+        this.setState({ baddies: whoAreThebaddies });
+    }
 
 
     /*
@@ -143,8 +174,7 @@ class Sky_net extends React.Component {
 
     close() {
         this.setState({ show: "Goodbye !" })
-        // changes the opactiy of the menu section to 0 
-
+        onClick = setState({ commandsVisible: false })
 
 
         setTimeout(this.setState({ show: "If you need more help I'm still here ;\)" }, 2000))
@@ -152,13 +182,15 @@ class Sky_net extends React.Component {
     }
 
     display() {
-        // changes opacity of the menu section to 1
+        onClick = setState({ commandsVisible: true })
     }
 
 
 
     render() {
-
+        const commandsOverrides = {
+            opacity: this.state.commandsVisible ? 1 : 0
+        }
         return (
             <div className='sky_net'>
                 <div className='container'>
@@ -194,9 +226,10 @@ class Sky_net extends React.Component {
 
 
 
-                    <div className='commands'><p>How can I help you ?</p><ul>
+                    <div className='commands' style={commandsOverrides}><p>How can I help you ?</p><ul>
                         <li onClick={this.initialise}>Initialize</li>
                         <li onClick={this.predict}>Scan Comments</li>
+                        <li onClick={this.baddies}>Show bad comments</li>
                         <li onClick={this.close}>Close</li>
                     </ul>
                     </div>

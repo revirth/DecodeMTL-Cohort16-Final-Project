@@ -1,16 +1,19 @@
 import "./main.css";
 import "./style.css";
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import addItemToCart from "./addItemToCart";
+import LoginPopup from "../login/LoginPopup";
 // import item from "./items.js";
 
-class Itempage extends Component {
+class UnconnectedItempage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       foundItem: {},
       reviews: [],
-      comment: ""
+      comment: "",
+      LoginPopup: false
     };
   }
   componentDidMount = async () => {
@@ -56,6 +59,19 @@ class Itempage extends Component {
       });
   };
 
+  onClickAddItemToCart = itemId => {
+    console.log("LoggedIn: ", this.props.loggedIn, "itemId: ", itemId);
+    if (this.props.loggedIn) {
+      addItemToCart(itemId);
+    } else {
+      this.setState({ loginPopup: true });
+    }
+  };
+
+  closeLoginPopup = () => {
+    this.setState({ loginPopup: false });
+  };
+
   render = () => {
     return (
       <div>
@@ -76,7 +92,10 @@ class Itempage extends Component {
                 </p>
                 <button
                   className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
-                  onClick={() => addItemToCart(this.state.foundItem._id)}
+                  // onClick={() => addItemToCart(this.state.foundItem._id)}
+                  onClick={() => {
+                    this.onClickAddItemToCart(this.state.foundItem._id);
+                  }}
                 >
                   Add to cart
                 </button>
@@ -154,9 +173,18 @@ class Itempage extends Component {
             <div className="footergap" />
           </div>
         </div>
+        {this.state.loginPopup ? (
+          <LoginPopup onClose={this.closeLoginPopup} />
+        ) : null}
       </div>
     );
   };
 }
+
+let mapStateToProps = state => {
+  return { loggedIn: state.loggedIn };
+};
+
+let Itempage = connect(mapStateToProps)(UnconnectedItempage);
 
 export default Itempage;
