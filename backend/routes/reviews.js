@@ -4,6 +4,12 @@ const ObjectId = require("mongodb").ObjectId;
 
 router.get("/", async (req, res) => {
   let docs = await res.locals.REVIEWS.find({}).toArray();
+  let items = await res.locals.ITEMS.find({}).toArray();
+
+  docs.forEach(d => {
+    let item = items.find(i => "" + i._id === d.itemId);
+    d.itemname = item ? item.name : "";
+  });
 
   res.send(docs);
 });
