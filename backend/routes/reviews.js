@@ -3,13 +3,17 @@ const router = express.Router();
 const ObjectId = require("mongodb").ObjectId;
 
 router.get("/", async (req, res) => {
-  let docs = await res.locals.REVIEWS.find({}).toArray();
-  let items = await res.locals.ITEMS.find({}).toArray();
-
-  docs.forEach(d => {
-    let item = items.find(i => "" + i._id === d.itemId);
-    d.itemname = item ? item.name : "";
-  });
+  let docs = await res.locals.REVIEWS.aggregate([
+    { $addFields: { convertedId: { $toObjectId: "$itemId" } } },
+    {
+      $lookup: {
+        from: "items",
+        localField: "convertedId",
+        foreignField: "_id",
+        as: "item"
+      }
+    }
+  ]).toArray();
 
   res.send(docs);
 });
