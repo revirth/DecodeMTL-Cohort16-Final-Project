@@ -32,7 +32,6 @@ class UnconnectedProduct extends Component {
   };
 
   onClickAddItemToCart = (itemId) => {
-    console.log("LoggedIn: ", this.props.loggedIn, "itemId: ", itemId)
     if (this.props.loggedIn) {
       addItemToCart(itemId)
     } else {

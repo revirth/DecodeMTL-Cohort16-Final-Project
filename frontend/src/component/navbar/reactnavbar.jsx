@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./reactnavbar.scss";
 import Fade from "react-reveal/Fade";
 import { connect } from "react-redux";
-
+import chekUserSession from '../login/CheckUserSession'
 import LoginPopup from "../login/LoginPopup.jsx";
 import SignupForm from "../login/SignupForm.jsx";
 import NavBarSearchBox from "../navbar-searchbox";
@@ -67,14 +67,8 @@ class UnconnectedLinks extends React.Component {
   }
 
   componentWillMount = () => {
-    this.isValidUser();
-  };
-
-  isValidUser = async () => {
-    let response = await fetch("/auth/isvalid", { credentials: "include" });
-    let data = await response.json();
-    this.props.dispatch({ type: "CheckIfUserValid", isValidUser: data.status });
-  };
+    chekUserSession()
+  }
 
   // closeLoginPopup = loggedIn => {
   closeLoginPopup = () => {
