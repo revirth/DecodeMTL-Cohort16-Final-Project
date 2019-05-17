@@ -10,6 +10,20 @@ export default class App extends Component {
     super(props);
     this.state = { popup: false, signup: false };
   }
+
+  escFunction = event => {
+    console.log("event key", event.key);
+    if (event.keyCode === 27) {
+      this.setState({
+        popup: false,
+        signup: false
+      });
+    }
+  };
+  componentDidMount = async () => {
+    console.log("did mount");
+    document.addEventListener("keydown", this.escFunction, false);
+  };
   closeLoginPopup = () => {
     this.setState({ popup: false });
   };
@@ -17,6 +31,7 @@ export default class App extends Component {
     this.setState({ signup: false });
   };
   render = () => {
+    console.log("state", this.state);
     return (
       <div className="maindiv">
         <div className="centered">
@@ -30,7 +45,7 @@ export default class App extends Component {
             className="btn login-btn f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
             onClick={() => this.setState({ signup: true })}
           >
-            Sign Up
+            Signnnn Up
           </button>
         </div>
         {this.state.popup ? (

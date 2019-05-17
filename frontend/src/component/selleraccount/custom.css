@@ -82,6 +82,7 @@ input::placeholder {
 .listing-items {
   display: flex;
   flex-direction: column;
+  margin-top: 15%;
 }
 .flexlist {
   display: flex;
@@ -89,6 +90,21 @@ input::placeholder {
   justify-content: space-evenly;
   width: 90%;
   margin-top: 10% !important;
+  height: -webkit-fill-available;
+  overflow: scroll;
+  display: flex;
+  flex-wrap: wrap;
+}
+.bordercolor {
+  border-color: rgb(3, 150, 103);
+}
+
+.hideop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 90%;
+  margin-top: 5% !important;
   height: -webkit-fill-available;
   overflow: scroll;
   display: flex;

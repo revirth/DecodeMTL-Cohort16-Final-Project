@@ -67,14 +67,14 @@ class UnconnectedLinks extends React.Component {
   }
 
   componentWillMount = () => {
-     this.isValidUser()
-  }
+    this.isValidUser();
+  };
 
   isValidUser = async () => {
     let response = await fetch("/auth/isvalid", { credentials: "include" });
     let data = await response.json();
-    this.props.dispatch({type: "CheckIfUserValid", isValidUser: data.status})
-  }
+    this.props.dispatch({ type: "CheckIfUserValid", isValidUser: data.status });
+  };
 
   // closeLoginPopup = loggedIn => {
   closeLoginPopup = () => {
@@ -93,7 +93,7 @@ class UnconnectedLinks extends React.Component {
   escFunction = event => {
     //console.log("event key", event.key);
     if (event.keyCode === 27) {
-      this.setState({ search: false });
+      this.setState({ search: false, popup: false, signup: false });
     }
   };
   enterFunction = event => {
@@ -148,25 +148,25 @@ class UnconnectedLinks extends React.Component {
             </Link>
           </span>
         ) : (
-            <span className="afterlogin">
-              Hi {this.props.username}
-              {this.props.loggedIn && this.props.usertp === "1" ? (
-                <span>
-                  <Link to="/profile">Account Setting</Link>
-                  <Link to="#" onClick={this.logout}>
-                    LOGOUT
+          <span className="afterlogin">
+            Hi {this.props.username}
+            {this.props.loggedIn && this.props.usertp === "1" ? (
+              <span>
+                <Link to="/profile">Account Setting</Link>
+                <Link to="#" onClick={this.logout}>
+                  LOGOUT
                 </Link>{" "}
-                </span>
-              ) : (
-                  <span>
-                    <Link to="/sellerprofile">Seller Account</Link>
-                    <Link to="#" onClick={this.logout}>
-                      LOGOUT
+              </span>
+            ) : (
+              <span>
+                <Link to="/sellerprofile">Seller Account</Link>
+                <Link to="#" onClick={this.logout}>
+                  LOGOUT
                 </Link>
-                  </span>
-                )}
-            </span>
-          )}
+              </span>
+            )}
+          </span>
+        )}
 
         {/* <i id="searchbutton" className="fa fa-search fa" />
         <input onClick={() => alert(`search ${this.value}`)} /> */}

@@ -96,28 +96,33 @@ class Itempage extends Component {
             </div>
             <form class="pa4 black-80" onSubmit={this.handleSubmit}>
               <div className="commentBox">
-                <label for="comment" class="f6 b db mb2">
-                  Comments <span class="normal black-60">(optional)</span>
-                </label>
-                <textarea
-                  id="comment"
-                  name="comment"
-                  class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2"
-                  aria-describedby="comment-desc"
-                  onChange={this.handleComment}
-                />
-                <input
-                  type="submit"
-                  class="f6 grow no-underline br-pill ba bw2 ph3 pv2 mb2 dib dark-green radiusgreen"
-                  value="Submit"
-                />
+                <div className="flex">
+                  <div>
+                    <label for="comment" class="f6 b db mb2">
+                      Comments <span class="normal black-60">(optional)</span>
+                    </label>
+                    <textarea
+                      id="comment"
+                      name="comment"
+                      class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2 txtarea"
+                      aria-describedby="comment-desc"
+                      onChange={this.handleComment}
+                      value={this.state.comment}
+                    />
+                  </div>
+                  <input
+                    type="submit"
+                    class="f6 grow no-underline br-pill ba bw2 ph3 pv2 mb2 dib dark-green radiusgreen"
+                    value="Submit"
+                  />
+                </div>
 
-                <small id="comment-desc" class="f6 black-60">
+                <p id="comment-desc" class="f6 black-60">
                   Helper text for a form control. Can use this text to{" "}
                   <a href="#" class="link underline black-80 hover-blue">
                     link to more info.
                   </a>
-                </small>
+                </p>
               </div>
             </form>
             <div className="pa4-l subscribeform">

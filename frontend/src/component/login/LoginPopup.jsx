@@ -17,6 +17,7 @@ class UnconnectedLoginPopup extends Component {
       email: ""
     };
   }
+
   componentDidMount() {
     document.getElementById("loginspace").focus();
   }
@@ -231,7 +232,7 @@ class UnconnectedLoginPopup extends Component {
 }
 
 let mapStateToProps = state => {
-  return { };
+  return {};
 };
 
 let Login = connect()(UnconnectedLoginPopup);
