@@ -1,6 +1,6 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css");
 @import url("https://use.fontawesome.com/releases/v5.8.2/css/all.css");
-@import url('https://fonts.googleapis.com/css?family=Slabo+27px');
+@import url("https://fonts.googleapis.com/css?family=Slabo+27px");
 
 #searchbutton {
   color: white;
@@ -12,15 +12,15 @@ input {
 }
 
 nav {
-  background-color: #037B55;
+  background-color: #0077b5;
   overflow: hidden;
-  padding: 1.30em;
+  padding: 1.3em;
   border-bottom: 3px solid transparent;
 }
 
 nav a {
   color: white;
-  font-family: 'Slabo 27px', serif;
+  font-family: "Slabo 27px", serif;
 }
 
 nav .navWide {

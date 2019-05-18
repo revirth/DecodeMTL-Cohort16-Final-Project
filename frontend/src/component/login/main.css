@@ -1,103 +1,97 @@
 body {
-    background-color: #F8F5F1;
-    margin: 0;
+  background-color: #f8f5f1;
+  margin: 0;
 }
 
 .overlay {
-    z-index: 50;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+  z-index: 50;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .popup {
-    z-index: 100;
-    top: 200px;
+  z-index: 100;
+  top: 200px;
 
-    background-color: white;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
+  background-color: white;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 
-    display: flex;
-
+  display: flex;
 }
 
-
 .login-btn {
-    margin: 0 auto;
-    width: 100px;
-    margin-top: 15%;
-
-
+  margin: 0 auto;
+  width: 100px;
+  margin-top: 15%;
 }
 
 .login-field {
-    width: 100%;
-    height: 10%;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    font-size: 150%;
-    border-radius: 5px !important;
-    -webkit-border-radius: 5px !important;
-    -moz-border-radius: 5px !important;
-    -ms-border-radius: 5px !important;
-    -o-border-radius: 5px !important;
+  width: 100%;
+  height: 40px !important;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 150%;
+  border-radius: 5px !important;
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  -ms-border-radius: 5px !important;
+  -o-border-radius: 5px !important;
 }
 
 /* ::placeholder {
     font-size: 200%;
 } */
 
-
 .login-form-div {
-    background-color: #F8F5F1;
-    padding: 50px;
-    border-radius: 5px;
-
+  background-color: #f8f5f1;
+  padding: 50px;
+  border-radius: 5px;
 }
 
-input[type=submit] {
-    margin-top: 20px;
+input[type="submit"] {
+  margin-top: 20px;
 }
 
 .maindiv {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))), url(/main.jpg);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/main.jpg);
-    /* background-image: url(/main.jpg); */
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-
-
+  background-image: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.7)),
+      to(rgba(0, 0, 0, 0.7))
+    ),
+    url(/main.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(/main.jpg);
+  /* background-image: url(/main.jpg); */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
 }
 
-
-
-
 .btn {
-
-    background-color: #2585B8;
-    border-color: black;
-    border-radius: 3px;
-    padding: 6px 12px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    -ms-border-radius: 3px;
-    -o-border-radius: 3px;
-    font-size: 20px;
-
+  background-color: #2585b8;
+  border-color: black;
+  border-radius: 3px;
+  padding: 6px 12px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  font-size: 20px;
 }
 
 /* .btn:hover {
@@ -106,184 +100,171 @@ input[type=submit] {
 } */
 
 .mainform {
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    border: 0px;
-
-
+  border-radius: 5px;
+  5-webkit-border-radius: ;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  border: 0px;
+  -webkit-border-radius: 5px;
 }
 
-
-
 .sub {
-    margin-left: 5px;
-    margin-bottom: 20px;
-    margin-top: 10%;
-    margin-right: 2px;
-
-
+  margin-left: 5px;
+  margin-bottom: 20px;
+  margin-top: 10%;
+  margin-right: 2px;
 }
 
 .forgot-password {
-    text-align: right;
+  text-align: right;
 }
 
-
-
-
-
-
 .animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s;
 }
 
 @-webkit-keyframes animatezoom {
-    from {
-        -webkit-transform: scale(0)
-    }
+  from {
+    -webkit-transform: scale(0);
+  }
 
-    to {
-        -webkit-transform: scale(1)
-    }
+  to {
+    -webkit-transform: scale(1);
+  }
 }
 
 @keyframes animatezoom {
-    from {
-        transform: scale(0)
-    }
+  from {
+    transform: scale(0);
+  }
 
-    to {
-        transform: scale(1)
-    }
+  to {
+    transform: scale(1);
+  }
 }
 
 .btndiv {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10%
+  display: flex;
+  flex-direction: column;
+  margin-top: 10%;
 }
 
 .centered {
-    text-align: center;
-    justify-content: center;
-
+  text-align: center;
+  justify-content: center;
 }
 
 .popup-img img {
-    height: 70vh;
+  height: 70vh;
 }
 
 .loginicon {
-    background-image: url(/loginicon-white.png);
-    background-repeat: no-repeat;
-    background-position: 70% 40%;
-    background-size: 25px;
-
-
+  background-image: url(/loginicon-white.png);
+  background-repeat: no-repeat;
+  background-position: 70% 40%;
+  background-size: 25px;
 }
 
 .signbtn {
-    background-image: url(/signupbtn.png);
-    background-repeat: no-repeat;
-    background-position: 80% 40%;
-    background-size: 25px;
+  background-image: url(/signupbtn.png);
+  background-repeat: no-repeat;
+  background-position: 80% 40%;
+  background-size: 25px;
 }
 
 .forgetlink {
-    color: #2585B8;
+  color: #2585b8;
 }
 
 .styled-select {
-    background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
-    height: 29px;
-    overflow: hidden;
-    width: 240px;
-    margin-left: 10%;
-
+  background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+  height: 29px;
+  overflow: hidden;
+  width: 240px;
+  margin-left: 10%;
 }
 
 .ColorSignup {
-    background-color: #037B55;
+  background-color: #037b55;
 }
 
-
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
 
 .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
-input:checked+.slider {
-    background-color: #037B55;
+input:checked + .slider {
+  background-color: #037b55;
 }
 
-input:focus+.slider {
-    box-shadow: 0 0 1px #037B55;
+input:focus + .slider {
+  box-shadow: 0 0 1px #037b55;
 }
 
-input:checked+.slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
 }
 
 /* Rounded sliders */
 .slider.round {
-    border-radius: 34px;
+  border-radius: 34px;
 }
 
 .slider.round:before {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .sildertoggle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .registertxt {
-    font-size: 1.2rem;
-
+  font-size: 1.2rem;
 }
 
 .tog {
-    margin-top: 4%;
+  margin-top: 4%;
+}
+.plcholder::placeholder {
+  background-image: linear-gradient(to left, #0999b9, #0083b0);
 }

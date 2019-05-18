@@ -4,9 +4,9 @@ import "./main.css";
 import "./style.css";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import LoginPopup from '../login/LoginPopup'
+import LoginPopup from "../login/LoginPopup";
 
-let onClickHandle = e => { };
+let onClickHandle = e => {};
 
 class UnconnectedProduct extends Component {
   constructor(props) {
@@ -31,13 +31,13 @@ class UnconnectedProduct extends Component {
     });
   };
 
-  onClickAddItemToCart = (itemId) => {
+  onClickAddItemToCart = itemId => {
     if (this.props.loggedIn) {
-      addItemToCart(itemId)
+      addItemToCart(itemId);
     } else {
-      this.setState({ loginPopup: true })
+      this.setState({ loginPopup: true });
     }
-  }
+  };
 
   closeLoginPopup = () => {
     this.setState({ loginPopup: false });
@@ -66,6 +66,14 @@ class UnconnectedProduct extends Component {
 
     return (
       <article className={classes} style={customCSS} id={_id}>
+        {!this.state.available && (
+          <div
+            className="notavailable"
+            style={{ transform: "rotateY(180deg)" }}
+          >
+            Not available
+          </div>
+        )}
         {this.props.usertype === "2" && (
           <p className="availability-toggle" onClick={this.availbleItem}>
             {!this.state.available ? "o" : "x"}
@@ -94,10 +102,10 @@ class UnconnectedProduct extends Component {
           <div className="btn1">
             <button
               disabled={!this.state.available}
-              className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow btncart"
+              className="f6 link dim br3 ph3 pv2 mb2 dib white btcolor  bn grow btncart"
               // onClick={() => addItemToCart(_id)}
               onClick={() => {
-                this.onClickAddItemToCart(_id)
+                this.onClickAddItemToCart(_id);
               }}
             >
               Add to cart
@@ -105,7 +113,7 @@ class UnconnectedProduct extends Component {
             </button>
 
             <Link
-              className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow moreLinks"
+              className="f6 link dim br3 ph3 pv2 mb2 dib white btcolor  bn grow moreLinks"
               to={`/items/item/${_id}`}
             >
               More Details

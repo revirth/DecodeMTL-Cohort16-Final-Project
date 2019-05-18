@@ -1,5 +1,6 @@
 import React from "react";
 import "./HomePageContent.scss";
+import Actualfooter from "./actualfooter.jsx";
 
 class HomePageContent extends React.Component {
   render() {
@@ -135,6 +136,7 @@ class HomePageContent extends React.Component {
         </div>
 
         <div className="spaceforfooter" />
+        <Actualfooter />
       </div>
     );
   }

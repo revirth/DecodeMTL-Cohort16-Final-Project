@@ -92,37 +92,37 @@ export default class selleraccount extends Component {
         </div>
         <div className="internalSeller">
           <button
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.shopDetails}
           >
             Update shop details
           </button>
           <button
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.uploadFile}
           >
             Upload Items
           </button>
           <button
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.showitems}
           >
             View/Edit Item list
           </button>
           <button
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.listOfuser}
           >
             List of user
           </button>
           <button
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.delivereditems}
           >
             Delivered items
           </button>
           <button
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.orderLists}
           >
             Order Lists
@@ -134,7 +134,7 @@ export default class selleraccount extends Component {
             All reviews
           </button> */}
           <Link
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             to="/sellerallreview"
           >
             All reviews

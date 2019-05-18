@@ -79,7 +79,9 @@ describe(`GET /items`, () => {
 const fake = () => ({
   name: `item name ${Math.floor(Math.random() * 100 + 10)}`,
   price: Math.floor(Math.random() * 100 + 30),
-  imgUrl: `http://placekitten.com/200/${Math.floor(Math.random() * 100 + 150)}`,
+  imgUrl: `https://baconmockup.com/200/${Math.floor(
+    Math.random() * 100 + 150
+  )}`,
   description: "test by mocha"
 });
 
