@@ -39,6 +39,7 @@ app.use(
       tokens.url(req, res),
       tokens.status(req, res),
       JSON.stringify(req.body),
+      SESSIONS[req.cookies.sid],
       tokens.res(req, res, "content-length"),
       "-",
       tokens["response-time"](req, res),
