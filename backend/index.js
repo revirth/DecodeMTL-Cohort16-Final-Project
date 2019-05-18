@@ -90,6 +90,9 @@ MongoClient.connect(process.env.MLAB_URI, {
     res.locals.REVIEWS = REVIEWS;
     res.locals.ORDERS = ORDERS;
     res.locals.CART = CART;
+
+    res.locals.USERNAME = SESSIONS[req.cookies.sid];
+
     next();
   });
 
