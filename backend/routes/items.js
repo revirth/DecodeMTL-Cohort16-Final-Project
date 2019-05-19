@@ -11,9 +11,6 @@ let paginzation = query => {
 };
 
 router.get("/", async (req, res) => {
-  let sid = req.cookies.sid;
-  let username = res.locals.SESSIONS[sid];
-
   const query = req.query.search
     ? {
         name: {
@@ -25,8 +22,10 @@ router.get("/", async (req, res) => {
     : { isDeleted: false };
 
   // for seller user, delete 'isDeleted' filter
-  if (username !== undefined) {
-    var user = await res.locals.USERS.findOne({ username: username });
+  if (res.locals.USERNAME !== undefined) {
+    var user = await res.locals.USERS.findOne({
+      username: res.locals.USERNAME
+    });
 
     user.usertype === 2 && delete query.isDeleted;
   }
