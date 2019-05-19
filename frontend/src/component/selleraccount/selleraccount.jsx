@@ -147,6 +147,12 @@ export default class selleraccount extends Component {
           >
             Map
           </Link>
+          <Link
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
+            to="/gmap"
+          >
+            GMap
+          </Link>
         </div>
         {this.state.showitems ? <EditSellerItems /> : null}
         {this.state.uploaditems ? <UploadItem /> : null}
