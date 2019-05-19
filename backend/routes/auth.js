@@ -14,6 +14,18 @@ const transporter = nodemailer.createTransport({
     pass: process.env.SENDER_PASSWORD
   }
 });
+const Joi = require("@hapi/joi");
+
+const validateUser = user => {
+  const schema = {
+    username: Joi.string()
+      .alphanum()
+      .required(),
+    password: Joi.string().required()
+  };
+
+  return Joi.validate(user, schema);
+};
 
 router.get("/isvalid", async (req, res) => {
   if (res.locals.USERNAME) return res.send(resmsg(true));
@@ -23,6 +35,11 @@ router.get("/isvalid", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  // validate form data
+  const result = validateUser(req.body);
+  if (result.error)
+    return res.status(400).send(resmsg(false, result.error.details[0].message));
+
   let query = {
     ...req.body,
     password: sha256(req.body.password)
@@ -64,6 +81,11 @@ sendtext = (to, message) => {
 };
 
 router.post("/signup", async (req, res) => {
+  // validate form data
+  const result = validateUser(req.body);
+  if (result.error)
+    return res.status(400).send(resmsg(false, result.error.details[0].message));
+
   // check the username
   let doc = await res.locals.USERS.findOne({
     username: req.body.username
