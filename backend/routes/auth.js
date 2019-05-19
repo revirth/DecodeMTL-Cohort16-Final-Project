@@ -36,9 +36,9 @@ router.get("/isvalid", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   // validate form data
-  const result = validateUser(req.body);
-  if (result.error)
-    return res.status(400).send(resmsg(false, result.error.details[0].message));
+  const { error } = validateUser(req.body);
+  if (error)
+    return res.status(400).send(resmsg(false, error.details[0].message));
 
   let query = {
     ...req.body,
@@ -82,9 +82,9 @@ sendtext = (to, message) => {
 
 router.post("/signup", async (req, res) => {
   // validate form data
-  const result = validateUser(req.body);
-  if (result.error)
-    return res.status(400).send(resmsg(false, result.error.details[0].message));
+  const { error } = validateUser(req.body);
+  if (error)
+    return res.status(400).send(resmsg(false, error.details[0].message));
 
   // check the username
   let doc = await res.locals.USERS.findOne({
