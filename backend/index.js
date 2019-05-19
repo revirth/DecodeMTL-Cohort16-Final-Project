@@ -21,7 +21,9 @@ app.use(cookieParser());
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({
+  extended: true
+})); // for parsing application/x-www-form-urlencoded
 
 const cors = require("cors");
 app.use(
@@ -50,8 +52,8 @@ app.use(
 const shajs = require("sha.js");
 sha256 = str =>
   shajs("sha256")
-    .update(str)
-    .digest("hex");
+  .update(str)
+  .digest("hex");
 
 resmsg = (st, msg) => ({
   status: st,
