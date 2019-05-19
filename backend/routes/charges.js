@@ -3,10 +3,8 @@ const router = express.Router();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 router.post("/", async (req, res) => {
-  if (res.locals.USERNAME === undefined) {
-    res.send(resmsg(false, "Invalid User"));
-    return;
-  }
+  if (res.locals.USERNAME === undefined)
+    return res.send(resmsg(false, "Invalid User"));
 
   try {
     const charge = await stripe.charges.create({

@@ -16,10 +16,7 @@ const transporter = nodemailer.createTransport({
 });
 
 router.get("/isvalid", async (req, res) => {
-  if (res.locals.SESSIONS[req.cookies.sid] !== undefined) {
-    res.send(resmsg(true));
-    return;
-  }
+  if (res.locals.USERNAME) return res.send(resmsg(true));
 
   res.clearCookie("sid");
   res.send(resmsg(false));
@@ -37,8 +34,7 @@ router.post("/login", async (req, res) => {
 
   if (doc === null) {
     res.clearCookie("sid");
-    res.send(resmsg(false, "Username or password is invalid"));
-    return;
+    return res.send(resmsg(false, "Username or password is invalid"));
   }
 
   // login
@@ -75,10 +71,7 @@ router.post("/signup", async (req, res) => {
 
   console.log("TCL: /signup -> USERS.findOne", doc);
 
-  if (doc !== null) {
-    res.send(resmsg(false, "Username is already used"));
-    return;
-  }
+  if (doc !== null) return res.send(resmsg(false, "Username is already used"));
 
   // store userinfo in Mongo
   let obj = {
@@ -107,8 +100,7 @@ router.get("/profile", async (req, res) => {
 
   if (doc === null) {
     res.clearCookie("sid");
-    res.send(resmsg(false, "Invalid request"));
-    return;
+    return res.send(resmsg(false, "Invalid request"));
   }
 
   delete doc.password;
@@ -127,8 +119,7 @@ router.put("/profile", async (req, res) => {
 
   if (doc === null) {
     res.clearCookie("sid");
-    res.send(resmsg(false, "Invalid request"));
-    return;
+    return res.send(resmsg(false, "Invalid request"));
   }
 
   let body = req.body.password
@@ -157,8 +148,7 @@ router.post("/socialLogin", async (req, res) => {
 
   if (doc === null) {
     res.clearCookie("sid");
-    res.send(resmsg(false, "User doesn't exist"));
-    return;
+    return res.send(resmsg(false, "User doesn't exist"));
   }
   // login
   let sid = "" + Math.floor(Math.random() * 1000000000000);
@@ -186,10 +176,7 @@ router.post("/socialSignup", async (req, res) => {
   });
   console.log("TCL: /facebookSignup -> USERS.findOne", doc);
 
-  if (doc !== null) {
-    res.send(resmsg(false, "Username is already used"));
-    return;
-  }
+  if (doc !== null) return res.send(resmsg(false, "Username is already used"));
 
   // store userinfo in Mongo
   let obj = {

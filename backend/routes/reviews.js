@@ -26,10 +26,8 @@ router.get("/:reviewId", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  if (res.locals.USERNAME === undefined) {
-    res.send(resmsg(false, "Invalid request"));
-    return;
-  }
+  if (res.locals.USERNAME === undefined)
+    return res.send(resmsg(false, "Invalid request"));
 
   // store a review in Mongo
   let obj = {
