@@ -136,6 +136,25 @@ router.get("/allItems", async (req, res) => {
     let username = res.locals.SESSIONS[sid];
     //request userId from the collection "users"
     let currentUser = await res.locals.USERS.findOne({ username: username });
+
+    let cartItems = await res.locals.CART.aggregate([{
+      $match: { userId: ObjectId(currentUser._id)}
+    },{ $addFields: { convertedItemId: {$toObjectId: "$itemId"}, convertedCartItemId: {$toString: "$_id"}}
+    },{ $lookup: {
+          from: "items",
+          localField: "convertedItemId",
+          foreignField: "_id",
+          as: "item"        
+    }
+    },{
+      $replaceRoot: { newRoot: { $mergeObjects: [ { $arrayElemAt: [ "$item", 0 ] }, "$$ROOT" ] } }
+    },{
+      $project: {cartItemId: "$convertedCartItemId",itemName: "$name",itemImage: "$imgUrl", itemPrice: "$price", itemQuantity:1, itemId: 1 }
+    }, {
+      $project: {item: 0, _id: 0, sellerId: 0, quantity:0, description:0, isDeleted: 0, isAvailable:0}
+    }]).toArray()
+
+   /**
     //request the items in the Cart for user with this userId only
     let cart = await res.locals.CART.find({
       userId: currentUser._id
@@ -157,8 +176,10 @@ router.get("/allItems", async (req, res) => {
           };
         }
       });
+      console.log("OldResult: ", cartItem)
       return cartItem;
     });
+    */
     console.log("Cart items sent");
     process.env.NODE_ENV === "development" &&
       res.send(JSON.stringify({ successful: true, cartItems: cartItems }));
