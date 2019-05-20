@@ -6,91 +6,91 @@ export default class Actualfooter extends Component {
   render() {
     return (
       <div>
-        <footer class="pa4 pa5-l black-70 bt b--black-10 footr">
-          <div class="mb4-l cf mgbtm">
-            <article class="fl w-50 dib-ns w-auto-ns mr4-m mr5-l mb4 pr2 pr0-ns">
-              <h4 class="f5 f4-l fw6">SF</h4>
-              <span class="f7 f6-l db black-70">837 Larkin St.</span>
-              <span class="f7 f6-l black-70">San Francisco, CA 94109 </span>
+        <footer className="pa4 pa5-l black-70 bt b--black-10 footr">
+          <div className="mb4-l cf mgbtm">
+            <article className="fl w-50 dib-ns w-auto-ns mr4-m mr5-l mb4 pr2 pr0-ns">
+              <h4 className="f5 f4-l fw6">SF</h4>
+              <span className="f7 f6-l db black-70">837 Larkin St.</span>
+              <span className="f7 f6-l black-70">San Francisco, CA 94109 </span>
               <a
-                class="f6 db fw6 pv3 black-70 link dim"
+                className="f6 db fw6 pv3 black-70 link dim"
                 title="Call SF"
                 href="tel:+12075555555"
               >
                 +1 207-555-5555
               </a>
             </article>
-            <article class="fl w-50 dib-ns w-auto-ns mr4-m mr5-l mb4 pl2 pl0-ns">
-              <h4 class="f5 f4-l fw6">LA</h4>
-              <span class="f7 f6-l db black-70">1111 Manor Way</span>
-              <span class="f7 f6-l di black-70">Los Angeles, CA 90048</span>
+            <article className="fl w-50 dib-ns w-auto-ns mr4-m mr5-l mb4 pl2 pl0-ns">
+              <h4 className="f5 f4-l fw6">LA</h4>
+              <span className="f7 f6-l db black-70">1111 Manor Way</span>
+              <span className="f7 f6-l di black-70">Los Angeles, CA 90048</span>
               <a
                 href="tel:+13235555555"
-                class="f6 db fw6 pv3 link dim black-70"
+                className="f6 db fw6 pv3 link dim black-70"
                 title="Call the LA office."
               >
                 +1 323-555-5555
               </a>
             </article>
-            <article class="fl w-50 dib-ns w-auto-ns mr4-m mr5-l mb4 pr2 pr0-ns">
-              <h4 class="f5 f4-l fw6">London</h4>
-              <span class="f7 f6-l db black-70">11 Downey St.</span>
-              <span class="f7 f6-l black-70">London, UK</span>
+            <article className="fl w-50 dib-ns w-auto-ns mr4-m mr5-l mb4 pr2 pr0-ns">
+              <h4 className="f5 f4-l fw6">London</h4>
+              <span className="f7 f6-l db black-70">11 Downey St.</span>
+              <span className="f7 f6-l black-70">London, UK</span>
               <a
                 href="tel:+5555555555"
-                class="link dim f6 db fw6 pv3 black-70"
+                className="link dim f6 db fw6 pv3 black-70"
                 title="Call the London office"
               >
                 +44 0 5555-5555
               </a>
             </article>
-            <article class="fl w-50 dib-ns w-auto-ns mb4 pl2 pl0-ns">
-              <h4 class="f5 f4-l fw6">Tokyo</h4>
-              <span class="f7 f6-l db black-70">1982 Flangan Rd.</span>
-              <span class="f7 f6-l">Shinjuku, Tokyo</span>
+            <article className="fl w-50 dib-ns w-auto-ns mb4 pl2 pl0-ns">
+              <h4 className="f5 f4-l fw6">Tokyo</h4>
+              <span className="f7 f6-l db black-70">1982 Flangan Rd.</span>
+              <span className="f7 f6-l">Shinjuku, Tokyo</span>
               <a
                 href="tel:+444444444444"
-                class="f6 db dim fw6 pv3 link black-70"
+                className="f6 db dim fw6 pv3 link black-70"
                 title="Call Tokyo Office"
               >
                 +99 5555-5555
               </a>
             </article>
           </div>
-          <section class="cf mb5 mgbtm">
-            <div class="mb4 mb0-ns w-100 w-50-l fr">
+          <section className="cf mb5 mgbtm">
+            <div className="mb4 mb0-ns w-100 w-50-l fr">
               <a
-                class="black-70 f3 f2-ns fw6 tl link dim dib pv3 mt2 mb4 mb0-l ctus"
+                className="black-70 f3 f2-ns fw6 tl link dim dib pv3 mt2 mb4 mb0-l ctus"
                 href="mailto:queries@thanos.com"
               >
                 {" "}
                 email us at : queries@thanos.com
               </a>
             </div>
-            <div class="mb4 mb0-ns fl w-100 w-50-l">
-              <p class="f4 fw6 mb2 f6 mt0">Sign up for our newsletter.</p>
+            <div className="mb4 mb0-ns fl w-100 w-50-l">
+              <p className="f4 fw6 mb2 f6 mt0">Sign up for our newsletter.</p>
               <input
                 placeholder="Email Address"
-                class="mw-100 w-100 w5-ns f5 input-reset ba b--black-20 pv3 ph4 border-box emailplace"
+                className="mw-100 w-100 w5-ns f5 input-reset ba b--black-20 pv3 ph4 border-box emailplace"
               />
               <input
                 type="submit"
-                class="input-reset w-100 w-auto-ns bg-black-80 white f5 pv2 pv3-ns ph4 ba b--black-80 bg-hover-mid-gray embtn"
+                className="input-reset w-100 w-auto-ns bg-black-80 white f5 pv2 pv3-ns ph4 ba b--black-80 bg-hover-mid-gray embtn"
               />
             </div>
           </section>
-          <div class="dt dt--fixed w-100">
-            <div class="dn dtc-ns v-mid">
-              <p class="f7 black-70 dib pr3 mb3">Copyright © thanos 2048</p>
+          <div className="dt dt--fixed w-100">
+            <div className="dn dtc-ns v-mid">
+              <p className="f7 black-70 dib pr3 mb3">Copyright © thanos 2048</p>
             </div>
-            <div class="db dtc-ns black-70 tc tr-ns v-mid">
+            <div className="db dtc-ns black-70 tc tr-ns v-mid">
               <a
                 href="https://www.facebook.com/"
-                class="link dim dib mr3 black-70"
+                className="link dim dib mr3 black-70"
                 title="Impossible Labs on Facebook"
               >
                 <svg
-                  class="db w2 h2"
+                  className="db w2 h2"
                   data-icon="facebook"
                   viewBox="0 0 32 32"
                   fill="currentColor"
@@ -99,9 +99,12 @@ export default class Actualfooter extends Component {
                   <path d="M8 12 L13 12 L13 8 C13 2 17 1 24 2 L24 7 C20 7 19 7 19 10 L19 12 L24 12 L23 18 L19 18 L19 30 L13 30 L13 18 L8 18 z" />
                 </svg>
               </a>
-              <a href="https://twitter.com/" class="link dim dib mr3 black-70">
+              <a
+                href="https://twitter.com/"
+                className="link dim dib mr3 black-70"
+              >
                 <svg
-                  class="db w2 h2"
+                  className="db w2 h2"
                   data-icon="twitter"
                   viewBox="0 0 32 32"
                   fill="currentColor"
@@ -112,11 +115,11 @@ export default class Actualfooter extends Component {
               </a>
               <a
                 href="https://medium.com/"
-                class="link dim dib mr3 black-70"
+                className="link dim dib mr3 black-70"
                 title="Impossible Labs on Medium"
               >
                 <svg
-                  class="db w2 h2"
+                  className="db w2 h2"
                   x="0px"
                   y="0px"
                   viewBox="0 0 290 248.6"
@@ -125,7 +128,7 @@ export default class Actualfooter extends Component {
                   <g>
                     <path
                       fill="currentColor"
-                      class="st0"
+                      className="st0"
                       d="M287.8,46.3L196,0.3c-0.4-0.2-0.9-0.3-1.3-0.3c0,0-0.1,0-0.1,0c-1.1,0-2.2,0.6-2.8,1.5l-56.6,92l63.2,102.7 l90.4-146.9C289.4,48.3,289,46.8,287.8,46.3z"
                     />
                     <polygon
@@ -145,9 +148,9 @@ export default class Actualfooter extends Component {
               </a>
               <a
                 href="https://www.linkedin.com/company/"
-                class="link dim dib black-70"
+                className="link dim dib black-70"
               >
-                <svg class="db w2 h2" x="0px" y="0px" viewBox="0 0 48 48">
+                <svg className="db w2 h2" x="0px" y="0px" viewBox="0 0 48 48">
                   <linearGradient
                     gradientUnits="userSpaceOnUse"
                     x1="23.9995"
@@ -174,8 +177,8 @@ export default class Actualfooter extends Component {
               </a>
             </div>
           </div>
-          <div class="db dn-ns">
-            <p class="f7 black-70 mt4 tc">Copyright © Thanos 2038</p>
+          <div className="db dn-ns">
+            <p className="f7 black-70 mt4 tc">Copyright © Thanos 2038</p>
           </div>
         </footer>
       </div>
