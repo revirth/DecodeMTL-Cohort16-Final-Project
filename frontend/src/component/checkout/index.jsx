@@ -6,12 +6,9 @@ export default class Checkout extends Component {
   render() {
     return (
       <StripeProvider apiKey="pk_test_9kvtGSlvXrGiwuS7NJ070Nrn006YjdNnpO">
-        <div className="example">
-          <h1>React Stripe Elements Example</h1>
-          <Elements>
-            <CheckoutForm />
-          </Elements>
-        </div>
+        <Elements>
+          <CheckoutForm />
+        </Elements>
       </StripeProvider>
     );
   }
