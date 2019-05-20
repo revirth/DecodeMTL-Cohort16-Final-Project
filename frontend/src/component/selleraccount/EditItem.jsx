@@ -48,24 +48,24 @@ export default class EditItem extends Component {
       //     </div>
       //   </div>
       // </div>
-      <section class="tc pa3 ">
+      <section className="tc pa3 ">
         <article
-          class="hide-child relative ba b--black-20 mw5 center"
+          className="hide-child relative ba b--black-20 mw5 center"
           style={{ borderRadius: "5px" }}
         >
           <img
             src={item.imgUrl}
-            class="db"
+            className="db"
             alt="Photo of Jesse Grant"
             style={{ borderRadius: "5px" }}
             height="150px"
             width="100%"
           />
-          <div class="pa2 bt b--black-20">
-            <p class="fw9 f4">{item.name}</p>
+          <div className="pa2 bt b--black-20">
+            <p className="fw9 f4">{item.name}</p>
 
             <button
-              class="f6 grow no-underline br-pill ba bw2 ph3 pv2 mb2 dib bttext bordercolorblue"
+              className="f6 grow no-underline br-pill ba bw2 ph3 pv2 mb2 dib bttext bordercolorblue"
               onClick={this.handleDelete}
             >
               {this.state.deletestatus ? "Show" : "Hide"}
@@ -77,23 +77,23 @@ export default class EditItem extends Component {
   }
 }
 {
-  /* <section class="tc pa3 pa5-ns">
-  <article class="hide-child relative ba b--black-20 mw5 center">
-    <img src={item.imgUrl} class="db" alt="Photo of Jesse Grant" />
-    <div class="pa2 bt b--black-20">
-      <a class="f6 db link dark-blue hover-blue" href="#">
+  /* <section className="tc pa3 pa5-ns">
+  <article className="hide-child relative ba b--black-20 mw5 center">
+    <img src={item.imgUrl} className="db" alt="Photo of Jesse Grant" />
+    <div className="pa2 bt b--black-20">
+      <a className="f6 db link dark-blue hover-blue" href="#">
         {item.name}
       </a>
-      <p class="f6 gray mv1">5 mutual friends</p>
+      <p className="f6 gray mv1">5 mutual friends</p>
       <button
-        class="link tc ph3 pv1 db bg-animate bg-dark-blue hover-bg-blue white f6 br1"
+        className="link tc ph3 pv1 db bg-animate bg-dark-blue hover-bg-blue white f6 br1"
         onClick={this.handleDelete}
       >
         {this.state.deletestatus ? "Show" : "Hide"}
       </button>
     </div>
     <a
-      class="child absolute top-1 right-1 ba bw1 black-40 grow no-underline br-100 w1 h1 pa2 lh-solid b"
+      className="child absolute top-1 right-1 ba bw1 black-40 grow no-underline br-100 w1 h1 pa2 lh-solid b"
       href="#"
     >
       ×
