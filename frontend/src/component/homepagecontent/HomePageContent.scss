@@ -1,6 +1,6 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css");
 @import url("https://use.fontawesome.com/releases/v5.8.2/css/all.css");
-.homecontent::before{
+.homecontent::before {
   background-image: url("background3.jpg");
   background-color: #cccccc;
   background-size: 1400px;
@@ -11,25 +11,22 @@
   left: 0;
   width: 95%;
   height: 125%;
-  margin-left:30px;
+  margin-left: 30px;
   z-index: -2;
-  margin-top:850px;
-  opacity:0.2;
-  
+  margin-top: 850px;
+  opacity: 0.2;
 }
-.logo
-	{
-    height: 275px;
-    width: 520px;
-		position:absolute;
-		top: 200px;
-		left:650px;
-		z-index: 2;
-	}
+.logo {
+  height: 275px;
+  width: 520px;
+  position: absolute;
+  top: 200px;
+  left: 650px;
+  z-index: 2;
+}
 .homecontent {
   body {
     background: green;
-    
   }
   /* videostyle */
   .videocontainer {
@@ -37,7 +34,7 @@
     margin-left: 0px;
     padding-left: 0px;
     margin-right: 1px;
-    margin-top:-30px;
+    margin-top: 2px;
   }
 
   /* scocial medias */
@@ -50,8 +47,8 @@
     text-align: center;
     font-size: 25px;
     display: flex;
-    justify-content:space-evenly;
-    padding-left:10px;
+    justify-content: space-evenly;
+    padding-left: 10px;
   }
 
   /* style for text blockof3 */
@@ -68,7 +65,7 @@
 
   // }
 
-  #blockof3{
+  #blockof3 {
     margin-top: 125px;
     margin-bottom: 150px;
     margin-right: 40px;
@@ -109,7 +106,7 @@
     // border: 1px solid white;
   }
 
-  .box1::before{
+  .box1::before {
     background-image: url("background2.jpg");
     background-color: #cccccc;
     background-size: 1500px;
@@ -118,19 +115,18 @@
     position: absolute;
     top: 0;
     left: 0;
-    margin-left:30px;
+    margin-left: 30px;
     width: 95%;
     height: 120%;
     z-index: -2;
-    margin-top:1800px;
-    opacity:0.1;
-    
+    margin-top: 1800px;
+    opacity: 0.1;
   }
   .box1 {
     display: flex;
     justify-content: space-around;
     padding-top: 75px;
-    padding-bottom:175px;
+    padding-bottom: 175px;
   }
 
   //    <div className="socialmedias">
@@ -181,8 +177,8 @@
 
   #box2 {
     align-content: center;
-    p{
-      font-size:20px;
+    p {
+      font-size: 20px;
     }
   }
   .servicesHeader {

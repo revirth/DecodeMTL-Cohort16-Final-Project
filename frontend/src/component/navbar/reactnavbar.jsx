@@ -9,9 +9,7 @@ import SignupForm from "../login/SignupForm.jsx";
 import NavBarSearchBox from "../navbar-searchbox";
 import Search from "./Search.jsx";
 import Customdropdown from "../login/customdropdown.jsx";
-import LightSpeed from 'react-reveal/LightSpeed';
-
-
+import LightSpeed from "react-reveal/LightSpeed";
 
 class UnconnectedLinks extends React.Component {
   constructor(props) {
@@ -85,7 +83,7 @@ class UnconnectedLinks extends React.Component {
         <span className="navstyles">
           <Link to="#" onClick={this.menuToggle}>
             MENU
-        </Link>
+          </Link>
           <Link to="/cart">ORDER</Link>
           <Link to="#">DELIVERY</Link>
           <Link to="/">ABOUT</Link>
@@ -93,30 +91,28 @@ class UnconnectedLinks extends React.Component {
             <span>
               <Link to="#" onClick={() => this.setState({ popup: true })}>
                 LOGIN
-            </Link>
+              </Link>
               <Link to="#" onClick={() => this.setState({ signup: true })}>
                 SIGNUP
-            </Link>
+              </Link>
             </span>
           ) : (
-
-              <span className="afterlogin">
-                Hello  {this.props.username} !
-                {this.props.loggedIn && this.props.usertp === "1" ? (
-                  <span>
-                    <Link to="/profile">Account Setting</Link>
-                    {" "}
-                  </span>
-                ) : (
-                    <span>
-                      <Link to="/sellerprofile">My Dashboard</Link>
-                      <Link to="#" onClick={this.logout}>
-                        LOGOUT
-                </Link>
-                    </span>
-                  )}
-              </span>
-            )}
+            <span className="afterlogin">
+              Hello {this.props.username} !
+              {this.props.loggedIn && this.props.usertp === "1" ? (
+                <span>
+                  <Link to="/profile">Account Setting</Link>{" "}
+                </span>
+              ) : (
+                <span>
+                  <Link to="/sellerprofile">My Dashboard</Link>
+                  <Link to="#" onClick={this.logout}>
+                    LOGOUT
+                  </Link>
+                </span>
+              )}
+            </span>
+          )}
 
           {/* <i id="searchbutton" className="fa fa-search fa" />
         <input onClick={() => alert(`search ${this.value}`)} /> */}
