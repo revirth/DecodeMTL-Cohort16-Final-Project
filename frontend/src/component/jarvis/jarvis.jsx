@@ -1,46 +1,59 @@
 import React, { Component } from "react";
 import "./jarvis.css";
 import "./style.css";
-import { Link } from "react-router-dom";
+
 import { connect } from "react-redux";
-import { sendMessage } from "../../store.js";
+
+import { ApiAiClient } from "api-ai-javascript";
+const accessToken = "5fa6f64523ef4168b443821a34096c76";
+const client = new ApiAiClient({ accessToken });
 
 class UnconnectedJarvis extends Component {
-  //   constructor(props) {
-  //     super(props);
-  //     this.state = {
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: []
+    };
+  }
 
-  //     }
-  //   }
+  sendMessage = value => {
+    const onSuccess = response => {
+      console.log("state", this.state);
+      console.log("response", response);
+      const speech = response.result.fulfillment.speech;
+      const newmsg = { text: speech, sender: "jarvis" };
+      const user = { text: value, sender: this.props.username };
+      this.setState({ messages: [...this.state.messages, user, newmsg] });
+    };
+    client.textRequest(value).then(onSuccess);
+  };
   render() {
-    const { feed, sendMessage } = this.props;
     return (
       <div>
         <h1>Love You 3000 </h1>
 
         <ul>
-          {feed.map(entry => (
-            <li>{entry.text}</li>
+          {this.state.messages.map(entry => (
+            <li>
+              {entry.sender}:{entry.text}
+            </li>
           ))}
         </ul>
         <input
           type="text"
           onKeyDown={e =>
-            e.keyCode === 13 ? sendMessage(e.target.value) : null
+            e.keyCode === 13 ? this.sendMessage(e.target.value) : null
           }
         />
       </div>
     );
   }
 }
-const mapStateToProps = state => {
+
+let mapStateToProps = state => {
   return {
-    feed: state.msg
+    username: state.username
   };
 };
-
-let Jarvis = connect(
-  mapStateToProps,
-  { sendMessage }
-)(UnconnectedJarvis);
+let Jarvis = connect(mapStateToProps)(UnconnectedJarvis);
 export default Jarvis;
