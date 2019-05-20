@@ -842,10 +842,10 @@ class Ultron extends Component {
     this.setState({ scanned: true })
     this.setState({ prediction: predictions })
         
-    setTimeout(() => { this.setState({ show: "Just kidding, I finished my task in less than " + t2 + " ms" }) }, 5000)
+    setTimeout(() => { this.setState({ show: "Just kidding, I finished my task in less than " + t2 + " ms" }) }, 4000)
 
-    setTimeout(() => { this.setState({ show: "What now ? " }) }, 7000)
-    setTimeout(() => { this.setState({ show: "I feel like my IQ is higher then yours..." }) }, 9000)
+    setTimeout(() => { this.setState({ show: "I stored the bad comments in your dashboard" }) }, 7000)
+    setTimeout(() => { this.setState({ show: "What next ?" }) }, 9000)
 
     }
 
@@ -895,7 +895,7 @@ class Ultron extends Component {
       this.setState({ baddies: whoAreThebaddies });
       this.setState({ baddiesChoices: itemnamebad });
       this.setState({
-        show: "These users wrote bad comments... \n"
+        show: "You can now access the bad comments with the option below \n"
           + whoAreThebaddies[19] + " for the " + itemnamebad[19] + " and \n" + whoAreThebaddies[13] + " for the " + itemnamebad[13]
       })
     }
