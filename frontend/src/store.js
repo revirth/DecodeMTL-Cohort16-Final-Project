@@ -1,29 +1,28 @@
 import { createStore, applyMiddleware, compose } from "redux";
-import { ApiAiClient } from "api-ai-javascript";
-const accessToken = "5fa6f64523ef4168b443821a34096c76";
-const client = new ApiAiClient({ accessToken });
+// import { ApiAiClient } from "api-ai-javascript";
+// const accessToken = "5fa6f64523ef4168b443821a34096c76";
+// const client = new ApiAiClient({ accessToken });
 
-const ON_MESSAGE = "ON_MESSAGE";
+// const ON_MESSAGE = "ON_MESSAGE";
 
-export const sendMessage = (text, sender = "user") => ({
-  type: ON_MESSAGE,
-  payload: { text, sender }
-});
+// export const sendMessage = (text, sender = "user") => ({
+//   type: ON_MESSAGE,
+//   payload: { text, sender }
+// });
 
-const messageMiddleware = () => next => action => {
-  next(action);
-  if (action.type === ON_MESSAGE) {
-    const { text } = action.payload;
-    client.textRequest(text).then(onSuccess);
+// const messageMiddleware = () => next => action => {
+//   next(action);
+//   if (action.type === ON_MESSAGE) {
+//     const { text } = action.payload;
+//     client.textRequest(text).then(onSuccess);
 
-    function onSuccess(response) {
-      const {
-        queryResult: { queryText }
-      } = response;
-      next(sendMessage(queryText, "jarvis"));
-    }
-  }
-};
+//     function onSuccess(response) {
+//       console.log("response", response);
+//       const speech = response.result.fulfillment.speech;
+//       next(sendMessage(speech, "jarvis"));
+//     }
+//   }
+// };
 
 let reducer = (state, action) => {
   if (action.type === "FillCart") {
@@ -57,8 +56,8 @@ let reducer = (state, action) => {
         username: "",
         usertype: ""
       };
-    case ON_MESSAGE:
-      return { ...state, msg: action.payload };
+    // case ON_MESSAGE:
+    //   return { ...state, msg: [...state.msg, action.payload] };
   }
   return state;
 };
@@ -96,13 +95,9 @@ let store = createStore(
     // loggedIn: isValidUser() === true,
     loggedIn: false,
     username: getCookie("sid") !== "" ? getCookie("unm") : "",
-    usertype: getCookie("sid") !== "" ? getCookie("utp") : "",
-    msg: [{ text: "hey" }]
+    usertype: getCookie("sid") !== "" ? getCookie("utp") : ""
   },
-  compose(
-    applyMiddleware(messageMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
-);
 
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 export default store;

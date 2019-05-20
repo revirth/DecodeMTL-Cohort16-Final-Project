@@ -146,6 +146,7 @@ a {
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
+  z-index: 2;
 }
 
 .btncart:disabled {
@@ -173,10 +174,15 @@ a {
 }
 .notavailable {
   position: absolute;
-  top: 210px;
+  top: 0px;
   left: 0px;
-  width: 75%;
-  height: 50%;
-  background-color: rgba(255, 255, 255, 0);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
   font-size: 25px;
+  color: black !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
 }

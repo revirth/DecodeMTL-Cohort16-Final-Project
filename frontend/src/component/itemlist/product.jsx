@@ -65,7 +65,7 @@ class UnconnectedProduct extends Component {
         "br2 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw5 center articlediv spin";
 
     return (
-      <article className={classes} style={customCSS} id={_id}>
+      <article className={classes} id={_id}>
         {!this.state.available && (
           <div
             className="notavailable"
