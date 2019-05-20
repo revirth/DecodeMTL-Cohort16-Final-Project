@@ -1,6 +1,7 @@
 import React from "react";
 import "./HomePageContent.scss";
 import Actualfooter from "./actualfooter.jsx";
+import logo from './imagevideo1.png';
 
 class HomePageContent extends React.Component {
   render() {
@@ -20,6 +21,7 @@ class HomePageContent extends React.Component {
             width="100%"
             height="780"
           />
+          <img src={logo} alt="Logo" className="logo" />
         </div>
         <div className="row align-items-center" id="blockof3">
           <div className="col-md-4 hello">
