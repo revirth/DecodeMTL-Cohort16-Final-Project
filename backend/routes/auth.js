@@ -21,9 +21,12 @@ const validateUser = user => {
     username: Joi.string()
       .alphanum()
       .required(),
-    password: Joi.string().required()
-  };
+    password: Joi.string().required(),
+    signuptype: Joi.string(),
+    usertype: Joi.string()
 
+  };
+  console.log("schema: ", Joi.validate(user, schema))
   return Joi.validate(user, schema);
 };
 
@@ -82,6 +85,7 @@ sendtext = (to, message) => {
 
 router.post("/signup", async (req, res) => {
   // validate form data
+  console.log(req.body)
   const { error } = validateUser(req.body);
   if (error)
     return res.status(400).send(resmsg(false, error.details[0].message));
@@ -108,7 +112,6 @@ router.post("/signup", async (req, res) => {
       +obj.username,
       "Welcome to Nutrition Fine Fourchette http://google.com"
     );
-
   res.send(resmsg(true, "signup success"));
 });
 
