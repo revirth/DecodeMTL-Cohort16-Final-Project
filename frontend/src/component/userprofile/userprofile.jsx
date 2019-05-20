@@ -62,12 +62,12 @@ class UnconnectedUserProfile extends Component {
       content = (
         <div className="mainsettings">
           <div className="settngdetials">
-            <article class="center mw5 mw6-ns br3 ba b--black-10 mv4">
-              <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
+            <article className="center mw5 mw6-ns br3 ba b--black-10 mv4">
+              <h1 className="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
                 Address
               </h1>
-              <div class="pa3 bt b--black-10">
-                <p class="f6 f5-ns lh-copy measure stylepara">
+              <div className="pa3 bt b--black-10">
+                <p className="f6 f5-ns lh-copy measure stylepara">
                   <span>Street: {this.state.userdetails.street}</span>
                   <span>Apartment No: {this.state.userdetails.apt}</span>
                   <span>Postal:{this.state.userdetails.postal}</span>
@@ -85,12 +85,12 @@ class UnconnectedUserProfile extends Component {
             </button>
           </div>
           <div className="settngdetials">
-            <article class="center mw5 mw6-ns br3 ba b--black-10 mv4">
-              <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
+            <article className="center mw5 mw6-ns br3 ba b--black-10 mv4">
+              <h1 className="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
                 Payment
               </h1>
-              <div class="pa3 bt b--black-10">
-                <p class="f6 f5-ns lh-copy measure stylepara">
+              <div className="pa3 bt b--black-10">
+                <p className="f6 f5-ns lh-copy measure stylepara">
                   <span>Card No: {this.state.userdetails.cardno}</span>
                   <span>CVC No: {this.state.userdetails.cvc}</span>
                   <span>Expiry Date:{this.state.userdetails.expirydate}</span>
@@ -107,12 +107,12 @@ class UnconnectedUserProfile extends Component {
             </button>
           </div>
           <div className="settngdetials">
-            <article class="center mw5 mw6-ns br3 ba b--black-10 mv4">
-              <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
+            <article className="center mw5 mw6-ns br3 ba b--black-10 mv4">
+              <h1 className="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
                 Account Details
               </h1>
-              <div class="pa3 bt b--black-10">
-                <p class="f6 f5-ns lh-copy measure stylepara">
+              <div className="pa3 bt b--black-10">
+                <p className="f6 f5-ns lh-copy measure stylepara">
                   <span>Username: {this.state.userdetails.username}</span>
                   <span>Current Password: *************</span>
                   <span>Email:{this.state.userdetails.email}</span>
@@ -147,12 +147,12 @@ class UnconnectedUserProfile extends Component {
     //       >
     //         Update Address
     //       </button>
-    //       <article class="center mw5 mw6-ns br3 ba b--black-10 mv4">
-    //         <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
+    //       <article className="center mw5 mw6-ns br3 ba b--black-10 mv4">
+    //         <h1 className="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
     //           Address
     //         </h1>
-    //         <div class="pa3 bt b--black-10">
-    //           <p class="f6 f5-ns lh-copy measure stylepara">
+    //         <div className="pa3 bt b--black-10">
+    //           <p className="f6 f5-ns lh-copy measure stylepara">
     //             <span>Street: {this.state.userdetails.street}</span>
     //             <span>Apartment No: {this.state.userdetails.apt}</span>
     //             <span>Postal:{this.state.userdetails.postal}</span>
@@ -170,12 +170,12 @@ class UnconnectedUserProfile extends Component {
     //       >
     //         Update Payment Options
     //       </button>
-    //       <article class="center mw5 mw6-ns br3 ba b--black-10 mv4">
-    //         <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
+    //       <article className="center mw5 mw6-ns br3 ba b--black-10 mv4">
+    //         <h1 className="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
     //           Payment
     //         </h1>
-    //         <div class="pa3 bt b--black-10">
-    //           <p class="f6 f5-ns lh-copy measure stylepara">
+    //         <div className="pa3 bt b--black-10">
+    //           <p className="f6 f5-ns lh-copy measure stylepara">
     //             <span>Card No: {this.state.userdetails.cardno}</span>
     //             <span>CVC No: {this.state.userdetails.cvc}</span>
     //             <span>Expiry Date:{this.state.userdetails.expirydate}</span>
@@ -192,12 +192,12 @@ class UnconnectedUserProfile extends Component {
     //       >
     //         Account detials
     //       </button>
-    //       <article class="center mw5 mw6-ns br3 ba b--black-10 mv4">
-    //         <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
+    //       <article className="center mw5 mw6-ns br3 ba b--black-10 mv4">
+    //         <h1 className="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
     //           Account Details
     //         </h1>
-    //         <div class="pa3 bt b--black-10">
-    //           <p class="f6 f5-ns lh-copy measure stylepara">
+    //         <div className="pa3 bt b--black-10">
+    //           <p className="f6 f5-ns lh-copy measure stylepara">
     //             <span>Username: {this.state.userdetails.username}</span>
     //             <span>Current Password: *************</span>
     //             <span>Email:{this.state.userdetails.email}</span>
