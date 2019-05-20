@@ -13,34 +13,37 @@ describe(`POST /auth`, () => {
       { form: fake(), jar: j },
       (err, res, body) => {
         expect(res.statusCode).to.equal(200);
-
-        j.getCookies(backend).map(c => (cookies[c.key] = c.value));
-
+        
+        j.getCookies(backend).map(c => {
+          (cookies[c.key] = c.value)
+        });
+        
         let json = JSON.parse(body);
-
+        
         expect(cookies).to.have.all.keys("sid", "unm", "utp");
         expect(json.status).to.be.true;
-
-        // console.table(cookies);
+        
+        console.table(cookies);
         done();
       }
-    );
-  });
-
-  it("/auth/signup ", done => {
-    request.post(
-      `${backend}/auth/signup`,
-      { form: fake() },
-      (err, res, body) => {
-        expect(res.statusCode).to.equal(200);
-
-        let json = JSON.parse(body);
-
-        expect(json).to.have.all.keys("status", "message");
-        expect(json.status).to.be.false;
-
-        done();
-      }
-    );
-  });
-});
+      );
+    });
+    
+    it("/auth/signup ", done => {
+      request.post(
+        `${backend}/auth/signup`,
+        { form: fake() },
+        (err, res, body) => {
+          expect(res.statusCode).to.equal(200);
+          
+          let json = JSON.parse(body);
+          
+          expect(json).to.have.all.keys("status", "message");
+          expect(json.status).to.be.false;
+          
+          done();
+        }
+        );
+      });
+    });    
+    
