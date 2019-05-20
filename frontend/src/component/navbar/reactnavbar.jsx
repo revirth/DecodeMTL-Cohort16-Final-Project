@@ -9,51 +9,9 @@ import SignupForm from "../login/SignupForm.jsx";
 import NavBarSearchBox from "../navbar-searchbox";
 import Search from "./Search.jsx";
 import Customdropdown from "../login/customdropdown.jsx";
+import LightSpeed from 'react-reveal/LightSpeed';
 
-// let Links = (props) => {
 
-//   const loginOrProfile = (login) => {
-//     // ternary operator statement ? (if true) : (if false)
-//     return auth.isAuthenticated ?
-//       // navbar if user is login= true
-//       <div className="navbarmains">
-//         <a href="/" className="titles">
-//           Nutrition Fine Fourchette
-//         </a>
-//         <a href="#" onClick={this.menuToggle}>
-//           MENU
-//         </a>
-//         <a href="/cart">ORDER</a>
-
-//         <a href="#">DELIVERY</a>
-//         <a href="/">ABOUT</a>
-//         <a href="/">{this.props.username}</a>
-//         <a href="/logout">LOGOUT</a>
-
-//         <i id="searchbutton" className="fa fa-search fa" />
-//         <input />
-//       </div>
-
-//       :
-
-//       // navbar if user is login=false
-//       <div className="navbarmains">
-//         <a href="/" className="titles">
-//           Nutrition Fine Fourchette
-//         </a>
-//         <a href="#" onClick={this.menuToggle}>
-//           MENU
-//         </a>
-//         <a href="/cart">ORDER</a>
-
-//         <a href="#">DELIVERY</a>
-//         <a href="/">ABOUT</a>
-//         <a href="/login">LOGIN</a>
-//         <a href="/login">SIGNUP</a>
-//         <i id="searchbutton" className="fa fa-search fa" />
-//         <input />
-//       </div>
-//   };
 
 class UnconnectedLinks extends React.Component {
   constructor(props) {
@@ -123,62 +81,61 @@ class UnconnectedLinks extends React.Component {
   render() {
     return (
       <div className="navbarmains">
-        <Link to="/" className="titles">
-          Nutrition Fine Fourchette
+        <i className="fas fa-hamburger fa-2x" />
+        <span className="navstyles">
+          <Link to="#" onClick={this.menuToggle}>
+            MENU
         </Link>
-        <Link to="#" onClick={this.menuToggle}>
-          MENU
-        </Link>
-        <Link to="/cart">ORDER</Link>
-        <Link to="#">DELIVERY</Link>
-        <Link to="/">ABOUT</Link>
-        {!this.props.loggedIn ? (
-          <span>
-            <Link to="#" onClick={() => this.setState({ popup: true })}>
-              LOGIN
+          <Link to="/cart">ORDER</Link>
+          <Link to="#">DELIVERY</Link>
+          <Link to="/">ABOUT</Link>
+          {!this.props.loggedIn ? (
+            <span>
+              <Link to="#" onClick={() => this.setState({ popup: true })}>
+                LOGIN
             </Link>
-            <Link to="#" onClick={() => this.setState({ signup: true })}>
-              SIGNUP
+              <Link to="#" onClick={() => this.setState({ signup: true })}>
+                SIGNUP
             </Link>
-          </span>
-        ) : (
-          <span className="afterlogin">
-            Hi {this.props.username}
-            {this.props.loggedIn && this.props.usertp === "1" ? (
-              <span>
-                <Link to="/profile">Account Setting</Link>
-                <Link to="#" onClick={this.logout}>
-                  LOGOUT
-                </Link>{" "}
-              </span>
-            ) : (
-              <span>
-                <Link to="/sellerprofile">Seller Account</Link>
-                <Link to="#" onClick={this.logout}>
-                  LOGOUT
+            </span>
+          ) : (
+
+              <span className="afterlogin">
+                Hello  {this.props.username} !
+                {this.props.loggedIn && this.props.usertp === "1" ? (
+                  <span>
+                    <Link to="/profile">Account Setting</Link>
+                    {" "}
+                  </span>
+                ) : (
+                    <span>
+                      <Link to="/sellerprofile">My Dashboard</Link>
+                      <Link to="#" onClick={this.logout}>
+                        LOGOUT
                 </Link>
+                    </span>
+                  )}
               </span>
             )}
-          </span>
-        )}
 
-        {/* <i id="searchbutton" className="fa fa-search fa" />
+          {/* <i id="searchbutton" className="fa fa-search fa" />
         <input onClick={() => alert(`search ${this.value}`)} /> */}
 
-        {/* <NavBarSearchBox /> */}
+          {/* <NavBarSearchBox /> */}
 
-        <i
-          id="searchbutton"
-          className="fa fa-search fa"
-          onClick={() => this.setState({ search: true })}
-          onKeyDown={this.closeSerachPopup}
-        />
-        {this.state.search ? <Search /> : null}
+          <i
+            id="searchbutton"
+            className="fa fa-search fa"
+            onClick={() => this.setState({ search: true })}
+            onKeyDown={this.closeSerachPopup}
+          />
+          {this.state.search ? <Search /> : null}
 
-        {this.state.popup ? (
-          <LoginPopup onClose={this.closeLoginPopup} />
-        ) : null}
-        {this.state.signup ? <SignupForm onClose={this.closeSignup} /> : null}
+          {this.state.popup ? (
+            <LoginPopup onClose={this.closeLoginPopup} />
+          ) : null}
+          {this.state.signup ? <SignupForm onClose={this.closeSignup} /> : null}
+        </span>
       </div>
     );
   }
@@ -206,7 +163,7 @@ export default class Navbar extends React.Component {
           </div>
         </div>
 
-        <Fade top>
+        <LightSpeed left>
           <div className="menus" onClick={this.menuToggle}>
             <Link to="/items" onClick={this.menuToggle} onClick={this.toggle}>
               WEEKLY
@@ -218,7 +175,7 @@ export default class Navbar extends React.Component {
               COOKED
             </Link>
           </div>
-        </Fade>
+        </LightSpeed>
         <div className="navNarrow" onClick={this.toggle}>
           <span>
             {" "}

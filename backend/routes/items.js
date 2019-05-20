@@ -73,7 +73,7 @@ router.post("/", async (req, res) => {
   await res.locals.ITEMS.insertOne(obj, (err, insertedOne) => {
     if (err) {
       console.error(err);
-      res.send(resmsg(false, err));
+      res.status(400).send(resmsg(false, err));
     } else {
       // console.info(insertedOne);
       res.send(resmsg(true, insertedOne.ops[0]._id));
@@ -94,7 +94,8 @@ router.put("/:itemId", async (req, res) => {
 
   console.log(`PUT /items/${req.params.itemId}`, doc);
 
-  res.send(resmsg(doc["ok"] === 1));
+  if (doc["ok"] === 1) res.send(resmsg(true));
+  else res.status(400).send(resmsg(false));
 });
 
 router.delete("/:itemId", async (req, res) => {
@@ -106,7 +107,8 @@ router.delete("/:itemId", async (req, res) => {
 
   console.log(`DEL /items/${req.params.itemId}`, doc);
 
-  res.send(resmsg(doc["ok"] === 1));
+  if (doc["ok"] === 1) res.send(resmsg(true));
+  else res.status(400).send(resmsg(false));
 });
 
 module.exports = router;

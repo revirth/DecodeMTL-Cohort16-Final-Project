@@ -28,7 +28,9 @@ export default class NavBarSearchBox extends Component {
   };
 
   render = () => (
+
     <span>
+
       <input
         type="text"
         name="search"
@@ -36,6 +38,7 @@ export default class NavBarSearchBox extends Component {
         onChange={this.handleChange}
         onKeyPress={this.keyPressed}
       />
+
       &nbsp;
       <i
         id="searchbutton"
@@ -43,5 +46,6 @@ export default class NavBarSearchBox extends Component {
         onClick={this.handleSearch}
       />
     </span>
+
   );
 }

@@ -1,9 +1,35 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css");
 @import url("https://use.fontawesome.com/releases/v5.8.2/css/all.css");
-
+.homecontent::before{
+  background-image: url("background3.jpg");
+  background-color: #cccccc;
+  background-size: 1400px;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 95%;
+  height: 125%;
+  margin-left:30px;
+  z-index: -2;
+  margin-top:850px;
+  opacity:0.2;
+  
+}
+.logo
+	{
+    height: 275px;
+    width: 520px;
+		position:absolute;
+		top: 200px;
+		left:650px;
+		z-index: 2;
+	}
 .homecontent {
   body {
-    background: #f8f5f1;
+    background: green;
+    
   }
   /* videostyle */
   .videocontainer {
@@ -11,6 +37,7 @@
     margin-left: 0px;
     padding-left: 0px;
     margin-right: 1px;
+    margin-top:-30px;
   }
 
   /* scocial medias */
@@ -19,32 +46,46 @@
     margin-top: 200px;
     margin-bottom: 200px;
     margin-right: 40px;
-    margin-left: -200px;
+    margin-left: -280px;
     text-align: center;
     font-size: 25px;
     display: flex;
-    justify-content: space-around;
+    justify-content:space-evenly;
+    padding-left:10px;
   }
 
   /* style for text blockof3 */
 
-  #blockof3 {
-    margin-top: 40px;
+  // #blockof3 {
+  //   margin-top: 40px;
+  //   margin-right: 20px;
+  //   // margin-left: 40px;
+  //   margin-bottom: 100px;
+  //   text-align: center;
+  //   font-size: 22px;
+  //   display: flex;
+  //   justify-content: space-around;
+
+  // }
+
+  #blockof3{
+    margin-top: 125px;
+    margin-bottom: 150px;
     margin-right: 40px;
-    margin-left: 40px;
-    margin-bottom: 100px;
+    margin-left: 10px;
     text-align: center;
+    padding-left: 50px;
     font-size: 25px;
     display: flex;
     justify-content: space-around;
   }
   #blockof4 {
-    margin-top: 150px;
+    margin-top: 125px;
     margin-bottom: 150px;
     margin-right: 40px;
-    margin-left: 40px;
+    margin-left: -20px;
     text-align: center;
-    padding-left: 80px;
+    padding-left: 50px;
     font-size: 25px;
     display: flex;
     justify-content: space-around;
@@ -56,22 +97,40 @@
 
   .hello {
     border-right-style: groove;
-    border-right-width: 1px;
+    border-right-width: 3px;
     max-height: 90px;
-    padding-right: 100px;
+    padding-right: 75px;
   }
   /* style for services + 4 images */
 
   .services {
     margin-left: 50px;
     margin-right: 50px;
-    border: 1px solid #0077b5;
+    // border: 1px solid white;
+  }
+
+  .box1::before{
+    background-image: url("background2.jpg");
+    background-color: #cccccc;
+    background-size: 1500px;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left:30px;
+    width: 95%;
+    height: 120%;
+    z-index: -2;
+    margin-top:1800px;
+    opacity:0.1;
+    
   }
   .box1 {
     display: flex;
     justify-content: space-around;
     padding-top: 75px;
-    padding-bottom: 75px;
+    padding-bottom:175px;
   }
 
   //    <div className="socialmedias">
@@ -120,8 +179,11 @@
     font-size: 1.2em;
   }
 
-  .box2 {
+  #box2 {
     align-content: center;
+    p{
+      font-size:20px;
+    }
   }
   .servicesHeader {
     font-size: 2em;
@@ -134,7 +196,7 @@
     height: 100px;
     margin-top: 75px;
     padding-top: 5px;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
     padding-left: 15px;
     padding-right: 15px;
   }
@@ -153,9 +215,9 @@
 .services {
   i {
     color: #0077b5;
-    font-size: 5em;
+    font-size: 5.5em;
     transition: 1s;
-    padding-left: 20%;
+    padding-left: 33%;
   }
 
   i:hover {

@@ -6,7 +6,7 @@ const twilio = require("twilio");
 const nodemailer = require("nodemailer");
 const accountSid = "ACa40838c98b0bb1e79ee3d893936297fa";
 const authToken = "81d861e95f049d1bbe053d0cc1c79ff1";
-const clinet = new twilio(accountSid, authToken);
+const client = new twilio(accountSid, authToken);
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -21,9 +21,11 @@ const validateUser = user => {
     username: Joi.string()
       .alphanum()
       .required(),
-    password: Joi.string().required()
+    password: Joi.string().required(),
+    signuptype: Joi.string(),
+    usertype: Joi.string()
   };
-
+  console.log("schema: ", Joi.validate(user, schema));
   return Joi.validate(user, schema);
 };
 
@@ -31,7 +33,7 @@ router.get("/isvalid", async (req, res) => {
   if (res.locals.USERNAME) return res.send(resmsg(true));
 
   res.clearCookie("sid");
-  res.send(resmsg(false));
+  res.status(400).send(resmsg(false));
 });
 
 router.post("/login", async (req, res) => {
@@ -51,7 +53,9 @@ router.post("/login", async (req, res) => {
 
   if (doc === null) {
     res.clearCookie("sid");
-    return res.send(resmsg(false, "Username or password is invalid"));
+    return res
+      .status(400)
+      .send(resmsg(false, "Username or password is invalid"));
   }
 
   // login
@@ -71,7 +75,7 @@ router.get("/logout", (req, res) => {
 });
 sendtext = (to, message) => {
   console.log("sending text to:", to, "message:", message);
-  clinet.messages
+  client.messages
     .create({
       body: message,
       to: to,
@@ -82,6 +86,7 @@ sendtext = (to, message) => {
 
 router.post("/signup", async (req, res) => {
   // validate form data
+  console.log(req.body);
   const { error } = validateUser(req.body);
   if (error)
     return res.status(400).send(resmsg(false, error.details[0].message));
@@ -93,7 +98,8 @@ router.post("/signup", async (req, res) => {
 
   console.log("TCL: /signup -> USERS.findOne", doc);
 
-  if (doc !== null) return res.send(resmsg(false, "Username is already used"));
+  if (doc !== null)
+    return res.status(400).send(resmsg(false, "Username is already used"));
 
   // store userinfo in Mongo
   let obj = {
@@ -108,7 +114,6 @@ router.post("/signup", async (req, res) => {
       +obj.username,
       "Welcome to Nutrition Fine Fourchette http://google.com"
     );
-
   res.send(resmsg(true, "signup success"));
 });
 
@@ -122,7 +127,7 @@ router.get("/profile", async (req, res) => {
 
   if (doc === null) {
     res.clearCookie("sid");
-    return res.send(resmsg(false, "Invalid request"));
+    return res.status(400).send(resmsg(false, "Invalid request"));
   }
 
   delete doc.password;
@@ -141,7 +146,7 @@ router.put("/profile", async (req, res) => {
 
   if (doc === null) {
     res.clearCookie("sid");
-    return res.send(resmsg(false, "Invalid request"));
+    return res.status(400).send(resmsg(false, "Invalid request"));
   }
 
   let body = req.body.password

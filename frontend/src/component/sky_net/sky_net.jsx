@@ -1,6 +1,7 @@
-
+// trained brain saved here in the state, incoming shitload of code :/
+// training data starts at 648 
+// component starts at line 708
 // currently analyze comments and returns an array of baddies 
-// need to work on displaying the baddies UI
 import brain from "brain.js"
 import React from "react"
 import trained_brain from "./trained_brain"
@@ -22,10 +23,7 @@ class Ultron extends Component {
             prediction: [], // array of string, 'good' or 'bad' based on trained_net
           baddies: [],// array of users with bad comments
           baddiesChoices: [],
-          
-// trained brain saved here in the state
-// training data starts at 648 
-// component starts at line 708
+        
 
 
             trained_net: function anonymous(rawInput, isSampleI, temperature
@@ -644,7 +642,7 @@ class Ultron extends Component {
 
     /* initialise and train on data.js content
      return sky_net which is the trained neural net
-     this may take 20-40 seconds 
+     this may take 40-60 seconds 
     */
     initialise = () => {
         this.setState({ show: "Loading..." })
@@ -709,6 +707,19 @@ class Ultron extends Component {
             { input: 'I want to kill myself', output: 'bad' },
             { input: 'I want to kill myself !', output: 'bad' },
             { input: 'i want to kill myself', output: 'bad' },
+            { input: 'I would never eat food from them again', output: 'bad' },
+            { input: 'I did not liked my experience', output: 'bad' },
+            { input: 'I can eat this all day !', output: 'happy' },
+            { input: 'i can eat this all day', output: 'happy' },
+            { input: 'the portions where too small', output: 'bad' },
+            { input: 'total ripoff', output: 'bad' },
+            { input: 'steal', output: 'bad' },
+            { input: 'never again !', output: 'bad' },
+            { input: 'dogshit', output: 'bad' },
+            { input: 'horseshit', output: 'bad' },
+            { input: 'crap', output: 'bad' },
+            { input: 'this sucks', output: 'bad' },
+            { input: 'evil', output: 'bad' }
 
 
 
@@ -831,10 +842,10 @@ class Ultron extends Component {
     this.setState({ scanned: true })
     this.setState({ prediction: predictions })
         
-    setTimeout(() => { this.setState({ show: "Just kidding, I finished my task in less than " + t2 + " ms" }) }, 5000)
+    setTimeout(() => { this.setState({ show: "Just kidding, I finished my task in less than " + t2 + " ms" }) }, 4000)
 
-    setTimeout(() => { this.setState({ show: "What now ? " }) }, 7000)
-    setTimeout(() => { this.setState({ show: "I feel like my IQ is higher then yours..." }) }, 9000)
+    setTimeout(() => { this.setState({ show: "I stored the bad comments in your dashboard" }) }, 7000)
+    setTimeout(() => { this.setState({ show: "What next ?" }) }, 9000)
 
     }
 
@@ -884,7 +895,7 @@ class Ultron extends Component {
       this.setState({ baddies: whoAreThebaddies });
       this.setState({ baddiesChoices: itemnamebad });
       this.setState({
-        show: "These users wrote bad comments... \n"
+        show: "You can now access the bad comments with the option below \n"
           + whoAreThebaddies[19] + " for the " + itemnamebad[19] + " and \n" + whoAreThebaddies[13] + " for the " + itemnamebad[13]
       })
     }
