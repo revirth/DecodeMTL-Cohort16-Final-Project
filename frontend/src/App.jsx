@@ -13,7 +13,6 @@ import selleraccount from "./component/selleraccount/selleraccount.jsx";
 import Allreviewspage from "./component/selleraccount/Allreviewspage.jsx";
 import Jarvis from "./component/jarvis/jarvis.jsx";
 import ReactMap from "./component/map/map.jsx";
-import GMap from "./component/map/Gmap.jsx";
 
 let renderItem = routerData => {
   return (
@@ -37,7 +36,7 @@ function App() {
         <Route exact={true} path="/sellerprofile" component={selleraccount} />
         <Route exact={true} path="/jarvis" component={Jarvis} />
         <Route exact={true} path="/map" component={ReactMap} />
-        <Route exact={true} path="/gmap" component={GMap} />
+
         <Route
           exact={true}
           path="/sellerallreview"

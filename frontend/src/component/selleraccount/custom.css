@@ -15,11 +15,11 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  margin-left: -550px;
 }
 
 .settingsbtn {
   padding: 2%;
+  margin-top: 10px;
 }
 
 .w3-animate-bottom {
@@ -120,4 +120,11 @@ input::placeholder {
 }
 .bordercolorblue {
   border-color: #0077b5;
+}
+.artcle {
+  max-width: 100% !important;
+  margin-left: 40px;
+}
+.mapclass {
+  width: 700px !important;
 }

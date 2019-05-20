@@ -75,12 +75,12 @@ export default class selleraccount extends Component {
     return (
       <div className="sellermain">
         <div className="internalSeller1">
-          <article class="center mw5 mw6-ns br3 ba b--black-10 mv4">
+          <article class="center mw5 mw6-ns br3 ba b--black-10 mv4 artcle">
             <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
               Shop Detail
             </h1>
-            {/* <ReactMap /> */}
-            <Sky_net />
+            <ReactMap className="mapclass" />
+
             <div class="pa3 bt b--black-10">
               <p class="f6 f5-ns lh-copy measure stylepara">
                 <span>Street: {this.state.sellerdetails.street}</span>
@@ -91,6 +91,7 @@ export default class selleraccount extends Component {
               </p>
             </div>
           </article>
+          <Sky_net />
         </div>
         <div className="internalSeller">
           <button
@@ -117,24 +118,7 @@ export default class selleraccount extends Component {
           >
             List of user
           </button>
-          <button
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
-            onClick={this.delivereditems}
-          >
-            Delivered items
-          </button>
-          <button
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
-            onClick={this.orderLists}
-          >
-            Order Lists
-          </button>
-          {/* <button
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
-            onClick={this.reviews}
-          >
-            All reviews
-          </button> */}
+
           <Link
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             to="/sellerallreview"
@@ -146,12 +130,6 @@ export default class selleraccount extends Component {
             to="/map"
           >
             Map
-          </Link>
-          <Link
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
-            to="/gmap"
-          >
-            GMap
           </Link>
         </div>
         {this.state.showitems ? <EditSellerItems /> : null}

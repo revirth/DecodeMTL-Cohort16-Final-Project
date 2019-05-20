@@ -62,12 +62,6 @@ class UnconnectedUserProfile extends Component {
       content = (
         <div className="mainsettings">
           <div className="settngdetials">
-            <button
-              className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow settingsbtn"
-              onClick={this.updateAddress}
-            >
-              Update Address
-            </button>
             <article class="center mw5 mw6-ns br3 ba b--black-10 mv4">
               <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
                 Address
@@ -83,14 +77,14 @@ class UnconnectedUserProfile extends Component {
 
               {this.state.showaddress ? <Addresspopup /> : null}
             </article>
+            <button
+              className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow settingsbtn"
+              onClick={this.updateAddress}
+            >
+              Update Address
+            </button>
           </div>
           <div className="settngdetials">
-            <button
-              className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
-              onClick={this.updatePayment}
-            >
-              Update Payment Options
-            </button>
             <article class="center mw5 mw6-ns br3 ba b--black-10 mv4">
               <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
                 Payment
@@ -105,14 +99,14 @@ class UnconnectedUserProfile extends Component {
               </div>
               {this.state.payment ? <Paymentpopup /> : null}
             </article>
-          </div>
-          <div className="settngdetials">
             <button
               className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
-              onClick={this.updateSettings}
+              onClick={this.updatePayment}
             >
-              Account detials
+              Update Payment Options
             </button>
+          </div>
+          <div className="settngdetials">
             <article class="center mw5 mw6-ns br3 ba b--black-10 mv4">
               <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
                 Account Details
@@ -126,6 +120,12 @@ class UnconnectedUserProfile extends Component {
               </div>
               {this.state.accountdetails ? <Accountdetails /> : null}
             </article>
+            <button
+              className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
+              onClick={this.updateSettings}
+            >
+              Account detials
+            </button>
           </div>
           <Link
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"

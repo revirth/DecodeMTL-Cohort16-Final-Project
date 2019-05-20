@@ -14,3 +14,26 @@
 .ctus {
   margin-top: 5% !important;
 }
+
+.footercard {
+  margin-top: 50px;
+  margin-left: 150px;
+  font-size: 40px !important;
+}
+.ftrclass {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* .mapboxgl-map {
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  margin-left: 10% !important;
+  width: 80% !important;
+  height: 90% !important;
+  margin-top: 5%;
+} */
