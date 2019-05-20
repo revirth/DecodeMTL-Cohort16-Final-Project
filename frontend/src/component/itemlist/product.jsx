@@ -49,7 +49,7 @@ class UnconnectedProduct extends Component {
     const { _id, name, description, imgUrl, price, isAvailable } = this.props;
     let showDesc = "";
 
-    console.log("isAvailable", isAvailable);
+    // console.log("isAvailable", isAvailable);
     const customCSS = {
       opacity: `${this.state.available ? 1 : 0.5}`
       // transform: `rotateY(180deg)`

@@ -22,7 +22,7 @@ class UnconnectedItempage extends Component {
 
     this.setState({ foundItem: data });
 
-    console.table("test", data);
+    // console.table("test", data);
     let reviews = await fetch(`/items/${this.props.id}/reviews`);
     let review = await reviews.json();
     // review = review.filter(rev => {
@@ -31,7 +31,7 @@ class UnconnectedItempage extends Component {
 
     this.setState({ reviews: review });
 
-    console.table("review", review);
+    // console.table("review", review);
   };
   handleComment = event => {
     this.setState({ comment: event.target.value });
@@ -75,18 +75,18 @@ class UnconnectedItempage extends Component {
     return (
       <div>
         <div>
-          <article class="pa3 pa5-ns">
-            <h1 class="f2 bold  mw5 name">{this.state.foundItem.name}</h1>
+          <article className="pa3 pa5-ns">
+            <h1 className="f2 bold  mw5 name">{this.state.foundItem.name}</h1>
             <div className="flex flex-row-m itemdetails">
               <div>
                 <img
                   src={this.state.foundItem.imgUrl}
-                  class="w-100 f5 measure productimg"
+                  className="w-100 f5 measure productimg"
                   alt="Photo of outer space"
                 />
               </div>
               <div className=" flex-column-m">
-                <p class="measure lh-copy">
+                <p className="measure lh-copy">
                   {this.state.foundItem.description}
                 </p>
                 <button
@@ -102,27 +102,28 @@ class UnconnectedItempage extends Component {
             </div>
           </article>
           <div>
-            <h1 class="f4 bold review mw5">Reviews</h1>
+            <h1 className="f4 bold review mw5">Reviews</h1>
             <div className="listofreview">
-              <ul class="list pl0 ml0 center  ba b--light-silver br3 reviewlist ">
-                {this.state.reviews.map(r => (
-                  <li class="ph3 pv2 bb b--light-silver">
+              <ul className="list pl0 ml0 center  ba b--light-silver br3 reviewlist ">
+                {this.state.reviews.map((r, i) => (
+                  <li key={i} className="ph3 pv2 bb b--light-silver">
                     {r.username} : {r.content}
                   </li>
                 ))}
               </ul>
             </div>
-            <form class="pa4 black-80" onSubmit={this.handleSubmit}>
+            <form className="pa4 black-80" onSubmit={this.handleSubmit}>
               <div className="commentBox">
                 <div className="flex">
                   <div>
-                    <label for="comment" class="f6 b db mb2">
-                      Comments <span class="normal black-60">(optional)</span>
+                    <label htmlFor="comment" className="f6 b db mb2">
+                      Comments{" "}
+                      <span className="normal black-60">(optional)</span>
                     </label>
                     <textarea
                       id="comment"
                       name="comment"
-                      class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2 txtarea"
+                      className="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2 txtarea"
                       aria-describedby="comment-desc"
                       onChange={this.handleComment}
                       value={this.state.comment}
@@ -130,38 +131,38 @@ class UnconnectedItempage extends Component {
                   </div>
                   <input
                     type="submit"
-                    class="f6 grow no-underline br-pill ba bw2 ph3 pv2 mb2 dib bttext radiusgreen"
+                    className="f6 grow no-underline br-pill ba bw2 ph3 pv2 mb2 dib bttext radiusgreen"
                     value="Submit"
                   />
                 </div>
 
-                <p id="comment-desc" class="f6 black-60">
+                <p id="comment-desc" className="f6 black-60">
                   Helper text for a form control. Can use this text to{" "}
-                  <a href="#" class="link underline black-80 hover-blue">
+                  <a href="#" className="link underline black-80 hover-blue">
                     link to more info.
                   </a>
                 </p>
               </div>
             </form>
             <div className="pa4-l subscribeform">
-              <form class="colorNews mw7 center pa4 br2-ns ba b--black-10">
-                <fieldset class="cf bn ma0 pa0">
-                  <legend class="pa0 f5 f4-ns mb3 black-80">
+              <form className="colorNews mw7 center pa4 br2-ns ba b--black-10">
+                <fieldset className="cf bn ma0 pa0">
+                  <legend className="pa0 f5 f4-ns mb3 black-80">
                     Sign up for our newsletter
                   </legend>
-                  <div class="cf">
-                    <label class="clip" for="email-address">
+                  <div className="cf">
+                    <label className="clip" htmlFor="email-address">
                       Email Address
                     </label>
                     <input
-                      class="f6 f5-l input-reset bn fl black-80 bg-white pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns subscribetxt"
+                      className="f6 f5-l input-reset bn fl black-80 bg-white pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns subscribetxt"
                       placeholder="Your Email Address"
                       type="text"
                       name="email-address"
                       id="email-address"
                     />
                     <input
-                      class="f6 f5-l button-reset fl pv3 tc bn bg-animate bg-black-70 hover-bg-black white pointer w-100 w-25-m w-20-l br2-ns br--right-ns subscribebtn"
+                      className="f6 f5-l button-reset fl pv3 tc bn bg-animate bg-black-70 hover-bg-black white pointer w-100 w-25-m w-20-l br2-ns br--right-ns subscribebtn"
                       type="submit"
                       value="Subscribe"
                     />

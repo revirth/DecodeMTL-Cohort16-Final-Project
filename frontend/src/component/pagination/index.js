@@ -17,7 +17,7 @@ export default class Pagination extends Component {
 
     for (let i = 1; i <= totalPage; i++) {
       pages.push(
-        <li>
+        <li key={i}>
           <Link to={this.pageLink(i)}>{i}</Link>
         </li>
       );
