@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./reactnavbar.scss";
 import Fade from "react-reveal/Fade";
 import { connect } from "react-redux";
-import chekUserSession from '../login/CheckUserSession'
+import chekUserSession from "../login/CheckUserSession";
 import LoginPopup from "../login/LoginPopup.jsx";
 import SignupForm from "../login/SignupForm.jsx";
 import NavBarSearchBox from "../navbar-searchbox";
@@ -67,8 +67,8 @@ class UnconnectedLinks extends React.Component {
   }
 
   componentWillMount = () => {
-    chekUserSession()
-  }
+    chekUserSession();
+  };
 
   // closeLoginPopup = loggedIn => {
   closeLoginPopup = () => {

@@ -1,4 +1,28 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
+// import { ApiAiClient } from "api-ai-javascript";
+// const accessToken = "5fa6f64523ef4168b443821a34096c76";
+// const client = new ApiAiClient({ accessToken });
+
+// const ON_MESSAGE = "ON_MESSAGE";
+
+// export const sendMessage = (text, sender = "user") => ({
+//   type: ON_MESSAGE,
+//   payload: { text, sender }
+// });
+
+// const messageMiddleware = () => next => action => {
+//   next(action);
+//   if (action.type === ON_MESSAGE) {
+//     const { text } = action.payload;
+//     client.textRequest(text).then(onSuccess);
+
+//     function onSuccess(response) {
+//       console.log("response", response);
+//       const speech = response.result.fulfillment.speech;
+//       next(sendMessage(speech, "jarvis"));
+//     }
+//   }
+// };
 
 let reducer = (state, action) => {
   if (action.type === "FillCart") {
@@ -13,7 +37,7 @@ let reducer = (state, action) => {
   }
 
   if (action.type === "CheckIfUserValid") {
-    return { ...state, loggedIn: action.isValidUser }
+    return { ...state, loggedIn: action.isValidUser };
   }
 
   switch (action.type) {
@@ -32,6 +56,8 @@ let reducer = (state, action) => {
         username: "",
         usertype: ""
       };
+    // case ON_MESSAGE:
+    //   return { ...state, msg: [...state.msg, action.payload] };
   }
   return state;
 };
@@ -60,7 +86,7 @@ let isValidUser = async () => {
   let response = await fetch("/auth/isvalid", { credentials: "include" });
   let data = await response.json();
   return data.status;
-}
+};
 
 let store = createStore(
   reducer,
@@ -71,7 +97,7 @@ let store = createStore(
     username: getCookie("sid") !== "" ? getCookie("unm") : "",
     usertype: getCookie("sid") !== "" ? getCookie("utp") : ""
   },
+
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
-
 export default store;

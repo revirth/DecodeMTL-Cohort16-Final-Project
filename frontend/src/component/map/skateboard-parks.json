@@ -1,0 +1,70 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [{
+      "type": "Feature",
+      "properties": {
+        "PARK_ID": 4010,
+        "FACILITYID": 28007,
+        "NAME": "North Avenue",
+        "ADDRESS": "10 Warner Colpitts Lane",
+        "FACILITY_T": "flat",
+        "FACILITY_1": "plat",
+        "ACCESSCTRL": "yes/oui",
+        "ACCESSIBLE": "no/non",
+        "OPEN": null,
+        "NOTES": "Indoor - Summer",
+        "MODIFIED_D": "2018/03/07",
+        "CREATED_DA": null,
+        "FACILITY": "Johnny Leroux Stittsville Community Arena - Roving Skateboard Park Location",
+        "DESCRIPTIO": "Flat surface, 5 components",
+        "DESCRIPT_1": "Surface plane, 5 modules",
+        "PICTURE_LI": null,
+        "PICTURE_DE": null,
+        "PICTURE__1": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.6151522397995,
+          45.47772948221379
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PARK_ID": 410,
+        "FACILITYID": 28007,
+        "NAME": "Place Ville Marie",
+        "ADDRESS": "410 Place Ville marie",
+        "FACILITY_T": "flat",
+        "FACILITY_1": "plat",
+        "ACCESSCTRL": "yes/oui",
+        "ACCESSIBLE": "no/non",
+        "OPEN": null,
+        "NOTES": "Indoor - Summer",
+        "MODIFIED_D": "2018/03/07",
+        "CREATED_DA": null,
+        "FACILITY": "Johnny Leroux Stittsville Community Arena - Roving Skateboard Park Location",
+        "DESCRIPTIO": "Flat surface, 5 components",
+        "DESCRIPT_1": "Surface plane, 5 modules",
+        "PICTURE_LI": null,
+        "PICTURE_DE": null,
+        "PICTURE__1": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.56862932443619,
+          45.501634112371455
+        ]
+      }
+    }
+  ]
+}

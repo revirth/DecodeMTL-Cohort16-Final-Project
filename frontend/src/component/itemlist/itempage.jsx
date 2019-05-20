@@ -90,7 +90,7 @@ class UnconnectedItempage extends Component {
                   {this.state.foundItem.description}
                 </p>
                 <button
-                  className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
+                  className="f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow"
                   // onClick={() => addItemToCart(this.state.foundItem._id)}
                   onClick={() => {
                     this.onClickAddItemToCart(this.state.foundItem._id);
@@ -130,7 +130,7 @@ class UnconnectedItempage extends Component {
                   </div>
                   <input
                     type="submit"
-                    class="f6 grow no-underline br-pill ba bw2 ph3 pv2 mb2 dib dark-green radiusgreen"
+                    class="f6 grow no-underline br-pill ba bw2 ph3 pv2 mb2 dib bttext radiusgreen"
                     value="Submit"
                   />
                 </div>

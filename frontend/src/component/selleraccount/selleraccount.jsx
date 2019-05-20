@@ -7,7 +7,8 @@ import EditSellerItems from "./EditSellerItems.jsx";
 import Userlist from "./Userlist.jsx";
 // import Allreviews from "./Allreviews.jsx";
 import { Link } from "react-router-dom";
-import Sky_net from '../../component/sky_net/sky_net'
+import Sky_net from "../../component/sky_net/sky_net";
+import ReactMap from "../map/map.jsx";
 
 export default class selleraccount extends Component {
   constructor(props) {
@@ -78,6 +79,7 @@ export default class selleraccount extends Component {
             <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
               Shop Detail
             </h1>
+            {/* <ReactMap /> */}
             <Sky_net />
             <div class="pa3 bt b--black-10">
               <p class="f6 f5-ns lh-copy measure stylepara">
@@ -92,37 +94,37 @@ export default class selleraccount extends Component {
         </div>
         <div className="internalSeller">
           <button
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.shopDetails}
           >
             Update shop details
           </button>
           <button
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.uploadFile}
           >
             Upload Items
           </button>
           <button
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.showitems}
           >
             View/Edit Item list
           </button>
           <button
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.listOfuser}
           >
             List of user
           </button>
           <button
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.delivereditems}
           >
             Delivered items
           </button>
           <button
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.orderLists}
           >
             Order Lists
@@ -134,10 +136,22 @@ export default class selleraccount extends Component {
             All reviews
           </button> */}
           <Link
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow settingsbtn"
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             to="/sellerallreview"
           >
             All reviews
+          </Link>
+          <Link
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
+            to="/map"
+          >
+            Map
+          </Link>
+          <Link
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
+            to="/gmap"
+          >
+            GMap
           </Link>
         </div>
         {this.state.showitems ? <EditSellerItems /> : null}

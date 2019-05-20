@@ -21,7 +21,11 @@ app.use(cookieParser());
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+); // for parsing application/x-www-form-urlencoded
 
 const cors = require("cors");
 app.use(
@@ -39,6 +43,7 @@ app.use(
       tokens.url(req, res),
       tokens.status(req, res),
       JSON.stringify(req.body),
+      SESSIONS[req.cookies.sid],
       tokens.res(req, res, "content-length"),
       "-",
       tokens["response-time"](req, res),
@@ -89,6 +94,9 @@ MongoClient.connect(process.env.MLAB_URI, {
     res.locals.REVIEWS = REVIEWS;
     res.locals.ORDERS = ORDERS;
     res.locals.CART = CART;
+
+    res.locals.USERNAME = SESSIONS[req.cookies.sid];
+
     next();
   });
 

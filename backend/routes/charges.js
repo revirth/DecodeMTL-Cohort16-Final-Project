@@ -3,13 +3,8 @@ const router = express.Router();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 router.post("/", async (req, res) => {
-  let sid = req.cookies.sid;
-  let username = res.locals.SESSIONS[sid];
-
-  if (username === undefined) {
-    res.send(resmsg(false, "Invalid User"));
-    return;
-  }
+  if (res.locals.USERNAME === undefined)
+    return res.send(resmsg(false, "Invalid User"));
 
   try {
     const charge = await stripe.charges.create({
@@ -17,7 +12,7 @@ router.post("/", async (req, res) => {
       currency: "cad",
       description: "An example charge",
       source: req.body.token,
-      metadata: { unm: username }
+      metadata: { unm: res.locals.USERNAME }
     });
 
     console.log("TCL: /chargse -> ", charge);
