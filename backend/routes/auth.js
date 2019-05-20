@@ -31,7 +31,7 @@ router.get("/isvalid", async (req, res) => {
   if (res.locals.USERNAME) return res.send(resmsg(true));
 
   res.clearCookie("sid");
-  res.send(resmsg(false));
+  res.status(400).send(resmsg(false));
 });
 
 router.post("/login", async (req, res) => {
@@ -51,7 +51,9 @@ router.post("/login", async (req, res) => {
 
   if (doc === null) {
     res.clearCookie("sid");
-    return res.send(resmsg(false, "Username or password is invalid"));
+    return res
+      .status(400)
+      .send(resmsg(false, "Username or password is invalid"));
   }
 
   // login
@@ -93,7 +95,8 @@ router.post("/signup", async (req, res) => {
 
   console.log("TCL: /signup -> USERS.findOne", doc);
 
-  if (doc !== null) return res.send(resmsg(false, "Username is already used"));
+  if (doc !== null)
+    return res.status(400).send(resmsg(false, "Username is already used"));
 
   // store userinfo in Mongo
   let obj = {
@@ -122,7 +125,7 @@ router.get("/profile", async (req, res) => {
 
   if (doc === null) {
     res.clearCookie("sid");
-    return res.send(resmsg(false, "Invalid request"));
+    return res.status(400).send(resmsg(false, "Invalid request"));
   }
 
   delete doc.password;
@@ -141,7 +144,7 @@ router.put("/profile", async (req, res) => {
 
   if (doc === null) {
     res.clearCookie("sid");
-    return res.send(resmsg(false, "Invalid request"));
+    return res.status(400).send(resmsg(false, "Invalid request"));
   }
 
   let body = req.body.password
