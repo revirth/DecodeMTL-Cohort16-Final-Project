@@ -55,12 +55,21 @@ describe(`POST /auth`, () => {
     );
   });
 
+  it("auth/logout", done => {
+    request(`${backend}/auth/logout`, { jar: j }, (err, res, body) => {
+      let cookies = j.getCookies(backend);
+      expect(cookies).to.not.have.keys("sid");
+
+      done();
+    });
+  });
+
   it("/auth/signup ", done => {
     request.post(
       `${backend}/auth/signup`,
       { form: fake() },
       (err, res, body) => {
-        expect(res.statusCode).to.equal(200);
+        expect(res.statusCode).to.equal(400);
 
         const json = JSON.parse(body);
         expect(json).to.have.all.keys("status", "message");
