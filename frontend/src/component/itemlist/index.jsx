@@ -1,4 +1,3 @@
-// import ReactDOM from "react-dom";
 import "./main.css";
 import "./style.css";
 import React, { Component } from "react";
@@ -18,22 +17,7 @@ class UnconnectedApp extends Component {
     };
   }
 
-  componentDidMount = async () => {
-    // let fetchUrl = `/items${window.location.search}`;
-    // let response = await fetch(fetchUrl);
-    // let data = await response.json();
-
-    // if (Array.isArray(data.items))
-    //   this.setState({
-    //     items: data.items,
-    //     page: data.page,
-    //     total: data.total,
-    //     limit: data.limit
-    //   });
-    this.requestItems();
-  };
-
-  requestItems = async () => {
+  reloadItems = async () => {
     let fetchUrl = `/items${window.location.search}`;
     let response = await fetch(fetchUrl, {
       method: "GET",
@@ -43,35 +27,33 @@ class UnconnectedApp extends Component {
 
     if (Array.isArray(data.items))
       this.setState({
+        query: window.location.search,
         items: data.items,
         page: data.page,
         total: data.total,
         limit: data.limit
       });
-    console.table(data);
+    // console.table(data);
   };
 
-  onToken = token => {
-    fetch("/save-stripe-token", {
-      method: "POST",
-      body: JSON.stringify(token)
-    }).then(response => {
-      response.json().then(data => {
-        alert(`We are in business, ${data.email}`);
-      });
-    });
+  componentDidMount = async () => {
+    await this.reloadItems();
   };
 
-  // ...
+  componentDidUpdate = async prevProps => {
+    prevProps.location.search !== this.props.location.search &&
+      (await this.reloadItems());
+  };
 
   render() {
-    console.log("state", this.state);
+    window.scrollTo(0, 0);
+    // console.log("state", this.state);
     return (
       <div>
         <div>
           <main className="pa3 pa5-ns flex flex-wrap">
             {this.state.items.map(p => (
-              <Product key={p.id} {...p} usertype={this.state.usertype} />
+              <Product key={p._id} {...p} usertype={this.state.usertype} />
             ))}
           </main>
         </div>
@@ -88,10 +70,9 @@ class UnconnectedApp extends Component {
 }
 
 let mapStatetoProps = state => {
-  return state;
+  return { ...state };
 };
 
 let app = connect(mapStatetoProps)(UnconnectedApp);
 
 export default app;
-// ReactDOM.render(<App />, document.getElementById("root"));

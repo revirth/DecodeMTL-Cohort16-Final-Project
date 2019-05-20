@@ -11,34 +11,14 @@ export default class Pagination extends Component {
     return `${window.location.pathname}?page=${page}&limit=${this.props.limit}`;
   };
 
-  createPage = () => {
+  createPageNums = () => {
     let pages = [];
     const totalPage = this.props.total / this.props.limit + 1;
 
     for (let i = 1; i <= totalPage; i++) {
       pages.push(
-        <li>
+        <li key={i}>
           <Link to={this.pageLink(i)}>{i}</Link>
-        </li>
-      );
-    }
-
-    return pages;
-  };
-  createPageAtag = () => {
-    let pages = [];
-    const totalPage = this.props.total / this.props.limit + 1;
-
-    for (let i = 1; i <= totalPage; i++) {
-      pages.push(
-        <li>
-          <a
-            href={`${window.location.pathname}?page=${i}&limit=${
-              this.props.limit
-            }`}
-          >
-            {i}
-          </a>
         </li>
       );
     }
@@ -47,11 +27,6 @@ export default class Pagination extends Component {
   };
 
   render() {
-    return (
-      <ul className="Pagination">
-        {this.createPage()}
-        {this.createPageAtag()}
-      </ul>
-    );
+    return <ul className="Pagination">{this.createPageNums()}</ul>;
   }
 }
