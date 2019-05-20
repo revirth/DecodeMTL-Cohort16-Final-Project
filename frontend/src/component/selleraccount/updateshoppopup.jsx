@@ -42,6 +42,7 @@ export default class Shoppopup extends Component {
       body: data,
       credentials: "include"
     });
+    this.props.onClose();
   };
   render() {
     return (

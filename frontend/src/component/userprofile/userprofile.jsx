@@ -28,16 +28,28 @@ class UnconnectedUserProfile extends Component {
       });
     }
   };
+  closeAdressPopup = () => {
+    this.setState({ showaddress: false });
+  };
+  closePayment = () => {
+    this.setState({ payment: false });
+  };
+  closeAccountDetails = () => {
+    this.setState({ accountdetails: false });
+  };
   componentDidMount = async () => {
     document.addEventListener("keydown", this.escFunction, false);
-    if (this.props.loggedIn) {
-      let response = await fetch(`/auth/profile`);
-      let data = await response.json();
 
-      this.setState({ userdetails: data });
+    console.table(this.props);
 
-      console.table("test", data);
-    }
+    // if (this.props.loggedIn) {
+    let response = await fetch(`/auth/profile`);
+    let data = await response.json();
+
+    this.setState({ userdetails: data });
+
+    console.table("test", data);
+    // }
   };
   // componentWillUnmount() {
   //   document.removeEventListener("keydown", this.escFunction, false);
@@ -75,35 +87,15 @@ class UnconnectedUserProfile extends Component {
                 </p>
               </div>
 
-              {this.state.showaddress ? <Addresspopup /> : null}
+              {this.state.showaddress ? (
+                <Addresspopup onClose={this.closeAdressPopup} />
+              ) : null}
             </article>
             <button
               className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow settingsbtn"
               onClick={this.updateAddress}
             >
               Update Address
-            </button>
-          </div>
-          <div className="settngdetials">
-            <article class="center mw5 mw6-ns br3 ba b--black-10 mv4">
-              <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
-                Payment
-              </h1>
-              <div class="pa3 bt b--black-10">
-                <p class="f6 f5-ns lh-copy measure stylepara">
-                  <span>Card No: {this.state.userdetails.cardno}</span>
-                  <span>CVC No: {this.state.userdetails.cvc}</span>
-                  <span>Expiry Date:{this.state.userdetails.expirydate}</span>
-                  <span>Name On Card:{this.state.userdetails.nameonCard}</span>
-                </p>
-              </div>
-              {this.state.payment ? <Paymentpopup /> : null}
-            </article>
-            <button
-              className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
-              onClick={this.updatePayment}
-            >
-              Update Payment Options
             </button>
           </div>
           <div className="settngdetials">
@@ -118,7 +110,9 @@ class UnconnectedUserProfile extends Component {
                   <span>Email:{this.state.userdetails.email}</span>
                 </p>
               </div>
-              {this.state.accountdetails ? <Accountdetails /> : null}
+              {this.state.accountdetails ? (
+                <Accountdetails onClose={this.closeAccountDetails} />
+              ) : null}
             </article>
             <button
               className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
@@ -127,12 +121,38 @@ class UnconnectedUserProfile extends Component {
               Account detials
             </button>
           </div>
-          <Link
+
+          <div className="settngdetials">
+            <article class="center mw5 mw6-ns br3 ba b--black-10 mv4">
+              <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
+                Payment
+              </h1>
+              <div class="pa3 bt b--black-10">
+                <p class="f6 f5-ns lh-copy measure stylepara">
+                  <span>Card No: {this.state.userdetails.cardno}</span>
+                  <span>CVC No: {this.state.userdetails.cvc}</span>
+                  <span>Expiry Date:{this.state.userdetails.expirydate}</span>
+                  <span>Name On Card:{this.state.userdetails.nameonCard}</span>
+                </p>
+              </div>
+              {this.state.payment ? (
+                <Paymentpopup onClose={this.closePayment} />
+              ) : null}
+            </article>
+            <button
+              className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
+              onClick={this.updatePayment}
+            >
+              Update Payment Options
+            </button>
+          </div>
+
+          {/* <Link
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
             to="/jarvis"
           >
             jarvis
-          </Link>
+          </Link> */}
         </div>
       );
     }

@@ -38,6 +38,7 @@ export default class UploadItem extends Component {
       body: data,
       credentials: "include"
     });
+    this.props.onClose();
   };
   render() {
     return (

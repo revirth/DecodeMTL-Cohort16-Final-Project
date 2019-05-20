@@ -97,7 +97,7 @@ class UnConnectedCart extends React.Component {
         <div className="parent-horizontal">
           <div className="button-right">
             <button
-              className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
+              className="f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow"
               onClick={this.onClickClearCart}
             >
               Clear Cart
@@ -167,7 +167,7 @@ class UnConnectedCart extends React.Component {
             <div className="button-right">
               <Link to="/checkout">
                 <button
-                  className="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green bn grow"
+                  className="f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow"
                   // onClick={this.onClickChaeckout}
                 >
                   Checkout

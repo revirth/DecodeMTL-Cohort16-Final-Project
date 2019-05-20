@@ -32,6 +32,7 @@ export default class Accountdetails extends Component {
         credentials: "include"
       });
     }
+    this.props.onClose();
   };
   render() {
     return (

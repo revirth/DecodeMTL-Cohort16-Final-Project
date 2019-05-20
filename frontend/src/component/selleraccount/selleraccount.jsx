@@ -34,6 +34,14 @@ export default class selleraccount extends Component {
       });
     }
   };
+
+  closeshopdetails = () => {
+    this.setState({ shopdetails: false });
+  };
+  closeUploaditems = () => {
+    this.setState({ uploaditems: false });
+  };
+
   componentDidMount = async () => {
     document.addEventListener("keydown", this.escFunction, false);
     let response = await fetch(`/auth/profile`);
@@ -133,8 +141,12 @@ export default class selleraccount extends Component {
           </Link>
         </div>
         {this.state.showitems ? <EditSellerItems /> : null}
-        {this.state.uploaditems ? <UploadItem /> : null}
-        {this.state.shopdetails ? <Shoppopup /> : null}
+        {this.state.uploaditems ? (
+          <UploadItem onClose={this.closeUploaditems} />
+        ) : null}
+        {this.state.shopdetails ? (
+          <Shoppopup onClose={this.closeshopdetails} />
+        ) : null}
         {this.state.userlist ? <Userlist /> : null}
         {/* {this.state.allreview ? <Allreviews /> : null} */}
       </div>

@@ -37,6 +37,7 @@ export default class Addresspopup extends Component {
       body: data,
       credentials: "include"
     });
+    this.props.onClose();
   };
   render() {
     return (
