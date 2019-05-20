@@ -6,7 +6,7 @@ const twilio = require("twilio");
 const nodemailer = require("nodemailer");
 const accountSid = "ACa40838c98b0bb1e79ee3d893936297fa";
 const authToken = "81d861e95f049d1bbe053d0cc1c79ff1";
-const clinet = new twilio(accountSid, authToken);
+const client = new twilio(accountSid, authToken);
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -24,9 +24,8 @@ const validateUser = user => {
     password: Joi.string().required(),
     signuptype: Joi.string(),
     usertype: Joi.string()
-
   };
-  console.log("schema: ", Joi.validate(user, schema))
+  console.log("schema: ", Joi.validate(user, schema));
   return Joi.validate(user, schema);
 };
 
@@ -76,7 +75,7 @@ router.get("/logout", (req, res) => {
 });
 sendtext = (to, message) => {
   console.log("sending text to:", to, "message:", message);
-  clinet.messages
+  client.messages
     .create({
       body: message,
       to: to,
@@ -87,7 +86,7 @@ sendtext = (to, message) => {
 
 router.post("/signup", async (req, res) => {
   // validate form data
-  console.log(req.body)
+  console.log(req.body);
   const { error } = validateUser(req.body);
   if (error)
     return res.status(400).send(resmsg(false, error.details[0].message));
