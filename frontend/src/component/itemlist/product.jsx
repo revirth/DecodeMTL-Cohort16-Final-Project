@@ -5,6 +5,8 @@ import "./style.css";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import LoginPopup from "../login/LoginPopup";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/opacity.css";
 
 let onClickHandle = e => {};
 
@@ -79,13 +81,13 @@ class UnconnectedProduct extends Component {
             {!this.state.available ? "o" : "x"}
           </p>
         )}
-        <img
+        <LazyLoadImage
           src={imgUrl}
           className="db w-100 br2 br--top"
           alt="Photo of a kitten looking menacing."
+          effect="opacity"
           title={name}
           height="200px"
-          width="100px"
         />
         <div className="pa2 ph3-ns pb3-ns">
           <div className="dt w-100 mt1">
