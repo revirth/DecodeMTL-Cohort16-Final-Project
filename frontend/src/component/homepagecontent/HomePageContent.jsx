@@ -11,10 +11,9 @@ class HomePageContent extends React.Component {
           <video
             src="//cms.chobanifoodservice.com/assets/Chobani_Loop_7.mp4"
             autoPlay
-            className="muted"
+            className="muted video"
             loop
-            playsinline=""
-            className="video"
+            playsInline=""
             data-jsx="2165040243"
             data-reactid="74"
             data-vscid="4rvi0manm"
@@ -79,6 +78,7 @@ class HomePageContent extends React.Component {
             <p>
               {" "}
               <span class="redish">PRE-COOKED</span>
+              <span className="redish">PRE-COOKED</span>
               <div />
               <span>DON'T WASTE TIME</span>
             </p>
