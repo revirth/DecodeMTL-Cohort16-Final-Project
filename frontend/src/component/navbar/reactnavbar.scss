@@ -2,6 +2,9 @@
 @import url("https://use.fontawesome.com/releases/v5.8.2/css/all.css");
 @import url("https://fonts.googleapis.com/css?family=Slabo+27px");
 
+
+
+
 #searchbutton {
   color: white;
   padding-right: 5px;
@@ -14,11 +17,15 @@ input {
 nav {
   background-color: #0077b5;
   overflow: hidden;
-  padding: 1.3em;
+  padding: 1em;
   border-bottom: 3px solid transparent;
 }
 
 nav a {
+  color: white;
+  font-family: "Slabo 27px", serif;
+}
+nav i {
   color: white;
   font-family: "Slabo 27px", serif;
 }
@@ -35,8 +42,9 @@ nav .navWide .wideDiv {
 nav .navWide .wideDiv a {
   text-decoration: none;
   display: line-block;
-  padding: 0 2.5em;
+  padding: 0 3.5em;
   padding-bottom: 5px;
+
 }
 
 a {
@@ -78,7 +86,7 @@ nav .navNarrow .narrowLinks a {
 
 /*Adjust breakpoint as desired to select when the "hamburger" menu is
 replaced by just the links.*/
-@media (min-width: 1250px) {
+@media (min-width: 1200px) {
   nav .navWide {
     display: block;
   }
@@ -95,16 +103,18 @@ replaced by just the links.*/
 .menus {
   display: none;
   padding-top: 20px;
-  padding-left: 40px;
+  
 }
 
 .menus a {
+  font-size: 1.3em;
   text-decoration: none;
   transition: 1000ms;
   border-bottom: 1px solid transparent;
   display: block;
   float: left;
   clear: left;
+  margin-top:10px;
   padding: 0.1em 0;
   -webkit-transition: 1000ms;
   -moz-transition: 1000ms;
@@ -118,4 +128,26 @@ replaced by just the links.*/
 
 .titles {
   font-size: 1em;
+}
+
+
+.navbarmains{
+
+  .fas{
+    margin-left:-30px;
+
+  }
+  .navstyles{
+    margin-top:10px;
+    margin-left:-20px;
+    
+  }
+  .titles link{
+  }
+}
+
+#searchbutton{
+  padding-left:10px;
+
+
 }
