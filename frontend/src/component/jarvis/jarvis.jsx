@@ -13,7 +13,8 @@ class UnconnectedJarvis extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: []
+      messages: [],
+      comment: ""
     };
   }
   scrollBottom = () => {
@@ -30,18 +31,25 @@ class UnconnectedJarvis extends Component {
       const newmsg = { text: speech, sender: "jarvis" };
       const user = { text: value, sender: this.props.username };
       this.setState(
-        { messages: [...this.state.messages, user, newmsg] },
+        { messages: [...this.state.messages, user, newmsg], comment: "" },
         this.scrollBottom
       );
     };
     client.textRequest(value).then(onSuccess);
   };
+  typeComment = event => {
+    event.preventDefault();
+    this.setState({ comment: event.target.value });
+  };
   render() {
     return (
       <div className="overlay3">
         <div className="w3-animate-bottom3">
-          <div className="login-form-div3" id="chatid">
+          <div className="login-form-div4">
+            <i class="far fa-comments" />
             <h1>Customer Support</h1>
+          </div>
+          <div className="login-form-div3" id="chatid">
             <ul className="jarvisul">
               {this.state.messages.map(entry =>
                 entry.sender === "jarvis" ? (
@@ -53,7 +61,9 @@ class UnconnectedJarvis extends Component {
                 ) : (
                   <li class="container2">
                     <p>
-                      {entry.text} :{entry.sender}
+                      <div className="usermsg">
+                        {entry.text} :{entry.sender}
+                      </div>
                     </p>
                   </li>
                 )
@@ -66,11 +76,17 @@ class UnconnectedJarvis extends Component {
                 </li>
               ))}
             </ul> */}
+          </div>
+          <div className="login-form-div5">
             <input
               type="text"
+              className="chatmsg"
+              onChange={this.typeComment}
               onKeyDown={e =>
                 e.keyCode === 13 ? this.sendMessage(e.target.value) : null
               }
+              value={this.state.comment}
+              placeholder="Type your message"
             />
           </div>
         </div>

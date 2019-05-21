@@ -100,9 +100,7 @@ class UnconnectedLinks extends React.Component {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {/* <label className="afterlogin">
-                Hello {this.props.username} !
-              </label> */}
+              <label className="afterlogin">Hello {this.props.username}</label>
               {this.props.loggedIn && this.props.usertp === "1" ? (
                 <Link to="/profile">Account Setting</Link>
               ) : (
