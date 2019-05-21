@@ -92,14 +92,16 @@ class UnconnectedProduct extends Component {
         <div className="pa2 ph3-ns pb3-ns">
           <div className="dt w-100 mt1">
             <div className="dtc">
-              <h1 className="f5 f4-ns mv0">{name}</h1>
+              <h1 className="f5 f4-ns mv0 itemName overflow-ellipsis">
+                {name}
+              </h1>
             </div>
             <div className="dtc tr">
               <h2 className="f5 mv0">{price}</h2>
             </div>
           </div>
-          <p className="f6 lh-copy measure mt2 mid-gray">
-            {description && description.substring(0, 200)}
+          <p className="f6 lh-copy measure mt2 mid-gray itemDesc overflow-ellipsis">
+            {description && description.substring(0, 1000)}
           </p>
           <div className="btn1">
             <button
