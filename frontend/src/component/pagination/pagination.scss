@@ -3,12 +3,12 @@
   margin-bottom: 100px;
   justify-content: center;
   width: 100%;
-}
 
-.Pagination li.active {
-  cursor: default;
-}
+  li.active {
+    cursor: default;
+  }
 
-.Pagination li {
-  cursor: pointer;
+  li {
+    cursor: pointer;
+  }
 }
