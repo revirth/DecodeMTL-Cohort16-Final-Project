@@ -10,6 +10,7 @@ import trained_brain from "./trained_brain"
 // import "./chitchatdata.js"
 import { Component } from "react";
 import "./sky_net.scss";
+// import './sky_net1.scss'
 class Ultron extends Component {
     constructor() {
         super();
@@ -647,34 +648,34 @@ class Ultron extends Component {
     initialise = () => {
         this.setState({ show: "Loading..." })
         let dataz = [
-            { input: 'i am super happy', output: 'happy' },
+            { input: 'i am super happy', output: 'ok' },
             { input: 'what a trhill', output: 'bad' },
-            { input: 'food was delicious awesome service', output: 'happy' },
-            { input: 'this is the best food ever', output: 'happy' },
-            { input: 'i am satisfied', output: 'happy' },
-            { input: 'I am satisfied', output: 'happy' },
+            { input: 'food was delicious awesome service', output: 'ok' },
+            { input: 'this is the best food ever', output: 'ok' },
+            { input: 'i am satisfied', output: 'ok' },
+            { input: 'I am satisfied', output: 'ok' },
             { input: 'i hated the service and the food', output: 'bad' },
             { input: 'would not recommend to anyone', output: 'bad' },
             { input: 'this is the worst place to eat in montreal', output: 'bad' },
-            { input: 'i am satisfied', output: 'happy' },
-            { input: 'i was happy with my order', output: 'happy' },
-            { input: 'i am happy!', output: 'happy' },
+            { input: 'i am satisfied', output: 'ok' },
+            { input: 'i was happy with my order', output: 'ok' },
+            { input: 'i am happy!', output: 'ok' },
             { input: 'the food was terrible', output: 'bad' },
             { input: 'i would never order from there again', output: 'bad' },
             { input: 'i was disapointed', output: 'bad' },
             { input: 'i was very disapointed', output: 'bad' },
             { input: 'the food tasted like shit', output: 'bad' },
             { input: 'the food tasted like crap', output: 'bad' },
-            { input: 'omg best service', output: 'happy' },
-            { input: 'i would recommend it to my friends', output: 'happy' },
-            { input: 'delicious food, great service', output: 'happy' },
-            { input: 'best choice out there', output: 'happy' },
-            { input: 'quick delivery, fast and effective', output: 'happy' },
+            { input: 'omg best service', output: 'ok' },
+            { input: 'i would recommend it to my friends', output: 'ok' },
+            { input: 'delicious food, great service', output: 'ok' },
+            { input: 'best choice out there', output: 'ok' },
+            { input: 'quick delivery, fast and effective', output: 'ok' },
             { input: 'i would not recommend', output: 'bad' },
             { input: 'i would not recommend it to my friends', output: 'bad' },
-            { input: 'very large choice of meals easy to order and interesting offers to watch for great', output: 'happy' },
-            { input: 'i already set a record for ordering from them every week today i ordered twice', output: 'happy' },
-            { input: 'very satisfied with alce they take care when delivering always on time great variety of', output: 'happy' },
+            { input: 'very large choice of meals easy to order and interesting offers to watch for great', output: 'ok' },
+            { input: 'i already set a record for ordering from them every week today i ordered twice', output: 'ok' },
+            { input: 'very satisfied with alce they take care when delivering always on time great variety of', output: 'ok' },
             { input: 'very bad quality and slow', output: 'bad' },
             { input: 'bad and slow', output: 'bad' },
             { input: 'i was very disapointed with my order', output: 'bad' },
@@ -687,30 +688,30 @@ class Ultron extends Component {
             { input: 'bad experience', output: 'bad' },
             { input: 'i had a really bad experience with them', output: 'bad' },
             { input: 'alot of errors in my order', output: 'bad' },
-            { input: 'i was very happy with my order', output: 'happy' },
+            { input: 'i was very happy with my order', output: 'ok' },
             { input: 'this looks really bad', output: 'bad' },
-            { input: 'i was very happy with my order', output: 'happy' },
+            { input: 'i was very happy with my order', output: 'ok' },
             { input: 'i really did not liked the spagetthi', output: 'bad' },
             { input: 'i had to trow half the food to the garbage', output: 'bad' },
             { input: 'i had a bad experience ordering with them', output: 'bad' },
             { input: 'bad bad bad', output: 'bad' },
             { input: 'bad', output: 'bad' },
-            { input: 'hi', output: 'happy' },
+            { input: 'hi', output: 'ok' },
             { input: 'review content', output: 'happy' },
             { input: 'asdf', output: 'bad' },
             { input: 'ghjghjghj', output: 'bad' },
-            { input: 'hello', output: 'happy' },
-            { input: 'good', output: 'happy' },
-            { input: 'very good', output: 'happy' },
-            { input: 'This is very good !', output: 'happy' },
-            { input: 'this is very good', output: 'happy' },
+            { input: 'hello', output: 'ok' },
+            { input: 'good', output: 'ok' },
+            { input: 'very good', output: 'ok' },
+            { input: 'This is very good !', output: 'ok' },
+            { input: 'this is very good', output: 'ok' },
             { input: 'I want to kill myself', output: 'bad' },
             { input: 'I want to kill myself !', output: 'bad' },
             { input: 'i want to kill myself', output: 'bad' },
             { input: 'I would never eat food from them again', output: 'bad' },
             { input: 'I did not liked my experience', output: 'bad' },
-            { input: 'I can eat this all day !', output: 'happy' },
-            { input: 'i can eat this all day', output: 'happy' },
+            { input: 'I can eat this all day !', output: 'ok' },
+            { input: 'i can eat this all day', output: 'ok' },
             { input: 'the portions where too small', output: 'bad' },
             { input: 'total ripoff', output: 'bad' },
             { input: 'steal', output: 'bad' },
@@ -719,7 +720,101 @@ class Ultron extends Component {
             { input: 'horseshit', output: 'bad' },
             { input: 'crap', output: 'bad' },
             { input: 'this sucks', output: 'bad' },
-            { input: 'evil', output: 'bad' }
+            { input: 'this is sad', output: 'bad' },
+            { input: 'evil', output: 'bad' },
+          { input: '"Chicken and mutton biryani is very tasty and hygienic. The rate is very cheap when compared to other high class restaurant"', output: 'ok' },
+          { input: '"Excellent dumplings, we loved all three we got: pork and cabbage, pork and cilantro, and beef and curry onion"', output: 'ok' },
+          { input: '"If you like Korean food , youve got to try thier Bulgogi Bibmibap. Served in a hot stone bowl. Comes to the table still sizzling. White rice on bottom with veges and sunny side up fried egg on top. Reasonable price of $10.99 . With all the side dishes. Besure to add some kimchi to your bowl of bibimbap. Husband had fried rice with chicken. Everything was great. Even the red sauce was good. Only complaint was the stone bowl kept the food almost to hot to eat. Will definitly be back "', output: 'ok' },
+          { input: '"I would not recommend it to my friend ever"', output: 'bad' },
+          { input: '"Incredible food and service. My lovely boyfriend and I decided to stop by this restaurant for dinner after a long day of walking around"', output: 'ok' },
+          { input: 'Oh my word, what a meal!!', output: 'ok' },
+          { input: 'Probably one of the highlights of my culinary experiences in Montreal.', output: 'ok' },
+          { input: 'much worth it', output: 'ok' },
+          { input: 'The food was delicious', output: 'ok' },{ input: 'i am super happy', output: 'ok' },
+          { input: 'what a trhill', output: 'bad' },
+          { input: 'food was delicious awesome service', output: 'ok' },
+          { input: 'this is the best food ever', output: 'ok' },
+          { input: 'i am satisfied', output: 'ok' },
+          { input: 'I am satisfied', output: 'ok' },
+          { input: 'i hated the service and the food', output: 'bad' },
+          { input: 'would not recommend to anyone', output: 'bad' },
+          { input: 'this is the worst place to eat in montreal', output: 'bad' },
+          { input: 'i am satisfied', output: 'ok' },
+          { input: 'i was happy with my order', output: 'ok' },
+          { input: 'i am happy!', output: 'ok' },
+          { input: 'the food was terrible', output: 'bad' },
+          { input: 'i would never order from there again', output: 'bad' },
+          { input: 'i was disapointed', output: 'bad' },
+          { input: 'i was very disapointed', output: 'bad' },
+          { input: 'the food tasted like shit', output: 'bad' },
+          { input: 'the food tasted like crap', output: 'bad' },
+          { input: 'omg best service', output: 'ok' },
+          { input: 'i would recommend it to my friends', output: 'ok' },
+          { input: 'delicious food, great service', output: 'ok' },
+          { input: 'best choice out there', output: 'ok' },
+          { input: 'quick delivery, fast and effective', output: 'ok' },
+          { input: 'i would not recommend', output: 'bad' },
+          { input: 'i would not recommend it to my friends', output: 'bad' },
+          { input: 'very large choice of meals easy to order and interesting offers to watch for great', output: 'ok' },
+          { input: 'i already set a record for ordering from them every week today i ordered twice', output: 'ok' },
+          { input: 'very satisfied with alce they take care when delivering always on time great variety of', output: 'ok' },
+          { input: 'very bad quality and slow', output: 'bad' },
+          { input: 'bad and slow', output: 'bad' },
+          { input: 'i was very disapointed with my order', output: 'bad' },
+          { input: 'the vegetables where rotten', output: 'bad' },
+          { input: 'taste was weird', output: 'bad' },
+          { input: 'really bad first experice', output: 'bad' },
+          { input: 'bad after sale service', output: 'bad' },
+          { input: 'taste was not what i expected', output: 'bad' },
+          { input: 'i had to put it to the garbage', output: 'bad' },
+          { input: 'bad experience', output: 'bad' },
+          { input: 'i had a really bad experience with them', output: 'bad' },
+          { input: 'alot of errors in my order', output: 'bad' },
+          { input: 'i was very happy with my order', output: 'ok' },
+          { input: 'this looks really bad', output: 'bad' },
+          { input: 'i was very happy with my order', output: 'ok' },
+          { input: 'i really did not liked the spagetthi', output: 'bad' },
+          { input: 'i had to trow half the food to the garbage', output: 'bad' },
+          { input: 'i had a bad experience ordering with them', output: 'bad' },
+          { input: 'bad bad bad', output: 'bad' },
+          { input: 'bad', output: 'bad' },
+          { input: 'hi', output: 'ok' },
+          { input: 'review content', output: 'ok' },
+          { input: 'asdf', output: 'bad' },
+          { input: 'ghjghjghj', output: 'bad' },
+          { input: 'hello', output: '' },
+          { input: 'good', output: 'ok' },
+          { input: 'very good', output: 'ok' },
+          { input: 'This is very good !', output: 'ok' },
+          { input: 'this is very good', output: 'ok' },
+          { input: 'I want to kill myself', output: 'bad' },
+          { input: 'I want to kill myself !', output: 'bad' },
+          { input: 'i want to kill myself', output: 'bad' },
+          { input: 'I would never eat food from them again', output: 'bad' },
+          { input: 'I did not liked my experience', output: 'bad' },
+          { input: 'I can eat this all day !', output: 'ok' },
+          { input: 'i can eat this all day', output: 'ok' },
+          { input: 'the portions where too small', output: 'bad' },
+          { input: 'total ripoff', output: 'bad' },
+          { input: 'steal', output: 'bad' },
+          { input: 'never again !', output: 'bad' },
+          { input: 'dogshit', output: 'bad' },
+          { input: 'horseshit', output: 'bad' },
+          { input: 'crap', output: 'bad' },
+          { input: 'this sucks', output: 'bad' },
+          { input: 'evil', output: 'bad' },
+          { input: 'horrible value', output: 'bad' },
+          { input: 'horrible taste, would not recommend', output: 'bad' },
+          { input: 'horrible taste, would not order again', output: 'bad' },
+          { input: 'would not order again', output: 'bad' },
+          { input: 'Would not order again !', output: 'bad' },
+          { input: 'I was sick for 2 days after eating a meal', output: 'bad' },
+          { input: 'I was sick for 3 days after eating a meal', output: 'bad' },
+          { input: 'I was sick for 1 days after eating a meal', output: 'bad' },
+          { input: 'I was sick for 1 hour after eating a meal', output: 'bad' },
+          { input: 'I was sick after eating a meal', output: 'bad' },
+          { input: 'I wanted to vomit', output: 'bad' },
+          { input: 'I wanted to vomit after eating', output: 'bad' }
 
 
 
@@ -824,9 +919,9 @@ class Ultron extends Component {
     for (let i = 0; i < reviews.length; i++) {
       let aa = reviews1[i]
       let ab = run(aa)
-      if (ab === "happy" || ab === "bad ") {
+      if (ab === "ok" || ab === "bad") {
         predictions.push(ab)
-      } else if (ab.includes("happy")) {
+      } else if (ab.includes("ok")) {
           predictions.push(ab)
         } else if (ab.includes("bad")) {
             predictions.push(ab)
@@ -889,14 +984,14 @@ class Ultron extends Component {
         }
       }
       
+
+      let badReviewpercent = itemnamebad.length / this.state.prediction.length
+      console.log(badReviewpercent)
       
-      console.log(whoAreThebaddies)
-      console.log(itemnamebad)
       this.setState({ baddies: whoAreThebaddies });
       this.setState({ baddiesChoices: itemnamebad });
       this.setState({
-        show: "You can now access the bad comments with the option below \n"
-          + whoAreThebaddies[19] + " for the " + itemnamebad[19] + " and \n" + whoAreThebaddies[13] + " for the " + itemnamebad[13]
+        show: "You can now access the bad comments with the option below"
       })
     }
   }
@@ -930,9 +1025,12 @@ class Ultron extends Component {
         this.setState({ can_you_see_me: true })
         this.setState({ show:  "Hello again!"})
     }
+/* Automatic response generator
+    Dear [NAME OF REVIEWER], thanks for sharing your feedback. We’re sorry your experience didn’t match your expectations. It was an uncommon instance and we’ll do better.
 
-
-
+    Please feel free reach out to [INSERT CONTACT INFORMATION] with any further comments, concerns, or suggestions you wish to share. We would love to make things right if you give us another chance.
+*/
+/*“Thank you for posting a review and we’re sorry to hear that your experience was not of the quality you expected. We would like the opportunity to investigate your feedback further.”*/
 
     render() {
         let commandsOverrides = {
