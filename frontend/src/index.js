@@ -5,7 +5,15 @@ import { Provider } from "react-redux";
 import store from "./store.js";
 import * as serviceWorker from "./serviceWorker";
 
-ReactDOM.render(
+// ReactDOM.render(
+//   <Provider store={store}>
+//     <App />
+//   </Provider>,
+//   document.getElementById("root")
+// );
+
+const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate;
+renderMethod(
   <Provider store={store}>
     <App />
   </Provider>,

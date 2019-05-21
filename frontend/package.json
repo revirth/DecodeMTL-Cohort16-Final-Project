@@ -34,7 +34,8 @@
     "start": "set HTTPS=true&&react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postbuild": "react-snap"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -51,5 +52,11 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:4000"
+  "proxy": "http://localhost:4000",
+  "reactSnap": {
+    "skipThirdPartyRequests": true
+  },
+  "devDependencies": {
+    "react-snap": "^1.23.0"
+  }
 }
