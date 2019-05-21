@@ -4,3 +4,11 @@
   justify-content: center;
   width: 100%;
 }
+
+.Pagination li.active {
+  cursor: default;
+}
+
+.Pagination li {
+  cursor: pointer;
+}
