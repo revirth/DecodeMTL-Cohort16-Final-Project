@@ -122,6 +122,10 @@ input[type="submit"] {
   text-align: right;
 }
 
+.forgot-password-text{
+  color: black
+}
+
 .animate {
   -webkit-animation: animatezoom 0.6s;
   animation: animatezoom 0.6s;
