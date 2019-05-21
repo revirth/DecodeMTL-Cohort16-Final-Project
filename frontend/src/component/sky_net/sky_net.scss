@@ -1,11 +1,41 @@
 .sky_net {
   z-index: 10;
+ margin-left:-50px;
+ 
   // margin-left:700px;
+}
+.sky_net::before{
+  background: #003b00;
+  opacity: 0.6;
+}
+
+.detailss{
+  
+  opacity: 1;
+  margin-left: 475px;
+  margin-top: 10px;
+  padding-right: 10px;
+  padding-bottom:50px;
+  font-family: Lucida Console, Courier;
+  color: red;
+  p {
+    margin-left: 10px;
+  }
+  li {
+    margin-left: 10px;
+    padding-top: 10px;
+    color: red;
+  }
+  li:hover {
+    color: red;
+    
+  }
 }
 .commands {
   opacity: 1;
-  margin-left: 450px;
-  margin-top: -250px;
+  
+  margin-left: 475px;
+  margin-top: -275px;
   padding-right: 10px;
   font-family: Lucida Console, Courier;
   color: #00ff41;
@@ -28,6 +58,7 @@ body {
   padding: 0;
   background: white;
   .container {
+    margin-left:-75px;
     margin-top: 50px;
     display: -webkit-box;
     display: -webkit-flex;
@@ -275,7 +306,10 @@ body {
   color: #008f11;
   margin-top: -20px;
   text-align: center;
+  font-size:1.5em;
+  width: 250px;
+  margin-left: -25px;
   button {
-    font-size: 1.5em;
+    font-size: 2em;
   }
 }
