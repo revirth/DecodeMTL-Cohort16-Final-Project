@@ -133,12 +133,12 @@ export default class selleraccount extends Component {
           >
             All reviews
           </Link>
-          <Link
+          {/* <Link
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             to="/map"
           >
             Map
-          </Link>
+          </Link> */}
         </div>
         {this.state.showitems ? <EditSellerItems /> : null}
         {this.state.uploaditems ? (

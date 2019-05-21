@@ -79,7 +79,9 @@ class UnconnectedLinks extends React.Component {
   render() {
     return (
       <div className="navbarmains">
-        <i className="fas fa-hamburger fa-2x" />
+        <Link to="/">
+          <i className="fas fa-hamburger fa-2x" />
+        </Link>
         <span className="navstyles">
           <Link to="#" onClick={this.menuToggle}>
             MENU
