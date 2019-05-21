@@ -196,20 +196,22 @@ class UnconnectedLoginPopup extends Component {
           </div> */}
           <div className="login-form-div">
             {form}
-            <div className="wrapper">
+            <div className="mtop1 mbot1">
               <FacebookLogin
                 appId="432661687560212"
                 size="small"
+                cssClass="custom-kep-login-facebook small"
                 fields="name,email,picture"
                 callback={r => {
                   this.socialLogin({ response: r, socialN: "facebook" });
                 }}
               />
             </div>
-            <div className="wrapper">
+            <div>
               <GoogleLogin
                 clientId="552704391478-lk7u47rc53grh82k0mmcekegqc8lkuo4.apps.googleusercontent.com"
                 buttonText="Login with Google"
+                className="custom-login-google"
                 theme="dark"
                 onSuccess={r => {
                   this.socialLogin({ response: r, socialN: "google" });

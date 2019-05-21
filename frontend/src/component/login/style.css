@@ -9,8 +9,8 @@ body {
     margin: 0
 }
 
-.wrapper{
- margin: 10px;
+.google-button{
+    border: 1px black
 }
 
 .fa-times:before {
@@ -20,7 +20,7 @@ body {
   .fa {
     display: inline-block;
     font-family: FontAwesome;
-    color: red;
+    color: black;
     font-style: normal;
     font-weight: normal;
     line-height: 1;
@@ -9061,4 +9061,52 @@ code {
     .v-btm-l {
         vertical-align: bottom
     }
+
+    .mtop1{
+        margin-top: 30px
+    }
+
+    .mbot1{
+        margin-bottom: -15px
+    }
+
+    .custom-kep-login-facebook {
+        /* font-family: Helvetica,sans-serif;
+        font-weight: 700;
+        -webkit-font-smoothing: antialiased; */
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        /* font-size: calc(.27548vw + 12.71074px); */
+        font-size: .875rem;
+        text-decoration: none;
+        /* text-transform: uppercase; */
+        transition: background-color .3s,border-color .3s;
+        background-color: #4c69ba;
+        border: calc(.06887vw + .67769px) solid #4c69ba;
+        padding: calc(.34435vw + 13.38843px) calc(.34435vw + 18.38843px);
+    }
+
+    .custom-kep-login-facebook.small {
+        padding: calc(.34435vw + 3.38843px) calc(.34435vw + 8.38843px);
+    }
+
+    .custom-login-google{
+        background-color: rgb(66, 133, 244);
+        display: inline-flex;
+        align-items: center;
+        color: rgb(255, 255, 255);
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
+        padding-left: 100px !important;
+        padding-right: auto !important;
+        border-radius: 8px !important;
+        border: 1px solid transparent;
+        font-size: .875rem !important;
+        /* font-weight: 500; */
+        font-weight: normal;
+        /* font-family: Roboto, sans-serif; */
+        font-family: none !important;
+        text-align: center !important;
+    }
+    
 }

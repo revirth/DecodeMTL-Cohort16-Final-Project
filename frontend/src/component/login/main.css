@@ -57,7 +57,7 @@ body {
 
 .login-form-div {
   background-color: #f8f5f1;
-  padding: 50px;
+  padding: 30px !important;
   border-radius: 5px;
 }
 
@@ -154,7 +154,7 @@ input[type="submit"] {
 .btndiv {
   display: flex;
   flex-direction: column;
-  margin-top: 10%;
+  margin-top: 3%;
 }
 
 .centered {
