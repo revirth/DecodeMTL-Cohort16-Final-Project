@@ -83,14 +83,14 @@ export default class selleraccount extends Component {
     return (
       <div className="sellermain">
         <div className="internalSeller1">
-          <article class="center mw5 mw6-ns br3 ba b--black-10 mv4 artcle">
-            <h1 class="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
+          <article className="center mw5 mw6-ns br3 ba b--black-10 mv4 artcle">
+            <h1 className="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
               Shop Detail
             </h1>
             <ReactMap className="mapclass" />
 
-            <div class="pa3 bt b--black-10">
-              <p class="f6 f5-ns lh-copy measure stylepara">
+            <div className="pa3 bt b--black-10">
+              <p className="f6 f5-ns lh-copy measure stylepara">
                 <span>Street: {this.state.sellerdetails.street}</span>
                 <span>Apartment No: {this.state.sellerdetails.apt}</span>
                 <span>Postal:{this.state.sellerdetails.postal}</span>
