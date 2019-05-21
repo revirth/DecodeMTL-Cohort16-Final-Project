@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./pagination.scss";
-import { Link } from "react-router-dom";
 
 export default class Pagination extends Component {
   constructor(props) {
@@ -11,14 +10,25 @@ export default class Pagination extends Component {
     return `${window.location.pathname}?page=${page}&limit=${this.props.limit}`;
   };
 
+  handleClick = e => {
+    parseInt(e.target.dataset.page) !== this.props.page &&
+      this.props.history.push(e.target.dataset.to);
+  };
+
   createPageNums = () => {
     let pages = [];
     const totalPage = this.props.total / this.props.limit + 1;
 
     for (let i = 1; i <= totalPage; i++) {
       pages.push(
-        <li key={i}>
-          <Link to={this.pageLink(i)}>{i}</Link>
+        <li
+          key={i}
+          onClick={this.handleClick}
+          data-page={i}
+          data-to={this.pageLink(i)}
+          className={this.props.page === i ? "btcolor white active" : ""}
+        >
+          {i}
         </li>
       );
     }

@@ -36,7 +36,7 @@ class UnconnectedCartBar extends React.Component {
             </div>
             <div className="column equal-width wrapper-center">
               <div className="child-center">
-                <div className="column text-title">Total: </div>
+                <div className="column text-title">Total:  </div>
                 <div className="column number">${this.props.total.toFixed(2)}</div>
               </div>
             </div>

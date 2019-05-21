@@ -159,7 +159,7 @@ class UnconnectedLoginPopup extends Component {
           />
 
           <span className="forgot-password">
-            <i onClick={this.switchForm}>Forgot password?</i>
+            <i className="forgot-password-text" onClick={this.switchForm}>Forgot password?</i>
           </span>
         </form>
       );

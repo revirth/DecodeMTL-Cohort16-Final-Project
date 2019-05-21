@@ -62,6 +62,7 @@ class UnconnectedApp extends Component {
             limit={this.state.limit}
             total={this.state.total}
             page={this.state.page}
+            history={this.props.history}
           />
         </div>
       </div>

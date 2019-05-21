@@ -3,4 +3,12 @@
   margin-bottom: 100px;
   justify-content: center;
   width: 100%;
+
+  li.active {
+    cursor: default;
+  }
+
+  li {
+    cursor: pointer;
+  }
 }
