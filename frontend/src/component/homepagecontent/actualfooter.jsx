@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./custom.css";
 import "./style.css";
 import ReactMap from "../map/map.jsx";
+import footer from './footerbasic.png'
+import './footerstyle.scss';
 
 export default class Actualfooter extends Component {
   render() {
@@ -75,7 +77,10 @@ export default class Actualfooter extends Component {
             </div>
             <ReactMap />
           </div>
-          <section className="cf mb5 mgbtm">
+          <div className="footers">
+            <img src={footer} alt="footer" />
+          </div>
+          {/* <section className="cf mb5 mgbtm">
             <div className="mb4 mb0-ns w-100 w-50-l fr">
               <a
                 className="black-70 f3 f2-ns fw6 tl link dim dib pv3 mt2 mb4 mb0-l ctus"
@@ -197,7 +202,7 @@ export default class Actualfooter extends Component {
           </div>
           <div className="db dn-ns">
             <p className="f7 black-70 mt4 tc">Copyright © Thanos 2038</p>
-          </div>
+          </div> */}
         </footer>
       </div>
     );

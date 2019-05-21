@@ -186,3 +186,35 @@ a {
   align-items: center;
   z-index: 1;
 }
+
+/* BOTH of the following are required for text-overflow */
+h1.itemName {
+  width: 200px;
+  height: 25px;
+  padding: 2px 5px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+p.itemDesc {
+  width: 200px;
+  height: 90px;
+  padding: 2px 5px;
+  /* white-space: nowrap; */
+  overflow: hidden;
+}
+
+.overflow-visible {
+  white-space: initial;
+}
+
+.overflow-clip {
+  text-overflow: clip;
+}
+
+.overflow-ellipsis {
+  text-overflow: ellipsis;
+}
+
+.overflow-string {
+  text-overflow: " [..]";
+}
