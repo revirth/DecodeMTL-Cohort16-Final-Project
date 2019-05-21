@@ -3,7 +3,7 @@ const router = express.Router();
 const ObjectId = require("mongodb").ObjectId;
 
 let paginzation = query => {
-  const limit = query.limit ? parseInt(query.limit) : 8; // default paging size
+  const limit = query.limit ? parseInt(query.limit) : 10; // default paging size
   const page = query.page ? parseInt(query.page) : 1;
   const skip = page ? (page - 1) * limit : 0;
 
