@@ -5,6 +5,7 @@ import Product from "./product.jsx";
 import { item } from "./items.js";
 import { connect } from "react-redux";
 import Pagination from "../pagination";
+import { Helmet } from "react-helmet";
 
 class UnconnectedApp extends Component {
   constructor(props) {
@@ -50,6 +51,9 @@ class UnconnectedApp extends Component {
     // console.log("state", this.state);
     return (
       <div>
+        <Helmet>
+          <title>Nutrition Fine Fourchette Menu</title>
+        </Helmet>
         <div>
           <main className="pa3 pa5-ns flex flex-wrap">
             {this.state.items.map(p => (
@@ -62,6 +66,7 @@ class UnconnectedApp extends Component {
             limit={this.state.limit}
             total={this.state.total}
             page={this.state.page}
+            history={this.props.history}
           />
         </div>
       </div>

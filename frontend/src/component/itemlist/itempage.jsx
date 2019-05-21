@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import addItemToCart from "./addItemToCart";
 import LoginPopup from "../login/LoginPopup";
 // import item from "./items.js";
+import { Helmet } from "react-helmet";
 
 class UnconnectedItempage extends Component {
   constructor(props) {
@@ -74,6 +75,10 @@ class UnconnectedItempage extends Component {
   render = () => {
     return (
       <div>
+        <Helmet>
+          <title>{this.state.foundItem.name}</title>
+          <meta name="description" content={this.state.foundItem.description} />
+        </Helmet>
         <div>
           <article className="pa3 pa5-ns">
             <h1 className="f2 bold  mw5 name">{this.state.foundItem.name}</h1>

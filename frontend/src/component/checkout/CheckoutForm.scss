@@ -28,3 +28,83 @@
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
 }
+
+button {
+  display: inline-block;
+  background-color: #0077b5;
+  color: #fff;
+  font-size: 0.875rem;
+  text-decoration: none;
+  opacity: 1;
+  border-style: none;
+  border-width: 0;
+  border-radius: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  transition: -webkit-transform 0.25s ease-out;
+  transition: transform 0.25s ease-out;
+  transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
+  -webkit-transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
+  -moz-transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
+  -ms-transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
+  -o-transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
+  margin-top: 25px !important;
+  width: 100%;
+}
+.overlay2 {
+  z-index: 50;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-form-div2 {
+  background-color: #f8f5f1;
+  padding: 50px;
+  border-radius: 5px;
+  width: 500px;
+}
+
+.w3-animate-bottom2 {
+  position: relative;
+  animation: animatebottom 0.4s;
+}
+@keyframes animatebottom {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+.fakeemail {
+  margin-bottom: 10px;
+  width: 100%;
+  border-radius: 2px !important;
+  -webkit-border-radius: 2px !important;
+  -moz-border-radius: 2px !important;
+  -ms-border-radius: 2px !important;
+  -o-border-radius: 2px !important;
+  height: 40px !important;
+  border: none;
+}
+.CardBrandIcon-container {
+  display: flex !important;
+  flex-direction: column !important;
+}

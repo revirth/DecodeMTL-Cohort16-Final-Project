@@ -5,10 +5,26 @@ import store from "../../store.js";
 import checkUserSession from "../login/CheckUserSession";
 import "./cart.scss";
 // import "./style.css";
+import Checkout from "../checkout/index.jsx";
 
 class UnConnectedCart extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      checkout: false
+    };
+  }
   componentDidMount = () => {
+    document.addEventListener("keydown", this.escFunction, false);
     updateCartInfo();
+  };
+  escFunction = event => {
+    //console.log("event key", event.key);
+    if (event.keyCode === 27) {
+      this.setState({
+        checkout: false
+      });
+    }
   };
 
   onChangeHandleQuantity = e => {
@@ -87,6 +103,9 @@ class UnConnectedCart extends React.Component {
         }
       });
   };
+  checkOut = event => {
+    this.setState({ checkout: true });
+  };
 
   render() {
     //calculate Total for all items in the Cart
@@ -112,7 +131,7 @@ class UnConnectedCart extends React.Component {
       // generate Cart page
       <div className="cart">
         <div className="general-margin">
-          <h4>Your Items:</h4>
+          <div className="title-text">Your Items:</div>
           {clearButton}
           {this.props.items.map(item => {
             return (
@@ -120,31 +139,43 @@ class UnConnectedCart extends React.Component {
                 <div className="item-in-column">
                   <div className="image-wrapper">
                     <Link to={"/items/item/" + item.itemId}>
-                      <img className="item-image" src={item.itemImage} alt="" />
+                      <img className="item-image" src={item.itemImage} alt="" width="100%" height="100%"/>
                     </Link>
                   </div>
                   <div className="information-in-row name-price-width">
                     <div>
-                      <div>Name: {item.itemName}</div>
+                      <div className="item-name" >{item.itemName}</div>
                       <hr />
-                      <div className="stick_bottom">${item.itemPrice}</div>
-                    </div>
-                  </div>
-                  <div className="parent quantity-width">
-                    <div className="stick_bottom">
-                      Qty:{" "}
+                      <div>
+                      <div className="price mt2" >${item.itemPrice}</div>
+                    <div className="mt1">
+                      <div className="pr ib1 fs1">Qty:{" "}</div>
                       <input
-                        className="input-number"
+                        className="quantity-box"
                         type="number"
                         value={item.itemQuantity}
                         id={item.cartItemId}
                         onChange={this.onChangeHandleQuantity}
                       />
                     </div>
+                      </div>
+                    </div>
                   </div>
+                  {/* <div className="parent quantity-width">
+                    <div className="stick_bottom">
+                      <div className="pr ib1 fs1">Qty:{" "}</div>
+                      <input
+                        className="quantity-box"
+                        type="number"
+                        value={item.itemQuantity}
+                        id={item.cartItemId}
+                        onChange={this.onChangeHandleQuantity}
+                      />
+                    </div>
+                  </div> */}
                   <div className="parent subtotal-width">
                     <div className="stick_bottom subtotal">
-                      Subtotal:{" "}
+                      Subtotal:{"  $"}
                       {(parseFloat(item.itemPrice) * item.itemQuantity).toFixed(
                         2
                       )}
@@ -162,18 +193,21 @@ class UnConnectedCart extends React.Component {
               </div>
             );
           })}
-          <div className="total">Total: {total.toFixed(2)}</div>
+          <div className="total">Total:{"  $"}{total.toFixed(2)}</div>
           <div className="parent-horizontal">
             <div className="button-right">
-              <Link to="/checkout">
-                <button
-                  className="f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow"
-                  // onClick={this.onClickChaeckout}
-                >
-                  Checkout
-                </button>
-              </Link>
+              {/* <Link to="/checkout"> */}
+              <button
+                className="f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow"
+                onClick={this.checkOut}
+              >
+                Checkout
+              </button>
+              {/* </Link> */}
             </div>
+            {this.state.checkout ? (
+              <Checkout onClose={this.closePayment} />
+            ) : null}
           </div>
         </div>
       </div>

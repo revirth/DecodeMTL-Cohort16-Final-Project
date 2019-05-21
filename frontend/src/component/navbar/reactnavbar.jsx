@@ -79,42 +79,37 @@ class UnconnectedLinks extends React.Component {
   render() {
     return (
       <div className="navbarmains">
-        <i className="fas fa-hamburger fa-2x" />
+        <Link to="/">
+          <i className="fas fa-hamburger fa-2x" />
+        </Link>
         <span className="navstyles">
           <Link to="#" onClick={this.menuToggle}>
             MENU
           </Link>
           <Link to="/cart">ORDER</Link>
-          <Link to="#">DELIVERY</Link>
+          {/* <Link to="#">DELIVERY</Link> */}
           <Link to="/">ABOUT</Link>
           {!this.props.loggedIn ? (
-            <span>
+            <React.Fragment>
               <Link to="#" onClick={() => this.setState({ popup: true })}>
                 LOGIN
               </Link>
               <Link to="#" onClick={() => this.setState({ signup: true })}>
                 SIGNUP
               </Link>
-            </span>
+            </React.Fragment>
           ) : (
-            <span className="afterlogin">
-              Hello {this.props.username} !
+            <React.Fragment>
+              <label className="afterlogin">Hello {this.props.username}</label>
               {this.props.loggedIn && this.props.usertp === "1" ? (
-                <span>
-                  <Link to="/profile">Account Setting</Link>
-                  <Link to="#" onClick={this.logout}>
-                    LOGOUT
-                  </Link>{" "}
-                </span>
+                <Link to="/profile">Account Setting</Link>
               ) : (
-                <span>
-                  <Link to="/sellerprofile">My Dashboard</Link>
-                  <Link to="#" onClick={this.logout}>
-                    LOGOUT
-                  </Link>
-                </span>
+                <Link to="/sellerprofile">My Dashboard</Link>
               )}
-            </span>
+              <Link to="/" onClick={this.logout}>
+                LOGOUT
+              </Link>
+            </React.Fragment>
           )}
 
           {/* <i id="searchbutton" className="fa fa-search fa" />

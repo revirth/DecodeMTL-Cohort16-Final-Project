@@ -2,9 +2,6 @@
 @import url("https://use.fontawesome.com/releases/v5.8.2/css/all.css");
 @import url("https://fonts.googleapis.com/css?family=Slabo+27px");
 
-
-
-
 #searchbutton {
   color: white;
   padding-right: 5px;
@@ -44,7 +41,6 @@ nav .navWide .wideDiv a {
   display: line-block;
   padding: 0 3.5em;
   padding-bottom: 5px;
-
 }
 
 a {
@@ -103,7 +99,6 @@ replaced by just the links.*/
 .menus {
   display: none;
   padding-top: 20px;
-  
 }
 
 .menus a {
@@ -114,12 +109,13 @@ replaced by just the links.*/
   display: block;
   float: left;
   clear: left;
-  margin-top:10px;
+  margin-top: 10px;
   padding: 0.1em 0;
   -webkit-transition: 1000ms;
   -moz-transition: 1000ms;
   -ms-transition: 1000ms;
   -o-transition: 1000ms;
+  margin-left: 75px;
 }
 
 .menus a:hover {
@@ -130,24 +126,18 @@ replaced by just the links.*/
   font-size: 1em;
 }
 
-
-.navbarmains{
-
-  .fas{
-    margin-left:-30px;
-
+.navbarmains {
+  .fas {
+    margin-left: -30px;
   }
-  .navstyles{
-    margin-top:10px;
-    margin-left:-20px;
-    
+  .navstyles {
+    margin-top: 10px;
+    margin-left: -20px;
   }
-  .titles link{
+  .titles link {
   }
 }
 
-#searchbutton{
-  padding-left:10px;
-
-
+#searchbutton {
+  padding-left: 10px;
 }

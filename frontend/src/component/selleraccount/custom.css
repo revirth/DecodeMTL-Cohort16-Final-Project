@@ -120,6 +120,7 @@ input::placeholder {
 }
 .bordercolorblue {
   border-color: #0077b5;
+  background-color: white !important;
 }
 .artcle {
   max-width: 100% !important;

@@ -6,6 +6,7 @@ import Addresspopup from "./updateAddresspopup.jsx";
 import Paymentpopup from "./updatePaymentpopup.jsx";
 import Accountdetails from "./updateAccountdetails.jsx";
 import { Link } from "react-router-dom";
+import Jarvis from "../jarvis/jarvis.jsx";
 
 // export default class userprofile extends Component {
 class UnconnectedUserProfile extends Component {
@@ -15,6 +16,7 @@ class UnconnectedUserProfile extends Component {
       showaddress: false,
       payment: false,
       accountdetails: false,
+      jarvis: false,
       userdetails: {}
     };
   }
@@ -24,7 +26,8 @@ class UnconnectedUserProfile extends Component {
       this.setState({
         showaddress: false,
         payment: false,
-        accountdetails: false
+        accountdetails: false,
+        jarvis: false
       });
     }
   };
@@ -67,92 +70,103 @@ class UnconnectedUserProfile extends Component {
     event.preventDefault();
     this.setState({ accountdetails: !this.state.accountdetails });
   };
+  jarvis = event => {
+    event.preventDefault();
+    this.setState({ jarvis: true });
+  };
   render() {
     // let checkAdd = this.state.address ? {<SignupForm>} : null
     let content = "";
     if (this.props.loggedIn) {
       content = (
         <div className="mainsettings">
-          <div className="settngdetials">
-            <article className="center mw5 mw6-ns br3 ba b--black-10 mv4">
-              <h1 className="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
-                Address
-              </h1>
-              <div className="pa3 bt b--black-10">
-                <p className="f6 f5-ns lh-copy measure stylepara">
-                  <span>Street: {this.state.userdetails.street}</span>
-                  <span>Apartment No: {this.state.userdetails.apt}</span>
-                  <span>Postal:{this.state.userdetails.postal}</span>
-                  <span>Phone No:{this.state.userdetails.phone}</span>
-                </p>
-              </div>
+          <div className="usracc">
+            <div className="settngdetials">
+              <article className="center mw5 mw6-ns br3 ba b--black-10 mv4 flex-grow-1 usrprar">
+                <h1 className="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
+                  Address
+                </h1>
+                <div className="pa3 bt b--black-10">
+                  <p className="f6 f5-ns lh-copy measure stylepara">
+                    <span>Street: {this.state.userdetails.street}</span>
+                    <span>Apartment No: {this.state.userdetails.apt}</span>
+                    <span>Postal:{this.state.userdetails.postal}</span>
+                    <span>Phone No:{this.state.userdetails.phone}</span>
+                  </p>
+                </div>
 
-              {this.state.showaddress ? (
-                <Addresspopup onClose={this.closeAdressPopup} />
-              ) : null}
-            </article>
-            <button
-              className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow settingsbtn"
-              onClick={this.updateAddress}
-            >
-              Update Address
-            </button>
-          </div>
-          <div className="settngdetials">
-            <article className="center mw5 mw6-ns br3 ba b--black-10 mv4">
-              <h1 className="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
-                Payment
-              </h1>
-              <div className="pa3 bt b--black-10">
-                <p className="f6 f5-ns lh-copy measure stylepara">
-                  <span>Card No: {this.state.userdetails.cardno}</span>
-                  <span>CVC No: {this.state.userdetails.cvc}</span>
-                  <span>Expiry Date:{this.state.userdetails.expirydate}</span>
-                  <span>Name On Card:{this.state.userdetails.nameonCard}</span>
-                </p>
-              </div>
-              {this.state.accountdetails ? (
-                <Accountdetails onClose={this.closeAccountDetails} />
-              ) : null}
-            </article>
-            <button
-              className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
-              onClick={this.updateSettings}
-            >
-              Account detials
-            </button>
+                {this.state.showaddress ? (
+                  <Addresspopup onClose={this.closeAdressPopup} />
+                ) : null}
+              </article>
+              <button
+                className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow settingsbtn"
+                onClick={this.updateAddress}
+              >
+                Update Address
+              </button>
+            </div>
+            <div className="settngdetials">
+              <article className="center mw5 mw6-ns br3 ba b--black-10 mv4 flex-grow-1 usrprar">
+                <h1 className="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
+                  Payment
+                </h1>
+                <div className="pa3 bt b--black-10">
+                  <p className="f6 f5-ns lh-copy measure stylepara">
+                    <span>Card No: {this.state.userdetails.cardno}</span>
+                    <span>CVC No: {this.state.userdetails.cvc}</span>
+                    <span>Expiry Date:{this.state.userdetails.expirydate}</span>
+                    <span>
+                      Name On Card:{this.state.userdetails.nameonCard}
+                    </span>
+                  </p>
+                </div>
+                {this.state.accountdetails ? (
+                  <Accountdetails onClose={this.closeAccountDetails} />
+                ) : null}
+              </article>
+              <button
+                className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
+                onClick={this.updateSettings}
+              >
+                Account detials
+              </button>
+            </div>
+
+            <div className="settngdetials">
+              <article className="center mw5 mw6-ns br3 ba b--black-10 mv4 flex-grow-1 usrprar">
+                <h1 className="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
+                  Account Details
+                </h1>
+                <div className="pa3 bt b--black-10">
+                  <p className="f6 f5-ns lh-copy measure stylepara">
+                    <span>Username: {this.state.userdetails.username}</span>
+                    <span>Current Password: *************</span>
+                    <span>Email:{this.state.userdetails.email}</span>
+                  </p>
+                </div>
+                {this.state.payment ? (
+                  <Paymentpopup onClose={this.closePayment} />
+                ) : null}
+              </article>
+              <button
+                className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
+                onClick={this.updatePayment}
+              >
+                Update Payment Options
+              </button>
+            </div>
           </div>
 
-          <div className="settngdetials">
-            <article className="center mw5 mw6-ns br3 ba b--black-10 mv4">
-              <h1 className="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
-                Account Details
-              </h1>
-              <div className="pa3 bt b--black-10">
-                <p className="f6 f5-ns lh-copy measure stylepara">
-                  <span>Username: {this.state.userdetails.username}</span>
-                  <span>Current Password: *************</span>
-                  <span>Email:{this.state.userdetails.email}</span>
-                </p>
-              </div>
-              {this.state.payment ? (
-                <Paymentpopup onClose={this.closePayment} />
-              ) : null}
-            </article>
-            <button
-              className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
-              onClick={this.updatePayment}
-            >
-              Update Payment Options
-            </button>
-          </div>
-
-          {/* <Link
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
-            to="/jarvis"
+          <button
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow jarvis"
+            onClick={this.jarvis}
           >
-            jarvis
-          </Link> */}
+            <div className="jarviscx">
+              <div>Customer Support</div>
+            </div>
+          </button>
+          {this.state.jarvis ? <Jarvis /> : null}
         </div>
       );
     }

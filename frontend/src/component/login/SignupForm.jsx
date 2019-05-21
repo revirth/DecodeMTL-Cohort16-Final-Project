@@ -137,11 +137,12 @@ export default class SignupForm extends Component {
                 value="Sign Me Up"
               />
             </form>
-            <div className="wrapper">
+            <div className="mtop1 mbot1">
               <FacebookLogin
                 appId="432661687560212"
                 textButton="SignUp with Facebook"
                 size="small"
+                cssClass="custom-kep-login-facebook small"
                 fields="name,email,picture"
                 callback={r => {
                   this.socialSignup({ response: r, socialN: "facebook" });
@@ -152,6 +153,7 @@ export default class SignupForm extends Component {
               <GoogleLogin
                 clientId="552704391478-lk7u47rc53grh82k0mmcekegqc8lkuo4.apps.googleusercontent.com"
                 buttonText="Signup with Google"
+                className="custom-login-google"
                 theme="dark"
                 onSuccess={r => {
                   this.socialSignup({ response: r, socialN: "google" });
