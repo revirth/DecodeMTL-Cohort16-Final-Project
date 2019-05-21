@@ -13,6 +13,7 @@ import selleraccount from "./component/selleraccount/selleraccount.jsx";
 import Allreviewspage from "./component/selleraccount/Allreviewspage.jsx";
 import Jarvis from "./component/jarvis/jarvis.jsx";
 import ReactMap from "./component/map/map.jsx";
+import { Helmet } from "react-helmet";
 
 let renderItem = routerData => {
   return (
@@ -25,6 +26,13 @@ let renderItem = routerData => {
 function App() {
   return (
     <BrowserRouter>
+      <Helmet>
+        <title>Nutrition Fine Fourchette</title>
+        <meta
+          name="description"
+          content="un grand choix de plats cuisinés santé vous sont proposés. Commander vos repas favoris chaque semaine dès maintenant!"
+        />
+      </Helmet>
       <Navbar />
       <div>
         <Route exact={true} path="/" component={HomePageContent} />
