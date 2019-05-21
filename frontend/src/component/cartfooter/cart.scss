@@ -6,8 +6,8 @@
   .quantity-box {
     font-size: 0.9vw;
     border-radius: 5px;
-    width: 2.25vw;
-    padding: 2px
+    width: 3.2vw;
+    padding: 0.2vw
   }
 
   .item-in-column {
@@ -118,6 +118,8 @@
   .item-image {
     object-fit: cover;
     border-radius: 5px;
+    border: 0.5px solid;
+    border-color: black;
   }
 
   .item-name{
@@ -139,7 +141,7 @@
   }
 
   .fs1{
-    font-size: 1em
+    font-size: 0.9vw
   }
 
   .ib1{
@@ -154,7 +156,4 @@
     margin-top: 10px
   }
 
-  .qty-text{
-    font-size: 0.9vw
-  }
 }

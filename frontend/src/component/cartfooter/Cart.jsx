@@ -130,7 +130,7 @@ class UnConnectedCart extends React.Component {
                       <div>
                       <div className="price mt2" >${item.itemPrice}</div>
                     <div className="mt1">
-                      <div className="qty-text pr ib1 fs1">Qty:{" "}</div>
+                      <div className="pr ib1 fs1">Qty:{" "}</div>
                       <input
                         className="quantity-box"
                         type="number"
