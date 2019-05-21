@@ -3,6 +3,7 @@ import "./jarvis.css";
 import "./style.css";
 
 import { connect } from "react-redux";
+import { animateScroll } from "react-scroll";
 
 import { ApiAiClient } from "api-ai-javascript";
 const accessToken = "5fa6f64523ef4168b443821a34096c76";
@@ -15,6 +16,11 @@ class UnconnectedJarvis extends Component {
       messages: []
     };
   }
+  scrollBottom = () => {
+    animateScroll.scrollToBottom({
+      containerId: "chatid"
+    });
+  };
 
   sendMessage = value => {
     const onSuccess = response => {
@@ -23,28 +29,51 @@ class UnconnectedJarvis extends Component {
       const speech = response.result.fulfillment.speech;
       const newmsg = { text: speech, sender: "jarvis" };
       const user = { text: value, sender: this.props.username };
-      this.setState({ messages: [...this.state.messages, user, newmsg] });
+      this.setState(
+        { messages: [...this.state.messages, user, newmsg] },
+        this.scrollBottom
+      );
     };
     client.textRequest(value).then(onSuccess);
   };
   render() {
     return (
-      <div>
-        <h1>Love You 3000 </h1>
-
-        <ul>
-          {this.state.messages.map(entry => (
-            <li>
-              {entry.sender}:{entry.text}
-            </li>
-          ))}
-        </ul>
-        <input
-          type="text"
-          onKeyDown={e =>
-            e.keyCode === 13 ? this.sendMessage(e.target.value) : null
-          }
-        />
+      <div className="overlay3">
+        <div className="w3-animate-bottom3">
+          <div className="login-form-div3" id="chatid">
+            <h1>Customer Support</h1>
+            <ul className="jarvisul">
+              {this.state.messages.map(entry =>
+                entry.sender === "jarvis" ? (
+                  <li class="container1">
+                    <p>
+                      {entry.sender}: {entry.text}
+                    </p>
+                  </li>
+                ) : (
+                  <li class="container2">
+                    <p>
+                      {entry.text} :{entry.sender}
+                    </p>
+                  </li>
+                )
+              )}
+            </ul>
+            {/* <ul>
+              {this.state.messages.map(entry => (
+                <li>
+                  {entry.sender}:{entry.text}
+                </li>
+              ))}
+            </ul> */}
+            <input
+              type="text"
+              onKeyDown={e =>
+                e.keyCode === 13 ? this.sendMessage(e.target.value) : null
+              }
+            />
+          </div>
+        </div>
       </div>
     );
   }

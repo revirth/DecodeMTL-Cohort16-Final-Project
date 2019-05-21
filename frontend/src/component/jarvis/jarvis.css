@@ -1,0 +1,66 @@
+.overlay3 {
+  z-index: 50;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-form-div3 {
+  background-color: #f8f5f1;
+  padding: 10px;
+  border-radius: 5px;
+  overflow: scroll;
+  flex-wrap: wrap;
+  max-height: 500px;
+}
+
+.w3-animate-bottom3 {
+  position: relative;
+  animation: animatebottom 0.4s;
+}
+@keyframes animatebottom {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+.mainform {
+  border-radius: 5px;
+  5-webkit-border-radius: ;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  border: 0px;
+  -webkit-border-radius: 5px;
+}
+
+.container1 {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  margin-top: 5px !important;
+  margin-right: 50%;
+}
+
+.container2 {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  margin-top: 5px !important;
+  margin-left: 50%;
+}
+.jarvisul {
+  width: 100%;
+}
