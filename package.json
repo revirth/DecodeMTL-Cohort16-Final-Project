@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  },
+  "scripts": {
+    "client-install": "npm install --prefix frontend",
+    "start": "node backend/index.js",
+    "server": "nodemon backend/index.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
+  }
+}
