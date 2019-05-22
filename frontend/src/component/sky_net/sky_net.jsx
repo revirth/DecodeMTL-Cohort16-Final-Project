@@ -16,14 +16,14 @@ class Ultron extends Component {
         super();
 
         this.state = {
-          show: "Allow me to assist, humans",
+          show: "Click here !",
           show1:"hello",
           show2: "hello1",
           show3: "hello2",
           show4: "hello3",
           show5:"hello4",
           show6:"hello5", // display text window
-          can_you_see_me: 1,
+          can_you_see_me: 0,
           can_you_see_me1: 0,
           scanned:0,
              // trained net after initialise method
@@ -1137,8 +1137,8 @@ class Ultron extends Component {
       this.setState({ baddies: whoAreThebaddies });
       this.setState({ baddiesChoices: itemnamebad });
       this.setState({ can_you_see_me1: true });
-      setTimeout(() => { this.setState({ show: "You can now access the Bad Reviews in your dashboard !" }) }, 1000)
-      setTimeout(() => { this.setState({ show: "Click on Automated Response to adress the most recent ones" }) }, 3000)
+      setTimeout(() => { this.setState({ show: "Here, the 3 last bad reviews" }) }, 1000)
+      setTimeout(() => { this.setState({ show: "Click on Automated Response to adress them" }) }, 3000)
     }
   }
 
@@ -1159,20 +1159,20 @@ class Ultron extends Component {
   tutorial = () => {
     setTimeout(() => { this.setState({ can_you_see_me: false })}, 500)
 
-    setTimeout(() => { this.setState({ show: "Hello to you and welcome to your dashboad !" }) }, 1000)
-    setTimeout(() => { this.setState({ show: "First of all thank you for choosing a React/Node.js Website over Wordpress ;)" }) }, 4000)
+    setTimeout(() => { this.setState({ show: "Hello to you and welcome to your dashboard !" }) }, 1000)
+    setTimeout(() => { this.setState({ show: "First of all thank you for choosing a React and Node.js Website over Wordpress ;)" }) }, 4000)
     setTimeout(() => { this.setState({ show: "Loading speed is key for SEO and consumer experience" }) }, 7000)
     setTimeout(() => { this.setState({ show: "And React allows us to make it faster and create a better experience for the end user" }) }, 10000)
     setTimeout(() => { this.setState({ show: "We also optimised this website for SEO using various tools including browser side rendering for google crawlers" }) },13000)
     setTimeout(() => { this.setState({ show: "You can navigate on your dashboard by clicking the adequate buttons below" }) }, 16000)
-    setTimeout(() => { this.setState({ show: "Where are my manners, I forgot to present myself !" }) }, 19000)
-    setTimeout(() => { this.setState({ show: "I am Sky_Net and I use machine learning to create my own neural network" }) }, 22000)
-    setTimeout(() => { this.setState({ show: "I analyzed various reviews from Facebook,Twitter,Yelp and more in order to make accurate predictions" }) }, 25000)
-    setTimeout(() => { this.setState({ show: "If you feel like I am innacurate, you can retrain me at anytime clicking the Initialize button" }) }, 28000)
-    setTimeout(() => { this.setState({ show: "Usually AI is done on the backend but I can train right here in your browser !" }) }, 31000)
-    setTimeout(() => { this.setState({ show: "This is not the optimal way for complex problem solving using AI but powerfull enough for what I need :)" }) }, 34000)
-    setTimeout(() => { this.setState({ show: "Enough talk, here is what I can do for you" }) }, 37000)  
-    setTimeout(() => { this.setState({ show: "You can use the 'Scan Comments' options to have me go through your database and make predictions based on content" }) }, 40000)
+    setTimeout(() => { this.setState({ show: "But where are my manners, I forgot to introduce myself !" }) }, 19000)
+    setTimeout(() => { this.setState({ show: "I am Sky_Net and I use machine learning to create my own neural network" }) }, 23000)
+    setTimeout(() => { this.setState({ show: "I analyzed various reviews from Facebook,Twitter,Yelp and more in order to make accurate predictions" }) }, 27000)
+    setTimeout(() => { this.setState({ show: "If you feel like I am innacurate, you can retrain me at anytime clicking the Initialize button" }) }, 30000)
+    setTimeout(() => { this.setState({ show: "Usually AI is done on the backend but I can train right here in your browser !" }) }, 33000)
+    setTimeout(() => { this.setState({ show: "This is not the optimal way for complex problem solving using AI but powerfull enough for what I need :)" }) }, 38000)
+    setTimeout(() => { this.setState({ show: "Enough talk, here is what I can do for you" }) }, 42000)  
+    setTimeout(() => { this.setState({ show: "You can click 'Scan Comments' to have me go through your database and make predictions based on content" }) }, 40000)
     setTimeout(() => { this.setState({ show: "Then click on Store Bad reviews, I will store my predictions in the database and give some recommendations" }) }, 43000)
     setTimeout(() => { this.setState({ show: "Challenge me a bit now :)" }) }, 46000)
     setTimeout(() => { this.setState({ can_you_see_me: true })}, 48000)
@@ -1192,7 +1192,7 @@ class Ultron extends Component {
       
 
            
-        setTimeout(() => {this.setState({ show:  "Humans..."})}, 6000)
+        setTimeout(() => {this.setState({ show:  "..."})}, 6000)
     }
 
     display = () => {
@@ -1219,7 +1219,8 @@ class Ultron extends Component {
         }
         let tests = this.state.trained_net
         return (
-            <div className='sky_net'>
+          <div className='sky_net'>
+            <div className="dropdowns">How can I help ?</div>
                 <div className='container'>
                     <div className='face'>
                         <div className="face__ears">
@@ -1254,25 +1255,33 @@ class Ultron extends Component {
 
 
 
-              <div className='commands' style={commandsOverrides}><p>How can I help ?</p>
+              <div className='commands' style={commandsOverrides}><p>Menu</p>
                 <ul>
                         <li onClick={this.tutorial}>Tutorial</li>
                         <li onClick={this.initialise}>Re-Initialize</li>
                         <li onClick={this.predict}>Scan Comments</li>
-                        <li style = {need_to_scan_first} onClick={this.baddies}>Store Bad Reviews</li>
-                        <li onClick={this.displaybaddies}>Latest Bad reviews</li>
+                        <li style = {need_to_scan_first} onClick={this.baddies}>Latest Bad Review</li>
+                        <li onClick={this.displaybaddies}>Automatic Courtesy Email</li>
                         <li onClick={this.close}>Close</li>
                     </ul>
               </div>
-              <div className="detailss" style={commandsOverrides1}>
+              {/* <div className="detailss" style={commandsOverrides1}>
                 <ul>
                   <li>{this.state.show1} left a bad review on {this.state.show4}</li>
                   <li>{this.state.show2} left a bad review on {this.state.show5}</li>
                   <li>{this.state.show3} left a bad review on {this.state.show6}</li>
                   <li onClick={this.close1}>Return</li>
                 </ul>
+                </div> */}
+              {/* demo version */}
+                <div className="detailss" style={commandsOverrides1}>
+                <ul>
+                  <li>Thanos left a bad review on the Bibimpap</li>
+                  <li>Nebula left a bad review on the Poutine</li>
+                  <li>Loki left a bad review on the Poutine</li>
+                  <li onClick={this.close1}>Return</li>
+                </ul>
                 </div>
-
 
                 </div>
 
