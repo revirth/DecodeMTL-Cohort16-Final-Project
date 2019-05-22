@@ -1,3 +1,8 @@
+* {
+  letter-spacing: 2px;
+  font-family: "Roboto", sans-serif;
+}
+
 .marker-btn {
   background: none;
   border: none;

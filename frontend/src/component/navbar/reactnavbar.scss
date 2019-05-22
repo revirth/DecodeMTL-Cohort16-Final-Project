@@ -2,6 +2,10 @@
 @import url("https://use.fontawesome.com/releases/v5.8.2/css/all.css");
 @import url("https://fonts.googleapis.com/css?family=Slabo+27px");
 
+* {
+  letter-spacing: 2px;
+  font-family: "Roboto", sans-serif;
+}
 #searchbutton {
   color: white;
   padding-right: 5px;
@@ -142,17 +146,17 @@ replaced by just the links.*/
   padding-left: 10px;
 }
 
-.auth-button-padding{
+.auth-button-padding {
   padding-right: 10px !important;
-  padding-left: 10px !important
+  padding-left: 10px !important;
 }
 
 .vertical-line {
   border-left-style: solid;
-  border-left-width: 1px
+  border-left-width: 1px;
 }
 
-.auth-aligment{
+.auth-aligment {
   display: inline-block;
-  margin-left: 10vw
+  margin-left: 10vw;
 }

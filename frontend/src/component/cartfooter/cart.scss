@@ -1,3 +1,7 @@
+* {
+  letter-spacing: 2px;
+  font-family: "Roboto", sans-serif;
+}
 .cart {
   .image {
     padding-right: 30px;
@@ -7,7 +11,7 @@
     font-size: 0.9vw;
     border-radius: 5px;
     width: 3.2vw;
-    padding: 0.2vw
+    padding: 0.2vw;
   }
 
   .item-in-column {
@@ -29,7 +33,7 @@
     display: flex;
     orientation: row;
     width: 100%;
-    margin-left: 5vw
+    margin-left: 5vw;
   }
 
   .parent {
@@ -122,38 +126,37 @@
     border-color: black;
   }
 
-  .item-name{
+  .item-name {
     font-size: 1.4vw;
   }
 
-  .price{
-    font-size: 1.2vw
+  .price {
+    font-size: 1.2vw;
   }
-  
-  .title-text{
+
+  .title-text {
     font-size: 1.2vw;
     font-weight: bold;
-    text-transform: uppercase
+    text-transform: uppercase;
   }
 
-  .pr{
-    padding-right: 5px
+  .pr {
+    padding-right: 5px;
   }
 
-  .fs1{
-    font-size: 0.9vw
+  .fs1 {
+    font-size: 0.9vw;
   }
 
-  .ib1{
-    display: inline-block
+  .ib1 {
+    display: inline-block;
   }
 
-  .mt1{
-    margin-top: 20px
+  .mt1 {
+    margin-top: 20px;
   }
 
-  .mt2{
-    margin-top: 10px
+  .mt2 {
+    margin-top: 10px;
   }
-
 }
