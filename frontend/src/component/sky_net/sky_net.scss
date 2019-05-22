@@ -1,24 +1,61 @@
 .sky_net {
   z-index: 10;
+ margin-left:-50px;
+ size: 0.5em;
+ 
   // margin-left:700px;
 }
-.commands {
-  opacity: 1;
-  margin-left: 450px;
-  margin-top: -250px;
+.dropdowns{
+  margin-left: 100px;
+  margin-top:100px;
   padding-right: 10px;
   font-family: Lucida Console, Courier;
-  color: #00ff41;
+  color: #0076B5;
+  font-size:1.5em;
+}
+
+
+.detailss{
+  
+  opacity: 1;
+  margin-left: 475px;
+  margin-top: 10px;
+  padding-right: 10px;
+  padding-bottom:50px;
+  font-family: Lucida Console, Courier;
+  color: red;
   p {
     margin-left: 10px;
   }
   li {
     margin-left: 10px;
     padding-top: 10px;
-    color: #00ff41;
+    color: red;
   }
   li:hover {
-    color: #008f11;
+    color: red;
+    
+  }
+}
+.commands {
+  opacity: 1;
+  
+  margin-left: 475px;
+  margin-top: -390px;
+  padding-right: 10px;
+  font-family: Lucida Console, Courier;
+  color: #0076B5;
+  p {
+    margin-left: 10px;
+    font-size:2em;
+  }
+  li {
+    margin-left: 10px;
+    padding-top: 10px;
+    color: #0076B5;
+  }
+  li:hover {
+    color: #0076B5;
     font-size: 1.05em;
   }
 }
@@ -28,7 +65,8 @@ body {
   padding: 0;
   background: white;
   .container {
-    margin-top: 50px;
+    margin-left:-75px;
+    margin-top: 30px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -50,14 +88,21 @@ body {
 }
 
 .face {
+  margin-left:-80px;
   width: 220px;
   -webkit-animation: updown 2s infinite alternate;
   animation: updown 2s infinite alternate;
-
+  &__ear{
+   
+  
+    height: 45px;
+    background: white;
+    padding-top: 20px; 
+  }
   &__body {
     width: 100%;
     height: 230px;
-    background: #090821;
+    background: #0076B5;
     -webkit-border-radius: 50% / 40% 40% 60% 60%;
     border-radius: 50% / 40% 40% 60% 60%;
   }
@@ -78,13 +123,13 @@ body {
     transition: all 1s linear;
     .eye {
       width: 30px;
-      background: #00ff41;
-      height: 20px;
+      background: white;
+      height: 30px;
       position: absolute;
       -webkit-border-radius: 50% / 40% 40% 60% 60%;
       border-radius: 50% / 40% 40% 60% 60%;
-      -webkit-animation: blink 5s infinite alternate;
-      animation: blink 5s infinite alternate;
+      // -webkit-animation: blink 5s infinite alternate;
+      // animation: blink 5s infinite alternate;
       -webkit-transition: all 0.3s ease;
       -o-transition: all 0.3s ease;
       transition: all 0.3s ease;
@@ -105,7 +150,7 @@ body {
   &__nose {
     top: 40px;
     width: 60px;
-    background: #1e1a41;
+    background: #0076B5;
     height: 80px;
     margin: auto;
 
@@ -123,7 +168,7 @@ body {
     &--inner {
       width: 50px;
       height: 26px;
-      background: #1e1a41;
+      background: #0076B5;
       position: absolute;
       top: 50%;
       left: 15%;
@@ -135,7 +180,7 @@ body {
       span {
         width: 0.3em;
         height: 1em;
-        background-color: #00ff41;
+        background-color: white;
       }
 
       span:nth-of-type(1) {
@@ -172,7 +217,7 @@ body {
   height: 30px;
   margin: auto;
   margin-top: -20px;
-  background: #003b00;
+  background: #0076B5;
   opacity: 0.6;
   display: block;
   -webkit-border-radius: 100%;
@@ -272,10 +317,13 @@ body {
 
 .talkative {
   font-family: Lucida Console, Courier;
-  color: #008f11;
+  color: #0076B5;
   margin-top: -20px;
   text-align: center;
+  font-size:1.6em;
+  width: 350px;
+  margin-left: -55px;
   button {
-    font-size: 1.5em;
+    font-size: 2em;
   }
 }
