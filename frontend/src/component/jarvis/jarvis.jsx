@@ -14,7 +14,8 @@ class UnconnectedJarvis extends Component {
     super(props);
     this.state = {
       messages: [],
-      comment: ""
+      comment: "",
+      typing: false
     };
   }
   scrollBottom = () => {
@@ -24,18 +25,26 @@ class UnconnectedJarvis extends Component {
   };
 
   sendMessage = value => {
-    const onSuccess = response => {
-      console.log("state", this.state);
-      console.log("response", response);
+    const user = { text: value, sender: this.props.username };
+    this.setState(
+      { messages: [...this.state.messages, user], comment: "", typing: true },
+      this.scrollBottom
+    );
+    client.textRequest(value).then(response => {
       const speech = response.result.fulfillment.speech;
       const newmsg = { text: speech, sender: "jarvis" };
-      const user = { text: value, sender: this.props.username };
-      this.setState(
-        { messages: [...this.state.messages, user, newmsg], comment: "" },
-        this.scrollBottom
-      );
-    };
-    client.textRequest(value).then(onSuccess);
+
+      setTimeout(() => {
+        this.setState(
+          {
+            messages: [...this.state.messages, newmsg],
+            comment: "",
+            typing: false
+          },
+          this.scrollBottom
+        );
+      }, 300);
+    });
   };
   typeComment = event => {
     event.preventDefault();
