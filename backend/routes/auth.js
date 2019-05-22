@@ -110,10 +110,7 @@ router.post("/signup", async (req, res) => {
 
   await res.locals.USERS.insertOne(obj);
   Number.isInteger(+obj.username) &&
-    sendtext(
-      +obj.username,
-      "Welcome to Nutrition Fine Fourchette http://google.com"
-    );
+    sendtext(+obj.username, "Welcome to Nutrition Fine Fourchette");
   res.send(resmsg(true, "signup success"));
 });
 

@@ -150,7 +150,7 @@ class UnConnectedCart extends React.Component {
                       </Link>
                     </div>
                     <div className="information-in-row name-price-width">
-                      <div>
+                      <div className="mtop1">
                         <div className="item-name">{item.itemName}</div>
                         <hr />
                         <div>

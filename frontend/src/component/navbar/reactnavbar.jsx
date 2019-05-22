@@ -90,6 +90,38 @@ class UnconnectedLinks extends React.Component {
           {/* <Link to="#">DELIVERY</Link> */}
           <Link to="/">ABOUT</Link>
 
+          {!this.props.loggedIn ? (
+            <React.Fragment>
+              <Link to="#" onClick={() => this.setState({ popup: true })}>
+                LOGIN
+              </Link>
+              <Link to="#" onClick={() => this.setState({ signup: true })}>
+                SIGNUP
+              </Link>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <label className="afterlogin">
+                Hello, {this.props.username}
+              </label>
+              {this.props.loggedIn && this.props.usertp === "1" ? (
+                <Link to="/profile">
+                  Account Setting
+                </Link>
+              ) : (
+                <Link to="/sellerprofile">
+                  My Dashboard
+                </Link>
+              )}
+              <Link
+                to="/"
+                onClick={this.logout}
+              >
+                LOGOUT
+              </Link>
+            </React.Fragment>
+          )}
+
           {/* <i id="searchbutton" className="fa fa-search fa" />
         <input onClick={() => alert(`search ${this.value}`)} /> */}
 
@@ -102,54 +134,6 @@ class UnconnectedLinks extends React.Component {
             onKeyDown={this.closeSerachPopup}
           />
           {this.state.search ? <Search /> : null}
-
-          {!this.props.loggedIn ? (
-            <React.Fragment>
-              <Link to="#" onClick={() => this.setState({ popup: true })}>
-                LOGIN
-              </Link>
-              <Link to="#" onClick={() => this.setState({ signup: true })}>
-                SIGNUP
-              </Link>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <div className="auth-aligment">
-                <label className="afterlogin auth-button-padding">
-                  Hello, {this.props.username}
-                </label>
-                {this.props.loggedIn && this.props.usertp === "1" ? (
-                  <Link className="auth-button-padding" to="/profile">
-                    Account Setting
-                  </Link>
-                ) : (
-                  <Link className="auth-button-padding" to="/sellerprofile">
-                    My Dashboard
-                  </Link>
-                )}
-                <Link
-                  className="auth-button-padding"
-                  to="/"
-                  onClick={this.logout}
-                >
-                  Logout
-                </Link>
-              </div>
-            </React.Fragment>
-          )}
-
-          {/* <i id="searchbutton" className="fa fa-search fa" />
-        <input onClick={() => alert(`search ${this.value}`)} /> */}
-
-          {/* <NavBarSearchBox /> */}
-
-          {/* <i
-            id="searchbutton"
-            className="fa fa-search fa"
-            onClick={() => this.setState({ search: true })}
-            onKeyDown={this.closeSerachPopup}
-          />
-          {this.state.search ? <Search /> : null} */}
 
           {this.state.popup ? (
             <LoginPopup onClose={this.closeLoginPopup} />
