@@ -115,25 +115,25 @@ class UnconnectedLinks extends React.Component {
           ) : (
             <React.Fragment>
               <div className="auth-aligment">
-              <label className="afterlogin auth-button-padding">
-                Hello, {this.props.username}
-              </label>
-              {this.props.loggedIn && this.props.usertp === "1" ? (
-                <Link className="auth-button-padding" to="/profile">
-                  Account Setting
+                <label className="afterlogin auth-button-padding">
+                  Hello, {this.props.username}
+                </label>
+                {this.props.loggedIn && this.props.usertp === "1" ? (
+                  <Link className="auth-button-padding" to="/profile">
+                    Account Setting
+                  </Link>
+                ) : (
+                  <Link className="auth-button-padding" to="/sellerprofile">
+                    My Dashboard
+                  </Link>
+                )}
+                <Link
+                  className="auth-button-padding"
+                  to="/"
+                  onClick={this.logout}
+                >
+                  Logout
                 </Link>
-              ) : (
-                <Link className="auth-button-padding" to="/sellerprofile">
-                  My Dashboard
-                </Link>
-              )}
-              <Link
-                className="auth-button-padding"
-                to="/"
-                onClick={this.logout}
-              >
-                Logout
-              </Link>
               </div>
             </React.Fragment>
           )}

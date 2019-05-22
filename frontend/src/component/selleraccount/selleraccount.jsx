@@ -134,6 +134,15 @@ export default class selleraccount extends Component {
           </div>
         </div>
         <Sky_net />
+        {this.state.showitems ? <EditSellerItems /> : null}
+        {this.state.uploaditems ? (
+          <UploadItem onClose={this.closeUploaditems} />
+        ) : null}
+        {this.state.shopdetails ? (
+          <Shoppopup onClose={this.closeshopdetails} />
+        ) : null}
+        {this.state.userlist ? <Userlist /> : null}
+        {/* {this.state.allreview ? <Allreviews /> : null} */}
       </div>
       // </div>
     );

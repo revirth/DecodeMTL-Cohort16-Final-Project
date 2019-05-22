@@ -125,7 +125,7 @@ input::placeholder {
 }
 .artcle {
   max-width: 100% !important;
-  margin-left: 40px;
+  margin-left: 20%;
 }
 .mapclass {
   width: 650px !important;
@@ -137,7 +137,7 @@ input::placeholder {
   margin-top: 10px;
   /* justify-content: space-evenly; */
   flex: 0 0 175px;
-  margin-left: 10%;
+  margin-left: 2%;
 }
 .mainsellerdiv {
   display: flex;
