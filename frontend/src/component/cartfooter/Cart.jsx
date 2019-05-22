@@ -135,33 +135,40 @@ class UnConnectedCart extends React.Component {
           {clearButton}
           {this.props.items.map(item => {
             return (
-              <div key={item.cartItemId} className="item-cell-width">
-                <div className="item-in-column">
-                  <div className="image-wrapper">
-                    <Link to={"/items/item/" + item.itemId}>
-                      <img className="item-image" src={item.itemImage} alt="" width="100%" height="100%"/>
-                    </Link>
-                  </div>
-                  <div className="information-in-row name-price-width">
-                    <div>
-                      <div className="item-name" >{item.itemName}</div>
-                      <hr />
-                      <div>
-                      <div className="price mt2" >${item.itemPrice}</div>
-                    <div className="mt1">
-                      <div className="pr ib1 fs1">Qty:{" "}</div>
-                      <input
-                        className="quantity-box"
-                        type="number"
-                        value={item.itemQuantity}
-                        id={item.cartItemId}
-                        onChange={this.onChangeHandleQuantity}
-                      />
+              <article className=" br3 pa3 pa4-ns mv3 ba b--black-10">
+                <div key={item.cartItemId} className="item-cell-width">
+                  <div className="item-in-column">
+                    <div className="image-wrapper">
+                      <Link to={"/items/item/" + item.itemId}>
+                        <img
+                          className="item-image"
+                          src={item.itemImage}
+                          alt=""
+                          width="100%"
+                          height="100%"
+                        />
+                      </Link>
                     </div>
+                    <div className="information-in-row name-price-width">
+                      <div>
+                        <div className="item-name">{item.itemName}</div>
+                        <hr />
+                        <div>
+                          <div className="price mt2">${item.itemPrice}</div>
+                          <div className="mt1">
+                            <div className="pr ib1 fs1">Qty: </div>
+                            <input
+                              className="quantity-box"
+                              type="number"
+                              value={item.itemQuantity}
+                              id={item.cartItemId}
+                              onChange={this.onChangeHandleQuantity}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  {/* <div className="parent quantity-width">
+                    {/* <div className="parent quantity-width">
                     <div className="stick_bottom">
                       <div className="pr ib1 fs1">Qty:{" "}</div>
                       <input
@@ -173,27 +180,31 @@ class UnConnectedCart extends React.Component {
                       />
                     </div>
                   </div> */}
-                  <div className="parent subtotal-width">
-                    <div className="stick_bottom subtotal">
-                      Subtotal:{"  $"}
-                      {(parseFloat(item.itemPrice) * item.itemQuantity).toFixed(
-                        2
-                      )}
+                    <div className="parent subtotal-width">
+                      <div className="stick_bottom subtotal">
+                        Subtotal:{"  $"}
+                        {(
+                          parseFloat(item.itemPrice) * item.itemQuantity
+                        ).toFixed(2)}
+                      </div>
+                    </div>
+                    <div className="remove-width">
+                      <i
+                        className="fa fa-times"
+                        id={item.cartItemId}
+                        onClick={this.onClickRemoveItem}
+                      />
                     </div>
                   </div>
-                  <div className="remove-width">
-                    <i
-                      className="fa fa-times"
-                      id={item.cartItemId}
-                      onClick={this.onClickRemoveItem}
-                    />
-                  </div>
+                  {/* <hr /> */}
                 </div>
-                <hr />
-              </div>
+              </article>
             );
           })}
-          <div className="total">Total:{"  $"}{total.toFixed(2)}</div>
+          <div className="total">
+            Total:{"  $"}
+            {total.toFixed(2)}
+          </div>
           <div className="parent-horizontal">
             <div className="button-right">
               {/* <Link to="/checkout"> */}
