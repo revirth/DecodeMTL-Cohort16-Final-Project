@@ -100,7 +100,7 @@ class UnconnectedUserProfile extends Component {
                 ) : null}
               </article>
               <button
-                className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow settingsbtn"
+                className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow "
                 onClick={this.updateAddress}
               >
                 Update Address
@@ -127,9 +127,9 @@ class UnconnectedUserProfile extends Component {
               </article>
               <button
                 className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
-                onClick={this.updateSettings}
+                onClick={this.updatePayment}
               >
-                Account detials
+                Update Payment Options
               </button>
             </div>
 
@@ -151,9 +151,9 @@ class UnconnectedUserProfile extends Component {
               </article>
               <button
                 className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white  bn grow"
-                onClick={this.updatePayment}
+                onClick={this.updateSettings}
               >
-                Update Payment Options
+                Account detials
               </button>
             </div>
           </div>
