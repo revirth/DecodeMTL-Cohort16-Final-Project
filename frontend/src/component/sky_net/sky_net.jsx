@@ -1220,14 +1220,15 @@ class Ultron extends Component {
         let tests = this.state.trained_net
         return (
           <div className='sky_net'>
-            <div className="dropdowns">How can I help ?</div>
+            <div className="dropdowns">SkyNet.Help()</div>
                 <div className='container'>
                     <div className='face'>
                         <div className="face__ears">
                             <div className="face__ears__left ear"></div>
                             <div className="face__ears__right ear"></div>
                         </div>
-                        <div className="face__body">
+                <div className="face__body">
+                <div className="face__ears">
                             <div className="face__eyes">
                                 <div className="face__eyes--left eye"></div>
                                 <div className="face__eyes--right eye"></div>
@@ -1242,7 +1243,8 @@ class Ultron extends Component {
                                     <div></div>
                                 </div>
                             </div>
-                        </div>
+                  </div>
+                  </div>
                         <div className="shadow"></div>
 
 
