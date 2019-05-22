@@ -135,8 +135,8 @@
   .sellerpanel {
     margin-bottom: -125px;
     margin-top: 70px;
-    padding-left: 50px;
-    margin-left: 10px;
+    padding-left: 30px;
+    margin-left: -10px;
     padding-right: 20px;
     display: flex;
     flex-direction: column;
@@ -170,7 +170,8 @@
       margin-left: 0px;
     }
     .miscdiv {
-      margin-top: -55px !important;
+      margin-top: -200px !important;
+     
       margin-left: -20px;
       display: flex;
       flex-direction: column;

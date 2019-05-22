@@ -1137,7 +1137,7 @@ class Ultron extends Component {
       this.setState({ baddies: whoAreThebaddies });
       this.setState({ baddiesChoices: itemnamebad });
       this.setState({ can_you_see_me1: true });
-      setTimeout(() => { this.setState({ show: "Here, the 3 last bad reviews" }) }, 1000)
+      setTimeout(() => { this.setState({ show: "Here, the 5 last bad reviews" }) }, 1000)
       setTimeout(() => { this.setState({ show: "Click on Automated Response to adress them" }) }, 3000)
     }
   }
@@ -1155,7 +1155,12 @@ class Ultron extends Component {
 
     }
 */
+  commentlol = () => { 
+    this.setState({ can_you_see_me1: false })
+    setTimeout(() => { this.setState({ show: "I have generated appropriate emails for them" }) }, 2000)
+    setTimeout(() => { this.setState({ show: "Click on List of users to confirm and send them !" }) }, 5000)
 
+  }
   tutorial = () => {
     setTimeout(() => { this.setState({ can_you_see_me: false })}, 500)
 
@@ -1164,18 +1169,18 @@ class Ultron extends Component {
     setTimeout(() => { this.setState({ show: "Loading speed is key for SEO and consumer experience" }) }, 7000)
     setTimeout(() => { this.setState({ show: "And React allows us to make it faster and create a better experience for the end user" }) }, 10000)
     setTimeout(() => { this.setState({ show: "We also optimised this website for SEO using various tools including browser side rendering for google crawlers" }) },13000)
-    setTimeout(() => { this.setState({ show: "You can navigate on your dashboard by clicking the adequate buttons below" }) }, 16000)
+    setTimeout(() => { this.setState({ show: "You can navigate on your dashboard by clicking the adequate buttons on your left" }) }, 16000)
     setTimeout(() => { this.setState({ show: "But where are my manners, I forgot to introduce myself !" }) }, 19000)
-    setTimeout(() => { this.setState({ show: "I am Sky_Net and I use machine learning to create my own neural network" }) }, 23000)
+    setTimeout(() => { this.setState({ show: "I am Sky_Net and I Tensorflow and Brain.js to create my own neural network" }) }, 23000)
     setTimeout(() => { this.setState({ show: "I analyzed various reviews from Facebook,Twitter,Yelp and more in order to make accurate predictions" }) }, 27000)
-    setTimeout(() => { this.setState({ show: "If you feel like I am innacurate, you can retrain me at anytime clicking the Initialize button" }) }, 30000)
-    setTimeout(() => { this.setState({ show: "Usually AI is done on the backend but I can train right here in your browser !" }) }, 33000)
+    setTimeout(() => { this.setState({ show: "If you feel like I am innacurate, you can retrain me at anytime clicking the Re-Initialize button" }) }, 31000)
+    setTimeout(() => { this.setState({ show: "Usually AI is done on the backend but I can train right here in your browser !" }) }, 34000)
     setTimeout(() => { this.setState({ show: "This is not the optimal way for complex problem solving using AI but powerfull enough for what I need :)" }) }, 38000)
     setTimeout(() => { this.setState({ show: "Enough talk, here is what I can do for you" }) }, 42000)  
-    setTimeout(() => { this.setState({ show: "You can click 'Scan Comments' to have me go through your database and make predictions based on content" }) }, 40000)
-    setTimeout(() => { this.setState({ show: "Then click on Store Bad reviews, I will store my predictions in the database and give some recommendations" }) }, 43000)
-    setTimeout(() => { this.setState({ show: "Challenge me a bit now :)" }) }, 46000)
-    setTimeout(() => { this.setState({ can_you_see_me: true })}, 48000)
+    setTimeout(() => { this.setState({ show: "You can click 'Scan Comments' to have me go through your database and make predictions based on content" }) }, 45000)
+    setTimeout(() => { this.setState({ show: "Then click on Store Bad reviews, I will store my predictions in the database and give some recommendations" }) }, 48000)
+    setTimeout(() => { this.setState({ show: "Challenge me a bit now :)" }) }, 52000)
+    setTimeout(() => { this.setState({ can_you_see_me: true })}, 53000)
   }
   displaybaddies = () => {
 
@@ -1263,7 +1268,7 @@ class Ultron extends Component {
                         <li onClick={this.initialise}>Re-Initialize</li>
                         <li onClick={this.predict}>Scan Comments</li>
                         <li style = {need_to_scan_first} onClick={this.baddies}>Latest Bad Review</li>
-                        <li onClick={this.displaybaddies}>Automatic Courtesy Email</li>
+                        <li onClick={this.commentlol}>Automatic Courtesy Email</li>
                         <li onClick={this.close}>Close</li>
                     </ul>
               </div>
@@ -1281,6 +1286,8 @@ class Ultron extends Component {
                   <p>1.Thanos left a bad review on the Bibimpap</p>
                   <p>2.Nebula left a bad review on the Poutine</p>
                   <p>3.Loki left a bad review on the Poutine</p>
+                  <p>4.Loki left a bad review on the Bibimpap</p>
+                  <p>5.Loki left a bad review on the Sushi</p>
                   <p onClick={this.close1} className="returns">Return</p>
                 
                 </div>

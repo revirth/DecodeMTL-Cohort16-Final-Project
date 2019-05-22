@@ -5,7 +5,7 @@
 
 .sky_net {
   z-index: 10;
-  margin-left: -50px;
+  margin-left: -150px;
   size: 0.5em;
 
   // margin-left:700px;
@@ -25,12 +25,14 @@
 
 .detailss {
   opacity: 1;
-  margin-left: 75px;
+  margin-left: 25px;
   margin-top: 60px;
   padding-right: 10px;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
+  margin-bottom:100px;
   font-family: Lucida Console, Courier;
   color: red;
+  border:1px solid red;
   p {
     margin-left: 10px;
   }
@@ -45,8 +47,8 @@
 }
 .commands {
   opacity: 1;
-  
-  margin-left: 450px;
+  padding-left:40px;
+  margin-left: 500px;
   margin-top: -390px;
   padding-right: 10px;
   font-family: Lucida Console, Courier;
