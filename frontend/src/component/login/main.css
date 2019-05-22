@@ -1,3 +1,8 @@
+* {
+  letter-spacing: 2px;
+  font-family: "Roboto", sans-serif;
+}
+
 body {
   background-color: #f8f5f1;
   margin: 0;
@@ -122,8 +127,8 @@ input[type="submit"] {
   text-align: right;
 }
 
-.forgot-password-text{
-  color: black
+.forgot-password-text {
+  color: black;
 }
 
 .animate {

@@ -17,7 +17,7 @@ export default class Checkout extends Component {
             <input
               className="fakeemail"
               type="email"
-              placeholder="type your email"
+              placeholder="Type your email"
             />
             <StripeProvider apiKey="pk_test_9kvtGSlvXrGiwuS7NJ070Nrn006YjdNnpO">
               <Elements>

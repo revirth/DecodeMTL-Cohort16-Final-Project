@@ -3,6 +3,11 @@
  * how you can use CSS to style your Element's container.
  */
 
+* {
+  letter-spacing: 2px;
+  font-family: "Roboto", sans-serif;
+}
+
 .StripeElement {
   font-size: 30px;
   color: #32325d;

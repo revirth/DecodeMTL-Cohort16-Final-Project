@@ -2,7 +2,10 @@
 @import url("https://use.fontawesome.com/releases/v5.8.2/css/all.css");
 
 // change back to -30px for demo for video
-
+* {
+  letter-spacing: 2px;
+  font-family: "Roboto", sans-serif;
+}
 .homecontent::before {
   background-image: url("background3.jpg");
   background-color: #cccccc;

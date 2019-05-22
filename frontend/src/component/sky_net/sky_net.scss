@@ -1,13 +1,17 @@
+* {
+  letter-spacing: 2px;
+  font-family: "Roboto", sans-serif;
+}
+
 .sky_net {
   z-index: 10;
- margin-left:-140px;
- size: 0.5em;
+  margin-left: -50px;
+  size: 0.5em;
 
- 
   // margin-left:700px;
 }
-.returns{
-  font-size:1.2em;
+.returns {
+  font-size: 1.2em;
 }
 .dropdowns{
   margin-left: 130px;
@@ -19,13 +23,12 @@
   
 }
 
-
-.detailss{
+.detailss {
   opacity: 1;
   margin-left: 75px;
   margin-top: 60px;
   padding-right: 10px;
-  padding-bottom:50px;
+  padding-bottom: 50px;
   font-family: Lucida Console, Courier;
   color: red;
   p {
@@ -38,7 +41,6 @@
   }
   li:hover {
     color: red;
-    
   }
 }
 .commands {
@@ -58,10 +60,10 @@
   li {
     margin-left: 10px;
     padding-top: 10px;
-    color: #0076B5;
+    color: #0076b5;
   }
   li:hover {
-    color: #0076B5;
+    color: #0076b5;
     font-size: 1.05em;
   }
 }
@@ -94,21 +96,19 @@ body {
 }
 
 .face {
-  margin-left:-80px;
+  margin-left: -80px;
   width: 220px;
   -webkit-animation: updown 2s infinite alternate;
   animation: updown 2s infinite alternate;
-  &__ear{
-   
-  
+  &__ear {
     height: 45px;
     background: white;
-    padding-top: 20px; 
+    padding-top: 20px;
   }
   &__body {
     width: 100%;
     height: 230px;
-    background: #0076B5;
+    background: #0076b5;
     -webkit-border-radius: 50% / 40% 40% 60% 60%;
     border-radius: 50% / 40% 40% 60% 60%;
   }
@@ -223,7 +223,7 @@ body {
   height: 30px;
   margin: auto;
   margin-top: -20px;
-  background: #0076B5;
+  background: #0076b5;
   opacity: 0.6;
   display: block;
   -webkit-border-radius: 100%;
@@ -323,10 +323,10 @@ body {
 
 .talkative {
   font-family: Lucida Console, Courier;
-  color: #0076B5;
+  color: #0076b5;
   margin-top: -20px;
   text-align: center;
-  font-size:1.4em;
+  font-size: 1.4em;
   width: 350px;
   margin-left: -65px;
   // button {
