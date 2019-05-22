@@ -160,6 +160,7 @@ class UnConnectedCart extends React.Component {
                             <input
                               className="quantity-box"
                               type="number"
+                              min="1"
                               value={item.itemQuantity}
                               id={item.cartItemId}
                               onChange={this.onChangeHandleQuantity}
