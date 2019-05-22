@@ -88,9 +88,9 @@ class HomePageContent extends React.Component {
           <div className="box1">
             <div id="box2">
               <i className="fas fa-users fa-5x" />
-              <p>You are an athlete or have very specific needs ?</p>
-              <p>We have a Fitness menu that is customisable</p>
-              <p>We guarantee your we can satisfy the pickest !</p>
+              <p>Office party, everyday meal or strict routine ?</p>
+              <p>We offer a variety of meal and services in order</p>
+              <p>To take care of everything, contact us for info !</p>
             </div>
             <div>
               <i className="fas fa-dumbbell fa-5x" />
@@ -102,15 +102,17 @@ class HomePageContent extends React.Component {
           <div className="box1">
             <div>
               <i className="fas fa-child fa-5x" />
-              <p>You are an athlete or have very specific needs ?</p>
-              <p>We have a Fitness menu that is customisable</p>
-              <p>We guarantee your we can satisfy the pickest !</p>
+              <p>All you got to do is place your delicious meals</p>
+              <p>in the fridge and enjoy the extra time not</p>
+              <p>spent in the kitchen. Time is money ! </p>
             </div>
             <div>
+
+
               <i className="fas fa-drumstick-bite fa-5x" />
-              <p>You are an athlete or have very specific needs ?</p>
-              <p>We have a Fitness menu that is customisable</p>
-              <p>We guarantee your we can satisfy the pickest !</p>
+              <p>Select from our wide range of freshly preapared meals,</p>
+              <p>meats and snacks. A new menu is available</p>
+              <p>every week. Spice up your routine easily !</p>
             </div>
           </div>
         </div>

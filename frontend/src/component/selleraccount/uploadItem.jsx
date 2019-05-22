@@ -51,7 +51,7 @@ export default class UploadItem extends Component {
             <form className="mainform" onSubmit={this.handleSubmit}>
               <input
                 type="text"
-                placeholder="Enter Name of food(optional)"
+                placeholder="Enter Name of the dish"
                 onChange={this.handleFood}
                 className="login-field"
                 id="Signupspace"
@@ -66,13 +66,13 @@ export default class UploadItem extends Component {
 
               <input
                 type="text"
-                placeholder="Enter your Image URL"
+                placeholder="Upload your image"
                 onChange={this.handleFile}
                 className="login-field"
               />
               <input
                 type="text"
-                placeholder="Enter Price"
+                placeholder="Enter Price $$"
                 onChange={this.handlePrice}
                 className="login-field"
               />

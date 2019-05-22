@@ -1158,28 +1158,23 @@ class Ultron extends Component {
   commentlol = () => { 
     this.setState({ can_you_see_me1: false })
     setTimeout(() => { this.setState({ show: "I have generated appropriate emails for them" }) }, 2000)
-    setTimeout(() => { this.setState({ show: "Click on List of users to confirm and send them !" }) }, 5000)
+    setTimeout(() => { this.setState({ show: "Click Manage SkyNet to confirm and send them !" }) }, 5000)
 
   }
   tutorial = () => {
     setTimeout(() => { this.setState({ can_you_see_me: false })}, 500)
 
     setTimeout(() => { this.setState({ show: "Hello to you and welcome to your dashboard !" }) }, 1000)
-    setTimeout(() => { this.setState({ show: "First of all thank you for choosing a React and Node.js Website over Wordpress ;)" }) }, 4000)
-    setTimeout(() => { this.setState({ show: "Loading speed is key for SEO and consumer experience" }) }, 7000)
-    setTimeout(() => { this.setState({ show: "And React allows us to make it faster and create a better experience for the end user" }) }, 10000)
-    setTimeout(() => { this.setState({ show: "We also optimised this website for SEO using various tools including browser side rendering for google crawlers" }) },13000)
-    setTimeout(() => { this.setState({ show: "You can navigate on your dashboard by clicking the adequate buttons on your left" }) }, 16000)
-    setTimeout(() => { this.setState({ show: "But where are my manners, I forgot to introduce myself !" }) }, 19000)
-    setTimeout(() => { this.setState({ show: "I am Sky_Net and I Tensorflow and Brain.js to create my own neural network" }) }, 23000)
-    setTimeout(() => { this.setState({ show: "I analyzed various reviews from Facebook,Twitter,Yelp and more in order to make accurate predictions" }) }, 27000)
-    setTimeout(() => { this.setState({ show: "If you feel like I am innacurate, you can retrain me at anytime clicking the Re-Initialize button" }) }, 31000)
-    setTimeout(() => { this.setState({ show: "Usually AI is done on the backend but I can train right here in your browser !" }) }, 34000)
-    setTimeout(() => { this.setState({ show: "This is not the optimal way for complex problem solving using AI but powerfull enough for what I need :)" }) }, 38000)
-    setTimeout(() => { this.setState({ show: "Enough talk, here is what I can do for you" }) }, 42000)  
-    setTimeout(() => { this.setState({ show: "You can click 'Scan Comments' to have me go through your database and make predictions based on content" }) }, 45000)
-    setTimeout(() => { this.setState({ show: "Then click on Store Bad reviews, I will store my predictions in the database and give some recommendations" }) }, 48000)
-    setTimeout(() => { this.setState({ show: "Challenge me a bit now :)" }) }, 52000)
+    setTimeout(() => { this.setState({ show: "You can navigate on your dashboard by clicking the adequate buttons on your left" }) }, 4000)
+    setTimeout(() => { this.setState({ show: "But where are my manners, I forgot to introduce myself !" }) }, 7000)
+    setTimeout(() => { this.setState({ show: "I am Sky_Net and I use Tensorflow and Brain.js to create my own neural network" }) }, 10000)
+    setTimeout(() => { this.setState({ show: "I analyzed various reviews from Facebook,Twitter,Yelp and more in order to make accurate predictions" }) }, 13000)
+    setTimeout(() => { this.setState({ show: "If you feel like I am innacurate, you can retrain me at anytime clicking the Re-Initialize button" }) }, 15000)
+    setTimeout(() => { this.setState({ show: "Usually AI is done on the backend but I can train right here in your browser !" }) }, 18000)
+    setTimeout(() => { this.setState({ show: "This is not the optimal way for complex problem solving using AI but powerfull enough for what I need :)" }) }, 21000)
+    setTimeout(() => { this.setState({ show: "You can click 'Scan Comments' to have me go through your database and make predictions based on content" }) }, 24000)
+    setTimeout(() => { this.setState({ show: "Then click on Store Bad reviews, I will store my predictions in the database and give some recommendations" }) }, 27000)
+    setTimeout(() => { this.setState({ show: "Challenge me a bit now :)" }) }, 30000)
     setTimeout(() => { this.setState({ can_you_see_me: true })}, 53000)
   }
   displaybaddies = () => {
