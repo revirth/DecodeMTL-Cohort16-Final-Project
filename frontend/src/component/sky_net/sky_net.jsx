@@ -1277,12 +1277,12 @@ class Ultron extends Component {
                 </div> */}
               {/* demo version */}
                 <div className="detailss" style={commandsOverrides1}>
-                <ul>
-                  <li>Thanos left a bad review on the Bibimpap</li>
-                  <li>Nebula left a bad review on the Poutine</li>
-                  <li>Loki left a bad review on the Poutine</li>
-                  <li onClick={this.close1}>Return</li>
-                </ul>
+                
+                  <p>1.Thanos left a bad review on the Bibimpap</p>
+                  <p>2.Nebula left a bad review on the Poutine</p>
+                  <p>3.Loki left a bad review on the Poutine</p>
+                  <p onClick={this.close1} className="returns">Return</p>
+                
                 </div>
 
                 </div>
