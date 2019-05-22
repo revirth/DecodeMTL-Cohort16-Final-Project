@@ -133,7 +133,7 @@ input::placeholder {
   margin-left: 20%;
 }
 .mapclass {
-  width: 650px !important;
+  width: 680px !important;
 }
 
 .sellerpanel {
@@ -154,6 +154,8 @@ input::placeholder {
   flex-direction: column;
   justify-content: space-evenly;
   width: 90% !important;
+  margin-left: -40px !important;
+  margin-bottom: 28px !important;
 }
 .sellermaindiv {
   max-width: 1200px;
