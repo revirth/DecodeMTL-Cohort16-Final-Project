@@ -17,8 +17,8 @@ export default class ReactMap extends Component {
       viewport: {
         latitude: 45.501634112371455,
         longitude: -73.56862932443619,
-        width: "700px",
-        height: "50vh",
+        width: "650px",
+        height: "200px",
         zoom: 15
       },
 

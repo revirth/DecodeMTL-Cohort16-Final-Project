@@ -81,27 +81,9 @@ export default class selleraccount extends Component {
   render() {
     // let checkAdd = this.state.address ? {<SignupForm>} : null
     return (
-      <div className="sellermain">
-        <div className="internalSeller1">
-          <article className="center mw5 mw6-ns br3 ba b--black-10 mv4 artcle">
-            <h1 className="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
-              Shop Detail
-            </h1>
-            <ReactMap className="mapclass" />
-
-            <div className="pa3 bt b--black-10">
-              <p className="f6 f5-ns lh-copy measure stylepara">
-                <span>Street: {this.state.sellerdetails.street}</span>
-                <span>Apartment No: {this.state.sellerdetails.apt}</span>
-                <span>Postal:{this.state.sellerdetails.postal}</span>
-                <span>Phone No:{this.state.sellerdetails.phone}</span>
-                <span>Shop Name : {this.state.sellerdetails.shopname}</span>
-              </p>
-            </div>
-          </article>
-          <Sky_net />
-        </div>
-        <div className="internalSeller">
+      // <div className="sellermaindiv">
+      <div className="mainsellerdiv">
+        <div className="sellerpanel">
           <button
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.shopDetails}
@@ -127,29 +109,33 @@ export default class selleraccount extends Component {
             List of user
           </button>
 
-          <Link
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
-            to="/sellerallreview"
-          >
-            All reviews
-          </Link>
-          {/* <Link
-            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
-            to="/map"
-          >
-            Map
-          </Link> */}
+          <button className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn">
+            <Link to="/sellerallreview">All reviews</Link>
+          </button>
         </div>
-        {this.state.showitems ? <EditSellerItems /> : null}
-        {this.state.uploaditems ? (
-          <UploadItem onClose={this.closeUploaditems} />
-        ) : null}
-        {this.state.shopdetails ? (
-          <Shoppopup onClose={this.closeshopdetails} />
-        ) : null}
-        {this.state.userlist ? <Userlist /> : null}
-        {/* {this.state.allreview ? <Allreviews /> : null} */}
+        <div className="miscdiv">
+          <div className="miscdiv">
+            <article className="center mw5 mw6-ns br3 ba b--black-10 mv4 artcle">
+              <h1 className="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
+                Shop Detail
+              </h1>
+              <ReactMap className="mapclass" />
+
+              <div className="pa3 bt b--black-10">
+                <p className="f6 f5-ns lh-copy measure stylepara">
+                  <span>Street: {this.state.sellerdetails.street}</span>
+                  <span>Apartment No: {this.state.sellerdetails.apt}</span>
+                  <span>Postal:{this.state.sellerdetails.postal}</span>
+                  <span>Phone No:{this.state.sellerdetails.phone}</span>
+                  <span>Shop Name : {this.state.sellerdetails.shopname}</span>
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <Sky_net />
       </div>
+      // </div>
     );
   }
 }

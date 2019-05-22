@@ -20,6 +20,7 @@
 .settingsbtn {
   padding: 2%;
   margin-top: 10px;
+  width: 150px;
 }
 
 .w3-animate-bottom {
@@ -127,5 +128,32 @@ input::placeholder {
   margin-left: 40px;
 }
 .mapclass {
-  width: 700px !important;
+  width: 650px !important;
+}
+
+.sellerpanel {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  /* justify-content: space-evenly; */
+  flex: 0 0 175px;
+  margin-left: 10%;
+}
+.mainsellerdiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.miscdiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 90% !important;
+}
+.sellermaindiv {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.mapboxgl-map {
+  width: 90% !important;
 }
