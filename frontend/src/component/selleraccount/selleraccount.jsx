@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import "./custom.css";
+// import "./custom.css";
+import "./custom.scss";
 import "./style.css";
 import Shoppopup from "./updateshoppopup.jsx";
 import UploadItem from "./uploadItem.jsx";
@@ -9,6 +10,8 @@ import Userlist from "./Userlist.jsx";
 import { Link } from "react-router-dom";
 import Sky_net from "../../component/sky_net/sky_net";
 import ReactMap from "../map/map.jsx";
+import footer from './footerbasic.png'
+import './footerstyle1.scss';
 
 export default class selleraccount extends Component {
   constructor(props) {
@@ -83,34 +86,53 @@ export default class selleraccount extends Component {
     return (
       // <div className="sellermaindiv">
       <div className="mainsellerdiv">
+        <div className="dashboardnav">DASHBOARD</div>
         <div className="sellerpanel">
           <button
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.shopDetails}
-          >
+          ><i class="fas fa-store"></i>
             Update shop details
           </button>
           <button
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.uploadFile}
-          >
+          ><i class="fas fa-shopping-cart"></i>
             Upload Items
           </button>
           <button
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.showitems}
-          >
+          ><i class="fas fa-hamburger"></i>
             View/Edit Item list
           </button>
           <button
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.listOfuser}
-          >
+          ><i class="fas fa-users"></i>
             List of user
           </button>
 
           <button className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn">
-            <Link to="/sellerallreview">All reviews</Link>
+            <i class="fas fa-comments"></i><Link to="/sellerallreview">All reviews</Link>
+          </button>
+          <button
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
+            onClick={this.listOfuser}
+          ><i class="fas fa-robot"></i>
+            Manage SkyNet
+          </button>
+          <button
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
+            onClick={this.listOfuser}
+          ><i class="fas fa-cog"></i>
+            Settings
+          </button>
+          <button
+            className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
+            onClick={this.listOfuser}
+          ><i class="fas fa-question"></i>
+            Support
           </button>
         </div>
         <div className="miscdiv">
@@ -134,6 +156,9 @@ export default class selleraccount extends Component {
           </div>
         </div>
         <Sky_net />
+        <div className="footers1">
+          <img src={footer} alt="footer1" />
+        </div>
         {this.state.showitems ? <EditSellerItems /> : null}
         {this.state.uploaditems ? (
           <UploadItem onClose={this.closeUploaditems} />
@@ -144,7 +169,8 @@ export default class selleraccount extends Component {
         {this.state.userlist ? <Userlist /> : null}
         {/* {this.state.allreview ? <Allreviews /> : null} */}
       </div>
-      // </div>
+
+
     );
   }
 }

@@ -13,13 +13,14 @@
 .returns {
   font-size: 1.2em;
 }
-.dropdowns {
-  margin-left: 100px;
-  margin-top: 100px;
+.dropdowns{
+  margin-left: 130px;
+  margin-top:100px;
   padding-right: 10px;
   font-family: Lucida Console, Courier;
-  color: #0076b5;
-  font-size: 1.5em;
+  color: #0076B5;
+  font-size:1.5em;
+  
 }
 
 .detailss {
@@ -44,15 +45,17 @@
 }
 .commands {
   opacity: 1;
-
-  margin-left: 475px;
+  
+  margin-left: 450px;
   margin-top: -390px;
   padding-right: 10px;
   font-family: Lucida Console, Courier;
-  color: #0076b5;
+  color: #0076B5;
+  margin-right:30px;
   p {
     margin-left: 10px;
-    font-size: 2em;
+    font-size:2em;
+    margin-top:60px;
   }
   li {
     margin-left: 10px;
@@ -70,8 +73,8 @@ body {
   padding: 0;
   background: white;
   .container {
-    margin-left: -75px;
-    margin-top: 30px;
+    margin-left:-75px;
+    margin-top: 10px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -326,7 +329,7 @@ body {
   font-size: 1.4em;
   width: 350px;
   margin-left: -65px;
-  button {
-    font-size: 2em;
-  }
+  // button {
+  //   font-size: 2em;
+  // }
 }

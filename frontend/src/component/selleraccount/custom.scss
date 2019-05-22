@@ -1,0 +1,194 @@
+.mainsellerdiv{
+
+.sellermain {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 1000px;
+  margin: auto;
+}
+.internalSeller {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.internalSeller1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.settingsbtn {
+  padding: 2%;
+  margin-top: 10px;
+  width: 150px;
+}
+
+.w3-animate-bottom {
+  position: relative;
+  animation: animatebottom 0.4s;
+}
+@keyframes animatebottom {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+.w3-animate-top {
+  position: absolute;
+  animation: animatetop 0.4s;
+  -webkit-animation: animatetop 0.4s;
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+
+  to {
+    /* top: 0; */
+    opacity: 1;
+  }
+}
+
+input::placeholder {
+  font-size: 20px;
+}
+
+.spaceeven {
+  justify-content: space-evenly;
+}
+.leftAlign {
+  justify-content: row-start;
+}
+
+.flexrow {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.stylepara {
+  display: flex;
+  flex-direction: column;
+}
+.editlist {
+  overflow: scroll;
+  height: -webkit-fill-available;
+}
+.listing-items {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15%;
+}
+.flexlist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 90%;
+  margin-top: 10% !important;
+  height: -webkit-fill-available;
+  overflow: scroll;
+  display: flex;
+  flex-wrap: wrap;
+}
+.bordercolor {
+  border-color: rgb(3, 150, 103);
+}
+
+.hideop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 90%;
+  margin-top: 5% !important;
+  height: -webkit-fill-available;
+  overflow: scroll;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.btcolor {
+  background-color: #242424;
+}
+.bttext {
+  color: #0077b5;
+}
+.bordercolorblue {
+  border-color: #0077b5;
+  background-color: white !important;
+}
+.artcle {
+  max-width: 90% !important;
+  margin-left: 20%;
+}
+.mapclass {
+  width: 550px !important;
+}
+
+.sellerpanel {
+  margin-bottom: -125px;
+  margin-top: 70px;
+  padding-left: 50px;
+  margin-left:10px;
+  padding-right:20px;
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 10px; */
+  /* justify-content: space-evenly; */
+  flex: 0 0 175px;
+  /* margin-left: 10%; */
+  background-color:#302f2f;
+}
+.mainsellerdiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.dashboardnav{
+  padding-top:30px;
+  padding-bottom:40px;
+  padding-left:20px;
+  color:white;
+  width: 100%;
+  position: absolute;
+  height:60px;
+  background-color:#242424;
+}
+.mainsellerdiv{
+  margin-left:10px;
+
+
+.fas{
+  padding-right:15px;
+
+  margin-left:0px;
+}
+.miscdiv {
+  margin-top: -55px !important;
+  margin-left: -20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 70% !important;
+  
+  
+  
+}
+.sellermaindiv {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.mapboxgl-map {
+  width: 90% !important;
+}
+}
+
+}
