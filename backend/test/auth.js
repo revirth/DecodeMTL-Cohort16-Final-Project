@@ -6,8 +6,8 @@ const j = request.jar();
 const fake = () => ({ username: "a", password: "b" });
 let cookies = {};
 
-describe(`POST /auth`, () => {
-  it("/auth/login return with cookies", done => {
+describe(`auth/login`, () => {
+  it("returns 3 cookies (sid, unm, utp)", done => {
     request.post(
       `${backend}/auth/login`,
       { form: fake(), jar: j },
@@ -16,7 +16,6 @@ describe(`POST /auth`, () => {
 
         j.getCookies(backend).map(c => (cookies[c.key] = c.value));
         expect(cookies).to.have.all.keys("sid", "unm", "utp");
-        // console.table(cookies);
 
         expect(JSON.parse(body).status).to.be.true;
 
@@ -25,7 +24,7 @@ describe(`POST /auth`, () => {
     );
   });
 
-  it("/auth/login with empty form", done => {
+  it("fails with empty form", done => {
     request.post(`${backend}/auth/login`, { form: {} }, (err, res, body) => {
       expect(res.statusCode).to.equal(400);
 
@@ -38,7 +37,7 @@ describe(`POST /auth`, () => {
     });
   });
 
-  it("/auth/login with just username", done => {
+  it("fails with invalid form", done => {
     request.post(
       `${backend}/auth/login`,
       { form: { username: "a" } },
@@ -54,8 +53,10 @@ describe(`POST /auth`, () => {
       }
     );
   });
+});
 
-  it("auth/logout", done => {
+describe(`auth/logout`, () => {
+  it("clears 'sid' cookie", done => {
     request(`${backend}/auth/logout`, { jar: j }, (err, res, body) => {
       let cookies = j.getCookies(backend);
       expect(cookies).to.not.have.keys("sid");
@@ -63,8 +64,10 @@ describe(`POST /auth`, () => {
       done();
     });
   });
+});
 
-  it("/auth/signup ", done => {
+describe(`auth//signup`, () => {
+  it("fails with existing userinfo", done => {
     request.post(
       `${backend}/auth/signup`,
       { form: fake() },
@@ -80,7 +83,7 @@ describe(`POST /auth`, () => {
     );
   });
 
-  it("/auth/signup with empty form", done => {
+  it("fails with empty formdata", done => {
     request.post(`${backend}/auth/signup`, { form: {} }, (err, res, body) => {
       expect(res.statusCode).to.equal(400);
 
@@ -93,7 +96,7 @@ describe(`POST /auth`, () => {
     });
   });
 
-  it("/auth/signup with just password", done => {
+  it("fails with invalid formdata", done => {
     request.post(
       `${backend}/auth/signup`,
       { form: { password: "b" } },
@@ -107,24 +110,6 @@ describe(`POST /auth`, () => {
 
         done();
       }
-      );
-    });
-    
-    it("/auth/signup ", done => {
-      request.post(
-        `${backend}/auth/signup`,
-        { form: fake() },
-        (err, res, body) => {
-          expect(res.statusCode).to.equal(200);
-          
-          let json = JSON.parse(body);
-          
-          expect(json).to.have.all.keys("status", "message");
-          expect(json.status).to.be.false;
-          
-          done();
-        }
-        );
-      });
-    });    
-    
+    );
+  });
+});

@@ -4,8 +4,8 @@ const backend = "http://localhost:4000";
 
 let result;
 
-describe(`GET /reviews`, () => {
-  it("/reviews status", done => {
+describe(`/reviews`, () => {
+  it("returns reviews with [200]", done => {
     request(`${backend}/reviews`, (err, res, body) => {
       expect(res.statusCode).to.equal(200);
 
