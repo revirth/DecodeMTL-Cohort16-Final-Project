@@ -10,8 +10,8 @@ import Userlist from "./Userlist.jsx";
 import { Link } from "react-router-dom";
 import Sky_net from "../../component/sky_net/sky_net";
 import ReactMap from "../map/map.jsx";
-import footer from './footerbasic.png'
-import './footerstyle1.scss';
+import footer from "./footerbasic.png";
+import "./footerstyle1.scss";
 
 export default class selleraccount extends Component {
   constructor(props) {
@@ -91,57 +91,66 @@ export default class selleraccount extends Component {
           <button
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.shopDetails}
-          ><i class="fas fa-store"></i>
+          >
+            <i class="fas fa-store" />
             Update shop details
           </button>
           <button
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.uploadFile}
-          ><i class="fas fa-shopping-cart"></i>
+          >
+            <i class="fas fa-shopping-cart" />
             Upload Items
           </button>
           <button
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.showitems}
-          ><i class="fas fa-hamburger"></i>
+          >
+            <i class="fas fa-hamburger" />
             View/Edit Item list
           </button>
           <button
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.listOfuser}
-          ><i class="fas fa-users"></i>
+          >
+            <i class="fas fa-users" />
             List of user
           </button>
 
           <button className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn">
-            <i class="fas fa-comments"></i><Link to="/sellerallreview">All reviews</Link>
+            <i class="fas fa-comments" />
+            <Link to="/sellerallreview">All reviews</Link>
           </button>
           <button
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.listOfuser}
-          ><i class="fas fa-robot"></i>
+          >
+            <i class="fas fa-robot" />
             Manage SkyNet
           </button>
           <button
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.listOfuser}
-          ><i class="fas fa-cog"></i>
+          >
+            <i class="fas fa-cog" />
             Settings
           </button>
           <button
             className="btn sub f6 link dim br3 ph3 pv2 mb2 dib white btcolor bn grow settingsbtn"
             onClick={this.listOfuser}
-          ><i class="fas fa-question"></i>
+          >
+            <i class="fas fa-question" />
             Support
           </button>
         </div>
         <div className="miscdiv">
-          <div className="miscdiv">
+          <div className="miscdiv2">
             <article className="center mw5 mw6-ns br3 ba b--black-10 mv4 artcle">
               <h1 className="f4 bg-near-white br3 br--top black-60 mv0 pv2 ph3">
                 Shop Detail
               </h1>
-              <ReactMap className="mapclass" />
+              {/* <ReactMap className="mapclass" /> */}
+              <img src="/maps.png" />
 
               <div className="pa3 bt b--black-10">
                 <p className="f6 f5-ns lh-copy measure stylepara">
@@ -169,8 +178,6 @@ export default class selleraccount extends Component {
         {this.state.userlist ? <Userlist /> : null}
         {/* {this.state.allreview ? <Allreviews /> : null} */}
       </div>
-
-
     );
   }
 }

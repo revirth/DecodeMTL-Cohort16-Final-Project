@@ -157,6 +157,14 @@ input::placeholder {
   margin-left: -40px !important;
   margin-bottom: 28px !important;
 }
+.miscdiv2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 90% !important;
+  margin-left: -40px !important;
+  margin-bottom: 28px !important;
+}
 .sellermaindiv {
   max-width: 1200px;
   margin: 0 auto;
