@@ -1,4 +1,4 @@
-// require("dotenv-expand")(require("dotenv").config());
+require("dotenv-expand")(require("dotenv").config());
 const express = require("express");
 const app = express();
 const upload = require("multer")({
