@@ -1185,7 +1185,7 @@ class Ultron extends Component {
     this.setState({ can_you_see_me: true })
   }
     close = () => {
-        setTimeout(() => {this.setState({ show:"Thank you for listening !"})}, 1000)
+        setTimeout(() => {this.setState({ show:"How can I help ?"})}, 1000)
         // setTimeout(() => {this.setState({ show:  "If you need more help I'm still here ;\)"})}, 3000)
       this.setState({ can_you_see_me: false })
       this.setState({ can_you_see_me1: false })
